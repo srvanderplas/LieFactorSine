@@ -35,3 +35,6 @@
 *.vrb
 *.xdy
 *.tdo
+.Rproj.user
+*.Rproj
+.gitignore
