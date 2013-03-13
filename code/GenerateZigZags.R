@@ -45,3 +45,4 @@ qplot(data=data.points, x=x, y=ynorm, geom="point", alpha=I(.25), colour=I("grey
   geom_line(data=data, aes(x=x, y=ynorm), color="black") +
   facet_wrap(~set) + theme_stimuli()
 
+data$correct[1]
