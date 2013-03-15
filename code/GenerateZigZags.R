@@ -26,7 +26,7 @@ get4 <- function(order){
   ans <- which(order==1)
 #   a <- .75# *(order==1) + .95*(order!=1)
 #   b <- 2# *(order==1) + 1.05*(order!=1)
-  nslopes <- runif(6, min=1, max=3)
+  nslopes <- runif(6, min=1, max=4)
   nseg <- 8
   data <- do.call("rbind", lapply(1:length(order), function(i) data.frame(
     getDataSet(nseg, slope=nslopes),
@@ -34,7 +34,7 @@ get4 <- function(order){
   data$sd <- .125*with(data, (set==ans) + (set!=ans)*sqrt(1+slope^2))
 #   data <- ddply(data, .(set), transform, sd = sd-mean(sd)+.25)
   data$sd[which(data$set==ans)] <- mean(data$sd[which(data$set!=ans)])
-  data <- ddply(data, .(set), transform, sd2 = loess(sd~x, span=.15, degree=1, surface="interpolate")$fitted)
+  data <- ddply(data, .(set), transform, sd2 = loess(sd~x, span=.2, degree=1, surface="interpolate")$fitted)
 #   data <- ddply(data, .(set), transform, sd2 = sd2-mean(sd2)+.125)
 }
 
