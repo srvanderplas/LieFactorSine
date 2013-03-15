@@ -1,7 +1,7 @@
 # Code to generate 2x2 grid of pictures, 3 or 4 of which have similar or identical slopes.
-require(ggplot2)
-require(plyr)
-require(reshape2)
+library(ggplot2)
+library(plyr)
+library(reshape2)
 source("./code/themeStimuli.R")
 
 # Input number of line segments and a vector of nonnegative slope magnitudes. 
@@ -24,22 +24,28 @@ getDataSet <- function(nsegment=4, slope=c(1))
 
 get4 <- function(order){
   ans <- which(order==1)
-  a <- .75*(order==1) + .95*(order!=1)
-  b <- 2*(order==1) + 1.05*(order!=1)
-  nslopes <- 4
+#   a <- .75# *(order==1) + .95*(order!=1)
+#   b <- 2# *(order==1) + 1.05*(order!=1)
+  nslopes <- runif(6, min=1, max=3)
   nseg <- 8
-  do.call("rbind", lapply(1:length(order), function(i) data.frame(
-    getDataSet(nseg, slope=runif(nslopes, min=a[i], max=b[i])),
+  data <- do.call("rbind", lapply(1:length(order), function(i) data.frame(
+    getDataSet(nseg, slope=nslopes),
     set=i, correct=ans)))
+  data$sd <- .125*with(data, (set==ans) + (set!=ans)*sqrt(1+slope^2))
+#   data <- ddply(data, .(set), transform, sd = sd-mean(sd)+.25)
+  data$sd[which(data$set==ans)] <- mean(data$sd[which(data$set!=ans)])
+  data <- ddply(data, .(set), transform, sd2 = loess(sd~x, span=.15, degree=1, surface="interpolate")$fitted)
+#   data <- ddply(data, .(set), transform, sd2 = sd2-mean(sd2)+.125)
 }
 
 data <- get4(sample(1:4, 4))
-
-data.points <- ddply(data, .(set, x, segmentLength, correct, slope), summarise, ynorm=runif(2, ynorm-.5, ynorm+.5))
+data.points <- ddply(data, .(set, x, segmentLength, correct, slope), summarise, ynorm=rnorm(10, ynorm, sd2))
 
 # Ribbon plot
-qplot(data=data, x=x, ymin=ynorm-.5, ymax=ynorm+.5, geom="ribbon") + facet_wrap(~set) + theme_stimuli()
+qplot(data=data, x=x, ymin=ynorm-sd2, ymax=ynorm+sd2, geom="ribbon") + 
+  facet_wrap(~set) + theme_stimuli() 
 
+qplot(data=data, x=x, y=sd2, geom="line") + facet_wrap(~set) #+ theme_stimuli() 
 # Points
 qplot(data=data.points, x=x, y=ynorm, geom="point", alpha=I(.25), colour=I("grey10")) + 
   geom_line(data=data, aes(x=x, y=ynorm), color="black") +
