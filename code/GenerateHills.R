@@ -2,10 +2,11 @@ require(ggplot2)
 require(plyr)
 require(reshape2)
 source("./code/themeStimuli.R")
-
+library(e1071)
 
 logit <- function(x, a=1, b=0){
-  1/(1+exp(a*x + b))
+  data <- data.frame(y=sigmoid(a*x), deriv=dsigmoid(a*x), deriv2=d2sigmoid(a*x))
+  data
 }
 
 # Logistic approx. to step function I(x0[1] < x < x0[2])
@@ -20,27 +21,44 @@ getrange <- function(){
   c(lower, upper)
 }
 
+correct <- function(data){
+  fp <- data$deriv
+  f2p <- data$deriv2
+  ell <- .1
+  lambdap <- (sqrt((fp^2+1)^2-f2p*fp^2*ell) + fp^2 + 1)^-1    
+  lambdam <- -(sqrt((fp^2+1)^2+f2p*fp^2*ell) + fp^2 + 1)^-1    
+  
+  
+  data$upper <- data$y + (4*abs(lambdap)*sqrt(1+fp^2))^-1
+  data$lower <- data$y - (4*abs(lambdam)*sqrt(1+fp^2))^-1
+  data
+}
+
 
 x <- seq(-8, 8, .1)
 
 # a can be any set of 4 positive numbers.
-a <- sample(c( 1, 1, 1, 2))
-data <- data.frame(
-        sapply(1:4, function(i) logitcombo(x=x, a=a[i], x0=getrange())) +
-        sapply(1:4, function(i) logitcombo(x=x, a=a[i], x0=getrange())) +
-        sapply(1:4, function(i) logitcombo(x=x, a=a[i], x0=getrange())), 
-        correct=which.max(a))
-data1 <- data.frame(x=x, data)
-data <- melt(data1, id.vars=c("x", "correct"), value.name="y", variable.name="type")
-data$set <- as.numeric(data$type)
+a <- sample(c( 1, 1, 1, 4))
+bumps <- rbind(getrange(), getrange(), getrange())
+data <- do.call("rbind", lapply(1:4, function(i) 
+          data.frame(x=x, set=i, correct(logitcombo(x=x, a=a[i], x0=bumps[1,]) + 
+                       logitcombo(x=x, a=a[i], x0=bumps[2,]) + 
+                       logitcombo(x=x, a=a[i], x0=bumps[3,])),
+                     ans=which.max(a))))
 
-data.points <- ddply(data, .(x, y, set, type, correct), summarise, ypoints = rnorm(5, y, .1))
+
+data.points <- ddply(data1, .(x, y, set, ans, deriv, deriv2), summarise, ypoints = runif(5, lower, upper))
+data.points$resid <- data.points$ypoints-data.points$y
+data.points1 <- melt(data.points, id.vars=c("x", "ans", "set", "deriv", "y"), value.vars=c("ypoints", "resid"), value.name=c("ypoints"), variable.name="type")
 
 # Ribbon plot
-qplot(data=data, x=x, ymin=y-.25, ymax=y+.25, geom="ribbon") + facet_wrap(~set) + theme_stimuli()
+qplot(data=data1, x=x, ymin=-.25*(1+(deriv^2)), ymax=.25*(1+(deriv^2)), geom="ribbon") + facet_wrap(~set) + theme_stimuli()
 
 # Points
 qplot(data=data.points, x=x, y=ypoints, geom="point", alpha=I(.5)) + 
   geom_line(data=data.points, aes(x=x,  y=y)) + facet_wrap(~set) + theme_stimuli()
+
+qplot(data=data.points1, x=x, y=ypoints, geom="point", alpha=I(.5)) + facet_grid(type~set) + theme_stimuli()
+qplot(data=data.points1, x=x, y=1/(1+deriv^2), geom="line") + facet_wrap(~set) #+ theme_stimuli()
 
 data$correct[1]

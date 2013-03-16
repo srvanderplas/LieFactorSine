@@ -1,0 +1,70 @@
+% !TeX program = pdfLaTeX
+\documentclass[11pt]{article}
+\usepackage{natbib}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage[colorlinks=TRUE, linkcolor=blue]{hyperref}
+\usepackage{wrapfig,float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage[section]{placeins}
+
+% test change
+% help with editing and coauthoring
+\usepackage[colorinlistoftodos]{todonotes}
+
+
+\graphicspath{{figure/}}
+\renewcommand{\floatpagefraction}{.99}
+
+\newcommand{\done}[2][inline]{\todo[color=SpringGreen, #1]{#2}}  % for todos that have been seen and dealt with
+\newcommand{\newdo}[1]{\todo[inline, color=Plum]{#1}} % new to do item
+\newcommand{\comment}[2][inline]{\todo[color=SkyBlue, #1]{#2}} % for comments that may not be "to-do"s
+\newcommand{\newtext}[1]{\todo[inline, color=White]{ \color{OliveGreen}{#1}}} % new text - not necessarily something to be done
+
+<<setup, fig.keep='all', cache=FALSE, echo=FALSE, eval=TRUE>>=
+options(replace.assign=TRUE,width=70)
+library(knitr)
+library(ggplot2)
+library(reshape2)
+library(plyr)
+
+opts_chunk$set(fig.path='figure/fig-', cache.path='cache/', fig.align='center', fig.width=5, fig.height=5, fig.show='hold', par=TRUE, cache=TRUE, concordance=TRUE, autodep=TRUE)
+@
+
+\begin{document}
+\begin{enumerate}
+\item Introduction - Lie Factor, Psychological Distortions, etc.
+\item Underlying Psychology - Why 3d perception is a curse. Muller Lyon, Ames room, etc. Necessity of quantifying the size of these effects on graphs to determine the psychological ``lie factor".
+\item Case Study - Sine Illusion
+\item Conclusions
+\end{enumerate}
+
+\section{Introduction}
+One of the basic principles of visual graphics is that the graphic should accurately reflect the data. Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data\citep{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). The implications behind Tufte's lie factor are somewhat ambiguous, however: Is the goal to make the graph on paper accurately represent the numbers used to generate that graph? Or is the goal to accurately convey the information presented in the graph to the reader? While in many cases, these two goals can be achieved simultaneously, there are many instances in which human perception produces a psychological distortion that can interfere with the interpretation of graphics that are true to the numerical data. In this paper, we examine several situations in which very low-level human perceptual processes interfere with making accurate judgements from displays that are true to the data. 
+
+\section{The Curse of Three Dimensions}
+The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional mental representations of the world. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation could correspond to multiple three-dimensional objects, as in the Necker Cube shown in Figure \ref{fig:Necker}, and the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. 
+\begin{figure}[H]
+\begin{subfigure}[b]{.3\linewidth}\centering
+\includegraphics[width=\linewidth]{images/Necker_cube.png}
+\caption{The original Necker cube}
+\end{subfigure}
+\begin{subfigure}[b]{.3\linewidth}\centering
+\includegraphics[width=\linewidth]{images/Necker_cube1.png}
+\caption{Interpretation 1}
+\end{subfigure}
+\begin{subfigure}[b]{.3\linewidth}\centering
+\includegraphics[width=\linewidth]{images/Necker_cube2.png}
+\caption{Interpretation 2}
+\end{subfigure}
+\caption{The Necker Cube is a so-called ``ambiguous object" because two different transparent objects could produce the same perceptual experience. Commonly, perception seems to transition instantaneously from one possible mental representation to the other.}\label{fig:Necker}
+\end{figure}
+
+\end{document}
