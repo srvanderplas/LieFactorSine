@@ -39,6 +39,7 @@ opts_chunk$set(fig.path='figure/fig-', cache.path='cache/', fig.align='center', 
 @
 
 \begin{document}
+\section*{Outline}
 \begin{enumerate}
 \item Introduction - Lie Factor, Psychological Distortions, etc.
 \item Underlying Psychology - Why 3d perception is a curse. Muller Lyer, Ames room, etc. Necessity of quantifying the size of these effects on graphs to determine the psychological ``lie factor".
@@ -52,22 +53,57 @@ One of the basic principles of visual graphics is that the graphic should accura
 \section{The Curse of Three Dimensions}
 The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional mental representations of the world. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation could correspond to multiple three-dimensional objects, as in the Necker Cube shown in Figure \ref{fig:Necker}, and the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. 
 \begin{figure}[H]
-\begin{subfigure}[b]{.3\linewidth}\centering
-\includegraphics[width=\linewidth]{images/Necker_cube.png}
-\caption{The original Necker cube}
-\end{subfigure}
-\begin{subfigure}[b]{.3\linewidth}\centering
-\includegraphics[width=\linewidth]{images/Necker_cube1.png}
-\caption{Interpretation 1}
-\end{subfigure}
-\begin{subfigure}[b]{.3\linewidth}\centering
-\includegraphics[width=\linewidth]{images/Necker_cube2.png}
-\caption{Interpretation 2}
-\end{subfigure}
+\includegraphics[keepaspectratio=TRUE,width=\linewidth]{figure/fig-neckercube}
 \caption{The Necker Cube is a so-called ``ambiguous object" because two different transparent objects could produce the same perceptual experience. Commonly, perception seems to transition instantaneously from one possible mental representation to the other.}\label{fig:Necker}
 \end{figure}
+In the case of the Necker cube, the two different figures are equally salient, and thus the brain never seems to pick one interpretation. In many cases, however, experience with the real world can inform the choice between many possible three-dimensional objects which form the same two-dimensional picture. If this were not the case, pictures would cease to provide any useful information, as the brain would not be able to map the picture back to the real world image which it typically represents. One of the most well studied examples of this phenomenon is the Muller-Lyer illusion, shown in Figure \ref{fig:mullerlyer}
+
+\begin{figure}[h!]\centering
+\includegraphics[keepaspectratio=TRUE]{figure/fig-mullerlyer}
+\caption{The Muller-Lyer illusion. The central segment of Figure A is perceived as shorter than the central segment  of Figure B, even though the two are actually the same length.}\label{fig:mullerlyer}
+\end{figure}
+
+The Muller-Lyer illusion occurs because the brain processes the ambiguous lines as a most-common three-dimensional object: corners of a room. Figure \ref{fig:mullerlyer}A occurs when viewing the outside corner of a cube, Figure \ref{fig:mullerlyer}B occurs when viewing the cube from the inside. The inferred perspective carries with it an inferred ``depth cue" \citep{gregory} which is reasonably consistent across individuals. This inferred perspective and depth combination is what causes the Muller-Lyer illusion, but it can also be found in the Necker Cube - whichever face appears to be furthest away also seems larger, even though any two parallel faces are equally sized. The psychological advantages of this approach in the real world are considerable \citep{gregory}, but for the purposes of graphical representations of data, we need only know that the effect exists. 
+
+
+
 
 \clearpage
 \bibliographystyle{plain}
 \bibliography{references}
+
+<<neckercube, fig.width=8, fig.height=3, echo=FALSE, include=FALSE>>=
+data <- rbind(data.frame(x=c(0, 1, 1.5, 1.5, 0.5, 0, 0), y=c(0, 0, 0.25, 1.25, 1.25, 1, 0), group=1, line=1),
+              data.frame(x=c(0, .5, 1.5), y=c(0, .25, .25), group=2, line=2), 
+              data.frame(x=c(.5, .5), y=c(.25, 1.25), group=3, line=2),
+              data.frame(x=c(0,  1, 1.5), y=c(1, 1, 1.25), group=4, line=3),
+              data.frame(x=c(1, 1), y=c(1, 0), group=5, line=3))
+
+data <- rbind(cbind(data, label="Necker Cube"), cbind(data, label="Interpretation 1"), cbind(data, label="Interpretation 2"))
+data$line[data$label=="Necker Cube"] <- 1
+data$line[data$label=="Interpretation 2" & data$line==2] <- 1
+data$line[data$label=="Interpretation 1" & data$line==3] <- 1
+qplot(data=data, x=x, y=y, group=group, geom="path", linetype=factor(line), colour=factor(line)) + facet_grid(.~label) + scale_linetype_discrete(guide="none") + scale_colour_manual(guide="none", values=c("black", "grey40", "grey40")) + 
+  theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
+        panel.grid.minor=element_blank(), panel.background=element_blank(),
+        axis.title = element_blank(), axis.ticks = element_blank(), 
+        axis.text = element_blank())
+@
+<<mullerlyer,echo=FALSE, fig.width=2, fig.height=4,  include=FALSE>>=
+y.a <- .125
+x.a <- .125
+
+data <- rbind(
+        data.frame(x=c(.5, .5, .5-x.a, .5, .5+x.a, .5-x.a, .5, .5+x.a), 
+                   y=c(0, 1, y.a, 0, y.a, 1-y.a, 1, 1-y.a), 
+                   group=c(1, 1, 2, 2, 2, 3, 3, 3), label="A"),
+        data.frame(x=c(.5, .5, .5-x.a, .5, .5+x.a, .5-x.a, .5, .5+x.a), 
+                   y=c(0, 1, -y.a, 0, -y.a, 1+y.a, 1, 1+y.a), 
+                   group=c(4, 4, 5, 5, 5, 6, 6, 6), label="B"))
+qplot(data=data, x=x, y=y, group=group, geom="path") + facet_grid(.~label) + 
+  theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
+        panel.grid.minor=element_blank(), panel.background=element_blank(),
+        axis.title = element_blank(), axis.ticks = element_blank(), 
+        axis.text = element_blank()) 
+@
 \end{document}
