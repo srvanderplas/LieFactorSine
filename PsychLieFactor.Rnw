@@ -41,7 +41,7 @@ opts_chunk$set(fig.path='figure/fig-', cache.path='cache/', fig.align='center', 
 \begin{document}
 \begin{enumerate}
 \item Introduction - Lie Factor, Psychological Distortions, etc.
-\item Underlying Psychology - Why 3d perception is a curse. Muller Lyon, Ames room, etc. Necessity of quantifying the size of these effects on graphs to determine the psychological ``lie factor".
+\item Underlying Psychology - Why 3d perception is a curse. Muller Lyer, Ames room, etc. Necessity of quantifying the size of these effects on graphs to determine the psychological ``lie factor".
 \item Case Study - Sine Illusion
 \item Conclusions
 \end{enumerate}
@@ -67,4 +67,7 @@ The human visual system is largely optimized for perception of three dimensions.
 \caption{The Necker Cube is a so-called ``ambiguous object" because two different transparent objects could produce the same perceptual experience. Commonly, perception seems to transition instantaneously from one possible mental representation to the other.}\label{fig:Necker}
 \end{figure}
 
+\clearpage
+\bibliographystyle{plain}
+\bibliography{references}
 \end{document}
