@@ -166,9 +166,9 @@ dframe <- createSine(n = 150, len = 1, f=f, fprime=fprime, f2prime)
 dframe$ystartcts <- dframe$ystart
 dframe$yendcts <- dframe$yend
 dframe[1:150,c(2, 3, 5, 6)] <- NA
-dframe[(1:15)*10-5, c(2, 3)] <- dframe[(1:15)*10-5, 1] 
-dframe[(1:15)*10-5, 5] <- dframe[(1:15)*10-5, 4] - .5
-dframe[(1:15)*10-5, 6] <- dframe[(1:15)*10-5, 4] + .5
+dframe[(1:30)*5-3, c(2, 3)] <- dframe[(1:30)*5-3, 1] 
+dframe[(1:30)*5-3, 5] <- dframe[(1:30)*5-3, 4] - .5
+dframe[(1:30)*5-3, 6] <- dframe[(1:30)*5-3, 4] + .5
 dframe$type <- "Data"
 dframe.1 <- getSecantSegment(dframe$xstart[!is.na(dframe$xstart)], dframe, f, fprime, f2prime)
 names(dframe.1) <- c("x", "y", "deriv", "xstart", "xend", "ystart", "yend", "ell", "ell.quad1", "ell.quad2", "type", "a")
@@ -183,6 +183,8 @@ qplot(x=x, y=y, geom="line", data=dframe, colour=I("grey50")) + theme_bw() +
   coord_equal(ratio=1) + scale_colour_manual("", values=c("black", "blue")) + theme(legend.position="bottom")  + 
   scale_x_continuous(breaks=seq(0, 2*pi, by=pi/2), 
                      labels=c("0", expression(paste(pi,"/2")), expression(pi), expression(paste("3",pi, "/2")), expression(paste("2",pi))))
+# we have a bit of a problem with the correction function here - could explain the over-correction....
+
 
 p <- persp(x, z, -data.persp, ylab="z", zlab="y", theta=0, phi=90, border="grey20") # B
 lines(trans3d(x, .25*sin(x)-.375, 1+0*x, p), col="red")
