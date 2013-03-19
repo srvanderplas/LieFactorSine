@@ -47,6 +47,10 @@ opts_chunk$set(fig.path='figure/fig-', cache.path='cache/', fig.align='center', 
 \item Conclusions
 \end{enumerate}
 
+\begin{abstract}
+Tufte's lie factor was created with the idea that graphs that do not represent the underlying data accurately should be avoided. In this paper, we examine a second level of graph distortion that occurs during the perceptual process. We discuss the underlying psychological mechanisms for the distortions, examine the effect these distortions have on statistical judgments, and consider the implications for graph design. Using the sine illusion as a case study, we quantify the effects of the distortion to create a ``perceptual lie factor" for the sine illusion.
+\end{abstract}
+
 \section{Introduction}
 One of the basic principles of visual graphics is that the graphic should accurately reflect the data. Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data\citep{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). The implications behind Tufte's lie factor are somewhat ambiguous, however: Is the goal to make the graph on paper accurately represent the numbers used to generate that graph? Or is the goal to accurately convey the information presented in the graph to the reader? While in many cases, these two goals can be achieved simultaneously, there are many instances in which human perception produces a psychological distortion that can interfere with the interpretation of graphics that are true to the numerical data. In this paper, we examine several situations in which very low-level human perceptual processes interfere with making accurate judgements from displays that are true to the data. 
 

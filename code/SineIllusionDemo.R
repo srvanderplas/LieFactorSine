@@ -41,6 +41,41 @@ createSine <- function(n=200, len=1, f=f, fprime=fprime, f2prime=f2prime, a=0, b
   dframe
 }
 
+
+getSecantSegment <- function(x0, df, f, fprime, f2prime){
+  ell     <- sapply(x0, function(i) df$ell[which.min(abs(i-df$x))]/2)
+  
+  dy <- diff(range(df$y))
+  dx <- diff(range(df$x))
+  a <- dx/(dy + 2*ell) 
+  
+  fp <- a*fprime(x0)
+  f2p <- a*f2prime(x0)
+  lambdap <- (sqrt((fp^2+1)^2-f2p*fp^2*ell) + fp^2 + 1)^-1    
+  lambdam <- -(sqrt((fp^2+1)^2+f2p*fp^2*ell) + fp^2 + 1)^-1    
+  
+  #---- Approximation
+  
+  x2 <- lambdap*fprime(x0)+x0
+  x1 <- lambdam*fprime(x0)+x0
+  y2 <- f(x0)-lambdap
+  y1 <- f(x0)-lambdam
+  #----
+  
+  df2 <- data.frame(x=x0, y=f(x0), deriv=fprime(x0),
+                    sec.xstart=x1, sec.xend = x2, 
+                    sec.ystart=y1, sec.yend = y2,
+                    ell = 2*ell)
+  
+  df2$sec.ellp <- (4*abs(lambdap)*sqrt(1+fp^2))^-1
+  df2$sec.ellm <- (4*abs(lambdam)*sqrt(1+fp^2))^-1
+  #   df2$sec.ellp <- with(df2, sqrt((sec.yend-y)^2+(sec.xend-x)^2))
+  #   df2$sec.ellm <- with(df2, sqrt((y-sec.ystart)^2+(x-sec.xstart)^2))
+  df2$type <- "Perceived Width"
+  df2$a <- a
+  return(df2)
+}
+
 f <- function(x) 2*sin(x)
 fprime <- function(x) 2*cos(x)
 f2prime <- function(x) -2*sin(x)
@@ -108,7 +143,7 @@ persp(x, z, data.persp, ylab="z", zlab="y", theta=0, phi=90, border="grey20")  #
 persp(x, z, -data.persp, ylab="z", zlab="y", theta=0, phi=90, border="grey20") # B
 persp(x, z, data.persp, ylab="z", zlab="y", theta=10, phi=0, border="grey20")  # C
 persp(x, z, -data.persp, ylab="z", zlab="y", theta=0, phi=0, border="grey20")  # D
-# I seem to flip between B and C... 
+# I seem to flip between B and C... but clearly you need the depth cues along the nearly-linear region to accurately parse the graph, particularly for C,D.
 
 qplot(data=createSine(40, 1, f=f, fprime=fprime, f2prime, a=0, b=2*pi), x=x, xend=x, y=ystart, yend=yend, geom="segment") + 
   geom_line(aes(y=ystart), linetype=2) + geom_line(aes(y=yend), linetype=2) + 
@@ -119,6 +154,35 @@ qplot(data=createSine(40, 1, f=f, fprime=fprime, f2prime, a=0, b=2*pi), x=x, xen
         axis.title = element_blank(), axis.ticks = element_blank(), 
         axis.text = element_blank()) + coord_equal(ratio=1)
 
+qplot(data=createSine(40, 1, f=f, fprime=fprime, f2prime, a=0, b=2*pi), x=x, xend=x, y=ystart, yend=yend, geom="segment", colour=I("grey70")) + 
+  geom_line(aes(y=ystart), linetype=2) + geom_line(aes(y=yend), linetype=2) + 
+  theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "black"),
+        panel.grid.minor=element_blank(), panel.background=element_blank(),
+        axis.title = element_blank(), axis.ticks = element_blank(), 
+        axis.text = element_blank()) + coord_equal(ratio=1)
+
+library(plyr)
+dframe <- createSine(n = 150, len = 1, f=f, fprime=fprime, f2prime)
+dframe$ystartcts <- dframe$ystart
+dframe$yendcts <- dframe$yend
+dframe[1:150,c(2, 3, 5, 6)] <- NA
+dframe[(1:15)*10-5, c(2, 3)] <- dframe[(1:15)*10-5, 1] 
+dframe[(1:15)*10-5, 5] <- dframe[(1:15)*10-5, 4] - .5
+dframe[(1:15)*10-5, 6] <- dframe[(1:15)*10-5, 4] + .5
+dframe$type <- "Data"
+dframe.1 <- getSecantSegment(dframe$xstart[!is.na(dframe$xstart)], dframe, f, fprime, f2prime)
+names(dframe.1) <- c("x", "y", "deriv", "xstart", "xend", "ystart", "yend", "ell", "ell.quad1", "ell.quad2", "type", "a")
+dframe.1$vangle <- with(dframe.1, atan(deriv))
+dframe <- rbind.fill(dframe, dframe.1)
+
+
+qplot(x=x, y=y, geom="line", data=dframe, colour=I("grey50")) + theme_bw() + 
+  geom_line(aes(y=ystartcts), colour="grey50", linetype=4) + 
+  geom_line(aes(y=yendcts), colour="grey50", linetype=4) +
+  geom_segment(data=subset(dframe, !is.na(type) & type=="Perceived Width"), aes(x=xstart, xend = xend, y=ystart, yend=yend, colour=type))  + 
+  coord_equal(ratio=1) + scale_colour_manual("", values=c("black", "blue")) + theme(legend.position="bottom")  + 
+  scale_x_continuous(breaks=seq(0, 2*pi, by=pi/2), 
+                     labels=c("0", expression(paste(pi,"/2")), expression(pi), expression(paste("3",pi, "/2")), expression(paste("2",pi))))
 
 p <- persp(x, z, -data.persp, ylab="z", zlab="y", theta=0, phi=90, border="grey20") # B
 lines(trans3d(x, .25*sin(x)-.375, 1+0*x, p), col="red")
