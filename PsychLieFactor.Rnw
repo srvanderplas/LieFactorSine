@@ -120,20 +120,36 @@ In the case of the Necker cube, the two different figures are equally salient, a
 \caption{The Muller-Lyer illusion. The central segment of Figure A is perceived as shorter than the central segment  of Figure B, even though the two are actually the same length.}\label{fig:mullerlyer}
 \end{figure}
 
-The Muller-Lyer illusion occurs because the brain interprets the ambiguous lines as a common three-dimensional object: corners of a room: Figure \ref{fig:mullerlyer}A occurs when viewing the outside corner of a rectangular prism, Figure \ref{fig:mullerlyer}B occurs when viewing the prism from the inside. Figure \ref{fig:mullerlyerreal} demonstrates the real-world experience that would lead to the Muller-Lyer effect. In regions which do not commonly have rectangular buildings, the illusion is significantly less pervasive \citep{mullerlyerafrica}. The inferred perspective carries with it an inferred ``depth cue" \citep{gregory} which is reasonably consistent across individuals. This inferred perspective and depth combination is what causes the Muller-Lyer illusion, but it can also be found in the Necker Cube - whichever face appears to be furthest away also seems larger, even though any two parallel faces are equally sized. The advantages of this approach in the real world are considerable \citep{gregory}, as pictures of real objects are seldom ambiguous and this strategy allow for high performance with limited neural bandwidth. 
+The Muller-Lyer illusion occurs because the brain interprets the ambiguous lines as a common three-dimensional object: corners of a room: Figure \ref{fig:mullerlyer}A occurs when viewing the outside corner of a rectangular prism, Figure \ref{fig:mullerlyer}B occurs when viewing the prism from the inside.  In regions which do not commonly have rectangular buildings, the illusion is significantly less pervasive \citep{mullerlyerafrica}. Figure \ref{fig:mullerlyerreal} demonstrates the real-world experience that would lead to the Muller-Lyer effect. This real-world experience carries with it an inferred perspective - when the arrows point inward, the object is typically closer than when the arrows point outward, which causes the brain to interpret the outward-pointing figure as larger, even though the retinal size is the same for the two objects. This inferred ``depth cue" \citep{gregory} is reasonably consistent across individuals. A similar effect can also be found in the Necker Cube - whichever face appears to be furthest away also seems larger, even though any two parallel faces are equally sized in the image. The advantages of this approach in the real world are considerable \citep{gregory}, as pictures of real objects are seldom ambiguous and this strategy allow for high performance with limited neural bandwidth - Figure \ref{fig:mullerlyerreal} shows not only the real-world context, but that the perspective cues that contribute to the illusion allow for an accurate neural representation of the actual object. 
 
 \begin{figure}[h!t]\centering
 \includegraphics[keepaspectratio=TRUE,width=\linewidth]{images/mullerlyerhouse}
 \caption{Real-world context that gives rise to the Muller Lyer illusion}\label{fig:mullerlyerreal}
 \end{figure}
 
+\section{Three Dimensional Context of the Sine Illusion}
+While the Muller-Lyer illusion is seldom a factor in statistical graphics, there are other illusions caused by the same mechanism - the brain interprets a two-dimensional stimulus in the context of three-dimensional objects, causing a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion) is one example of this phenomenon which occurs frequently in statistical graphics. Like the Muller-Lyer illusion, it is pervasive and very difficult to ``un-see" or mentally correct. Figure \ref{fig:sineillusion} shows the sine illusion in its original form, and Figure \ref{fig:playfair} shows the same illusion in one of Playfair's Statistical Atlas graphs\citep{playfair}.
+\begin{figure}[h!t]\centering
+\includegraphics[keepaspectratio=TRUE,width=\linewidth]{figure/fig-sinedemo1}
+\caption{The classic sine illusion. Each vertical line has the same length, though the lines at the peak and trough of the curve appear longer.}\label{fig:sineillusion}
+\end{figure}
 
+\begin{figure}[h!t]\centering
+\includegraphics[keepaspectratio=TRUE,width=\linewidth]{images/PlayfairExportImports}
+\caption{The sine illusion in Playfair's graph of trade between the East Indies and England, 1700-1780. The trade balance in 1763 does not appear to be the same size as that in 1745, though the vertical distance is approximately the same.}\label{fig:playfair}
+\end{figure}
+
+The three-dimensional context most similar to the sine illusion shown in Figure \ref{fig:sineillusion} is shown in Figure \ref{fig:sineillusion3d}. 
+\begin{figure}[h!t]\centering
+\includegraphics[keepaspectratio=TRUE,width=\linewidth, trim=0in 1in 0in 1in]{figure/fig-sinedemo2}
+\caption{Three dimensional context for the sine illusion.}\label{fig:sineillusion3d}
+\end{figure}
 
 \clearpage
 \bibliographystyle{plain}
 \bibliography{references}
 
-<<neckercube, fig.width=8, fig.height=3, echo=FALSE, include=FALSE>>=
+<<neckercube, echo=FALSE, fig.width=8, fig.height=3, include=FALSE>>=
 data <- rbind(data.frame(x=c(0, 1, 1.5, 1.5, 0.5, 0, 0), y=c(0, 0, 0.25, 1.25, 1.25, 1, 0), group=1, line=1),
               data.frame(x=c(0, .5, 1.5), y=c(0, .25, .25), group=2, line=2), 
               data.frame(x=c(.5, .5), y=c(.25, 1.25), group=3, line=2),
@@ -150,7 +166,7 @@ qplot(data=data, x=x, y=y, group=group, geom="path", linetype=factor(line), colo
         axis.title = element_blank(), axis.ticks = element_blank(), 
         axis.text = element_blank())
 @
-<<mullerlyer,echo=FALSE, fig.width=2, fig.height=2,  include=FALSE>>=
+<<mullerlyer, echo=FALSE, fig.width=2, fig.height=2, include=FALSE>>=
 y.a <- .125
 x.a <- .125
 
@@ -167,4 +183,73 @@ qplot(data=data, x=x, y=y, group=group, geom="path") + facet_grid(.~label) +
         axis.title = element_blank(), axis.ticks = element_blank(), 
         axis.text = element_blank()) + xlim(c(0,1))
 @
+<<sinedemo,   echo=FALSE, fig.width=4, fig.height=4, include=FALSE>>=
+createSine <- function(n=200, len=1, f=f, fprime=fprime, f2prime=f2prime, a=0, b=2*pi) {
+  x <- seq(a, b, length=n+2)[(2:(n+1))]
+  ell <- rep(len, length=length(x))
+  fx <- f(x)
+  ystart <- fx - .5*ell
+  yend <- fx + .5*ell
+  
+  # now correct for line illusion in vertical direction
+  dy <- diff(range(fx))
+  dx <- diff(range(x))
+  # fprime works in framework of dx and dy, but we represent it in framework of dx and dy+len
+  # needs to be fixed by factor a:  
+  a <- dy/(dy + len) 
+  # ellx is based on the "trig" correction
+  ellx <- ell / cos(atan(abs(a*fprime(x))))
+  # ellx2 is based on linear approximation of f  
+  ellx2 <- ell * sqrt(1 + a^2*fprime(x)^2)
+  
+  # make this a data frame - ggplot2 doesn't do well with floating vectors
+  dframe <- data.frame(x=x, xstart=x, xend=x, y=fx, ystart=ystart, yend=yend, ell=ell, ellx = ellx, ellx2=ellx2)
+  
+  # third adjustment is based on quadratic approximation of f.
+  # this needs two parts: correction above and below f(x)  
+  
+  fp <- a*fprime(x)
+  f2p <- a*f2prime(x)
+  lambdap <- (sqrt((fp^2+1)^2-f2p*fp^2*ell) + fp^2 + 1)^-1    
+  lambdam <- -(sqrt((fp^2+1)^2+f2p*fp^2*ell) + fp^2 + 1)^-1    
+  
+  
+  dframe$ellx4.l <- (4*abs(lambdap)*sqrt(1+fp^2))^-1
+  dframe$ellx4.u <- (4*abs(lambdam)*sqrt(1+fp^2))^-1
+  
+  dframe
+}
+
+trans3d <- function(x,y,z, plot) {
+  tmat <- t(cbind(x,y,z,1) %*% plot)
+  list(x=tmat[1,]/tmat[4,], y=tmat[2,]/tmat[4,])
+} 
+
+f <- function(x) 2*sin(x)
+fprime <- function(x) 2*cos(x)
+f2prime <- function(x) -2*sin(x)
+
+qplot(x=x, xend=xend, y = ystart, yend=yend, geom="segment", data=createSine(40, 1, f=f, fprime=fprime, f2prime), colour=I("black")) +
+#   geom_line(aes(x=x, y=ystart), colour="black") + 
+#   geom_line(aes(x=x, y=yend), colour="black") + 
+  theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
+        panel.grid.minor=element_blank(), panel.background=element_blank(),
+        axis.title = element_blank(), axis.ticks = element_blank(), 
+        axis.text = element_blank()) + coord_equal(ratio=1)
+
+x <- seq(0, 2*pi, length=40)
+data <- do.call("rbind", lapply(seq(-1.5, 1.5, 3), function(i) data.frame(x=x, y=2*sin(x), z=i)))
+
+data.persp <- acast(data, x~z, value.var="y")
+x <- sort(unique(data$x))
+y <- sort(unique(data$y))
+z <- sort(unique(data$z))
+
+
+p <- persp(x, z, data.persp, ylab="z", zlab="y", theta=-5, phi=25, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), expand=.75, scale=FALSE) # , ltheta=0, lphi=-15
+# lines(trans3d(x, -1.5, 2*sin(x), p), col="white")
+# lines(trans3d(x, 1.5, 2*sin(x), p), col="white")
+
+@
+
 \end{document}
