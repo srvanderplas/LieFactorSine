@@ -47,12 +47,12 @@ data <- do.call("rbind", lapply(1:4, function(i)
                      ans=which.max(a))))
 
 
-data.points <- ddply(data1, .(x, y, set, ans, deriv, deriv2), summarise, ypoints = runif(5, lower, upper))
+data.points <- ddply(data, .(x, y, set, ans, deriv, deriv2), summarise, ypoints = runif(5, lower, upper))
 data.points$resid <- data.points$ypoints-data.points$y
 data.points1 <- melt(data.points, id.vars=c("x", "ans", "set", "deriv", "y"), value.vars=c("ypoints", "resid"), value.name=c("ypoints"), variable.name="type")
 
 # Ribbon plot
-qplot(data=data1, x=x, ymin=-.25*(1+(deriv^2)), ymax=.25*(1+(deriv^2)), geom="ribbon") + facet_wrap(~set) + theme_stimuli()
+qplot(data=data, x=x, ymin=-.25*(1+(deriv^2)), ymax=.25*(1+(deriv^2)), geom="ribbon") + facet_wrap(~set) + theme_stimuli()
 
 # Points
 qplot(data=data.points, x=x, y=ypoints, geom="point", alpha=I(.5)) + 

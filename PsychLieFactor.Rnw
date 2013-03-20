@@ -1,14 +1,35 @@
 % !TeX program = pdfLaTeX
-\documentclass[11pt]{article}
+\documentclass[journal]{vgtc}                % final (journal style)
+%\documentclass[review,journal]{vgtc}         % review (journal style)
+% \documentclass[widereview]{vgtc}             % wide-spaced review
+%\documentclass[preprint,journal]{vgtc}       % preprint (journal style)
+%\documentclass[electronic,journal]{vgtc}     % electronic version, journal
+
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{times}
+
 \usepackage{natbib}
 \usepackage{fullpage}
 \usepackage{color}
 \usepackage[dvipsnames,svgnames]{xcolor}
-\usepackage[colorlinks=TRUE, linkcolor=blue]{hyperref}
+\usepackage[bookmarks,backref=true,linkcolor=black]{hyperref} %,colorlinks
+\hypersetup{
+  pdfauthor = {},
+  pdftitle = {},
+  pdfsubject = {},
+  pdfkeywords = {},
+  colorlinks=true,
+  linkcolor= black,
+  citecolor= black,
+  pageanchor=true,
+  urlcolor = black,
+  plainpages = false,
+  linktocpage
+}
 \usepackage{wrapfig,float}
-\usepackage{caption}
+% \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{url}
@@ -38,20 +59,52 @@ library(plyr)
 opts_chunk$set(fig.path='figure/fig-', cache.path='cache/', fig.align='center', fig.width=5, fig.height=5, fig.show='hold', par=TRUE, cache=TRUE, concordance=TRUE, autodep=TRUE)
 @
 
+%% If you are submitting a paper to a conference for review with a double
+%% blind reviewing process, please replace the value ``0'' below with your
+%% OnlineID. Otherwise, you may safely leave it at ``0''.
+\onlineid{0}
+
+%% declare the category of your paper, only shown in review mode
+\vgtccategory{Research}
+
+%% allow for this line if you want the electronic option to work properly
+\vgtcinsertpkg
+
+%% In preprint mode you may define your own headline.
+%\preprinttext{To appear in an IEEE VGTC sponsored conference.}
+
+%% Paper title.
+
+\title{The curse of three dimensions: Why your brain is lying to you}
+\author{Susan VanderPlas\thanks{e-mail: srvanderplas@gmail.com}\\ %
+        \scriptsize Iowa State University %
+\and Heike Hofmann\thanks{e-mail:hofmann@iastate.edu}\\ %
+        \scriptsize Iowa State University %
+\and Di Cook\thanks{e-mail:dicook@iastate.edu}\\ %
+        \scriptsize Iowa State University %}
+}
+        
+\abstract{Tufte's lie factor was created with the idea that graphs that do not represent the underlying data accurately should be avoided. In this paper, we examine a second level of graph distortion that occurs during the perceptual process. We discuss the underlying psychological mechanisms for the distortions, examine the effect these distortions have on statistical judgments, and consider the implications for graph design. Using the sine illusion as a case study, we quantify the effects of the distortion to create a ``perceptual lie factor" for the sine illusion.}
+
+ %% Uncomment below to include a teaser figure.
+ %% Note: No figures other than the optional teaser are permitted on title page.
+ %\centering
+ %\includegraphics[width=16cm]{CypressView.eps}
+ %\caption{In the Clouds: Vancouver from Cypress Mountain}
+ %} 
+ 
 \begin{document}
-\section*{Outline}
-\begin{enumerate}
-\item Introduction - Lie Factor, Psychological Distortions, etc.
-\item Underlying Psychology - Why 3d perception is a curse. Muller Lyer, Ames room, etc. Necessity of quantifying the size of these effects on graphs to determine the psychological ``lie factor".
-\item Case Study - Sine Illusion
-\item Conclusions
-\end{enumerate}
 
-\begin{abstract}
-Tufte's lie factor was created with the idea that graphs that do not represent the underlying data accurately should be avoided. In this paper, we examine a second level of graph distortion that occurs during the perceptual process. We discuss the underlying psychological mechanisms for the distortions, examine the effect these distortions have on statistical judgments, and consider the implications for graph design. Using the sine illusion as a case study, we quantify the effects of the distortion to create a ``perceptual lie factor" for the sine illusion.
-\end{abstract}
+\maketitle
+% \section*{Outline}
+% \begin{enumerate}
+% \item Introduction - Lie Factor, Psychological Distortions, etc.
+% \item Underlying Psychology - Why 3d perception is a curse. Muller Lyer, Ames room, etc. Necessity of quantifying the size of these effects on graphs to determine the psychological ``lie factor".
+% \item Case Study - Sine Illusion
+% \item Conclusions
+% \end{enumerate}
 
-\section{Introduction}
+\firstsection{Introduction}
 One of the basic principles of visual graphics is that the graphic should accurately reflect the data. Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data\citep{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). The implications behind Tufte's lie factor are somewhat ambiguous, however: Is the goal to make the graph on paper accurately represent the numbers used to generate that graph? Or is the goal to accurately convey the information presented in the graph to the reader? While in many cases, these two goals can be achieved simultaneously, there are many instances in which human perception produces a psychological distortion that can interfere with the interpretation of graphics that are true to the numerical data. In this paper, we examine several situations in which very low-level human perceptual processes interfere with making accurate judgements from displays that are true to the data. 
 
 \section{The Curse of Three Dimensions}
@@ -93,7 +146,7 @@ qplot(data=data, x=x, y=y, group=group, geom="path", linetype=factor(line), colo
         axis.title = element_blank(), axis.ticks = element_blank(), 
         axis.text = element_blank())
 @
-<<mullerlyer,echo=FALSE, fig.width=2, fig.height=4,  include=FALSE>>=
+<<mullerlyer,echo=FALSE, fig.width=2, fig.height=2,  include=FALSE>>=
 y.a <- .125
 x.a <- .125
 
@@ -108,6 +161,6 @@ qplot(data=data, x=x, y=y, group=group, geom="path") + facet_grid(.~label) +
   theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
         panel.grid.minor=element_blank(), panel.background=element_blank(),
         axis.title = element_blank(), axis.ticks = element_blank(), 
-        axis.text = element_blank()) 
+        axis.text = element_blank()) + xlim(c(0,1))
 @
 \end{document}
