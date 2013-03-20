@@ -113,15 +113,19 @@ The human visual system is largely optimized for perception of three dimensions.
 \includegraphics[keepaspectratio=TRUE,width=\linewidth]{figure/fig-neckercube}
 \caption{The Necker Cube is a so-called ``ambiguous object" because two different transparent objects could produce the same perceptual experience. Commonly, perception seems to transition instantaneously from one possible mental representation to the other.}\label{fig:Necker}
 \end{figure}
-In the case of the Necker cube, the two different figures are equally salient, and thus the brain never seems to pick one interpretation. In many cases, however, experience with the real world can inform the choice between many possible three-dimensional objects which form the same two-dimensional picture. If this were not the case, pictures would cease to provide any useful information, as the brain would not be able to map the picture back to the real world image which it typically represents. One of the most well studied examples of this phenomenon is the Muller-Lyer illusion, shown in Figure \ref{fig:mullerlyer}
+In the case of the Necker cube, the two different figures are equally salient, and thus the brain never seems to pick one interpretation. In many cases, however, experience with the real world can inform the choice between many possible three-dimensional objects which form the same two-dimensional picture, that is, processing occurs ``top down" in that our previous experience influences our current perceptions. Without this top-down influence, the brain would not be able to map the picture back to the original three-dimensional object. One of the most well studied examples of the influence of top-down processing is the Muller-Lyer illusion, shown in Figure \ref{fig:mullerlyer}
 
-\begin{figure}[h!]\centering
+\begin{figure}[h!t]\centering
 \includegraphics[keepaspectratio=TRUE]{figure/fig-mullerlyer}
 \caption{The Muller-Lyer illusion. The central segment of Figure A is perceived as shorter than the central segment  of Figure B, even though the two are actually the same length.}\label{fig:mullerlyer}
 \end{figure}
 
-The Muller-Lyer illusion occurs because the brain processes the ambiguous lines as a most-common three-dimensional object: corners of a room. Figure \ref{fig:mullerlyer}A occurs when viewing the outside corner of a cube, Figure \ref{fig:mullerlyer}B occurs when viewing the cube from the inside. The inferred perspective carries with it an inferred ``depth cue" \citep{gregory} which is reasonably consistent across individuals. This inferred perspective and depth combination is what causes the Muller-Lyer illusion, but it can also be found in the Necker Cube - whichever face appears to be furthest away also seems larger, even though any two parallel faces are equally sized. The psychological advantages of this approach in the real world are considerable \citep{gregory}, but for the purposes of graphical representations of data, we need only know that the effect exists. 
+The Muller-Lyer illusion occurs because the brain interprets the ambiguous lines as a common three-dimensional object: corners of a room: Figure \ref{fig:mullerlyer}A occurs when viewing the outside corner of a rectangular prism, Figure \ref{fig:mullerlyer}B occurs when viewing the prism from the inside. Figure \ref{fig:mullerlyerreal} demonstrates the real-world experience that would lead to the Muller-Lyer effect. In regions which do not commonly have rectangular buildings, the illusion is significantly less pervasive \citep{mullerlyerafrica}. The inferred perspective carries with it an inferred ``depth cue" \citep{gregory} which is reasonably consistent across individuals. This inferred perspective and depth combination is what causes the Muller-Lyer illusion, but it can also be found in the Necker Cube - whichever face appears to be furthest away also seems larger, even though any two parallel faces are equally sized. The advantages of this approach in the real world are considerable \citep{gregory}, as pictures of real objects are seldom ambiguous and this strategy allow for high performance with limited neural bandwidth. 
 
+\begin{figure}[h!t]\centering
+\includegraphics[keepaspectratio=TRUE,width=\linewidth]{images/mullerlyerhouse}
+\caption{Real-world context that gives rise to the Muller Lyer illusion}\label{fig:mullerlyerreal}
+\end{figure}
 
 
 
