@@ -5,6 +5,7 @@ trans3d <- function(x,y,z, plot) {
   list(x=tmat[1,]/tmat[4,], y=tmat[2,]/tmat[4,])
 } 
 
+
 createSine <- function(n=200, len=1, f=f, fprime=fprime, f2prime=f2prime, a=0, b=2*pi) {
   x <- seq(a, b, length=n+2)[(2:(n+1))]
   ell <- rep(len, length=length(x))
@@ -112,7 +113,7 @@ x <- sort(unique(data$x))
 y <- sort(unique(data$y))
 z <- sort(unique(data$z))
 
-
+persp(x, z, data.persp, ylab="z", zlab="y", theta=15, phi=0, border="black", shade=.25) 
 persp(x, z, data.persp, ylab="z", zlab="y", theta=-10, phi=35, border=NA, shade=.75) 
 # Extant width makes perfect sense here - it's exactly what you'd be judging if you were judging width for a perspective view, 
 # except that you would have more information and/or be able to assume some sort of width constancy behavior. 
@@ -192,3 +193,20 @@ lines(trans3d(x, .25*sin(x)+.125, 1+0*x, p), col="red")
 
 
 
+x <- seq(0, 2*pi, .01)
+y <- 2*sin(x)
+z <- seq(-.5, .5, .01)
+data <- expand.grid(x=x, z=z)
+
+data$y <- 2*sin(data$x) + data$z
+
+qplot(data=data, x=x, y=y, geom="line", colour=cos(x)) + scale_colour_gradient(low="lightblue", high="darkblue")
+
+
+data <- rbind(createSine(40, 1, f, fprime, f2prime), createSine(40, 1, f, fprime, f2prime))
+data$z <- c(rep(-.0001, 40), rep(0.0001, 40))
+data$y <- data$y+data$z
+data.persp <- acast(data, x~z, value.var="y")
+x <- order(unique(data$x))
+z <- order(unique(data$z))
+persp(x, z, data.persp, scale=FALSE, phi=45)

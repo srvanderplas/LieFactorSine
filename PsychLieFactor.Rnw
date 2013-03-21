@@ -128,7 +128,7 @@ The Muller-Lyer illusion occurs because the brain interprets the ambiguous lines
 \end{figure}
 
 \section{Three Dimensional Context of the Sine Illusion}
-While the Muller-Lyer illusion is seldom a factor in statistical graphics, there are other illusions caused by the same mechanism - the brain interprets a two-dimensional stimulus in the context of three-dimensional objects, causing a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion) is one example of this phenomenon which occurs frequently in statistical graphics. Like the Muller-Lyer illusion, it is pervasive and very difficult to ``un-see" or mentally correct. Figure \ref{fig:sineillusion} shows the sine illusion in its original form, and Figure \ref{fig:playfair} shows the same illusion in one of Playfair's Statistical Atlas graphs\citep{playfair}.
+While the classic Muller-Lyer illusion is seldom a factor in statistical graphics, there are other illusions caused by the same mechanism: the brain interprets a two-dimensional stimulus in the context of three-dimensional objects, causing a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion) is one example of this phenomenon which occurs frequently in statistical graphics. Like the Muller-Lyer illusion, it is pervasive and very difficult to ``un-see" or mentally correct. Figure \ref{fig:sineillusion} shows the sine illusion in its original form, and Figure \ref{fig:playfair} shows the same illusion in one of Playfair's Statistical Atlas graphs\citep{playfair}.
 \begin{figure}[h!t]\centering
 \includegraphics[keepaspectratio=TRUE,width=\linewidth]{figure/fig-sinedemo1}
 \caption{The classic sine illusion. Each vertical line has the same length, though the lines at the peak and trough of the curve appear longer.}\label{fig:sineillusion}
@@ -138,12 +138,13 @@ While the Muller-Lyer illusion is seldom a factor in statistical graphics, there
 \includegraphics[keepaspectratio=TRUE,width=\linewidth]{images/PlayfairExportImports}
 \caption{The sine illusion in Playfair's graph of trade between the East Indies and England, 1700-1780. The trade balance in 1763 does not appear to be the same size as that in 1745, though the vertical distance is approximately the same.}\label{fig:playfair}
 \end{figure}
+Cleveland and Mcgill (1985) determined that comparison of vertical distances is inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance" \citep{cleveland:1984}. While they do not explain why the tendency exists, introspection does readily confirm their explanation- we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher (1991) suggest that the sine illusion is similar in principle to the Muller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  Muller Lyer illusion in another way, as well - there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in Figure \ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, Figure \ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in Cleveland (1985) corresponds to the measurement of depth in the three-dimensional image. 
 
-The three-dimensional context most similar to the sine illusion shown in Figure \ref{fig:sineillusion} is shown in Figure \ref{fig:sineillusion3d}. 
 \begin{figure}[h!t]\centering
 \includegraphics[keepaspectratio=TRUE,width=\linewidth, trim=0in 1in 0in 1in]{figure/fig-sinedemo2}
 \caption{Three dimensional context for the sine illusion.}\label{fig:sineillusion3d}
 \end{figure}
+
 
 \clearpage
 \bibliographystyle{plain}
@@ -245,10 +246,17 @@ x <- sort(unique(data$x))
 y <- sort(unique(data$y))
 z <- sort(unique(data$z))
 
+p <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=-8, phi=25, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, expand=.75) # , ltheta=0, lphi=-15
 
-p <- persp(x, z, data.persp, ylab="z", zlab="y", theta=-5, phi=25, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), expand=.75, scale=FALSE) # , ltheta=0, lphi=-15
-# lines(trans3d(x, -1.5, 2*sin(x), p), col="white")
-# lines(trans3d(x, 1.5, 2*sin(x), p), col="white")
+data$transx <- trans3d(data$x, .25*data$z, data$y, p)$x
+data$transy <- trans3d(data$x, .25*data$z, data$y, p)$y
+qplot(data=data, x=transx, y=transy, geom="line", group=x)+
+#   geom_line(aes(x=x, y=ystart), colour="black") + 
+#   geom_line(aes(x=x, y=yend), colour="black") + 
+  theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
+        panel.grid.minor=element_blank(), panel.background=element_blank(),
+        axis.title = element_blank(), axis.ticks = element_blank(), 
+        axis.text = element_blank()) + coord_equal(ratio=1)
 
 @
 
