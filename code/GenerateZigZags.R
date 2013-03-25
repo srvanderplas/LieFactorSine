@@ -38,7 +38,7 @@ get4 <- function(order){
 #   data <- ddply(data, .(set), transform, sd2 = sd2-mean(sd2)+.125)
 }
 
-for(j in 1:50){
+for(j in 1:10){
   data <- get4(sample(1:6, 6))
   data.points <- ddply(data, .(set, x, segmentLength, correct, slope), summarise, ynorm=rnorm(3, ynorm, .1*sd2))
   

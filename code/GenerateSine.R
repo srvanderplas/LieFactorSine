@@ -54,10 +54,10 @@ fprime <- function(x) 2*cos(x)
 f2prime <- function(x) -2*sin(x)
 orig <- createSine(50, 1, f, fprime, f2prime, 0, 2*pi)
 
-w.all <- seq(0, 1, length=21)
+w.all <-  seq(.55, .95, .05)
 
-for(j in 1:50){
-  w <- sort(sample(w.all, 6))
+for(j in 1:10){
+  w <- sort(c(0, .25, .5, sample(w.all, 2), 1))
   frameorder <- sample(w, 6)
   
   data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
