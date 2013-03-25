@@ -35,7 +35,7 @@ correct <- function(data, ell=.5){
 }
 
 getdata <- function(){
-    x <- seq(-3, 3, .1)
+    x <- seq(-3, 3, length=40)
     coef <- c(4, -2, -3, 1)
     bumps <- rbind(getrange(lb=-1, ub=1), getrange(lb=-3, ub=3), getrange(lb=0, ub=3), getrange(lb=-2, ub=1))
     # Uncorrected Data
@@ -110,27 +110,18 @@ getdata <- function(){
 }
 
 data.all <- getdata()
+# 
+# qplot(data=subset(data.all, type=="Untransformed"), x=x, y=y, geom="line")
+# qplot(data=subset(data.all, type=="Untransformed"), x=x, y=deriv, geom="line")
+# qplot(data=subset(data.all, type=="Untransformed"), x=x, y=deriv2, geom="line")
+# 
+# qplot(data=data.all, x=x, y=upper.cor, geom="line") + geom_line(aes(y=lower.cor)) + geom_line(aes(y=deriv), linetype=2) + facet_wrap(~set)
 
-qplot(data=subset(data.all, type=="Untransformed"), x=x, y=y, geom="line")
-qplot(data=subset(data.all, type=="Untransformed"), x=x, y=deriv, geom="line")
-qplot(data=subset(data.all, type=="Untransformed"), x=x, y=deriv2, geom="line")
-
-qplot(data=data.all, x=x, y=upper.cor, geom="line") + geom_line(aes(y=lower.cor)) + geom_line(aes(y=deriv), linetype=2) + facet_wrap(~set)
-
-data.points <- ddply(data.all, .(set, x, y, deriv, deriv2, upper, lower, upper.cor, lower.cor, correct), summarise, ypoints=runif(7, lower, upper))
-
-# Ribbon Plot
-qplot(data=data.all, x=x, ymin=lower, ymax=upper, geom="ribbon") + coord_equal(ratio=1) + facet_wrap(~set, nrow=2) + theme_stimuli()
-ggsave(filename=paste("HillsRibbons_Pic_", i, ".png", sep=""), path="./stimuli/Hills/", width=8, height=6, units="in")
-
-# Points
-qplot(data=data.points, x=x, y=ypoints, geom="jitter", alpha=I(.5)) + coord_equal(ratio=1) + facet_wrap(~set, nrow=2) + theme_stimuli()
-ggsave(filename=paste("HillsPoints_Pic_", i, ".png", sep=""), path="./stimuli/Hills/", width=8, height=6, units="in")
+# Line Plot
+qplot(data=data.all, x=x, xend=x, y=lower, yend=upper, geom="segment") + coord_equal(ratio=1) + facet_wrap(~set, nrow=2) + theme_stimuli()
+ggsave(filename=paste("HillsLine_Pic_", i, ".png", sep=""), path="./stimuli/Hills/", width=8, height=6, units="in")
 
 key <- ddply(data.all, .(set, correct, type), summarize, maxlength=max(upper-lower), meanlength=mean(upper-lower))
 
-unique(data.points$set[data.points$correct])
-
-# Size of Actual Length Change
-qplot(data=data.all, x=x, y=upper-lower, geom="line") + facet_wrap(~set, nrow=2)
+unique(data.all$set[data.all$correct])
 
