@@ -109,3 +109,33 @@ data <- rbind(data.frame(x=x, xend=x, xstart=x, y=x, ystart=2*abs(x-pi)-.25, yen
 qplot(data=data, x=x, y=ystart, xend=x, yend=yend, geom="segment") + facet_wrap(~display) + theme_stimuli()
 ggsave("./stimuli/Examples/Example3.png",width=6, height=3)
 
+
+w.all <- rbind(c(0, .12, .33, 1, 1.18, 1.35), c(0, .16, .31, 1, 1.2, 1.35), c(0, .15, .3, 1, 1.15, 1.3), 
+               c(0, .12, .28, .43, 1, 1.35), c(0, .12, .33, 1, 1.2, 1.35))
+
+data.file <- read.csv("./stimuli/datafile.csv", stringsAsFactors=FALSE)
+data.file <- data.file[!grepl("Test", data.file$pic_name),] # remove previous test images.
+for(j in 1:5){
+  w <- w.all[j,]
+  diff.w <- min(ceiling((diff(w)/.05)))
+  frameorder <- sample(w, 6)
+  
+  data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
+  data$set <- sapply(data$w, function(i) which(w %in% i))
+  data$display <- sapply(data$w, function(i) which(frameorder %in% i))
+  ans <- which.min(abs(frameorder-.99))
+  qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli()
+  ggsave(filename=paste("YTransPicTest", j, ".png", sep=""), path="./stimuli", width=8, height=6, units="in")
+  data.file <- rbind(data.file, data.frame(
+    pic_id=j, 
+    sample_size=50, 
+    test_param="weight of y-transformation", 
+    param_value=paste("w", median(w), diff.w, sep="-"), 
+    p_value=0,
+    obv_plot_location=ans,
+    pic_name=paste("YTransPicTest", j, ".png", sep=""),
+    experiment="turk8",
+    difficulty=diff.w))
+}
+write.csv(data.file, "./stimuli/datafile.csv", row.names=FALSE)
+
