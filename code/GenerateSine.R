@@ -77,6 +77,7 @@ for(j in 1:10){
     sample_size=50, 
     test_param="weight of y-transformation", 
     param_value=paste("w", median(w), diff.w, sep="-"), 
+    p_value=0,
     obv_plot_location=ans,
     pic_name=paste("YTransPic", j, ".png", sep=""),
     experiment="turk8",
