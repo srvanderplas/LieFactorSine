@@ -108,3 +108,4 @@ data <- rbind(data.frame(x=x, xend=x, xstart=x, y=x, ystart=2*abs(x-pi)-.25, yen
               data.frame(x=x, xend=x, xstart=x, y=x, ystart=x-.25+.5*log(x+1), yend=x+.25+.5*log(2*x+1), display=1))
 qplot(data=data, x=x, y=ystart, xend=x, yend=yend, geom="segment") + facet_wrap(~display) + theme_stimuli()
 ggsave("./stimuli/Examples/Example3.png",width=6, height=3)
+
