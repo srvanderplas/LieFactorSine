@@ -16,8 +16,8 @@ logitcombo <- function(x, a, x0){
 
 # generates random start,end points for logistic approximations to step functions.
 getrange <- function(lb=-2.5, ub=2.5){
-  lower <- sample(seq(from=lb, to=mean(c(lb, ub)), length=10), 1)
-  upper <- sample(seq(lower, ub, length=10), 1)
+  lower <- sample(seq(from=lb, to=-1, length=10), 1)
+  upper <- sample(seq(1, ub, length=10), 1)
   c(lower, upper)
 }
 
@@ -36,13 +36,11 @@ correct <- function(data, ell=.5){
 
 getdata <- function(){
     x <- seq(-3, 3, length=40)
-    coef <- c(4, -2, -3, 1)
-    bumps <- rbind(getrange(lb=-1, ub=1), getrange(lb=-3, ub=3), getrange(lb=0, ub=3), getrange(lb=-2, ub=1))
+    coef <- c(3, 6)
+    bumps <- rbind(getrange(lb=-2.5, ub=0), getrange(lb=0, ub=2.5))
     # Uncorrected Data
     data <- cbind(set=1, x=x, coef[1]*logitcombo(x, a=1, x0=bumps[1,]) + 
-                    coef[2]*logitcombo(x, a=3, x0=bumps[2,]) + 
-                    coef[3]*logitcombo(x, a=5, x0=bumps[3,]) + 
-                    coef[4]*logitcombo(x, a=3, x0=bumps[4,]))
+                    coef[2]*logitcombo(x, a=3, x0=bumps[2,]))
     data$upper <- data$y + .5
     data$lower <- data$y - .5
     data$upper.cor <- .5
@@ -52,41 +50,33 @@ getdata <- function(){
     data2 <- correct(data, ell=.5)
     data2$set <- 2
     
-    # Correct using slope assuming that "steepness" (a = 3) -- both over and undercorrect
-    data3 <- cbind(set=3, x=x, coef[1]*logitcombo(x, a=3, x0=bumps[1,]) + 
-                    coef[2]*logitcombo(x, a=3, x0=bumps[2,]) + 
-                    coef[3]*logitcombo(x, a=3, x0=bumps[3,]) + 
-                    coef[4]*logitcombo(x, a=3, x0=bumps[4,]))
+    # Correct using slope assuming that "steepness" (a = mean(coef)) -- both over and undercorrect
+    data3 <- cbind(set=3, x=x, coef[1]*logitcombo(x, a=mean(coef), x0=bumps[1,]) + 
+                    coef[2]*logitcombo(x, a=mean(coef), x0=bumps[2,]))
     data3 <- correct(data3, ell=.5)
     data3$y <- data$y
     data3$upper <- data3$y + data3$upper.cor
     data3$lower <- data3$y + data3$lower.cor
     
-    # Correct using slope assuming that "steepness" (a = 1) -- Undercorrect
-    data4 <- cbind(set=4, x=x, coef[1]*logitcombo(x, a=1, x0=bumps[1,]) + 
-                     coef[2]*logitcombo(x, a=1, x0=bumps[2,]) + 
-                     coef[3]*logitcombo(x, a=1, x0=bumps[3,]) + 
-                     coef[4]*logitcombo(x, a=1, x0=bumps[4,]))
+    # Correct using slope assuming that "steepness" (a = min(coef)) -- Undercorrect
+    data4 <- cbind(set=4, x=x, coef[1]*logitcombo(x, a=min(coef), x0=bumps[1,]) + 
+                     coef[2]*logitcombo(x, a=min(coef), x0=bumps[2,]))
     data4 <- correct(data4, ell=.5)
     data4$y <- data$y
     data4$upper <- data4$y + data4$upper.cor
     data4$lower <- data4$y + data4$lower.cor
     
-    # Correct using slope assuming that "steepness" (a = 6) -- Overcorrect 
-    data5 <- cbind(set=5, x=x, coef[1]*logitcombo(x, a=5, x0=bumps[1,]) + 
-                     coef[2]*logitcombo(x, a=6, x0=bumps[2,]) + 
-                     coef[3]*logitcombo(x, a=6, x0=bumps[3,]) + 
-                     coef[4]*logitcombo(x, a=6, x0=bumps[4,]))
+    # Correct using slope assuming that "steepness" (a = max(coef)) -- Overcorrect 
+    data5 <- cbind(set=5, x=x, coef[1]*logitcombo(x, a=max(coef), x0=bumps[1,]) + 
+                     coef[2]*logitcombo(x, a=max(coef), x0=bumps[2,]))
     data5 <- correct(data5, ell=.5)
     data5$y <- data$y
     data5$upper <- data5$y + data5$upper.cor
     data5$lower <- data5$y + data5$lower.cor
     
     # Correct using slope assuming that "steepness" (a = .5) -- Severely Undercorrect. 
-    data6 <- cbind(set=6, x=x, coef[1]*logitcombo(x, a=.5, x0=bumps[1,]) + 
-                     coef[2]*logitcombo(x, a=.5, x0=bumps[2,]) + 
-                     coef[3]*logitcombo(x, a=.5, x0=bumps[3,]) + 
-                     coef[4]*logitcombo(x, a=.5, x0=bumps[4,]))
+    data6 <- cbind(set=6, x=x, coef[1]*logitcombo(x, a=.5*min(coef), x0=bumps[1,]) + 
+                     coef[2]*logitcombo(x, a=.5*min(coef), x0=bumps[2,]))
     data6 <- correct(data6, ell=.5)
     data6$y <- data$y
     data6$upper <- data6$y + data6$upper.cor
