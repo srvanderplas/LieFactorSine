@@ -150,7 +150,16 @@ Cleveland and McGill
 \caption{Three dimensional context for the sine illusion.}\label{fig:sineillusion3d}
 \end{figure}
 
-One difference between the sine illusion and the M\"uller-Lyer illusion that may influence the tendency to see a three-dimensional ``ribbon" instead of the two-dimensional sine curve is that the vertical lines in the sine illusion are ambiguously oriented - there is an entire plane of possible three-dimensional reconstructions for each line, and each possible rotation leads to a line of different length. It is this facet of the image that we believe partially contributes to the ambiguity of the image, though it is not a necessary feature for the illusion to persist, as the illusion also can be found in scatterplots and in ``ribbon plots" such as Figure \ref{fig:playfair}.
+One difference between the sine illusion and the M\"uller-Lyer illusion that may influence the tendency to see a three-dimensional ``ribbon" instead of the two-dimensional sine curve is that the vertical lines in the sine illusion are ambiguously oriented - there is an entire plane of possible three-dimensional reconstructions for each line, and each possible rotation leads to a line of different length. It is this facet of the image that we believe partially contributes to the ambiguity of the image, though it is not a necessary feature for the illusion to persist, as the illusion also can be found in scatterplots and in ``ribbon plots" such as Figure \ref{fig:playfair}. 
+
+
+\begin{figure}[h!t]\centering
+\includegraphics[keepaspectratio=TRUE,width=\linewidth, trim=0in 1in 0in 1in]{figure/fig-sinedemo3}
+\caption{Three dimensional context for the sine illusion, with a weaker perspective transformation.}\label{fig:sineillusion3dmagic}
+\end{figure}
+
+
+Further, the three-dimensional reconstruction of the illusion converges on the actual picture as the field of view increases and the 3d projection decreases in strength. Figure \ref{fig:sineillusion3dmagic} shows a weaker 3-dimensional projection that is much closer to Figure \ref{fig:sineillusion}, however, the three-dimensional contextual information provided by the shading removes much of the illusion's distortions. This, too, is similar to the Muller-Lyer illusion - Figure \ref{fig:mullerlyerhouse} is not at all ambiguous - the contextual depth information provided by the rest of the surface of the house is sufficient to remove the illusion that the closer corner is in fact larger due to the perspective.
 
 
 
@@ -254,18 +263,29 @@ x <- sort(unique(data$x))
 y <- sort(unique(data$y))
 z <- sort(unique(data$z))
 
-p <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=-8, phi=25, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, expand=.75) # , ltheta=0, lphi=-15
+p <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=0, phi=25, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, expand=.75, d=3) # , ltheta=0, lphi=-15
 
-data$transx <- trans3d(data$x, .25*data$z, data$y, p)$x
-data$transy <- trans3d(data$x, .25*data$z, data$y, p)$y
-qplot(data=data, x=transx, y=transy, geom="line", group=x)+
-#   geom_line(aes(x=x, y=ystart), colour="black") + 
-#   geom_line(aes(x=x, y=yend), colour="black") + 
-  theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
-        panel.grid.minor=element_blank(), panel.background=element_blank(),
-        axis.title = element_blank(), axis.ticks = element_blank(), 
-        axis.text = element_blank()) + coord_equal(ratio=1)
+data$transx <- trans3d(data$x, data$z, data$y, p)$x
+data$transy <- trans3d(data$x, data$z, data$y, p)$y
+# qplot(data=data, x=transx, y=transy, geom="line", group=x)+
+# #   geom_line(aes(x=x, y=ystart), colour="black") + 
+# #   geom_line(aes(x=x, y=yend), colour="black") + 
+#   theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
+#         panel.grid.minor=element_blank(), panel.background=element_blank(),
+#         axis.title = element_blank(), axis.ticks = element_blank(), 
+#         axis.text = element_blank()) + coord_equal(ratio=1)
 
+p <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=0, phi=25, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, expand=.75, d=15) # , ltheta=0, lphi=-15
+
+data$transx <- trans3d(data$x, data$z, data$y, p)$x
+data$transy <- trans3d(data$x, data$z, data$y, p)$y
+# qplot(data=data, x=transx, y=transy, geom="line", group=x)+
+# #   geom_line(aes(x=x, y=ystart), colour="black") + 
+# #   geom_line(aes(x=x, y=yend), colour="black") + 
+#   theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
+#         panel.grid.minor=element_blank(), panel.background=element_blank(),
+#         axis.title = element_blank(), axis.ticks = element_blank(), 
+#         axis.text = element_blank()) + coord_equal(ratio=1)
 @
 
 \end{document}
