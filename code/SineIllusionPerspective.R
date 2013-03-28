@@ -116,17 +116,15 @@ data$transx <- trans3d(data$x, data$z, data$y, p)$x
 data$transy <- trans3d(data$x, data$z, data$y, p)$y
 data.2d <- ddply(data, .(x,y), summarise, xstart=min(transx), xend=max(transx), ystart=min(transy), yend=max(transy), len=sqrt(diff(transx)^2+diff(transy)^2))
 
-#'-----------------------------------------------------------------------------------------
-#' Linear relationship between x and xstart, xend
-# qplot(data=data.2d, x=x, y=xstart, geom="line") + geom_line(aes(y=xend))
-#' Linear relationship between y and ystart, yend
-# qplot(data=data.2d, x=y, y=ystart, geom="line") + geom_line(aes(y=yend))
-#'-----------------------------------------------------------------------------------------
-
 data.2d$xstart <- predict(lm(data=data.2d, x~xstart))
 data.2d$xend <- predict(lm(data=data.2d, x~xend))
 data.2d$ystart <- lm(data=data.2d, y~ystart)$coefficients[2]*data.2d$ystart
 data.2d$yend <- lm(data=data.2d, y~yend)$coefficients[2]*data.2d$yend
+
+#' Linear relationship between x and xstart, xend
+# qplot(data=data.2d, x=x, y=xstart, geom="line") + geom_line(aes(y=xend))
+#' Linear relationship between y and ystart, yend
+# qplot(data=data.2d, x=y, y=ystart, geom="line") + geom_line(aes(y=yend))
 
 trans.resid <- data.frame(x = data.2d$x,
   xresid1 = data.2d$xstart-createSine(40, 1, f=f, fprime=fprime, f2prime)$xstart,
@@ -148,3 +146,39 @@ qplot(data=trans.resid.long, x=x, y=resid, geom="line", linetype=end) +
 
 #' Very little difference with d=500 and original createSine() data. 
 #' Slight periodicity may be useful as a correction factor later?
+
+#'-----------------------------------------------------------------------------------------
+#'-----------------------------------------------------------------------------------------
+
+p5 <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=0, phi=45, border="black", 
+            shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), 
+            scale=FALSE, box=FALSE, d=5, expand=3/(pi)) # , ltheta=0, lphi=-15
+
+data$transx <- trans3d(data$x, data$z, data$y, p5)$x
+data$transy <- trans3d(data$x, data$z, data$y, p5)$y
+data.2d <- ddply(data, .(x,y), summarise, xstart=min(transx), xend=max(transx), ystart=min(transy), yend=max(transy), len=sqrt(diff(transx)^2+diff(transy)^2))
+
+data.2d$xstart <- predict(lm(data=data.2d, x~xstart))
+data.2d$xend <- predict(lm(data=data.2d, x~xend))
+data.2d$ystart <- lm(data=data.2d, y~ystart)$coefficients[2]*data.2d$ystart
+data.2d$yend <- lm(data=data.2d, y~yend)$coefficients[2]*data.2d$yend
+
+trans.resid <- data.frame(x = data.2d$x,
+                          xresid1 = data.2d$xstart-createSine(40, 1, f=f, fprime=fprime, f2prime)$xstart,
+                          xresid2 = data.2d$xend-createSine(40, 1, f=f, fprime=fprime, f2prime)$xend,
+                          yresid1 = data.2d$ystart-createSine(40, 1, f=f, fprime=fprime, f2prime)$ystart,
+                          yresid2 = data.2d$yend-createSine(40, 1, f=f, fprime=fprime, f2prime)$yend
+)
+
+trans.resid.long <- melt(trans.resid, id.vars=1, value.name="resid", variable.name="type")
+trans.resid.long$axis <- substr(trans.resid.long$type, 1, 1)
+trans.resid.long$end <- factor(as.numeric(substr(trans.resid.long$type, 7, 7)), 
+                               labels=c("start", "end"), ordered=TRUE)
+qplot(data=trans.resid.long, x=x, y=resid, geom="line", linetype=end) + 
+  facet_wrap(~axis) + ylab("Difference in endpoints, Persp-createSine()") + 
+  scale_linetype_discrete("Endpoint") + 
+  scale_x_continuous(breaks=seq(0, 2*pi, by=pi/2), 
+                     labels=c("0", expression(paste(pi,"/2")), expression(pi), 
+                              expression(paste("3",pi, "/2")), expression(paste("2",pi))))
+
+#' Could we use this to get some sort of perspective-based transformation?
