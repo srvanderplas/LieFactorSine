@@ -255,15 +255,15 @@ qplot(x=x, xend=xend, y = ystart, yend=yend, geom="segment", data=createSine(40,
         axis.title = element_blank(), axis.ticks = element_blank(), 
         axis.text = element_blank()) + coord_equal(ratio=1)
 
-x <- seq(0, 2*pi, length=40)
-data <- do.call("rbind", lapply(seq(-1.5, 1.5, 3), function(i) data.frame(x=x, y=2*sin(x), z=i)))
+x <- seq(0, 2*pi, length=42)[2:41]
+data <- do.call("rbind", lapply(seq(-.5, .5, 1), function(i) data.frame(x=x, y=2*sin(x), z=i)))
 
 data.persp <- acast(data, x~z, value.var="y")
 x <- sort(unique(data$x))
 y <- sort(unique(data$y))
 z <- sort(unique(data$z))
 
-p <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=0, phi=25, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, expand=.75, d=3) # , ltheta=0, lphi=-15
+p <- persp(x, z, data.persp,  xlab="", ylab="", zlab="", theta=0, phi=45, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, expand=3/pi, d=3) # , ltheta=0, lphi=-15
 
 data$transx <- trans3d(data$x, data$z, data$y, p)$x
 data$transy <- trans3d(data$x, data$z, data$y, p)$y
@@ -275,17 +275,29 @@ data$transy <- trans3d(data$x, data$z, data$y, p)$y
 #         axis.title = element_blank(), axis.ticks = element_blank(), 
 #         axis.text = element_blank()) + coord_equal(ratio=1)
 
-p <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=0, phi=25, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, expand=.75, d=15) # , ltheta=0, lphi=-15
+p <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=0, phi=45, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, d=50, expand=3/(pi)) # , ltheta=0, lphi=-15
 
 data$transx <- trans3d(data$x, data$z, data$y, p)$x
 data$transy <- trans3d(data$x, data$z, data$y, p)$y
-# qplot(data=data, x=transx, y=transy, geom="line", group=x)+
-# #   geom_line(aes(x=x, y=ystart), colour="black") + 
-# #   geom_line(aes(x=x, y=yend), colour="black") + 
-#   theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
-#         panel.grid.minor=element_blank(), panel.background=element_blank(),
-#         axis.title = element_blank(), axis.ticks = element_blank(), 
-#         axis.text = element_blank()) + coord_equal(ratio=1)
+data.2d <- ddply(data, .(x,y), summarise, xstart=min(transx), xend=max(transx), ystart=min(transy), yend=max(transy), len=sqrt(diff(transx)^2+diff(transy)^2))
+# 
+# qplot(data=data.2d, x=x, y=xstart, geom="line") + geom_line(aes(y=xend))
+# qplot(data=data.2d, x=y, y=ystart, geom="line") + geom_line(aes(y=yend))
+
+data.2d$xstart <- predict(lm(data=data.2d, x~xstart))
+data.2d$xend <- predict(lm(data=data.2d, x~xend))
+data.2d$ystart <- lm(data=data.2d, y~ystart)$coefficients[2]*data.2d$ystart
+data.2d$yend <- lm(data=data.2d, y~yend)$coefficients[2]*data.2d$yend
+
+plot(x=data.2d$x, data.2d$xstart-createSine(40, 1, f=f, fprime=fprime, f2prime)$xstart)
+
+
+qplot(x=xstart, xend=xend, y = ystart, yend=yend, geom="segment", data=data.2d) +
+  theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
+        panel.grid.minor=element_blank(), panel.background=element_blank(),
+        axis.title = element_blank(), axis.ticks = element_blank(), 
+        axis.text = element_blank()) + coord_equal(ratio=1) + 
+  geom_segment(data=createSine(40, 1, f=f, fprime=fprime, f2prime), colour=I("grey"))
 @
 
 \end{document}
