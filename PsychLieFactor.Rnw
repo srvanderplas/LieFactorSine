@@ -179,7 +179,9 @@ In order to determine the size of the psychological distortion, participants wer
 \caption{Stimuli similar to (a) were shown to participants, while (b) shows the corresponding differences in line lengths.}
 \end{figure*}
 
-As the strength of the correction varies, we can quantify the psychological distortion by comparing the maximum line length to the minimum line length for plot $i$: $D^i = (l_{max}-l_{min})/l_{min}$. If we compute this for each plot presented to the participant, then the psychological lie factor is $$LF=D^\ast/\min_{1\leq i \leq 6} D^i$$ where $D^\ast$ is the size of the change in line length in the plot chosen by the participant. 
+As the strength of the correction varies, we can quantify the psychological distortion by comparing the maximum line length to the minimum line length for plot $i$: $D^i = (l_{max}-l_{min})/l_{min}$. If we compute this for each plot presented to the participant, then the psychological lie factor is $$LF=D^\ast/\min_{1\leq i \leq 6} D_i$$ where $D^\ast$ is the size of the change in line length in the plot chosen by the participant, and $D_i$ is the computed for each plot.
+
+
 
 
 \clearpage
