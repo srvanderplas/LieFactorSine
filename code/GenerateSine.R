@@ -103,7 +103,7 @@ for(j in 1:12){
     test_param=0, 
     param_value=paste("w", median(w), diff.w, sep="-"), 
     p_value=0,
-    obvious_plot_location=ans,
+    obs_plot_location=ans,
     pic_name=paste("YtransSin", j, ".png", sep=""),
     experiment="turk8",
     difficulty=diff.w))
@@ -134,7 +134,7 @@ for(j in 1:10){
     test_param=1, 
     param_value=paste("w", median(w), diff.w, sep="-"), 
     p_value=0,
-    obvious_plot_location=ans,
+    obs_plot_location=ans,
     pic_name=paste("YTransExp", j, ".png", sep=""),
     experiment="turk8",
     difficulty=diff.w))
@@ -164,7 +164,7 @@ for(j in 1:10){
     test_param=2, 
     param_value=paste("w", median(w), diff.w, sep="-"), 
     p_value=0,
-    obvious_plot_location=ans,
+    obs_plot_location=ans,
     pic_name=paste("YTransInv", j, ".png", sep=""),
     experiment="turk8",
     difficulty=diff.w))
