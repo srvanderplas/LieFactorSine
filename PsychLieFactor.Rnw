@@ -159,9 +159,11 @@ One difference between the sine illusion and the M\"uller-Lyer illusion that may
 \end{figure}
 
 
-Further, the three-dimensional reconstruction of the illusion converges on the actual picture as the field of view increases and the 3d projection decreases in strength. Figure \ref{fig:sineillusion3dmagic} shows a weaker 3-dimensional projection that is much closer to Figure \ref{fig:sineillusion}, however, the three-dimensional contextual information provided by the shading removes much of the illusion's distortions. This, too, is similar to the Muller-Lyer illusion - Figure \ref{fig:mullerlyerhouse} is not at all ambiguous - the contextual depth information provided by the rest of the surface of the house is sufficient to remove the illusion that the closer corner is in fact larger due to the perspective.
+Further, the three-dimensional reconstruction of the illusion converges on the actual picture as the vanishing point moves further away from the viewer and the 3d projection decreases in strength. Figure \ref{fig:sineillusion3dmagic} shows a weaker 3-dimensional projection that is much closer to Figure \ref{fig:sineillusion}, however, the three-dimensional contextual information provided by the shading removes much of the illusion's distortions. This, too, is similar to the Muller-Lyer illusion - Figure \ref{fig:mullerlyerreal} is not at all ambiguous - the contextual depth information provided by the rest of the surface of the house is sufficient to remove the illusion that the closer corner is in fact larger due to the perspective.
 
+The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world \citep{gregory}, but they do have disadvantages. In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
 
+\section{Experimental Determination of the Size of the Psychological Lie Factor for the Sine Illusion}
 
 \clearpage
 \bibliographystyle{plain}
