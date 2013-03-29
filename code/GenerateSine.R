@@ -100,10 +100,10 @@ for(j in 1:12){
   data.file <- rbind(data.file, data.frame(
     pic_id=j, 
     sample_size=25, 
-    test_param="turk8_2sin(x)", 
+    test_param=0, 
     param_value=paste("w", median(w), diff.w, sep="-"), 
     p_value=0,
-    obv_plot_location=ans,
+    obvious_plot_location=ans,
     pic_name=paste("YtransSin", j, ".png", sep=""),
     experiment="turk8",
     difficulty=diff.w))
@@ -131,10 +131,10 @@ for(j in 1:10){
   data.file <- rbind(data.file, data.frame(
     pic_id=j, 
     sample_size=13, 
-    test_param="turk8_exp(x)", 
+    test_param=1, 
     param_value=paste("w", median(w), diff.w, sep="-"), 
     p_value=0,
-    obv_plot_location=ans,
+    obvious_plot_location=ans,
     pic_name=paste("YTransExp", j, ".png", sep=""),
     experiment="turk8",
     difficulty=diff.w))
@@ -161,10 +161,10 @@ for(j in 1:10){
   data.file <- rbind(data.file, data.frame(
     pic_id=j, 
     sample_size=12, 
-    test_param="turk8_inv(x)", 
+    test_param=2, 
     param_value=paste("w", median(w), diff.w, sep="-"), 
     p_value=0,
-    obv_plot_location=ans,
+    obvious_plot_location=ans,
     pic_name=paste("YTransInv", j, ".png", sep=""),
     experiment="turk8",
     difficulty=diff.w))
