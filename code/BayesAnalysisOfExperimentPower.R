@@ -9,7 +9,7 @@ f <- function(y, theta, w){ # the yth largest response in w (the index, not the 
   sapply(theta, function(i) p(i)[y]/sum(p(i)))*1/length(theta)
 }
 
-sum(f(5, theta=seq(0, 1.3, .01), w))
+# sum(f(5, theta=seq(0, 1.3, .01), w))
 
 
 get.post.w <- function(y, theta, w){
@@ -25,7 +25,8 @@ f(4, theta, w)
 theta <- seq(0, 1.3, .01)
 data <- ldply(1:6, function(i) data.frame(theta=theta, f=f(i, theta, w), y=i))
 
-qplot(data=data, x=theta, y=f, colour=y, geom="line", group=y)
+# What theta looks like given y=1, ..., 6
+qplot(data=data, x=theta, y=f, colour=factor(y), geom="line", group=y)
 
 y <- c(4, 4, 3, 4, 4, 5, 4)
 
@@ -40,30 +41,40 @@ y <- c(4, 6, 5, 1, 6, 6, 6, 4, 1, 1)
 
 data <- NULL
 for(th in seq(.1, 1.2, by=.1)){
-  for(z in 1:13){
+  for(z in 1:50){
     w <- matrix(c(  0, .2,  .4,  .6,   .8,  1.0,      .1,  .3,  .5,  .7,  .9,  1.1,
                   .05, .3,  .5,  .65,  .8,  1.0,      .1,  .3,  .55, .7,  .85, 1.0,
                    .4, .6,  .7,  .8,   .9,  1.05,     .35, .65, .75, .85, .95, 1.05,
                   .35, .5,  .6,  .7,   .8,   .95,     .4,  .55, .65, .75, .85, 1.0,
                    .5, .65, .75, .8,   .9,  1.0,      .5,  .6,  .7,  .75, .85, 1.0), nrow=12, ncol=6, byrow=TRUE)
-    pic.num=1:10
-    y <- t(sapply(1:10, function(i) sample(1:6, 6, prob=f(1:6, th, w[i,]), replace=TRUE)))
-    data1 <- ddply(get.post.all(y, theta, w, pic.num), .(theta), summarise, f=exp(sum(f)+350))
+    pic.num=c(sample(1:2, 1), sample(3:4, 1), sample(5:6, 1), sample(7:8, 1), sample(9:10, 1))
+    w.subj = w[pic.num,]
+    y <- t(sapply(1:5, function(i) sample(1:6, 6, prob=f(1:6, th, w.subj[i,]), replace=TRUE)))
+    data1 <- ddply(get.post.all(y, theta, w.subj, 1:5), .(theta), summarise, f=exp(sum(f)+350))
     data1$method <- 1
     data1$f <- data1$f/sum(data1$f)
     
-    w <- t(sapply(1:10, function(i) sort(sample(seq(0, 1.3, .05), 6))))
-    y <- t(sapply(1:10, function(i) sample(1:6, 6, prob=f(1:6, th, w[i,]), replace=TRUE)))
-    data2 <- ddply(get.post.all(y, theta, w, pic.num), .(theta), summarise, f=exp(sum(f)+350))
-    data2$method <- 2
-    data2$f <- data2$f/sum(data2$f)
+#     w <- t(sapply(1:10, function(i) sort(sample(seq(0, 1.3, .05), 6))))
+#     y <- t(sapply(1:10, function(i) sample(1:6, 6, prob=f(1:6, th, w[i,]), replace=TRUE)))
+#     data2 <- ddply(get.post.all(y, theta, w, pic.num), .(theta), summarise, f=exp(sum(f)+350))
+#     data2$method <- 2
+#     data2$f <- data2$f/sum(data2$f)
     
-    data.z <- rbind(data1, data2)
+#     data.z <- rbind(data1, data2)
+    data.z <- data1
     data.z$z <- z
     data.z$th <- th
     data <- rbind(data, data.z)
   }
 }
-qplot(data=data, x=theta, y=f, geom="line", colour=factor(method), fill=factor(method)) + scale_colour_manual(values=c("blue", "green"))  + scale_fill_manual(values=c("blue", "green")) + facet_grid(z~th) + geom_vline(aes(xintercept=th), alpha=.1)
+
+qplot(data=subset(data, method==1), x=theta, y=f, geom="line", group=interaction(z, method), alpha=I(.5)) + 
+  facet_wrap(~th) + geom_vline(aes(xintercept=th), alpha=.1)
+
+
+data.aggregate <- ddply(data, .(theta, th), summarise, f=sum(f))
+data.aggregate$f <- data.aggregate$f/sum(data.aggregate$f)
+qplot(data=data.aggregate, x=theta, y=f, geom="line") + 
+  facet_wrap(~th) + geom_vline(aes(xintercept=th), alpha=.1)
 
 # Conclude: Method 1 and Method 2 are approximately the same, and method 1 requires less coding for the Turk site.

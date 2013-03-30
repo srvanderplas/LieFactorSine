@@ -85,6 +85,7 @@ f2prime <- function(x) -2*sin(x)
 orig <- createSine(50, 1, f, fprime, f2prime, 0, 2*pi)
 lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
 
+weight.key <- NULL
 for(j in 1:12){
   w <- w.all[j,]
   diff.w <- ceiling(j/2)-1
@@ -107,6 +108,10 @@ for(j in 1:12){
     pic_name=paste("YtransSin", j, ".png", sep=""),
     experiment="turk8",
     difficulty=diff.w))
+  temp <- unique(data[,14:15] )
+  weight.key <- rbind(weight.key, 
+                      data.frame(pic_name=paste("YtransSin", j, ".png", sep=""), 
+                                 w=w[temp$set], set=temp$set, response_no=temp$display))
 }
 
 w.all <- w.all[3:12,]
@@ -138,6 +143,10 @@ for(j in 1:10){
     pic_name=paste("YTransExp", j, ".png", sep=""),
     experiment="turk8",
     difficulty=diff.w))
+  temp <- unique(data[,14:15] )
+  weight.key <- rbind(weight.key, 
+                      data.frame(pic_name=paste("YtransExp", j, ".png", sep=""), 
+                                 w=w[temp$set], set=temp$set, response_no=temp$display))
 }
 
 
@@ -168,9 +177,14 @@ for(j in 1:10){
     pic_name=paste("YTransInv", j, ".png", sep=""),
     experiment="turk8",
     difficulty=diff.w))
+  temp <- unique(data[,14:15] )
+  weight.key <- rbind(weight.key, 
+                      data.frame(pic_name=paste("YtransInv", j, ".png", sep=""), 
+                                 w=w[temp$set], set=temp$set, response_no=temp$display))
 }
 
 write.csv(data.file, "./stimuli/datafile.csv", row.names=FALSE)
+write.csv(weight.key, "./data/pictureKey.csv", row.names=FALSE)
 
 # examples
 w <- c(0, .9, 1.4)
