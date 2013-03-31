@@ -215,7 +215,7 @@ set \vphantom{hp}& 1 & 2 & 3 & 4 & 5 & 6 & difficulty\\
 \caption{\label{tab:w} Distortion factors used for the sine curve stimulus.}
 \end{table}
 
-Besides the sine wave two other curves were tested, as shown in figure~\ref{fig:stimuli}. Figure~\ref{fig:stimuli.a} shows an inverse function ($f(x) \propto 1/x$),  figure~\ref{fig:stimuli.b} shows line lengths along an exponential ($f(x) \propto \exp(a*x)$). Note that for both figures the line lengths are kept constant.
+Besides the sine wave two other curves were tested, as shown in figure~\ref{fig:stimuli}. Figure~\ref{fig:stimuli.a} shows an inverse function ($f(x) = 1/x$),  figure~\ref{fig:stimuli.b} shows line lengths along an exponential ($f(x) = \exp(a \cdot x)$). Note that for both figures the line lengths are kept constant.
 
 \begin{figure}
 \begin{subfigure}[b]{.49\linewidth}\centering
