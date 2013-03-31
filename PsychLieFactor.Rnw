@@ -169,14 +169,41 @@ In order to determine the amount of the psychological distortion, participants w
 
 The amount of correction in each sub-plot was chosen such that each sheet contained one uncorrected curve together with a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. In the sine curve, the correction factor we use for extending the length of the line segment at loctaion $x$ is given as
 \[
-w \sin x,
+w \cdot \cos x,
 \]
-where $w$ is varied between 0 (for no correction) and 1.5 (very strong correction). From the previous pilot study, we suspected values of $w = 0.8$ to be promising. 
+where $w$ is varied between 0 (for no correction) and 1.5 (very strong correction). From the previous pilot study, we suspected values of $w = 0.8$ to be promising. This led to twelve sheets with correction factors as shown in table \ref{tab:w}. The difficulty level of each of the sheets was determined by the number of correction factors close to 0.8 and distance between them.
+
+% latex table generated in R 2.15.1 by xtable 1.7-0 package
+% Sun Mar 31 12:08:30 2013
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrrr}
+  \hline
+  & \multicolumn{5}{l}{sub-plot}\\
+set & 1 & 2 & 3 & 4 & 5 & 6 & difficulty\\ 
+  \hline
+1 & 0.00 & 0.20 & 0.40 & 0.80 & 1.25 & 1.40 & test\\ 
+  2 & 0.00 & 0.15 & 0.35 & 0.80 & 1.20 & 1.40 & test\\ 
+  3 & 0.00 & 0.20 & 0.40 & 0.60 & 0.80 & 1.00 & 1 \\ 
+  4 & 0.10 & 0.30 & 0.50 & 0.70 & 0.90 & 1.10 & 1 \\  
+  5 & 0.00 & 0.50 & 0.70 & 0.80 & 0.90 & 1.00 & 2 \\ 
+  6 & 0.00 & 0.45 & 0.65 & 0.75 & 0.85 & 1.00 & 2 \\ 
+  7 & 0.40 & 0.70 & 0.80 & 0.90 & 1.00 & 1.30 & 3 \\  
+  8 & 0.30 & 0.65 & 0.75 & 0.85 & 0.95 & 1.20 & 3 \\ 
+  9 & 0.50 & 0.60 & 0.70 & 0.80 & 0.90 & 1.00 &  4 \\  
+  10 & 0.55 & 0.65 & 0.75 & 0.85 & 0.95 & 1.00 & 4 \\ 
+  11 & 0.60 & 0.70 & 0.75 & 0.85 & 0.90 & 1.00 & 5\\ 
+  12 & 0.60 & 0.70 & 0.75 & 0.80 & 0.90 & 1.00 & 5\\ 
+   \hline
+\end{tabular}
+\caption{\label{tab:w} Distortion factors used for the sine curve stimulus.}
+\end{table}
+
 
 
 Besides the sine wave two other curves were tested, as shown in figure \ref{fig:stimuli}. Figure \ref{fig:stimuli.a} shows an inverse function ($f(x) \propto 1/x$),  figure \ref{fig:stimuli.b} shows line lengths along an exponential ($f(x) \propto \exp(a*x)$). Note that for both figures the line lengths are kept constant.
 
-\begign{figure}
+\begin{figure}
 \begin{subfigure}[b]{.49\linewidth}\centering
 \includegraphics[width=.\linewidth]{figure/fig-inverse}
 \caption{inverse function.}\label{fig:stimuli.a}
