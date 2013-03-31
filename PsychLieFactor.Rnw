@@ -58,6 +58,7 @@ library(plyr)
 
 opts_chunk$set(fig.path='figure/fig-', cache.path='cache/', fig.align='center', fig.width=5, fig.height=5, fig.show='hold', par=TRUE, cache=TRUE, concordance=TRUE, autodep=TRUE)
 source("./code/themeStimuli.R")
+load("./code/BayesAnalysis.Rdata")
 @
 
 %% If you are submitting a paper to a conference for review with a double
@@ -271,13 +272,22 @@ Figure \ref{fig:indivdensity} shows the posterior density for $theta_i$ for four
 
 \begin{figure}\centering
 \includegraphics[width=\linewidth]{figure/fig-IndivMeanAllFcns}
-\caption{Posterior distributions for $\theta_i$, $i=2, 9, 32, 88$. Each of the participants whose data is shown here completed at least 6 trials of each of the three function types.}\label{fig:indivdensity}
+\caption{Posterior distributions for $\theta_i$ for four of the participants who completed at least 6 trials of each of the three function types.}\label{fig:indivdensity}
 \end{figure}
 
-% \paragraph{Optimal Correction Weight}
-% As the strength of the correction varies, we can quantify the difference in line lengths by considering a weight factor $w$, such that $w=0$ corresponds to a constant line length and $w=1$ corresponds to a maximum line length of about 1.88 times the minimum line length. $w$ could in theory exist anywhere on the real line, but in practice any $w$ of more than about 1.4 causes severe distortions to the point that the illusion is not salient. Using $w \in [0, 1.4]$ we can compare participant choices for the most consistent line length and estimate both an overall ``best" $w$ and a participant-specific $w_i$ to see if the effect is reasonably stable across participants of different backgrounds. Similar magnitude effects might suggest that there may be an underlying innate neural mechanism behind the illusion. Using a discrete distribution over the 6 possible $w$ values in a given plot, such that $$P(y|w, \gamma, s) = \sum_k(s+(w_k-\gamma)^2)/(s+(y-\gamma)^2)$$ where $y$ is the $w$ value from the selected ``most consistent size" plot, $\gamma$ is the theoretical value of $w$ that is preferred, $k=1, ..., 6$, $s$ is a parameter controlling the sharpness of the distribution, added to prevent division by zero. This distribution allows for estimation of $theta$ on a continuous scale while $w_k$ values are chosen discretely. Improper priors on $s$ and $\gamma$ complete the model. We can then obtain values for both individual and overall estimates of $\gamma_i=E[y_i]$ and $\gamma = E[y]$, where subscript $i$ denotes the $i^{th}$ participant. 
-% 
+Credible intervals for $\theta_i$ as shown in Figure \ref{fig:indivCIs} suggest that overall, the $\theta_i$ are similar across individuals. Very few of the intervals contain 1, indicating that there is significant distortion for most individuals, and the marked overlap of the intervals for each participant provides evidence towards a consistent magnitude of distortion and suggests there may be a common biological cause. 
 
+\begin{figure}\centering
+\includegraphics[width=\linewidth]{figure/fig-CIindivMean}
+\caption{95\% credible intervals for each participant and stimulus type. Vertical lines indicate the median estimate of the overall $\theta$ with a 95\% credible interval.}\label{fig:indivCIs}
+\end{figure}
+
+The overall distribution of $\theta_i$ and $\theta$ for each stimulus type is shown in Figure \ref{fig:overalldensity}. Estimates of $\hat\theta = E[\theta]$ for each function are \Sexpr{overall.mean.bounds$mean[1]}, \Sexpr{overall.mean.bounds$mean[2]}, and \Sexpr{overall.mean.bounds$mean[3]} respectively for exponential, inverse, and sine functions, suggesting a similar psychological distortion even for very different functions. 
+
+\begin{figure}\centering
+\includegraphics[width=\linewidth]{figure/fig-spaghettiIndivDists}
+\caption{Estimated densities for $\theta_i$, shown in color, with the estimated overall density for $\theta$ shown in black. Individuals have extremely similar posterior distribution of $\theta_i$, and even different functions have similar $\hat\theta$, suggesting a common underlying mental distortion.}\label{fig:overalldensity}
+\end{figure}
 
 
 

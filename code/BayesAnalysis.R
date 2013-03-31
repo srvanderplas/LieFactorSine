@@ -16,15 +16,15 @@ get_posterior_density <- function(data, pars){
 }
 
 #--------------------Overall Marginals-------------------------------------------------------------------------
-pars <- as.matrix(expand.grid(seq(1.0, 1.75, .01), seq(.1, .5, .01)))
+pars <- as.matrix(expand.grid(seq(.5, 2.5, .01), seq(.1, .5, .01)))
 
-# overall <- ddply(turkdata, .(test_param), get_posterior_density, pars=pars)
-# overall.mean <- ddply(overall[,-3], .(test_param, mean), summarise, f=sum(f))
-# overall.mean <- ddply(overall.mean, .(test_param), transform, f=f/sum(f))
+overall <- ddply(turkdata, .(test_param), get_posterior_density, pars=pars)
+overall.mean <- ddply(overall[,-3], .(test_param, mean), summarise, f=sum(f))
+overall.mean <- ddply(overall.mean, .(test_param), transform, f=f/sum(f))
 
 #' Posterior marginal distribution over individual and std. deviation
 qplot(data=overall.mean, x=mean, y=f, geom="line", colour=test_param, group=test_param) + 
-  scale_colour_discrete("Function Type") + 
+  scale_colour_discrete("Function Type") + xlim(c(.9, 1.7)) +
   xlab("Mean Psychological Lie Factor") + ylab("Density") + theme_bw()  + theme(legend.position="bottom") 
 ggsave("figure/fig-OverallMeans.pdf", width=4, height=4, units="in")
 
@@ -103,47 +103,7 @@ qplot(data=test.post.indiv,  x=lb, xend=ub, y=ip.id, yend=ip.id, geom="segment",
   geom_vline(data=overall.mean.bounds, aes(xintercept=ub), linetype=3) + 
   ylab("Participant ID") + xlab("Mean Lie Factor") + theme_bw() + theme(legend.position="bottom") + 
   scale_colour_discrete("Function Type")
-ggsave("figure/fig-CIindivMean.pdf", width=4, height=4, units="in")
-
-# #' Posterior mean estimates, including CI information for the individual w corresponding to orig mean 
-# # (i.e. not for any individual observation)
-# test <- ddply(turkdata, .(ip.id, test_param), get_posterior_density, pars=pars)
-# qplot(data=test, x=mean, y=f, group=ip.id, geom="line", alpha=I(.1)) + facet_grid(test_param~sd, scales="free_y")
-# test.mean <- ddply(test, .(ip.id, test_param, mean), summarise, f=sum(f))
-# test.mean <- ddply(test.mean, .(ip.id, test_param), transform, f=f/sum(f))
-# test.w.indiv<- ddply(test.mean, .(ip.id, test_param), 
-#                         function(x){
-#                           ex=sum(x$mean*x$f)
-#                           n=nrow(subset(turkdata, turkdata$ip.id==ip.id[1] & turkdata$test_param==test_param[1]))
-#                           samp <- matrix(sample(x$mean, n*11, prob=x$f, replace=TRUE), ncol=11)
-#                           z <- as.numeric(quantile(rowMeans(samp), c(.025, .5, .975)))
-#                           data.frame(ip.id=unique(x$ip.id), test_param=unique(x$test_param), lb=z[1], mean = ex, median=z[2], ub=z[3], n=n)
-#                         })
-# 
-# overall.w.f <- ddply(test.mean, .(test_param, mean), summarise, f=sum(f))
-# overall.w.f <- ddply(overall.mean.f, .(test_param), transform, f=f/sum(f))
-# 
-# overall.mean.bounds <- ddply(overall.mean.f, .(test_param), function(x){
-#   ex=sum(x$mean*x$f)
-#   n=length(unique(subset(turkdata, turkdata$test_param==test_param)$ip.id))
-#   samp <- matrix(sample(x$mean, n*11, prob=x$f, replace=TRUE), ncol=11)
-#   sample.mean = mean(samp)                          
-#   sdev = sd(rowMeans(samp))/sqrt(n)
-#   lb = as.numeric(quantile(rowMeans(samp), .025))
-#   med = as.numeric(quantile(rowMeans(samp), .5))
-#   ub = as.numeric(quantile(rowMeans(samp), .975))
-#   data.frame(lb=lb, mean=sample.mean, median=med, ub=ub)
-# })
-
-
-qplot(data=test.post.indiv,  x=1/lb, xend=1/ub, y=ip.id, yend=ip.id, geom="segment", colour=test_param) + 
-  facet_wrap(~test_param) + geom_point(aes(x=1/median), colour="black") + 
-  geom_vline(data=overall.mean.bounds, aes(xintercept=1/lb), linetype=3) + 
-  geom_vline(data=overall.mean.bounds, aes(xintercept=1/median)) + 
-  geom_vline(data=overall.mean.bounds, aes(xintercept=1/ub), linetype=3) + 
-  ylab("Participant ID") + xlab("w Corresponding to Mean Lie Factor") + theme_bw() + theme(legend.position="bottom") + 
-  scale_colour_discrete("Function Type")
-ggsave("figure/fig-CIindivMean-w.pdf", width=4, height=4, units="in")
+ggsave("figure/fig-CIindivMean.pdf", width=6, height=6, units="in")
 
 #' Posterior estimates, including CI information for the individual observations 
 #' (i.e. not for any individual observation)
@@ -176,10 +136,11 @@ ggsave("figure/fig-CIindivMean-w.pdf", width=4, height=4, units="in")
 
 # test.mean.marginal <- ddply(test, .(ip.id, test_param, mean), summarise, f=sum(f))
 # test.mean.marginal$f <- unlist(dlply(test.mean.marginal, .(ip.id, test_param), summarise, f=f/sum(f)))
-qplot(data=test.mean.marginal, x=mean, y=f, geom="line", group=ip.id, alpha=I(.25), colour=test_param) + 
+ggplot(data=test.mean.marginal, aes(x=mean, y=f, group=ip.id, colour=test_param)) + geom_line(alpha=I(.175)) + 
   facet_wrap(~test_param) + ylab("Density") + xlab("Lie Factor") + theme_bw() + scale_colour_discrete("Function Type") +
-  theme(legend.position="bottom")
-ggsave("figure/fig-spaghettiIndivDists.pdf", width=4, height=4, units="in")
+  theme(legend.position="bottom") + geom_line(data=overall.mean, aes(x=mean, y=f, group=test_param), colour="black") + 
+  guides(colour = guide_legend(override.aes = list(alpha = 1)))
+ggsave("figure/fig-spaghettiIndivDists.pdf", width=6, height=6, units="in")
 
 # 
 # posterior.modes <- ddply(test, .(ip.id, test_param), summarise, theta=mean[which.max(f)])
