@@ -105,6 +105,45 @@ qplot(data=test.post.indiv,  x=lb, xend=ub, y=ip.id, yend=ip.id, geom="segment",
   scale_colour_discrete("Function Type")
 ggsave("figure/fig-CIindivMean.pdf", width=4, height=4, units="in")
 
+# #' Posterior mean estimates, including CI information for the individual w corresponding to orig mean 
+# # (i.e. not for any individual observation)
+# test <- ddply(turkdata, .(ip.id, test_param), get_posterior_density, pars=pars)
+# qplot(data=test, x=mean, y=f, group=ip.id, geom="line", alpha=I(.1)) + facet_grid(test_param~sd, scales="free_y")
+# test.mean <- ddply(test, .(ip.id, test_param, mean), summarise, f=sum(f))
+# test.mean <- ddply(test.mean, .(ip.id, test_param), transform, f=f/sum(f))
+# test.w.indiv<- ddply(test.mean, .(ip.id, test_param), 
+#                         function(x){
+#                           ex=sum(x$mean*x$f)
+#                           n=nrow(subset(turkdata, turkdata$ip.id==ip.id[1] & turkdata$test_param==test_param[1]))
+#                           samp <- matrix(sample(x$mean, n*11, prob=x$f, replace=TRUE), ncol=11)
+#                           z <- as.numeric(quantile(rowMeans(samp), c(.025, .5, .975)))
+#                           data.frame(ip.id=unique(x$ip.id), test_param=unique(x$test_param), lb=z[1], mean = ex, median=z[2], ub=z[3], n=n)
+#                         })
+# 
+# overall.w.f <- ddply(test.mean, .(test_param, mean), summarise, f=sum(f))
+# overall.w.f <- ddply(overall.mean.f, .(test_param), transform, f=f/sum(f))
+# 
+# overall.mean.bounds <- ddply(overall.mean.f, .(test_param), function(x){
+#   ex=sum(x$mean*x$f)
+#   n=length(unique(subset(turkdata, turkdata$test_param==test_param)$ip.id))
+#   samp <- matrix(sample(x$mean, n*11, prob=x$f, replace=TRUE), ncol=11)
+#   sample.mean = mean(samp)                          
+#   sdev = sd(rowMeans(samp))/sqrt(n)
+#   lb = as.numeric(quantile(rowMeans(samp), .025))
+#   med = as.numeric(quantile(rowMeans(samp), .5))
+#   ub = as.numeric(quantile(rowMeans(samp), .975))
+#   data.frame(lb=lb, mean=sample.mean, median=med, ub=ub)
+# })
+
+
+qplot(data=test.post.indiv,  x=1/lb, xend=1/ub, y=ip.id, yend=ip.id, geom="segment", colour=test_param) + 
+  facet_wrap(~test_param) + geom_point(aes(x=1/median), colour="black") + 
+  geom_vline(data=overall.mean.bounds, aes(xintercept=1/lb), linetype=3) + 
+  geom_vline(data=overall.mean.bounds, aes(xintercept=1/median)) + 
+  geom_vline(data=overall.mean.bounds, aes(xintercept=1/ub), linetype=3) + 
+  ylab("Participant ID") + xlab("w Corresponding to Mean Lie Factor") + theme_bw() + theme(legend.position="bottom") + 
+  scale_colour_discrete("Function Type")
+ggsave("figure/fig-CIindivMean-w.pdf", width=4, height=4, units="in")
 
 #' Posterior estimates, including CI information for the individual observations 
 #' (i.e. not for any individual observation)

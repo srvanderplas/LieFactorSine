@@ -147,7 +147,7 @@ Cleveland and McGill
 \citep{cleveland:1984} determined that comparison of vertical distances is inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does readily confirm their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher \citep{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well - there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in Figure \ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, Figure \ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in Cleveland et al \citep{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. One main difference between the three dimensional image shown in Figure \ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
 
 \begin{figure}[h!t]\centering
-\includegraphics[keepaspectratio=TRUE,width=\linewidth, trim=0in 1in 0in 1in]{figure/fig-sinedemo2}
+\includegraphics[keepaspectratio=TRUE,width=\linewidth, trim=0in 1.5in 0in 1.5in]{figure/fig-sinedemo2}
 \caption{Three dimensional context for the sine illusion.}\label{fig:sineillusion3d}
 \end{figure}
 
@@ -155,7 +155,7 @@ One difference between the sine illusion and the M\"uller-Lyer illusion that may
 
 
 \begin{figure}[h!t]\centering
-\includegraphics[keepaspectratio=TRUE,width=\linewidth, trim=0in 1in 0in 1in]{figure/fig-sinedemo3}
+\includegraphics[keepaspectratio=TRUE,width=\linewidth, trim=0in 1.5in 0in 1.5in]{figure/fig-sinedemo3}
 \caption{Three dimensional context for the sine illusion, with a weaker perspective transformation.}\label{fig:sineillusion3dmagic}
 \end{figure}
 
@@ -173,7 +173,7 @@ The amount of correction in each sub-plot was chosen such that each sheet contai
 \[
 w \cdot \cos x,
 \]
-where $w$ is varied between 0 (for no correction) and 1.5 (very strong correction). From the previous pilot study, we suspected values of $w = 0.8$ to be promising. This led to twelve sheets with correction factors as shown in table \ref{tab:w}. The difficulty level of each of the sheets was determined by the similarity of the six plots shown.
+where $w$ is varied between 0 (for no correction) and 1.5 (very strong correction). From the previous pilot study, we suspected values around $w = 0.8$ to be promising. This led to twelve sheets with correction factors as shown in table \ref{tab:w}. The difficulty level of each of the sheets was determined by the similarity of the six plots shown.
 
 \begin{figure*}
 \center
@@ -193,8 +193,8 @@ where $w$ is varied between 0 (for no correction) and 1.5 (very strong correctio
 \centering
 \begin{tabular}{rrrrrrrr}
   \hline
-  & \multicolumn{5}{l}{sub-plot}\\
-set & 1 & 2 & 3 & 4 & 5 & 6 & difficulty\\ 
+  & \multicolumn{5}{c}{sub-plot}\\\cline{2-7}\\ [-1.75ex]
+set \vphantom{hp}& 1 & 2 & 3 & 4 & 5 & 6 & difficulty\\ 
   \hline
 1 & 0.00 & 0.20 & 0.40 & 0.80 & 1.25 & 1.40 & test\\ 
   2 & 0.00 & 0.15 & 0.35 & 0.80 & 1.20 & 1.40 & test\\ 
@@ -255,7 +255,7 @@ We compute this quantity for each plot in each set presented to the participant.
 $$P=D^\ast/\min_{1\leq i \leq 6} D_i$$
 for each plot and each participant.
 %
-By averaging a participant's preference for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion. 
+By considering each participant's answers for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion on an individual level. 
 
 This allows further investigation of the phenomenon.
 In particular, similar values of $P$  across participants,   suggest the possibility of an underlying neural basis for the sine illusion, rather than a learned misperception. 
@@ -264,7 +264,16 @@ Each value of $w$ as defined in table~\ref{tab:w} corresponds  to a value of $P$
 We test for only a set of discrete values of $w$, which is reflected directly in the number of different values of $P$ we can observe. 
 To counteract this discreteness, we employ a Bayesian approach to allow for a more precise estimation of the psychological lie-factor:
 
-Plots used in the experiment have factors $P$ ranging between 0 and 3,  so we can use a normal data model for participant $i$ viewing plot $j$, with $P = p_{ij} \sim N(\theta, \sigma)$ and flat priors $\pi(\theta)=1/3$ and $\pi(\sigma)=2$ for $\sigma\in[.1, .5]$. Using Bayesian estimation, we can then obtain values for both individual and overall estimates of $\theta_i=E[p_{i}]$ and $\theta = E[p]$. 
+Plots used in the experiment have factors $P$ ranging between 0 and 3,  so we can use a normal data model for participant $i$ viewing plot $j$, with $P = p_{ij} \sim N(\theta, \sigma)$ and flat priors $\pi(\theta)=1/3$ and $\pi(\sigma)=2$ for $\sigma\in[.1, .5]$. These ``prior distributions" represent our expectations of the values of $\theta$ and $\sigma$ before the experiment; assigning them constant values indicates that we had little useable knowledge about the joint or marginal distributions of $\theta$ and $\sigma$ before the experiment was conducted. Using Bayesian estimation, we can then obtain posterior distributions for $\theta_i$ and $\theta$, the individual and overall mean lie factors. We are not particularly interested in the actual values of $\sigma$; as such, we consider the joint distribution of the $\theta_i$'s after integrating over possible values of $\sigma$. An additional advantage to using a normal distribution for $P$ and flat priors for $\theta$ and $\sigma$ is that the posterior distribution has a closed form that we can evaluate directly without resorting to Monte Carlo techniques.
+
+\subsection{Results}
+Figure \ref{fig:indivdensity} shows the posterior density for $theta_i$ for four of the participants who completed at least 6 trials in each category. The posterior distributions for each function type are very similar, and the changing variance is at least in part due to the varying number of trials of each function type completed by each participant. 
+
+\begin{figure}\centering
+\includegraphics[width=\linewidth]{figure/fig-IndivMeanAllFcns}
+\caption{Posterior distributions for $\theta_i$, $i=2, 9, 32, 88$. Each of the participants whose data is shown here completed at least 6 trials of each of the three function types.}\label{fig:indivdensity}
+\end{figure}
+
 % \paragraph{Optimal Correction Weight}
 % As the strength of the correction varies, we can quantify the difference in line lengths by considering a weight factor $w$, such that $w=0$ corresponds to a constant line length and $w=1$ corresponds to a maximum line length of about 1.88 times the minimum line length. $w$ could in theory exist anywhere on the real line, but in practice any $w$ of more than about 1.4 causes severe distortions to the point that the illusion is not salient. Using $w \in [0, 1.4]$ we can compare participant choices for the most consistent line length and estimate both an overall ``best" $w$ and a participant-specific $w_i$ to see if the effect is reasonably stable across participants of different backgrounds. Similar magnitude effects might suggest that there may be an underlying innate neural mechanism behind the illusion. Using a discrete distribution over the 6 possible $w$ values in a given plot, such that $$P(y|w, \gamma, s) = \sum_k(s+(w_k-\gamma)^2)/(s+(y-\gamma)^2)$$ where $y$ is the $w$ value from the selected ``most consistent size" plot, $\gamma$ is the theoretical value of $w$ that is preferred, $k=1, ..., 6$, $s$ is a parameter controlling the sharpness of the distribution, added to prevent division by zero. This distribution allows for estimation of $theta$ on a continuous scale while $w_k$ values are chosen discretely. Improper priors on $s$ and $\gamma$ complete the model. We can then obtain values for both individual and overall estimates of $\gamma_i=E[y_i]$ and $\gamma = E[y]$, where subscript $i$ denotes the $i^{th}$ participant. 
 % 
@@ -276,7 +285,7 @@ Plots used in the experiment have factors $P$ ranging between 0 and 3,  so we ca
 \bibliographystyle{plain}
 \bibliography{references}
 
-<<neckercube, echo=FALSE, fig.width=8, fig.height=3, include=FALSE>>=
+<<neckercube, echo=FALSE, fig.width=4, fig.height=1.75, include=FALSE>>=
 data <- rbind(data.frame(x=c(0, 1, 1.5, 1.5, 0.5, 0, 0), y=c(0, 0, 0.25, 1.25, 1.25, 1, 0), group=1, line=1),
               data.frame(x=c(0, .5, 1.5), y=c(0, .25, .25), group=2, line=2), 
               data.frame(x=c(.5, .5), y=c(.25, 1.25), group=3, line=2),
@@ -439,7 +448,7 @@ ans <- which.min(abs(frameorder-.99))
 qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
 ggsave("./figure/fig-stimulicorrectionsize1.png", width=6, height=4.15, units="in")
 qplot(data=data, x=xstart, y=ystart-y, xend=xend, yend=yend-y, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy + c(2, -2))
-ggsave("./figure/fig-stimulicorrectionsize2.png", width=6, height=2.02, units="in")
+ggsave("./figure/fig-stimulicorrectionsize2.pdf", width=6, height=2.02, units="in")
 @
 <<invexpstimuli, echo=FALSE, include=FALSE>>=
 f <- function(x) 5/6*1/x
@@ -457,7 +466,7 @@ data$display <- factor(data$display, labels=c("Uncorrected", "Max/Min Length = 1
 # p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
 
 qplot(data=subset(data, set==1), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
-ggsave("./figure/fig-inverse.png", width=2, height=2, units="in")
+ggsave("figure/fig-inverse.pdf", width=2, height=2, units="in")
 
 f <- function(x) exp(x/2)
 fprime <- function(x) 1/2*exp(x/2)
@@ -475,7 +484,7 @@ data2$display <- factor(data2$display, labels=c("Uncorrected", "Max/Min Length =
 # p2 <- qplot(data=data2, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
 
 qplot(data=subset(data2, set==3), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
-ggsave("./figure/fig-exponential.png", width=2, height=2, units="in")
+ggsave("figure/fig-exponential.png", width=2, height=2, units="in")
 # library(gridExtra)
 # grid.arrange(p1, p2)
 # ggsave("./figure/fig-invexpstimuli.png", width=6, height=6, units="in")
