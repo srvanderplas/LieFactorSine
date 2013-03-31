@@ -57,6 +57,7 @@ library(reshape2)
 library(plyr)
 
 opts_chunk$set(fig.path='figure/fig-', cache.path='cache/', fig.align='center', fig.width=5, fig.height=5, fig.show='hold', par=TRUE, cache=TRUE, concordance=TRUE, autodep=TRUE)
+source("./code/themeStimuli.R")
 @
 
 %% If you are submitting a paper to a conference for review with a double
@@ -168,9 +169,9 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 In order to determine the amount of the psychological distortion, participants were presented with different sheets of sets of six graphs each, similar to Figure \ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure \ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. 
 Besides the sine wave two other curves were tested, as shown in figure \ref{fig:stimuli}. Figure \ref{fig:stimuli.a} whos an inverse function ($f(x) \propto 1/x$),  figure \ref{fig:stimuli.b} shows line lengths along an exponential ($f(x) \propto \exp(a*x)$). Note that for both figures the line lengths are kept constant.
 
-\begign{figure}
+\begin{figure}
 \begin{subfigure}[b]{.49\linewidth}\centering
-\includegraphics[width=.\linewidth]{figure/fig-inverse}
+\includegraphics[width=\linewidth]{figure/fig-inverse}
 \caption{inverse function.}\label{fig:stimuli.a}
 \end{subfigure}
 \begin{subfigure}[b]{.49\linewidth}\centering
@@ -189,7 +190,6 @@ Additionally, participants were  asked to provide an estimate of their confidenc
 
 
 The 11 sets of graphs were broken down into 6 sets of sine plots as in Figure \ref{fig:sinestimuli} and 5 sets of plots with either an inverse ($f(x) \propto 1/x$) or exponential ($f(x) \propto \exp(a*x)$) curve. Plots were shown to participants in random order, and were ranked by difficulty so that each participant received one plot of each of 5 levels of difficulty (as measured by the similarity of the 6 plots shown), plus a test sine plot that had the lowest difficulty for use in filtering out spurious responses. After the 11 plots required to receive payment through Amazon, participants could continue participating, and any subsequent plots were randomly selected from the 32 possible stimuli. 
-
 
 \subsection{}
 In order to determine the size of the psychological distortion, participants at 123 unique IP addresses were presented with 11 sets of 6 graphs similar to Figure \ref{fig:sinestimuli}. These sets were constructed so that the line lengths of some of the sub-plots varied to counteract the illusion. Participants were asked "In which graph is the size of the curve most consistent?," which was chosen so as not to bias participants to explicitly measure line lengths. Participants were also asked to provide an estimate of their confidence in their answer, rated on a 5 point likert scale from low to high. The actual differences in line length corresponding to Figure \ref{fig:sinestimuli} are shown in Figure \ref{fig:sinestimulinotrend}. 
@@ -260,6 +260,7 @@ qplot(data=data, x=x, y=y, group=group, geom="path") + facet_grid(.~label) +
         axis.text = element_blank()) + xlim(c(0,1))
 @
 <<sinedemo,   echo=FALSE, fig.width=4, fig.height=4, include=FALSE>>=
+
 createSine <- function(n=200, len=1, f=f, fprime=fprime, f2prime=f2prime, a=0, b=2*pi) {
   x <- seq(a, b, length=n+2)[(2:(n+1))]
   ell <- rep(len, length=length(x))
@@ -295,11 +296,6 @@ createSine <- function(n=200, len=1, f=f, fprime=fprime, f2prime=f2prime, a=0, b
   
   dframe
 }
-
-trans3d <- function(x,y,z, plot) {
-  tmat <- t(cbind(x,y,z,1) %*% plot)
-  list(x=tmat[1,]/tmat[4,], y=tmat[2,]/tmat[4,])
-} 
 
 f <- function(x) 2*sin(x)
 fprime <- function(x) 2*cos(x)
@@ -358,7 +354,6 @@ qplot(x=xstart, xend=xend, y = ystart, yend=yend, geom="segment", data=data.2d) 
   geom_segment(data=createSine(40, 1, f=f, fprime=fprime, f2prime), colour=I("grey"))
 @
 <<stimulicorrectionsize, include=FALSE, echo=FALSE>>=
-source("./code/themeStimuli.R")
 weightYTrans <- function(df, w){
   df$elltrans <- w*df$ellx2/2 + (1-w)*df$ell/2
   df$ystart <- df$y - df$elltrans
@@ -394,5 +389,44 @@ qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + fac
 ggsave("./figure/fig-stimulicorrectionsize1.png", width=6, height=4.15, units="in")
 qplot(data=data, x=xstart, y=ystart-y, xend=xend, yend=yend-y, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy + c(2, -2))
 ggsave("./figure/fig-stimulicorrectionsize2.png", width=6, height=2.02, units="in")
+@
+<<invexpstimuli, echo=FALSE, include=FALSE>>=
+f <- function(x) 5/6*1/x
+fprime <- function(x) -5/6*x^(-2)
+f2prime <- function(x) 2*5/6*x^(-3)
+orig <- createSine(50, 1, f, fprime, f2prime, 1/2, 3.5)
+lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
+w <-  c(0, 1)
+frameorder <- c(0, 1)
+
+data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
+data$set <- sapply(data$w, function(i) which(w %in% i))
+data$display <- sapply(data$w, function(i) which(frameorder %in% i))
+data$display <- factor(data$display, labels=c("Uncorrected", "Max/Min Length = 1.78"))
+# p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
+
+qplot(data=subset(data, set==1), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
+ggsave("./figure/fig-inverse.png", width=2, height=2, units="in")
+
+f <- function(x) exp(x/2)
+fprime <- function(x) 1/2*exp(x/2)
+f2prime <- function(x) 1/4*exp(x/2)
+orig <- createSine(50, 1, f, fprime, f2prime, -pi, pi)
+lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
+w <-  c(0, 1)
+frameorder <- c(0, 1)
+
+data2 <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
+data2$set <- sapply(data2$w, function(i) which(w %in% i)+2)
+data2$display <- sapply(data2$w, function(i) which(frameorder %in% i)+2)
+data2$display <- factor(data2$display, labels=c("Uncorrected", "Max/Min Length = 2.09"))
+
+# p2 <- qplot(data=data2, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
+
+qplot(data=subset(data2, set==3), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
+ggsave("./figure/fig-exponential.png", width=2, height=2, units="in")
+# library(gridExtra)
+# grid.arrange(p1, p2)
+# ggsave("./figure/fig-invexpstimuli.png", width=6, height=6, units="in")
 @
 \end{document}
