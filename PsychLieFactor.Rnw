@@ -252,14 +252,14 @@ In order to more accurately identify unique individuals, data were grouped by IP
 
 \subsection{Analysis}
 \paragraph{Psychological ``Lie Factor"}
-As the strength of the correction varies across the horizontal range of the curve, we  quantify the psychological distortion by as the ratio of the maximum line length to the minimum line length for each plot $i$: $D^i = (l_{max}-l_{min})/l_{min}$. 
+As the strength of the correction varies across the horizontal range of the curve, we  quantify the psychological distortion as the ratio of the maximum line length to the minimum line length for each plot $i$: $D^i = l_{max}/l_{min}$, and denote the chosen ratio as $D^\ast$. 
 Without any correction, this factor is, as Tufte's lie-factor, equal to one, values above one indicate that at least in some areas of the curve line segments are extended.
 
-We compute this quantity for each plot in each set presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). We then estimate the overall  psychological `lie factor' as 
+We compute this quantity for each plot in each set presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$, corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a $D_i=1$ also in the plot than if there is at minimum a $D=1.2$. This correction for the set of $D^\ast=\{D_1, ..., D_6\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as 
 $$P=D^\ast/\min_{1\leq i \leq 6} D_i$$
 for each plot and each participant.
 
-\hh{What is $D^\ast$ and why do we need to divide by the minimum of the other values of $D$?}
+\hh{What is $D^\ast$ and why do we need to divide by the minimum of the other values of $D$? -- I fixed the math and elaborated a bit more. Since not every plot has a w=0 option, the lie factor of "what appears most constant" changes. I'm not sure that it's that big of a deal, to be honest... the outcome should be the same regardless, since both map back to $w$ linearly.}
 
 %
 By considering each participant's answers for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion on an individual level. 
@@ -275,7 +275,7 @@ Plots used in the experiment have factors $P$ ranging between 0 and 3,  so we ca
 An  advantage to using a normal distribution for $P$ and flat priors for $\theta$ and $\sigma$ is that the posterior distribution has a closed form that we can evaluate directly without resorting to Monte Carlo techniques.
 
 \subsection{Results}
-Figure~\ref{fig:indivdensity} shows the posterior density for $theta_i$ for four of the participants who completed at least 6 trials in each category. The posterior distributions for each function type are very similar, and the changing variance is at least in part due to the varying number of trials of each function type completed by each participant. This suggests that individuals have similar psychological distortions even for different functions. 
+Figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. The posterior distributions for each function type are very similar, and the changing variance is at least in part due to the varying number of trials of each function type completed by each participant. This suggests that individuals have similar psychological distortions even for different functions. 
 
 \begin{figure}\centering
 \includegraphics[width=\linewidth]{figure/fig-IndivMeanAllFcns}
@@ -481,7 +481,7 @@ key <- ddply(key, .(pic_name), transform, minlie=min(d))
 key$liefactor <- key$d/key$minlie
 key$test_param <- factor(sapply(sapply(key$pic_name, substr, start=7, stop=9), .simpleCap))
 overall.mean.bounds
-keys <- unique(data.frame(lie=key$lmax*2, w=key$w, test=key$test_param))
+keys <- unique(data.frame(lie=key$liefactor, w=key$w, test=key$test_param))
 midweights <- ddply(keys, .(test), summarise, w=w[which.min(abs(lie-overall.mean.bounds$mean[overall.mean.bounds$test_param%in%test]))])
 
 f <- function(x) 2*sin(x)
@@ -539,11 +539,5 @@ ggsave("figure/fig-exponential.png", width=2, height=2, units="in")
 # library(gridExtra)
 # grid.arrange(p1, p2)
 # ggsave("./figure/fig-invexpstimuli.png", width=6, height=6, units="in")
-@
-<<preferredstimuli,echo=FALSE,include=FALSE>>=
-
-
-
-
 @
 \end{document}
