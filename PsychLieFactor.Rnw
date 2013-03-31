@@ -166,6 +166,12 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 \section{Experimental Determination of the Size of the Psychological Lie Factor for the Sine Illusion}
 \subsection{Study Setup}
 In order to determine the amount of the psychological distortion, participants were presented with different sheets of sets of six graphs each, similar to Figure \ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure \ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. 
+
+XXX How was the amount of correction picked for the study?
+XXX difficulty level
+
+
+
 Besides the sine wave two other curves were tested, as shown in figure \ref{fig:stimuli}. Figure \ref{fig:stimuli.a} whos an inverse function ($f(x) \propto 1/x$),  figure \ref{fig:stimuli.b} shows line lengths along an exponential ($f(x) \propto \exp(a*x)$). Note that for both figures the line lengths are kept constant.
 
 \begign{figure}
@@ -180,6 +186,10 @@ Besides the sine wave two other curves were tested, as shown in figure \ref{fig:
 \caption{\label{fig:stimuli} Vertical line segments along two curves. Line segments are kept constant but appear to be of different length due to a strong contextual illusion.}
 \end{figure}
 
+five sheets with the sine wave as stimuli of difficulty 1 through 5. 
+five sheets with either the exponential curve or the inverse curve as stimuli of difficulty 1 through 5. 
+one test plot 
+
 Participants were asked  to answer the question: "In which graph is the size of the curve most consistent?". 
 The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
 Additionally, participants were  asked to provide an estimate of their confidence in their answer, rated on a five point likert scale from low to high. 
@@ -191,7 +201,7 @@ Additionally, participants were  asked to provide an estimate of their confidenc
 The 11 sets of graphs were broken down into 6 sets of sine plots as in Figure \ref{fig:sinestimuli} and 5 sets of plots with either an inverse ($f(x) \propto 1/x$) or exponential ($f(x) \propto \exp(a*x)$) curve. Plots were shown to participants in random order, and were ranked by difficulty so that each participant received one plot of each of 5 levels of difficulty (as measured by the similarity of the 6 plots shown), plus a test sine plot that had the lowest difficulty for use in filtering out spurious responses. After the 11 plots required to receive payment through Amazon, participants could continue participating, and any subsequent plots were randomly selected from the 32 possible stimuli. 
 
 
-\subsection{}
+\subsection{Analysis}
 In order to determine the size of the psychological distortion, participants at 123 unique IP addresses were presented with 11 sets of 6 graphs similar to Figure \ref{fig:sinestimuli}. These sets were constructed so that the line lengths of some of the sub-plots varied to counteract the illusion. Participants were asked "In which graph is the size of the curve most consistent?," which was chosen so as not to bias participants to explicitly measure line lengths. Participants were also asked to provide an estimate of their confidence in their answer, rated on a 5 point likert scale from low to high. The actual differences in line length corresponding to Figure \ref{fig:sinestimuli} are shown in Figure \ref{fig:sinestimulinotrend}. 
 
 The 11 sets of graphs were broken down into 6 sets of sine plots as in Figure \ref{fig:sinestimuli} and 5 sets of plots with either an inverse ($f(x) \propto 1/x$) or exponential ($f(x) \propto \exp(a*x)$) curve. Plots were shown to participants in random order, and were ranked by difficulty so that each participant received one plot of each of 5 levels of difficulty (as measured by the similarity of the 6 plots shown), plus a test sine plot that had the lowest difficulty for use in filtering out spurious responses. After the 11 plots required to receive payment through Amazon, participants could continue participating, and any subsequent plots were randomly selected from the 32 possible stimuli. 
