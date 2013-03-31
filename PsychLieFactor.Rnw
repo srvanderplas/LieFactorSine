@@ -258,8 +258,8 @@ Without any correction, this factor is, as Tufte's lie-factor, equal to one, val
 We compute this quantity for each plot in each set presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$, corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a $D_i=1$ also in the plot than if there is at minimum a $D=1.2$. This correction for the set of $D^\ast=\{D_1, ..., D_6\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as 
 $$P=D^\ast/\min_{1\leq i \leq 6} D_i$$
 for each plot and each participant.
-
-\hh{What is $D^\ast$ and why do we need to divide by the minimum of the other values of $D$? -- I fixed the math and elaborated a bit more. Since not every plot has a w=0 option, the lie factor of "what appears most constant" changes. I'm not sure that it's that big of a deal, to be honest... the outcome should be the same regardless, since both map back to $w$ linearly.}
+% 
+% \hh{What is $D^\ast$ and why do we need to divide by the minimum of the other values of $D$? -- I fixed the math and elaborated a bit more. Since not every plot has a w=0 option, the lie factor of "what appears most constant" changes. I'm not sure that it's that big of a deal, to be honest... the outcome should be the same regardless, since both map back to $w$ linearly.}
 
 %
 By considering each participant's answers for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion on an individual level. 
@@ -312,6 +312,20 @@ Sin & (\Sexpr{overall.mean.bounds[3,2]}, \Sexpr{overall.mean.bounds[3, 5]}) & \S
 \includegraphics[width=\linewidth]{figure/fig-spaghettiIndivDists}
 \caption{Estimated densities for $\theta_i$, shown in color, with the estimated overall density for $\theta$ shown in black. Individuals have extremely similar posterior distribution of $\theta_i$, and even different functions have similar $\hat\theta$, suggesting a common underlying mental distortion.}\label{fig:overalldensity}
 \end{figure}
+
+\subsection{Comparison of the Preferred Stimuli}
+\begin{figure*}\centering
+\includegraphics[width=\linewidth]{figure/fig-sineOptimalWeights}
+\caption{Sine stimuli with uncorrected (w=0), optimally corrected (according to the mean value of $\theta$), and fully corrected (w=1)}\label{fig:sineCorrectionOptimal}
+\end{figure*}
+\begin{figure*}\centering
+\includegraphics[width=\linewidth]{figure/fig-expOptimalWeights}
+\caption{Exponential stimuli with uncorrected (w=0), optimally corrected (according to the mean value of $\theta$), and fully corrected (w=1)}\label{fig:expCorrectionOptimal}
+\end{figure*}
+\begin{figure*}\centering
+\includegraphics[width=\linewidth]{figure/fig-invOptimalWeights}
+\caption{Exponential stimuli with uncorrected (w=0) , optimally corrected (according to the mean value of $\theta$), and fully corrected (w=1)}\label{fig:invCorrectionOptimal}
+\end{figure*}
 
 \section{Conclusions}
 The sine illusion arises from misapplication of three-dimensional context to a two-dimensional stimulus which results in nearly unavoidable perceptual distortions that impact the inferences made from graphics. We have estimated that the illuson produces a distortion of about 140\%. This distortion occurs entirely between the retinal image and the mental representation of the object; it is not due to the chart per se, but is an artifact of our perceptual system. 
@@ -507,7 +521,7 @@ fprime <- function(x) 2*cos(x)
 f2prime <- function(x) -2*sin(x)
 orig <- createSine(50, 1, f, fprime, f2prime, 0, 2*pi)
 lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
-w <-  c(0, midweights$w[3], 1)
+w <-  sort(c(0, midweights$w[3], 1))
 frameorder <- w
 
 w.label <-  function(var, value){
@@ -548,7 +562,7 @@ frameorder <- w
 
 data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
 data$set <- sapply(data$w, function(i) which(w %in% i))
-data$display <- sapply(data$w, function(i) which(frameorder %in% i)+2)
+data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(.~display, labeller=w.label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
 ggsave("figure/fig-expOptimalWeights.pdf", width=6, height=2.25)
 
