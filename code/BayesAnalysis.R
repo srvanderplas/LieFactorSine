@@ -18,9 +18,9 @@ get_posterior_density <- function(data, pars){
 #--------------------Overall Marginals-------------------------------------------------------------------------
 pars <- as.matrix(expand.grid(seq(.5, 2.5, .01), seq(.1, .5, .01)))
 
-overall <- ddply(turkdata, .(test_param), get_posterior_density, pars=pars)
-overall.mean <- ddply(overall[,-3], .(test_param, mean), summarise, f=sum(f))
-overall.mean <- ddply(overall.mean, .(test_param), transform, f=f/sum(f))
+# overall <- ddply(turkdata, .(test_param), get_posterior_density, pars=pars)
+# overall.mean <- ddply(overall[,-3], .(test_param, mean), summarise, f=sum(f))
+# overall.mean <- ddply(overall.mean, .(test_param), transform, f=f/sum(f))
 
 #' Posterior marginal distribution over individual and std. deviation
 qplot(data=overall.mean, x=mean, y=f, geom="line", colour=test_param, group=test_param) + 
