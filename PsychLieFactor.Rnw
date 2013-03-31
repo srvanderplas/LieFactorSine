@@ -168,8 +168,6 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 \subsection{Study Setup}
 In order to determine the amount of the psychological distortion, participants were presented with different sheets of sets of six graphs each, similar to Figure \ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure \ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. 
 
-<<<<<<< HEAD
-=======
 The amount of correction in each sub-plot was chosen such that each sheet contained one uncorrected curve together with a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. In the sine curve, the correction factor we use for extending the length of the line segment at loctaion $x$ is given as
 \[
 w \cdot \cos x,
