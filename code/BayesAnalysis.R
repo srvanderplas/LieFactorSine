@@ -66,7 +66,7 @@ par_labeller <- function(var, value){
 qplot(data=subset(test.mean, ip.id%in%ipsubset), x=mean, y=f, group=test_param, colour=test_param, geom="line") + 
   facet_grid(.~ip.id, labeller=par_labeller) + scale_colour_discrete("Function Type") + theme_bw() + 
   theme(legend.position="bottom") + xlab("Mean Psychological Lie Factor") + ylab("Density")
-ggsave("figure/fig-IndivMeanAllFcns.pdf", width=6, height=3)      
+ggsave("figure/fig-IndivMeanAllFcns.pdf", width=7, height=3.5)      
 
 
 
