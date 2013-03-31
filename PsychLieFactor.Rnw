@@ -461,45 +461,6 @@ qplot(data=data, x=xstart, y=ystart-y, xend=xend, yend=yend-y, geom="segment") +
 ggsave("./figure/fig-stimulicorrectionsize2.pdf", width=6, height=2.02, units="in")
 @
 <<invexpstimuli, echo=FALSE, include=FALSE>>=
-f <- function(x) 5/6*1/x
-fprime <- function(x) -5/6*x^(-2)
-f2prime <- function(x) 2*5/6*x^(-3)
-orig <- createSine(50, 1, f, fprime, f2prime, 1/2, 3.5)
-lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
-w <-  c(0, 1)
-frameorder <- c(0, 1)
-
-data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
-data$set <- sapply(data$w, function(i) which(w %in% i))
-data$display <- sapply(data$w, function(i) which(frameorder %in% i))
-data$display <- factor(data$display, labels=c("Uncorrected", "Max/Min Length = 1.78"))
-# p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
-
-qplot(data=subset(data, set==1), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
-ggsave("figure/fig-inverse.pdf", width=2, height=2, units="in")
-
-f <- function(x) exp(x/2)
-fprime <- function(x) 1/2*exp(x/2)
-f2prime <- function(x) 1/4*exp(x/2)
-orig <- createSine(50, 1, f, fprime, f2prime, -pi, pi)
-lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
-w <-  c(0, 1)
-frameorder <- c(0, 1)
-
-data2 <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
-data2$set <- sapply(data2$w, function(i) which(w %in% i)+2)
-data2$display <- sapply(data2$w, function(i) which(frameorder %in% i)+2)
-data2$display <- factor(data2$display, labels=c("Uncorrected", "Max/Min Length = 2.09"))
-
-# p2 <- qplot(data=data2, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
-
-qplot(data=subset(data2, set==3), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
-ggsave("figure/fig-exponential.png", width=2, height=2, units="in")
-# library(gridExtra)
-# grid.arrange(p1, p2)
-# ggsave("./figure/fig-invexpstimuli.png", width=6, height=6, units="in")
-@
-<<preferredstimuli,echo=FALSE,include=FALSE>>=
 key <- read.csv("./data/pictureKey.csv", stringsAsFactors=FALSE)
 key$pic_name <- tolower(key$pic_name)
 key <- ddply(key, .(pic_name),transform, d= lmax/min(lmax))
@@ -513,7 +474,69 @@ key <- ddply(key, .(pic_name), transform, minlie=min(d))
 key$liefactor <- key$d/key$minlie
 key$test_param <- factor(sapply(sapply(key$pic_name, substr, start=7, stop=9), .simpleCap))
 overall.mean.bounds
-ddply(key, .(test_param), summarise, w=w[which.min(abs(lmax/2-overall.mean.bounds$mean[overall.mean.bounds$test_param%in%test_param]))])
+keys <- unique(data.frame(lie=key$lmax*2, w=key$w, test=key$test_param))
+midweights <- ddply(keys, .(test), summarise, w=w[which.min(abs(lie-overall.mean.bounds$mean[overall.mean.bounds$test_param%in%test]))])
+
+f <- function(x) 2*sin(x)
+fprime <- function(x) 2*cos(x)
+f2prime <- function(x) -2*sin(x)
+orig <- createSine(50, 1, f, fprime, f2prime, 0, 2*pi)
+lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
+w <-  c(0, midweights$w[3], 1)
+frameorder <- w
+
+w.label <-  function(var, value){
+  value <- paste("w = ", round(w[value], 2))
+  return(value)
+}
+
+data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
+data$set <- sapply(data$w, function(i) which(w %in% i))
+data$display <- sapply(data$w, function(i) which(frameorder %in% i))
+qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(.~display, labeller=w.label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
+ggsave("figure/fig-sineOptimalWeights.pdf", width=6, height=2.25)
+
+f <- function(x) 5/6*1/x
+fprime <- function(x) -5/6*x^(-2)
+f2prime <- function(x) 2*5/6*x^(-3)
+orig <- createSine(50, 1, f, fprime, f2prime, 1/2, 3.5)
+lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
+w <-  c(0, midweights$w[2], 1)
+frameorder <- w
+
+data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
+data$set <- sapply(data$w, function(i) which(w %in% i))
+data$display <- sapply(data$w, function(i) which(frameorder %in% i))
+qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(.~display, labeller=w.label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
+ggsave("figure/fig-invOptimalWeights.pdf", width=6, height=2.25)
+
+qplot(data=subset(data, set==1), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
+ggsave("figure/fig-inverse.pdf", width=2, height=2, units="in")
+
+f <- function(x) exp(x/2)
+fprime <- function(x) 1/2*exp(x/2)
+f2prime <- function(x) 1/4*exp(x/2)
+orig <- createSine(50, 1, f, fprime, f2prime, -pi, pi)
+lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
+w <-  c(0, midweights$w[1], 1)
+frameorder <- w
+
+data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
+data$set <- sapply(data$w, function(i) which(w %in% i))
+data$display <- sapply(data$w, function(i) which(frameorder %in% i)+2)
+qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(.~display, labeller=w.label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
+ggsave("figure/fig-expOptimalWeights.pdf", width=6, height=2.25)
+
+qplot(data=subset(data, set==1), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
+ggsave("figure/fig-exponential.png", width=2, height=2, units="in")
+# library(gridExtra)
+# grid.arrange(p1, p2)
+# ggsave("./figure/fig-invexpstimuli.png", width=6, height=6, units="in")
+@
+<<preferredstimuli,echo=FALSE,include=FALSE>>=
+
+
+
 
 @
 \end{document}
