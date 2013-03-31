@@ -306,7 +306,8 @@ Exp & (\Sexpr{overall.mean.bounds[1,2]}, \Sexpr{overall.mean.bounds[1, 5]}) & \S
 Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \Sexpr{overall.mean.bounds[2, 4]}\\
 Sin & (\Sexpr{overall.mean.bounds[3,2]}, \Sexpr{overall.mean.bounds[3, 5]}) & \Sexpr{overall.mean.bounds[3, 4]}\\
 \hline
-\end{tabular}\end{table}
+\end{tabular}
+\caption{Credible intervals for the overall $theta$ for exponential, inverse, and sine stimuli.}\end{table}
 
 \begin{figure}\centering
 \includegraphics[width=\linewidth]{figure/fig-spaghettiIndivDists}
