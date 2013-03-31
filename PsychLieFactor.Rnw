@@ -298,7 +298,7 @@ Credible intervals for $\theta_i$ as shown in Figure~\ref{fig:indivCIs} suggest 
 \caption{95\% credible intervals for each participant and stimulus type. Vertical lines indicate the median estimate of the overall $\theta$ with a 95\% credible interval.}\label{fig:indivCIs}
 \end{figure}
 
-The overall distribution of $\theta_i$ and $\theta$ for each stimulus type is shown in Figure~\ref{fig:overalldensity}. Estimates of $\hat\theta = E[\theta]$ for each function are \Sexpr{round(overall.mean.bounds$mean[1], 2)}, \Sexpr{round(overall.mean.bounds$mean[2],2)}, and \Sexpr{round(overall.mean.bounds$mean[3], 2)} respectively for exponential, inverse, and sine functions, suggesting a similar psychological distortion even for very different functions. Credible intervals can be found in Table \ref{credibleintervalstable}.
+The overall distribution of $\theta_i$ and $\theta$ for each stimulus type is shown in Figure~\ref{fig:overalldensity}. Estimates of $\hat\theta = E[\theta]$ for each function are \Sexpr{round(overall.mean.bounds$mean[1], 2)}, \Sexpr{round(overall.mean.bounds$mean[2],2)}, and \Sexpr{round(overall.mean.bounds$mean[3], 2)} respectively for exponential, inverse, and sine functions, suggesting a similar psychological distortion even for very different functions. Credible intervals can be found in Table \ref{tab:credibleintervalstable}.
 
 \begin{table}\centering\begin{tabular}{ccc}
 Function & 95\% Credible Interval for $\theta$ & Median\\\hline
@@ -307,7 +307,7 @@ Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \S
 Sin & (\Sexpr{overall.mean.bounds[3,2]}, \Sexpr{overall.mean.bounds[3, 5]}) & \Sexpr{overall.mean.bounds[3, 4]}\\
 \hline
 \end{tabular}
-\caption{Credible intervals for the overall $theta$ for exponential, inverse, and sine stimuli.}\label{credibleintervalstheta}\end{table}
+\caption{Credible intervals for the overall $\theta$ for exponential, inverse, and sine stimuli.}\label{tab:credibleintervalstable}\end{table}
 
 \begin{figure}\centering
 \includegraphics[width=\linewidth]{figure/fig-spaghettiIndivDists}
@@ -329,7 +329,7 @@ Sin & (\Sexpr{overall.mean.bounds[3,2]}, \Sexpr{overall.mean.bounds[3, 5]}) & \S
 \end{figure*}
 
 \section{Conclusions}
-The sine illusion arises from misapplication of three-dimensional context to a two-dimensional stimulus which results in nearly unavoidable perceptual distortions that impact the inferences made from graphics. We have estimated that the illuson produces a distortion of about 140\%. This distortion occurs entirely between the retinal image and the mental representation of the object; it is not due to the chart per se, but is an artifact of our perceptual system. 
+The sine illusion arises from misapplication of three-dimensional context to a two-dimensional stimulus which results in nearly unavoidable perceptual distortions that impact the inferences made from graphics. We have estimated that the illuson produces a distortion of about 140\%. This distortion occurs entirely between the retinal image and the mental representation of the object; it is not due to the chart, rather, it is an artifact of our perceptual system. As many graph types can induce this illusion (scatterplots, ribbon plots, parallel sets plots) we should be aware of its implications when drawing conclusions from graphical displays.
 
 \clearpage
 \bibliographystyle{plain}
