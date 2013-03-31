@@ -275,9 +275,15 @@ Plots used in the experiment have factors $P$ ranging between 0 and 3,  so we ca
 An  advantage to using a normal distribution for $P$ and flat priors for $\theta$ and $\sigma$ is that the posterior distribution has a closed form that we can evaluate directly without resorting to Monte Carlo techniques.
 
 \subsection{Results}
-Figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. The posterior distributions for each function type are very similar, and the changing variance is at least in part due to the varying number of trials of each function type completed by each participant. This suggests that individuals have similar psychological distortions even for different functions. 
+The overall posterior distribution of $\theta$ for each function is shown in Figure \ref{fig:overalldensity}. $\theta$ is reasonably similar for all three functions overall, and on an individual level, 
+Figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. 
 
-\hh{Could you include a picture of the posterior distribution of $\theta$?}
+\begin{figure}\centering
+\includegraphics[width=\linewidth]{figure/fig-OverallMeans}
+\caption{Posterior distributions for $\theta$ for each of the three stimuli types.}\label{fig:indivdensity}
+\end{figure}
+
+The posterior distributions for each function type are very similar, and the changing variance is at least in part due to the varying number of trials of each function type completed by each participant. This suggests that individuals have similar psychological distortions even for different functions. 
 
 
 \begin{figure}\centering
@@ -293,7 +299,14 @@ Credible intervals for $\theta_i$ as shown in Figure~\ref{fig:indivCIs} suggest 
 \end{figure}
 
 The overall distribution of $\theta_i$ and $\theta$ for each stimulus type is shown in Figure~\ref{fig:overalldensity}. Estimates of $\hat\theta = E[\theta]$ for each function are \Sexpr{round(overall.mean.bounds$mean[1], 2)}, \Sexpr{round(overall.mean.bounds$mean[2],2)}, and \Sexpr{round(overall.mean.bounds$mean[3], 2)} respectively for exponential, inverse, and sine functions, suggesting a similar psychological distortion even for very different functions. 
-\hh{Are these values consistent? Could you include credible intervals for them?}
+
+\begin{table}\centering\begin{tabular}{ccc}
+Function & 95\% Credible Interval & Median\\\hline
+Exp & (\Sexpr{overall.mean.bounds[1,2]}, \Sexpr{overall.mean.bounds[1, 5]}) & \Sexpr{overall.mean.bounds[1, 4]}\\
+Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \Sexpr{overall.mean.bounds[2, 4]}\\
+Sin & (\Sexpr{overall.mean.bounds[3,2]}, \Sexpr{overall.mean.bounds[3, 5]}) & \Sexpr{overall.mean.bounds[3, 4]}\\
+\hline
+\end{tabular}\end{table}
 
 \begin{figure}\centering
 \includegraphics[width=\linewidth]{figure/fig-spaghettiIndivDists}
