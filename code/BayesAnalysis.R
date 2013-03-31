@@ -98,12 +98,15 @@ ggsave("figure/fig-IndivMeanAllFcns.pdf", width=7, height=3.5)
 #   data.frame(lb=lb, mean=sample.mean, median=med, ub=ub)
 # })
 
+test.post.indiv$functions <- c("Exponential", "Inverse", "Sine")[as.numeric(test.post.indiv$test_param)]
+test.post.indiv$functions <- factor(test.post.indiv$functions, levels=c("Sine", "Exponential", "Inverse"))
+overall.mean.bounds$functions <- c("Exponential", "Inverse", "Sine")[as.numeric(factor(overall.mean.bounds$test_param))]
 qplot(data=test.post.indiv,  x=lb, xend=ub, y=ip.id, yend=ip.id, geom="segment", colour=test_param) + 
-  facet_wrap(~test_param) + geom_point(aes(x=median), colour="black") + 
+  facet_wrap(~functions) + geom_point(aes(x=median), colour="black") + 
   geom_vline(data=overall.mean.bounds, aes(xintercept=lb), linetype=3) + 
   geom_vline(data=overall.mean.bounds, aes(xintercept=median)) + 
   geom_vline(data=overall.mean.bounds, aes(xintercept=ub), linetype=3) + 
-  ylab("Participant ID") + xlab("Mean Lie Factor") + theme_bw() + theme(legend.position="bottom") + 
+  ylab("Participant ID") + xlab("Mean Lie Factor") + theme_bw() + theme(legend.position="none") + 
   scale_colour_discrete("Function Type")
 ggsave("figure/fig-CIindivMean.pdf", width=6, height=6, units="in")
 
@@ -138,9 +141,13 @@ ggsave("figure/fig-CIindivMean.pdf", width=6, height=6, units="in")
 
 # test.mean.marginal <- ddply(test, .(ip.id, test_param, mean), summarise, f=sum(f))
 # test.mean.marginal$f <- unlist(dlply(test.mean.marginal, .(ip.id, test_param), summarise, f=f/sum(f)))
+test.mean.marginal$functions <- c("Exponential", "Inverse", "Sine")[as.numeric(as.factor(test.mean.marginal$test_param))]
+test.mean.marginal$functions <- factor(test.mean.marginal$functions, levels=c("Sine", "Exponential", "Inverse"))
+overall.mean$functions <- c("Exponential", "Inverse", "Sine")[as.numeric(as.factor(overall.mean$test_param))]
+
 ggplot(data=test.mean.marginal, aes(x=mean, y=f, group=ip.id, colour=test_param)) + geom_line(alpha=I(.175)) + 
-  facet_wrap(~test_param) + ylab("Density") + xlab("Lie Factor") + theme_bw() + scale_colour_discrete("Function Type") +
-  theme(legend.position="bottom") + geom_line(data=overall.mean, aes(x=mean, y=f, group=test_param), colour="black") + 
+  facet_wrap(~functions) + ylab("Density") + xlab("Lie Factor") + theme_bw() + scale_colour_discrete("Function Type") +
+  theme(legend.position="none") + geom_line(data=overall.mean, aes(x=mean, y=f, group=functions), colour="black") + 
   guides(colour = guide_legend(override.aes = list(alpha = 1)))
 ggsave("figure/fig-spaghettiIndivDists.pdf", width=6, height=6, units="in")
 
