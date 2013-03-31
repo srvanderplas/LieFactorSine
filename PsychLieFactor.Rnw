@@ -276,11 +276,9 @@ An  advantage to using a normal distribution for $P$ and flat priors for $\theta
 
 \subsection{Results}
 Figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. The posterior distributions for each function type are very similar, and the changing variance is at least in part due to the varying number of trials of each function type completed by each participant. This suggests that individuals have similar psychological distortions even for different functions. 
-<<<<<<< HEAD
-=======
 
 \hh{Could you include a picture of the posterior distribution of $\theta$?}
->>>>>>> b9323afe1bb080a24553179af5b7177b7733d1f6
+
 
 \begin{figure}\centering
 \includegraphics[width=\linewidth]{figure/fig-IndivMeanAllFcns}
