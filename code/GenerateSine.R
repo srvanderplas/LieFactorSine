@@ -3,7 +3,7 @@
 library(ggplot2)
 library(reshape2)
 library(plyr)
-source("./code/themeStimuli.R")
+# source("./code/themeStimuli.R")
 
 createSine <- function(n=200, len=1, f=f, fprime=fprime, f2prime=f2prime, a=0, b=2*pi) {
   x <- seq(a, b, length=n+2)[(2:(n+1))]
@@ -97,7 +97,7 @@ for(j in 1:12){
   ans <- which.min(abs(frameorder-.99))
   if(diff.w==0) ans <- which.min(abs(frameorder-.8))
   qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
-  ggsave(filename=paste("YtransSin", j, ".png", sep=""), path="./stimuli", width=5.37, height=3.88, units="in", dpi=100)
+#   ggsave(filename=paste("YtransSin", j, ".png", sep=""), path="./stimuli", width=5.37, height=3.88, units="in", dpi=100)
   data.file <- rbind(data.file, data.frame(
     pic_id=j, 
     sample_size=25, 
@@ -111,7 +111,8 @@ for(j in 1:12){
   temp <- unique(data[,14:15] )
   weight.key <- rbind(weight.key, 
                       data.frame(pic_name=paste("YtransSin", j, ".png", sep=""), 
-                                 w=w[temp$set], set=temp$set, response_no=temp$display))
+                                 w=w[temp$set], set=temp$set, response_no=temp$display,
+                                 lmax=sapply(temp$display, function(i) max(subset(data ,display==i)$elltrans))))
 }
 
 w.all <- w.all[3:12,]
@@ -132,7 +133,7 @@ for(j in 1:10){
   ans <- which.min(abs(frameorder-.99))
   if(diff.w==0) ans <- which.min(abs(frameorder-.5))
   qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
-  ggsave(filename=paste("YTransExp", j, ".png", sep=""), path="./stimuli", width=5.37, height=3.88, units="in", dpi=100)
+#   ggsave(filename=paste("YTransExp", j, ".png", sep=""), path="./stimuli", width=5.37, height=3.88, units="in", dpi=100)
   data.file <- rbind(data.file, data.frame(
     pic_id=j, 
     sample_size=13, 
@@ -145,8 +146,9 @@ for(j in 1:10){
     difficulty=diff.w))
   temp <- unique(data[,14:15] )
   weight.key <- rbind(weight.key, 
-                      data.frame(pic_name=paste("YtransExp", j, ".png", sep=""), 
-                                 w=w[temp$set], set=temp$set, response_no=temp$display))
+                      data.frame(pic_name=paste("YTransExp", j, ".png", sep=""), 
+                                 w=w[temp$set], set=temp$set, response_no=temp$display,
+                                 lmax=sapply(temp$display, function(i) max(subset(data ,display==i)$elltrans))))
 }
 
 
@@ -166,7 +168,7 @@ for(j in 1:10){
   ans <- which.min(abs(frameorder-.99))
   if(diff.w==0) ans <- which.min(abs(frameorder-.5))
   qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli()  + xlim(lims$dx) + ylim(lims$dy)
-  ggsave(filename=paste("YTransInv", j, ".png", sep=""), path="./stimuli", width=5.37, height=3.88, units="in", dpi=100)
+#   ggsave(filename=paste("YTransInv", j, ".png", sep=""), path="./stimuli", width=5.37, height=3.88, units="in", dpi=100)
   data.file <- rbind(data.file, data.frame(
     pic_id=j, 
     sample_size=12, 
@@ -179,12 +181,14 @@ for(j in 1:10){
     difficulty=diff.w))
   temp <- unique(data[,14:15] )
   weight.key <- rbind(weight.key, 
-                      data.frame(pic_name=paste("YtransInv", j, ".png", sep=""), 
-                                 w=w[temp$set], set=temp$set, response_no=temp$display))
+                      data.frame(pic_name=paste("YTransInv", j, ".png", sep=""), 
+                                 w=w[temp$set], set=temp$set, response_no=temp$display,
+                                 lmax=sapply(temp$display, function(i) max(subset(data ,display==i)$elltrans))))
 }
 
 write.csv(data.file, "./stimuli/datafile.csv", row.names=FALSE)
 write.csv(weight.key, "./data/pictureKey.csv", row.names=FALSE)
+write.csv(weight.key, "/home/susan/Dropbox/GraphicsGroup/TurkLieFactorSine/pictureKey.csv", row.names=FALSE)
 
 # examples
 w <- c(0, .9, 1.4)
@@ -200,18 +204,18 @@ data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 
 qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
-ggsave("./stimuli/Example2.png",width=5.37, height=2.10, units="in", dpi=100)
+# ggsave("./stimuli/Example2.png",width=5.37, height=2.10, units="in", dpi=100)
 
 x <- orig$x
 data <- rbind(data.frame(x=x, y=x, ystart=x-.5, yend=x+.5, display=1),
               data.frame(x=x, y=x, ystart=.5*abs(x-pi/2)+.2, yend=1.5*abs(x-pi)-.2, display=2), 
               data.frame(x=x, y=x, ystart=x-sin(x), yend=x+sin(x), display=3))
 qplot(data=data, x=x, y=ystart, xend=x, yend=yend, geom="segment") + facet_wrap(~display) + theme_stimuli() + xlim(c(-3/8+min(orig$x), 3/8+max(orig$x)))
-ggsave("./stimuli/Example1.png",width=5.37, height=2.10, units="in", dpi=100)
+# ggsave("./stimuli/Example1.png",width=5.37, height=2.10, units="in", dpi=100)
 
 x <- orig$x
 data <- rbind(data.frame(x=x, xend=x, xstart=x, y=x, ystart=1.5*abs(x-pi)-.25, yend=1.5*abs(x-pi)+.75, display=3),
               data.frame(x=x, xend=x, xstart=x, y=x, ystart=.75*x-.25+cos(x)*.5, yend=.75*x+.25+cos(x)*.5 + x*.1, display=2),
               data.frame(x=x, xend=x, xstart=x, y=x, ystart=.75*x-.25+.5*log(.25*x+1), yend=.75*x+.25+.5*log(4*x+1), display=1))
 qplot(data=data, x=x, y=ystart, xend=x, yend=yend, geom="segment") + facet_wrap(~display) + theme_stimuli() + ylim(range(c(data$ystart, data$yend)) + c(-.183, .183))
-ggsave("./stimuli/Example3.png",width=5.37, height=2.10, units="in", dpi=100)
+# ggsave("./stimuli/Example3.png",width=5.37, height=2.10, units="in", dpi=100)
