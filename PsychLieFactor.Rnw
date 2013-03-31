@@ -166,14 +166,27 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 
 \section{Experimental Determination of the Size of the Psychological Lie Factor for the Sine Illusion}
 \subsection{Study Setup}
-In order to determine the amount of the psychological distortion, participants were presented with different sheets of sets of six graphs each, similar to Figure \ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure \ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. 
+In order to determine the amount of the psychological distortion, participants were presented with different sheets of sets of six graphs each, similar to Figure \ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure \ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: "In which graph is the size of the curve most consistent?". 
+The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
 
 The amount of correction in each sub-plot was chosen such that each sheet contained one uncorrected curve together with a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. In the sine curve, the correction factor we use for extending the length of the line segment at loctaion $x$ is given as
 \[
 w \cdot \cos x,
 \]
-where $w$ is varied between 0 (for no correction) and 1.5 (very strong correction). From the previous pilot study, we suspected values of $w = 0.8$ to be promising. This led to twelve sheets with correction factors as shown in table \ref{tab:w}. The difficulty level of each of the sheets was determined by the number of correction factors close to 0.8 and distance between them.
+where $w$ is varied between 0 (for no correction) and 1.5 (very strong correction). From the previous pilot study, we suspected values of $w = 0.8$ to be promising. This led to twelve sheets with correction factors as shown in table \ref{tab:w}. The difficulty level of each of the sheets was determined by the similarity of the six plots shown.
 
+\begin{figure*}
+\center
+\begin{subfigure}[b]{.9\linewidth}\centering
+\includegraphics[width=.9\linewidth]{figure/fig-stimulicorrectionsize1}
+\caption{One of the graphs presented to participants through Amazon Mechanical Turk.}\label{fig:sinestimuli}
+\end{subfigure}
+\begin{subfigure}[b]{.9\linewidth}\centering
+\includegraphics[width=.9\linewidth]{figure/fig-stimulicorrectionsize2}
+\caption{Line lengths (without the trend) for Figure \ref{fig:sinestimuli}.}\label{fig:sinestimulinotrend}
+\end{subfigure}
+\caption{Stimuli similar to (a) were shown to participants, while (b) shows the corresponding differences in line lengths.}
+\end{figure*}
 % latex table generated in R 2.15.1 by xtable 1.7-0 package
 % Sun Mar 31 12:08:30 2013
 \begin{table}[ht]
@@ -200,8 +213,6 @@ set & 1 & 2 & 3 & 4 & 5 & 6 & difficulty\\
 \caption{\label{tab:w} Distortion factors used for the sine curve stimulus.}
 \end{table}
 
-
-
 Besides the sine wave two other curves were tested, as shown in figure \ref{fig:stimuli}. Figure \ref{fig:stimuli.a} shows an inverse function ($f(x) \propto 1/x$),  figure \ref{fig:stimuli.b} shows line lengths along an exponential ($f(x) \propto \exp(a*x)$). Note that for both figures the line lengths are kept constant.
 
 \begin{figure}
@@ -216,39 +227,44 @@ Besides the sine wave two other curves were tested, as shown in figure \ref{fig:
 \caption{\label{fig:stimuli} Vertical line segments along two curves. Lengths of line segments are kept constant but appear to change  due to a strong contextual illusion.}
 \end{figure}
 
-Participants were asked  to answer the question: "In which graph is the size of the curve most consistent?". 
-The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
+Each participant was presented with eleven sets of graphs, consisting of five sheets of difficulty level 1 through 5 with the sine curve as stimuli, and another set of five sheets (also of difficulty levels 1 to 5) from either the exponential or the inverse curve, as well as a test chart. Plots were shown to participants in random order.
+The test chart consists of a set of six sine curves with a very low level diffcilty level. We use the test chart to filter out participants providing us with spurious responses.
+
 Additionally, participants were  asked to provide an estimate of their confidence in their answer, rated on a five point likert scale from low to high. 
 
 
+% The 11 sets of graphs were broken down into 6 sets of sine plots as in Figure \ref{fig:sinestimuli} and 5 sets of plots with either an inverse ($f(x) \propto 1/x$) or exponential ($f(x) \propto \exp(a*x)$) curve. Plots were shown to participants in random order, and were ranked by difficulty so that each participant received one plot of each of 5 levels of difficulty (as measured by the similarity of the 6 plots shown), plus a test sine plot that had the lowest difficulty for use in filtering out spurious responses. After the 11 plots required to receive payment through Amazon, participants could continue participating, and any subsequent plots were randomly selected from the 32 possible stimuli. 
+
+
+\subsection{Demographics}
+Participants for the study were recruited through the Amazon Turk web service. 
+Each participant was asked to pick the curve with the minimal amount of length distortion from eleven sheets. Responses from 128 users at 123 unique IP addresses were collected. 
+Some participants continued to provide feedback beyond the eleven required to receive payment through Amazon. For any subsequent responses we randomly selected one for each of the possible 32 stimuli.
+
+In order to more accurately identify unique individuals, data were grouped by IP address rather than by user-entered identification code, as it is common for individuals to have multiple accounts and somewhat less likely for two Amazon Mechanical Turk participants to share the same IP address and complete the same study in the same reasonably short window. We treated responses from the  same IP addresses as additional responses from the same user.
+%There were 123 unique IP addresses and 128 unique user ID values, so at most this decision affected 1/12 of the data. 
+
+% The 11 sets of graphs were broken down into 6 sets of sine plots as in Figure \ref{fig:sinestimuli} and 5 sets of plots with either an inverse ($f(x) \propto 1/x$) or exponential ($f(x) \propto \exp(a*x)$) curve. Plots were shown to participants in random order, and were ranked by difficulty so that each participant received one plot of each of 5 levels of difficulty (as measured by the similarity of the 6 plots shown), plus a test sine plot that had the lowest difficulty for use in filtering out spurious responses. After the 11 plots required to receive payment through Amazon, participants could continue participating, and any subsequent plots were randomly selected from the 32 possible stimuli. 
 
 
 
-The 11 sets of graphs were broken down into 6 sets of sine plots as in Figure \ref{fig:sinestimuli} and 5 sets of plots with either an inverse ($f(x) \propto 1/x$) or exponential ($f(x) \propto \exp(a*x)$) curve. Plots were shown to participants in random order, and were ranked by difficulty so that each participant received one plot of each of 5 levels of difficulty (as measured by the similarity of the 6 plots shown), plus a test sine plot that had the lowest difficulty for use in filtering out spurious responses. After the 11 plots required to receive payment through Amazon, participants could continue participating, and any subsequent plots were randomly selected from the 32 possible stimuli. 
-
-\subsection{}
-In order to determine the size of the psychological distortion, participants at 123 unique IP addresses were presented with 11 sets of 6 graphs similar to Figure \ref{fig:sinestimuli}. These sets were constructed so that the line lengths of some of the sub-plots varied to counteract the illusion. Participants were asked "In which graph is the size of the curve most consistent?," which was chosen so as not to bias participants to explicitly measure line lengths. Participants were also asked to provide an estimate of their confidence in their answer, rated on a 5 point likert scale from low to high. The actual differences in line length corresponding to Figure \ref{fig:sinestimuli} are shown in Figure \ref{fig:sinestimulinotrend}. 
-
-The 11 sets of graphs were broken down into 6 sets of sine plots as in Figure \ref{fig:sinestimuli} and 5 sets of plots with either an inverse ($f(x) \propto 1/x$) or exponential ($f(x) \propto \exp(a*x)$) curve. Plots were shown to participants in random order, and were ranked by difficulty so that each participant received one plot of each of 5 levels of difficulty (as measured by the similarity of the 6 plots shown), plus a test sine plot that had the lowest difficulty for use in filtering out spurious responses. After the 11 plots required to receive payment through Amazon, participants could continue participating, and any subsequent plots were randomly selected from the 32 possible stimuli. 
-
-In order to more accurately identify unique individuals, data were grouped by IP address rather than by user-entered identification code, as it is common for individuals to have multiple accounts and somewhat less likely for two Amazon Mechanical Turk participants to share the same IP address and complete the same study in the same reasonably short window. There were 123 unique IP addresses and 128 unique user ID values, so at most this decision affected 1/12 of the data. 
-
-\begin{figure*}
-\center
-\begin{subfigure}[b]{.9\linewidth}\centering
-\includegraphics[width=.9\linewidth]{figure/fig-stimulicorrectionsize1}
-\caption{One of the graphs presented to participants through Amazon Mechanical Turk.}\label{fig:sinestimuli}
-\end{subfigure}
-\begin{subfigure}[b]{.9\linewidth}\centering
-\includegraphics[width=.9\linewidth]{figure/fig-stimulicorrectionsize2}
-\caption{Line lengths (without the trend) for Figure \ref{fig:sinestimuli}.}\label{fig:sinestimulinotrend}
-\end{subfigure}
-\caption{Stimuli similar to (a) were shown to participants, while (b) shows the corresponding differences in line lengths.}
-\end{figure*}
 \subsection{Analysis}
 \paragraph{Psychological ``Lie Factor"}
-As the strength of the correction varies, we can quantify the psychological distortion by comparing the maximum line length to the minimum line length for plot $i$: $D^i = (l_{max}-l_{min})/l_{min}$. If we compute this for each set of plots presented to the participant, and the participant chose the plot that appeard to have the most consistent line length, then the psychological lie factor is $$P=D^\ast/\min_{1\leq i \leq 6} D_i$$ where $D^\ast$ is the size of the change in line length in the plot chosen by the participant, and $D_i$ is computed for each plot. By comparing participant preferences for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion. In particular, if the effect is similar across participants, that would suggest the possibility of an underlying neural basis for the sine illusion, rather than a learned misperception. Plots used in this experiment have $P \in [0, 3]$, and so we can use a normal data model for participant $i$ viewing plot $j$ $p_{ij} \sim N(\theta, \sigma)$ and flat priors $\pi(\theta)=1/3$ and $\pi(\sigma)=2$ for $\sigma\in[.1, .5]$. Using Bayesian estimation, we can then obtain values for both individual and overall estimates of $\theta_i=E[p_{i}]$ and $\theta = E[p]$. 
-% 
+As the strength of the correction varies across the horizontal range of the curve, we  quantify the psychological distortion by comparing the maximum line length to the minimum line length for each plot $i$: $D^i = (l_{max}-l_{min})/l_{min}$. 
+We compute this quantity for each plot in each set presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). We then estimate the overall  psychological `lie factor' as 
+$$P=D^\ast/\min_{1\leq i \leq 6} D_i$$
+for each plot and each participant.
+%
+By averaging a participant's preference for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion. 
+
+This allows further investigation of the phenomenon.
+In particular, similar values of $P$  across participants,   suggest the possibility of an underlying neural basis for the sine illusion, rather than a learned misperception. 
+
+Each value of $w$ as defined in table~\ref{tab:w} corresponds  to a value of $P$ as defined above. 
+We test for only a set of discrete values of $w$, which is reflected directly in the number of different values of $P$ we can observe. 
+To counteract this discreteness, we employ a Bayesian approach to allow for a more precise estimation of the psychological lie-factor:
+
+Plots used in the experiment have factors $P$ ranging between 0 and 3,  so we can use a normal data model for participant $i$ viewing plot $j$, with $P = p_{ij} \sim N(\theta, \sigma)$ and flat priors $\pi(\theta)=1/3$ and $\pi(\sigma)=2$ for $\sigma\in[.1, .5]$. Using Bayesian estimation, we can then obtain values for both individual and overall estimates of $\theta_i=E[p_{i}]$ and $\theta = E[p]$. 
 % \paragraph{Optimal Correction Weight}
 % As the strength of the correction varies, we can quantify the difference in line lengths by considering a weight factor $w$, such that $w=0$ corresponds to a constant line length and $w=1$ corresponds to a maximum line length of about 1.88 times the minimum line length. $w$ could in theory exist anywhere on the real line, but in practice any $w$ of more than about 1.4 causes severe distortions to the point that the illusion is not salient. Using $w \in [0, 1.4]$ we can compare participant choices for the most consistent line length and estimate both an overall ``best" $w$ and a participant-specific $w_i$ to see if the effect is reasonably stable across participants of different backgrounds. Similar magnitude effects might suggest that there may be an underlying innate neural mechanism behind the illusion. Using a discrete distribution over the 6 possible $w$ values in a given plot, such that $$P(y|w, \gamma, s) = \sum_k(s+(w_k-\gamma)^2)/(s+(y-\gamma)^2)$$ where $y$ is the $w$ value from the selected ``most consistent size" plot, $\gamma$ is the theoretical value of $w$ that is preferred, $k=1, ..., 6$, $s$ is a parameter controlling the sharpness of the distribution, added to prevent division by zero. This distribution allows for estimation of $theta$ on a continuous scale while $w_k$ values are chosen discretely. Improper priors on $s$ and $\gamma$ complete the model. We can then obtain values for both individual and overall estimates of $\gamma_i=E[y_i]$ and $\gamma = E[y]$, where subscript $i$ denotes the $i^{th}$ participant. 
 % 
