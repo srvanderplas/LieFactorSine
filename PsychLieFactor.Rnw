@@ -301,7 +301,7 @@ Credible intervals for $\theta_i$ as shown in Figure~\ref{fig:indivCIs} suggest 
 The overall distribution of $\theta_i$ and $\theta$ for each stimulus type is shown in Figure~\ref{fig:overalldensity}. Estimates of $\hat\theta = E[\theta]$ for each function are \Sexpr{round(overall.mean.bounds$mean[1], 2)}, \Sexpr{round(overall.mean.bounds$mean[2],2)}, and \Sexpr{round(overall.mean.bounds$mean[3], 2)} respectively for exponential, inverse, and sine functions, suggesting a similar psychological distortion even for very different functions. 
 
 \begin{table}\centering\begin{tabular}{ccc}
-Function & 95\% Credible Interval & Median\\\hline
+Function & 95\% Credible Interval for $\theta$ & Median\\\hline
 Exp & (\Sexpr{overall.mean.bounds[1,2]}, \Sexpr{overall.mean.bounds[1, 5]}) & \Sexpr{overall.mean.bounds[1, 4]}\\
 Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \Sexpr{overall.mean.bounds[2, 4]}\\
 Sin & (\Sexpr{overall.mean.bounds[3,2]}, \Sexpr{overall.mean.bounds[3, 5]}) & \Sexpr{overall.mean.bounds[3, 4]}\\
