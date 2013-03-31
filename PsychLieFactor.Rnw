@@ -183,7 +183,7 @@ where $w$ is varied between 0 (for no correction) and 1.5 (very strong correctio
 \caption{One of the graphs presented to participants through Amazon Mechanical Turk.}\label{fig:sinestimuli}
 \end{subfigure}
 \begin{subfigure}[b]{.9\linewidth}\centering
-\includegraphics[width=.9\linewidth]{figure/fig-stimulicorrectionsize2}
+\includegraphics[width=.8125\linewidth]{images/fig-stimulicorrectionsize2}
 \caption{Line lengths (without the trend) for Figure \ref{fig:sinestimuli}.}\label{fig:sinestimulinotrend}
 \end{subfigure}
 \caption{Stimuli similar to (a) were shown to participants, while (b) shows the corresponding differences in line lengths.}
