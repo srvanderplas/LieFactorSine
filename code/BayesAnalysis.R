@@ -1,4 +1,6 @@
 load("./code/BayesAnalysis.Rdata")
+require(ggplot2)
+require(plyr)
 
 # turkdata <- read.csv("./data/turkdataclean.csv", stringsAsFactors=FALSE)
 
