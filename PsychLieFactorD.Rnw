@@ -50,7 +50,7 @@
 \newcommand{\comment}[2][inline]{\todo[color=SkyBlue, #1]{#2}} % for comments that may not be "to-do"s
 \newcommand{\newtext}[1]{\todo[inline, color=White]{ \color{OliveGreen}{#1}}} % new text - not necessarily something to be done
 
-<<setup, fig.keep='all', cache=FALSE, echo=FALSE, eval=TRUE>>=
+<<setup, fig.keep='all', cache=FALSE, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE, error=FALSE>>=
 options(replace.assign=TRUE,width=70)
 library(knitr)
 library(ggplot2)

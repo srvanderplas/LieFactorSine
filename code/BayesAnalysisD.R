@@ -26,7 +26,7 @@ pars <- as.matrix(expand.grid(seq(.5, 2.5, .01), seq(.1, .5, .01)))
 
 #' Posterior marginal distribution over individual and std. deviation
 qplot(data=overall.mean, x=mean, y=f, geom="line", colour=test_param, group=test_param) + 
-  scale_colour_discrete("Function Type") + xlim(c(1, 2.5)) +
+  scale_colour_discrete("Function Type") + xlim(c(1, 1.75)) +
   xlab("Mean Psychological Lie Factor") + ylab("Density") + theme_bw()  + theme(legend.position="bottom") 
 ggsave("figure/fig-OverallMeansD.pdf", width=4, height=4, units="in")
 
