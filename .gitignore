@@ -37,7 +37,15 @@
 .Rproj.user
 *.Rproj
 .gitignore
+<<<<<<< HEAD
 *.pdf
 *.tex
 cache/
 .RData
+=======
+PsychLieFactor-concordance.tex
+PsychLieFactor.pdf
+PsychLieFactor.tex
+cache
+figure
+>>>>>>> 5d1d76c182cd7e39d354387d696f4061fd7c0fb2
