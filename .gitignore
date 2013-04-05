@@ -1,6 +1,5 @@
 # History files
 .Rhistory
-
 # Example code in package build process
 *-Ex.R
 *.acn
@@ -38,3 +37,7 @@
 .Rproj.user
 *.Rproj
 .gitignore
+*.pdf
+*.tex
+cache/
+.RData
