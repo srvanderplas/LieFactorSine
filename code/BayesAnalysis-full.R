@@ -42,12 +42,12 @@ invgammaparametersolver <- function(qu,p,init=c(1, 1)) {
 
 ### Prior parameters
 
-gammapars <- invgammaparametersolver(c(.001, 6), c(.1, .8), c(2, 2))
+gammapars <- invgammaparametersolver(c(.001, 3), c(.1, .8), c(2, 2))
 alpha.g <- gammapars[1] # 3.438
 beta.g <- gammapars[2] # 0.466
-tau2 <- .5
+tau2 <- 2
 mu0 <- 1.5
-eta2 <- .25
+eta2 <- 1
 
 ### Log conditional posteriors
 logf.thetaj <- cmpfun(function(theta, mu, sigma2, x){
@@ -87,8 +87,27 @@ logf <- cmpfun(function(theta, mu, sigma2, x, j){
 })
 
 ### Functions to draw from conditional posteriors
-r.mu <- cmpfun(function(theta, sigma2){
-  dnorm(1, mean=((mu0/eta2+sum(theta)/tau2)/(1/eta2+length(theta)/tau2)), sd=1/sqrt(1/eta2+length(theta)/tau2))
+
+var.par.2 <- .1
+r.mu <- cmpfun(function(theta, mu.old, sigma2, x, j){
+  mu.old.mean <- as.numeric((mu.old/eta2 + sum(theta)/sigma2)/(1/eta2+sum(theta)/tau2))
+  mu.sd <- as.numeric(1/(1/eta2+sum(theta)/tau2))
+  if(sum(mu.sd<=0)>0){
+    mu.sd <- pmax(0.0001, th.sd)
+    message("sd values negative")
+  } 
+  mu.sd <- sqrt(mu.sd)/var.par.2
+  mu.new <- rnorm(1, mean=mu.old.mean, sd=mu.sd)
+  
+#   mu.new.mean <- as.numeric((theta.new/tau2 + tapply(x, j, sum)/sigma2)/(1/tau2+tapply(x, j, length)/sigma2))
+#   
+  logf.mu.old <- logf(theta, mu.old, sigma2, x, j)
+  logf.mu.new <- logf(theta, mu.new, sigma2, x, j)
+  
+  
+  r <- (logf.mu.new)/(logf.mu.old)
+  u <- runif(length(r))
+  return(data.frame(accept=(r>=u), var=as.numeric(mu.new*(r>=u)+mu.old+(r<u))))
 })
 
 var.par <- .25
@@ -96,14 +115,17 @@ var.par <- .25
 r.theta <- cmpfun(function(theta.old, mu, sigma2, x, j){
   th.old.mean <- as.numeric((theta.old/tau2 + tapply(x, j, sum)/sigma2)/(1/tau2+tapply(x, j, length)/sigma2))
   th.sd <- as.numeric(1/(1/tau2+tapply(x, j, length)/sigma2))
-  if(sum(th.sd<=0)>0) message("sd values negative")
-  th.sd <- sqrt(pmax(0.0001, th.sd))/var.par
+  if(sum(th.sd<=0)>0){
+    th.sd <- pmax(0.0001, th.sd)
+    message("sd values negative")
+  } 
+  th.sd <- sqrt(th.sd)/var.par
   theta.new <- rnorm(length(theta.old), mean=th.old.mean, sd=th.sd)
   
   th.new.mean <- as.numeric((theta.new/tau2 + tapply(x, j, sum)/sigma2)/(1/tau2+tapply(x, j, length)/sigma2))
   
-  logf.theta.old <- logf.theta.vec(theta.old, mu, sigma2, x, j)
-  logf.theta.new <- logf.theta.vec(theta.new, mu, sigma2, x, j)
+  logf.theta.old <- logf(theta.old, mu, sigma2, x, j)
+  logf.theta.new <- logf(theta.new, mu, sigma2, x, j)
 
 
   r <- (logf.theta.new)/(logf.theta.old)
@@ -111,57 +133,57 @@ r.theta <- cmpfun(function(theta.old, mu, sigma2, x, j){
   return(data.frame(accept=(r>=u), var=as.numeric(theta.new*(r>=u)+theta.old+(r<u))))
 })
 
-var.par2 <- .1
-r.sigma2 <- cmpfun(function(sigma.old, theta, x, j){
+r.sigma2 <- cmpfun(function(sigma.old, mu, theta, x, j){
   nj <- as.numeric(tapply(x, j, length))
   old.sum <- ddply(data.frame(x=x, theta=theta[j], j=j), .(j), summarise, z=sum((x-theta)^2))$z
   sig.alpha <- alpha.g+nj/2
   if(sum(sig.alpha<=2)>0) message("alpha values < 2")
   sig.alpha <- pmax(sig.alpha, 2)
   sig.beta <- beta.g+.5*old.sum
-  sigma.new <- rnorm(length(sigma.old), mean=sig.beta/(sig.alpha+1), sd=sqrt(sig.beta^2/((sig.alpha-1)^2*(sig.alpha-2)))/var.par2)
+  sigma.new <- rigamma(length(sigma.old), sig.alpha, sig.beta)
   
-  logf.sigma.old <- logf.sigma.vec(theta, sigma.old, x, j)
-  logf.sigma.new <- logf.sigma.vec(theta, sigma.new, x, j)
-#   jnew.old <- sapply(1:length(sigma.new), function(i) densigamma(sigma.new[i], sig.alpha[i], sig.beta[i]))
-#   jold.new <- sapply(1:length(sigma.old), function(i) densigamma(sigma.old[i], sig.alpha[i], sig.beta[i]))
+  logf.sigma.old <- logf(theta, mu, sigma.old, x, j)
+  logf.sigma.new <- logf(theta, mu, sigma.new, x, j)
+  jnew.old <- sapply(1:length(sigma.new), function(i) densigamma(sigma.new[i], sig.alpha[i], sig.beta[i]))
+  jold.new <- sapply(1:length(sigma.old), function(i) densigamma(sigma.old[i], sig.alpha[i], sig.beta[i]))
   
-#   r <- (logf.sigma.new/jnew.old)/(logf.sigma.old/jold.new)
-  r <- logf.sigma.new/logf.sigma.old
+  r <- (logf.sigma.new/jnew.old)/(logf.sigma.old/jold.new)
+#   r <- logf.sigma.new/logf.sigma.old
   u <- runif(length(r))
   return(data.frame(accept=(r>=u), var=as.numeric(sigma.new*(r>=u)+sigma.old+(r<u))))
 })
   
 
 ### Check posterior conditionals
-vars <- expand.grid(theta=seq(.5, 3, .05), mu=seq(0, 2, .05), sigma=seq(.01, 1, .01))
-# vars$f.theta <- sapply(1:nrow(vars), function(k) logf.thetaj(vars$theta[k], vars$mu[k], vars$sigma[k], turkdata$ans.liefactor[which(turkdata$ip.id==1)]))
-# vars$f.mu <- sapply(1:nrow(vars), function(k) logf.mu(vars$mu[k], vars$theta[k], vars$sigma[k]))
-# vars$f.sigma <- sapply(1:nrow(vars), function(k) logf.sigma2j(vars$sigma[k], vars$theta[k], turkdata$ans.liefactor[which(turkdata$ip.id==1)]))
-
-# qplot(data=vars, x=theta, y=f.theta, group=interaction(vars$mu, vars$sigma), geom="line", alpha=I(.2), colour=sigma)
-
-vars$f <- unlist(mclapply(1:nrow(vars), function(k) logf(vars$theta[k], vars$mu[k], vars$sigma[k], turkdata$ans.liefactor[which(turkdata$ip.id==1)], rep(1, sum(turkdata$ip.id==1)))))
-vars$f[!is.finite(vars$f)] <- NA
-vars$f <- vars$f-max(vars$f[is.finite(vars$f)])
-vars$f <- exp(vars$f)
-vars$f <- vars$f/sum(vars$f)
-
-
-
-qplot(data=subset(vars, mu==1.5), x=sigma, y=f, group=theta, geom="line", alpha=I(.2), colour=theta)
-qplot(data=vars, x=theta, y=sigma, z=f.theta, group=mu, geom="contour")+xlim(c(1, 10))
-qplot(data=subset(vars, mu==1.5), x=theta, y=sigma, z=f, geom="contour")
-qplot(data=subset(vars, round(sigma,2)==.05), x=theta, y=mu, fill=f, geom="tile")
-
-qplot(data=vars[which(is.finite(vars$f.sigma)),], x=theta, y=sigma, geom="jitter", alpha=I(.01))
-
-qplot(data=vars[which(is.finite(vars$f.sigma)),], x=theta, y=mu, geom="jitter", alpha=I(.01))
-qplot(data=vars[which(is.finite(vars$f.sigma)),], x=mu, y=sigma, geom="jitter", alpha=I(.01))
+# vars <- expand.grid(theta=seq(.5, 3, .05), mu=seq(0, 2, .05), sigma=seq(.01, 1, .01))
+# # vars$f.theta <- sapply(1:nrow(vars), function(k) logf.thetaj(vars$theta[k], vars$mu[k], vars$sigma[k], turkdata$ans.liefactor[which(turkdata$ip.id==1)]))
+# # vars$f.mu <- sapply(1:nrow(vars), function(k) logf.mu(vars$mu[k], vars$theta[k], vars$sigma[k]))
+# # vars$f.sigma <- sapply(1:nrow(vars), function(k) logf.sigma2j(vars$sigma[k], vars$theta[k], turkdata$ans.liefactor[which(turkdata$ip.id==1)]))
+# 
+# # qplot(data=vars, x=theta, y=f.theta, group=interaction(vars$mu, vars$sigma), geom="line", alpha=I(.2), colour=sigma)
+# 
+# vars$f <- unlist(mclapply(1:nrow(vars), function(k) logf(vars$theta[k], vars$mu[k], vars$sigma[k], turkdata$ans.liefactor[which(turkdata$ip.id==1)], rep(1, sum(turkdata$ip.id==1)))))
+# vars$f[!is.finite(vars$f)] <- NA
+# vars$f <- vars$f-max(vars$f[is.finite(vars$f)])
+# vars$f <- exp(vars$f)
+# vars$f <- vars$f/sum(vars$f)
+# 
+# 
+# 
+# qplot(data=subset(vars, mu==1.5), x=sigma, y=f, group=theta, geom="line", alpha=I(.2), colour=theta)
+# qplot(data=vars, x=theta, y=sigma, z=f.theta, group=mu, geom="contour")+xlim(c(1, 10))
+# qplot(data=subset(vars, mu==1.5), x=theta, y=sigma, z=f, geom="contour")
+# qplot(data=subset(vars, round(sigma,2)==.05), x=theta, y=mu, fill=f, geom="tile")
+# 
+# qplot(data=vars[which(is.finite(vars$f.sigma)),], x=theta, y=sigma, geom="jitter", alpha=I(.01))
+# 
+# qplot(data=vars[which(is.finite(vars$f.sigma)),], x=theta, y=mu, geom="jitter", alpha=I(.01))
+# qplot(data=vars[which(is.finite(vars$f.sigma)),], x=mu, y=sigma, geom="jitter", alpha=I(.01))
 
 ### Gibbs Sampling
 N <- 100
 mu.vec <- rep(0, N)
+mu.acc <- 0
 theta.vec <- matrix(0, ncol=length(unique(turkdata$ip.id)), nrow=N)
 theta.acc <- rep(0, length(unique(turkdata$ip.id)))
 sigma2.vec <- matrix(0, ncol=length(unique(turkdata$ip.id)), nrow=N)
@@ -171,7 +193,13 @@ theta.vec[1,] <- unlist(dlply(turkdata, .(ip.id), function(i) mean(i$ans.liefact
 sigma2.vec[1,] <- jitter(as.numeric(tapply(turkdata$ans.liefactor, turkdata$ip.id, sd)))
 for(i in 1:(N-1)){
   if(i%%10==0) print(i)
-  mu.vec[i+1] <- r.mu(theta.vec[i], sigma2.vec[i,])
+  temp <- r.mu(theta = theta.vec[i,],
+                      mu = mu.vec[i], 
+                      sigma2 = sigma2.vec[i,], 
+                      x = turkdata$ans.liefactor, 
+                      j = turkdata$ip.id)
+  mu.vec[i+1] <- temp$var
+  mu.acc <- mu.acc+temp$accept
   temp <- r.theta(theta.old = theta.vec[i,],
                    mu = mu.vec[i+1], 
                    sigma2 = sigma2.vec[i,], 
@@ -180,6 +208,7 @@ for(i in 1:(N-1)){
   theta.vec[i+1,] <- temp$var
   theta.acc <- theta.acc+temp$accept
   temp <- r.sigma2(sigma.old = sigma2.vec[i,], 
+                   mu = mu.vec[i+1],
                    theta = theta.vec[i+1,], 
                    x = turkdata$ans.liefactor, 
                    j = turkdata$ip.id)
