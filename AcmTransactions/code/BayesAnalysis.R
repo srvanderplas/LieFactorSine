@@ -84,7 +84,7 @@ load("./code/BayesAnalysis.Rdata")
 # Plot 4 individuals who did at least 6 figures of each trial 
 # qplot(data=subset(test.mean, ip.id%in%ipsubset), x=mean, y=f, group=test_param, colour=test_param, geom="line") + 
 #   facet_grid(.~ip.id, labeller=par_labeller) + scale_colour_discrete("Function Type") + theme_bw() + 
-#   theme(legend.position="bottom") + xlab("Mean Psychological Lie Factor") + ylab("Density")
+#   theme(legend.position="bottom") + ylab("Density") + scale_x_continuous(breaks=c(1, 1.5, 2), limits=c(1, 2), name="Mean Psychological Lie Factor")
 # ggsave("figure/fig-IndivMeanAllFcns.pdf", width=6, height=3)      
 # 
 # 
