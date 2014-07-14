@@ -412,7 +412,7 @@ xline <- linedata$x
 yline <- linedata$y
 zline <- linedata$z
 
-p2 <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=0, phi=45, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, d=10, expand=3/(pi)) # , ltheta=0, lphi=-15
+p2 <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=0, phi=45, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, d=20, expand=3/(pi)) # , ltheta=0, lphi=-15
 lines(trans3d(x=xline[1:2], y=yline[1:2], z=zline[1:2], p2), lty=2)
 lines(trans3d(x=xline[3:4], y=yline[3:4], z=zline[3:4], p2), lty=2)
 points(trans3d(x=xline[c(1,3)], y=yline[c(1,3)], z=zline[c(1,3)], p2), pch=2, cex=.75)
