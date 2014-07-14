@@ -248,21 +248,21 @@ Plots used in the experiment have factors $P$ ranging between 1 and 2.5,  so we 
 The posterior density of $\theta$ for each function is shown in figure \ref{fig:overalldensity}, along with separate posterior densities for each individual $\theta_i$. $\theta$ is reasonably similar for all three functions, suggesting that while function type may moderate the size of the effect, the illusion occurs regardless of function type. Individual curves have different variability due to the number of trials completed, and are necessarily more spread out as there is less data with which to estimate the individual posterior distributions. 
 
 \begin{figure}\centering
-\includegraphics[width=6in]{figure/fig-spaghettiIndivDists}
+\includegraphics[width=6in, trim=0in .1in 0in .1in]{figure/fig-spaghettiIndivDists}
 \caption{Estimated densities for $\theta_i$, shown in color, with the estimated overall density for $\theta$ shown in black. Individuals have extremely similar posterior distribution of $\theta_i$, and even different functions have similar $\hat\theta$, suggesting a common underlying mental distortion.}\label{fig:overalldensity}
 \end{figure}
 
 On an individual level, figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. While in many cases, the most probable $\theta_i$ is similar across trials, individuals do seem to have been somewhat more affected by the illusion when the underlying function was sinusoidal, though this may reflect a discrepancy in the number of trials rather than a stronger illusion. Alternately, as the illusion depends on variable slope, it is possible that the monotonic exponential and inverse stimuli induced a weaker three-dimensional context.
 
 \begin{figure}\centering
-\includegraphics[width=6in]{figure/fig-IndivMeanAllFcns}
+\includegraphics[width=6in, trim=0in .2in 0in .1in]{figure/fig-IndivMeanAllFcns}
 \caption{Posterior distributions for $\theta_i$ for four of the participants who completed at least 6 trials of each of the three function types.}\label{fig:indivdensity}
 \end{figure}
 
 In order to appropriately compare intervals for each participant's $\theta_i$, we simulated 11 new ``data points" from our model (thus enforcing a uniform 11 trials per participant for each function type) to get a single new estimate of $\hat\theta_i$. For each participant, we generated 100 of these $\hat\theta_i$ and used these simulated values to calculate the 95\% credible intervals shown in figure \ref{fig:indivCIs}. These intervals will allow us to consider the variability in $\theta_i$ due to participant preference rather than the number of trials a participant completed during the study. Removing this additional variability provides us with the opportunity to consider whether the sine illusion stems from an individual's perceptual experiences or from a lower-level perceptual heuristic. 
 
 \begin{figure}\centering
-\includegraphics[width=6in]{figure/fig-CIindivMean}
+\includegraphics[width=6in, trim=0in .1in 0in .1in]{figure/fig-CIindivMean}
 \caption{95\% posterior predictive intervals for $\theta_i$, calculated for each stimulus type. Vertical lines indicate the median estimate of the overall $\theta$ with a 95\% credible interval.}\label{fig:indivCIs}
 \end{figure}
 
