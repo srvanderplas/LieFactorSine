@@ -1,20 +1,26 @@
-% !TeX program = pdfLaTeX
-\documentclass[letterpaper,final,compsoc,9pt,conference]{IEEEtran}
-% \documentclass[journal]{vgtc}                % final (journal style)
-%\documentclass[review,journal]{vgtc}         % review (journal style)
-% \documentclass[widereview]{vgtc}             % wide-spaced review
-%\documentclass[preprint,journal]{vgtc}       % preprint (journal style)
-%\documentclass[electronic,journal]{vgtc}     % electronic version, journal
+\documentclass[prodmode,acmtap]{acmlarge}
 
+% Debugging
+\errorcontextlines 10000
+
+% Metadata Information
+\acmVolume{1}
+\acmNumber{1}
+\acmArticle{1}
+\articleSeq{1}
+\acmYear{2014}
+\acmMonth{1}
+
+% Package to generate and customize Algorithm as per ACM style
+\usepackage[ruled]{algorithm2e}
 \usepackage{mathptmx}
-\usepackage{graphicx}
+% \usepackage{graphicx}
 % \usepackage{times}
-
 \usepackage{natbib}
-\usepackage{fullpage}
+% \usepackage{fullpage}
 \usepackage{color}
 \usepackage[dvipsnames,svgnames]{xcolor}
-\usepackage[bookmarks,backref=true,linkcolor=black]{hyperref} %,colorlinks
+\usepackage[bookmarks,linkcolor=black]{hyperref} %,colorlinks
 \hypersetup{
   pdfauthor = {Susan VanderPlas},
   pdftitle = {The curse of three dimensions: Why your brain is lying to you},
@@ -29,17 +35,48 @@
   linktocpage
 }
 \usepackage{wrapfig,float}
-\usepackage{caption}
-\usepackage{subcaption}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{url}
 \usepackage{ulem}
 \usepackage[section]{placeins}
-
-% test change
-% help with editing and coauthoring
 \usepackage[colorinlistoftodos]{todonotes}
+
+\SetAlFnt{\algofont}
+\SetAlCapFnt{\algofont}
+\SetAlCapNameFnt{\algofont}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+\renewcommand{\algorithmcfname}{ALGORITHM}
+
+
+% Page heads
+\markboth{S. VanderPlas, H. Hofmann, and D. Cook}{The curse of three dimensions}
+
+% Title portion
+\title{The curse of three dimensions: Why your brain is lying to you}
+\author{SUSAN VANDERPLAS, HEIKE HOFMANN and DI COOK\affil{Iowa State University}
+}
+
+\begin{abstract}
+One of the basic principles of visual graphics is that the graphic should accurately reflect the data.
+Tufte's lie factor
+% ~\cite{tufte}
+was created with the idea that graphs that do not represent the underlying data accurately should be avoided. In this paper, we examine a second level of graph distortion that occurs during the perceptual process.
+ The human visual system is largely optimized for perception of three dimensions. Generally, the brain processes potential  ambiguities in the rendering as the most-common three-dimensional object. This can lead to visual distortions, such as occur with the Necker figure or in the M\"uller-Lyer illusion.
+We discuss the underlying psychological mechanisms for the distortions, examine the effect these distortions have on  judgments, and consider the implications for graph design. Using the sine illusion as a case study, we quantify the effects of the distortion that create a ``perceptual lie factor" for the sine illusion.
+\end{abstract}
+
+% \category{}{}[]
+% \category{}{}{}[]
+% \category{}{}{}[]
+% 
+
+\terms{Design, Human factors, Experimentation}
+\keywords{Statistical graphics, optical illusion, perceptual theory, visualization}
+
+\acmformat{VanderPlas, S., Hofmann, H., and Cook, D. 2014. The Curse of Three Dimensions: Why Your Brain is Lying to You.}
+
 
 \newcommand{\hh}[1]{{\color{orange} #1}}
 
@@ -64,127 +101,97 @@ source("./code/themeStimuli.R")
 source("./code/BayesAnalysis.R") # generate pics for analysis without all the ddplying....
 @
 
-%% If you are submitting a paper to a conference for review with a double
-%% blind reviewing process, please replace the value ``0'' below with your
-%% OnlineID. Otherwise, you may safely leave it at ``0''.
-% \onlineid{0}
-
-%% declare the category of your paper, only shown in review mode
-% \vgtccategory{Research}
-
-%% allow for this line if you want the electronic option to work properly
-% \vgtcinsertpkg
-
-%% In preprint mode you may define your own headline.
-%\preprinttext{To appear in an IEEE VGTC sponsored conference.}
-
-%% Paper title.
-
-\title{The curse of three dimensions: Why your brain is lying to you}
-\author{Susan VanderPlas\\srvanderplas@gmail.com\\Iowa State University \and Heike Hofmann\\hofmann@iastate.edu\\Iowa State University \and Di Cook\\dicook@iastate.edu\\Iowa State University
-}
-        
-
-
- %% Uncomment below to include a teaser figure.
- %% Note: No figures other than the optional teaser are permitted on title page.
- %\centering
- %\includegraphics[width=16cm]{CypressView.eps}
- %\caption{In the Clouds: Vancouver from Cypress Mountain}
- %} 
- 
 \begin{document}
+\begin{bottomstuff}
+Author's address: S. VanderPlas, Snedecor Hall, Iowa State University, Ames, IA 50010; email: skoons@iastate.edu
+\end{bottomstuff}
 \maketitle
-\begin{abstract}
-One of the basic principles of visual graphics is that the graphic should accurately reflect the data.
-Tufte's lie factor~\citep{tufte} was created with the idea that graphs that do not represent the underlying data accurately should be avoided. In this paper, we examine a second level of graph distortion that occurs during the perceptual process.
- The human visual system is largely optimized for perception of three dimensions. Generally, the brain processes potential  ambiguities in the rendering as the most-common three-dimensional object. This can lead to visual distortions, such as occur with the Necker figure or in the M\"uller-Lyer illusion.
-We discuss the underlying psychological mechanisms for the distortions, examine the effect these distortions have on  judgments, and consider the implications for graph design. Using the sine illusion as a case study, we quantify the effects of the distortion that create a ``perceptual lie factor" for the sine illusion.
-\end{abstract}
+
 \section{Introduction}
-One of the basic principles of visual graphics is that the graphic should accurately reflect the data. Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data~\citep{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the transition from data to graphics, it is not as effective at measuring the transition from graph to the brain. Ideally, graphics would not only represent the data accurately, but would also allow readers to draw accurate conclusions from the graph. While in many cases these two goals can be achieved simultaneously, there are instances in which human perception produces a psychological distortion that can interfere with the interpretation of graphics, even if the graphics are accurate portrayals of the numerical data. In this paper, we examine situations in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a graphic.
+One of the basic principles of visual graphics is that the graphic should accurately reflect the data. Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data~\cite{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the transition from data to graphics, it is not as effective at measuring the transition from graph to the brain. Ideally, graphics would not only represent the data accurately, but would also allow readers to draw accurate conclusions from the graph. While in many cases these two goals can be achieved simultaneously, there are instances in which human perception produces a psychological distortion that can interfere with the interpretation of graphics, even if the graphics are accurate portrayals of the numerical data. In this paper, we examine situations in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a graphic.
 %that are true to the data. 
 
 \section{The Curse of Three Dimensions}
-The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a reasonably accurate mental representation of the three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional information. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation might correspond to multiple three-dimensional objects, as in the Necker Cube shown in Figure~\ref{fig:Necker}. Additionally, the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. Optical illusions that demonstrate this phenomenon are the so-called ``impossible objects" such as the Penrose triangle. 
-\begin{figure}[H]
-\includegraphics[keepaspectratio=TRUE,width=\linewidth]{figure/fig-neckercube}
-\caption{The Necker Cube is a so-called ``ambiguous object" because two different transparent objects could produce the same retinal image (and thus the same perceptual experience). Commonly, the image seems to transition instantaneously from one possible mental representation to the other.\citep{gregory}}\label{fig:Necker}
+The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a reasonably accurate mental representation of the three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional information. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation might correspond to multiple three-dimensional objects, as in the Necker Cube shown in figure~\ref{fig:Necker}. Additionally, the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. Optical illusions that demonstrate this phenomenon are the so-called ``impossible objects" such as the Penrose triangle. 
+\begin{figure}
+\includegraphics[keepaspectratio=TRUE,width=6.5in]{figure/fig-neckercube}
+\caption{The Necker Cube is a so-called ``ambiguous object" because two different transparent objects could produce the same retinal image (and thus the same perceptual experience). Commonly, the image seems to transition instantaneously from one possible mental representation to the other.\cite{gregory}}\label{fig:Necker}
 \end{figure}
-In the case of the Necker cube, the two different figures are equally salient, and thus the brain does not prefer one interpretation over the other and instead continuously switches between interpretations. In many other instances experience with the real world  informs the choice between multiple possible three-dimensional objects which form the same two-dimensional picture. This indicates that processing occurs ``top down" in that our previous experience influences our current perceptions. Without this top-down influence, the brain would not be able to map the picture back to a three-dimensional object. One of the most well studied examples of the influence of top-down processing is the M\"uller-Lyer illusion, shown in Figure~\ref{fig:mullerlyer}
+In the case of the Necker cube, the two different figures are equally salient, and thus the brain does not prefer one interpretation over the other and instead continuously switches between interpretations. In many other instances experience with the real world  informs the choice between multiple possible three-dimensional objects which form the same two-dimensional picture. This indicates that processing occurs ``top down" in that our previous experience influences our current perceptions. Without this top-down influence, the brain would not be able to map the picture back to a three-dimensional object. One of the most well studied examples of the influence of top-down processing is the M\"uller-Lyer illusion, shown in figure~\ref{fig:mullerlyer}.
 
-\begin{figure}[h!t]\centering
+\begin{figure}[tp]\centering
 \includegraphics[keepaspectratio=TRUE]{figure/fig-mullerlyer}
-\caption{The M\"uller-Lyer illusion. The central segment of Figure A is perceived as shorter than the central segment  of Figure B, even though the two are actually the same length.}\label{fig:mullerlyer}
+\caption{The M\"uller-Lyer illusion. The central segment of figure A is perceived as shorter than the central segment  of figure B, even though the two are actually the same length.}
+\label{fig:mullerlyer}
 \end{figure}
 
-One explanation for the M\"uller-Lyer illusion is that the brain interprets the ambiguous lines as a common three-dimensional object: corners of a room: Figure~\ref{fig:mullerlyer}A occurs when viewing the outside corner of a rectangular prism, Figure~\ref{fig:mullerlyer}B occurs when viewing the prism from the inside.  In regions which do not commonly have rectangular buildings, the illusion is significantly less pervasive~\citep{mullerlyerafrica}. Figure~\ref{fig:mullerlyerreal} provides one possible context that would lead to the M\"uller-Lyer effect. This real-world experience carries with it an inferred perspective - when the arrows point inward, the object is typically closer than when the arrows point outward, which causes the brain to interpret the outward-pointing figure as larger, even though the retinal size is identical for the two objects. This inferred ``depth cue"~\citep{gregory} is reasonably consistent across individuals. A similar effect can also be found in the Necker Cube - whichever face appears to be furthest away also seems larger, even though any two parallel faces are equally sized in the image. The advantages of this approach in the real world are considerable~\citep{gregory}, as pictures of real objects are seldom ambiguous and this strategy allow for high performance with limited neural bandwidth. Figure~\ref{fig:mullerlyerreal} shows not only the real-world context, but that the perspective cues which contribute to the illusion allow for an accurate neural representation of the object in context. 
+One explanation for the M\"uller-Lyer illusion is that the brain interprets the ambiguous lines as a common three-dimensional object: corners of a room: figure~\ref{fig:mullerlyer}A occurs when viewing the outside corner of a rectangular prism, figure~\ref{fig:mullerlyer}B occurs when viewing the prism from the inside.  In regions which do not commonly have rectangular buildings, the illusion is significantly less pervasive~\cite{mullerlyerafrica}. Figure~\ref{fig:mullerlyerreal} provides one possible context that would lead to the M\"uller-Lyer effect. This real-world experience carries with it an inferred perspective - when the arrows point inward, the object is typically closer than when the arrows point outward, which causes the brain to interpret the outward-pointing figure as larger, even though the retinal size is identical for the two objects. This inferred ``depth cue"~\cite{gregory} is reasonably consistent across individuals. A similar effect can also be found in the Necker Cube - whichever face appears to be furthest away also seems larger, even though any two parallel faces are equally sized in the image. The advantages of this approach in the real world are considerable~\cite{gregory}, as pictures of real objects are seldom ambiguous and this strategy allow for high performance with limited neural bandwidth. Figure~\ref{fig:mullerlyerreal} shows not only the real-world context, but that the perspective cues which contribute to the illusion allow for an accurate neural representation of the object in context. 
 
-\begin{figure}[h!t]\centering
-\includegraphics[keepaspectratio=TRUE,width=\linewidth]{images/mullerlyerhouse}
+\begin{figure}[tp]\centering
+\includegraphics[width=6in,keepaspectratio=TRUE]{images/mullerlyerhouse}
 \caption{Real-world context that gives rise to the M\"uller-Lyer illusion}\label{fig:mullerlyerreal}
 \end{figure}
 
 \section{Three Dimensional Context of the Sine Illusion}
-While the classic M\"uller-Lyer illusion is seldom a factor in statistical graphics, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion) is one example of this phenomenon which occurs frequently in statistical graphics. Like the M\"uller-Lyer illusion, it is pervasive and very difficult to ``un-see" or mentally correct. Figure~\ref{fig:sineillusion} shows the sine illusion in its original form, and Figure~\ref{fig:playfair} shows the same illusion in one of the charts from Playfair's Statistical Atlas~\citep{playfair}. This illusion, which is also known as the line-width illusion, has also been documented in parallel sets plots \citep{parallelsets}. 
-\begin{figure}[h!t]\centering
-\includegraphics[keepaspectratio=TRUE,width=.8\linewidth,trim=0in .5in 0in .5in]{figure/fig-sinedemo1}
+While the classic M\"uller-Lyer illusion is seldom a factor in statistical graphics, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion) is one example of this phenomenon which occurs frequently in statistical graphics. Like the M\"uller-Lyer illusion, it is pervasive and very difficult to ``un-see" or mentally correct. Figure~\ref{fig:sineillusion} shows the sine illusion in its original form, and figure~\ref{fig:playfair} shows the same illusion in one of the charts from Playfair's Statistical Atlas~\cite{playfair}. This illusion, which is also known as the line-width illusion, has also been documented in parallel sets plots \cite{parallelsets}. 
+\begin{figure}[tp]\centering
+\includegraphics[keepaspectratio=TRUE,width=5in,trim=0in .5in 0in .5in]{figure/fig-sinedemo}
 \caption{The classic sine illusion. Each vertical line has the same length, though the lines at the peak and trough of the curve appear longer.}\label{fig:sineillusion}
 \end{figure}
 
-\begin{figure}[h!t]\centering
-\includegraphics[keepaspectratio=TRUE,width=\linewidth]{images/PlayfairExportImports}
+\begin{figure}[t]\centering
+\includegraphics[keepaspectratio=TRUE,width=5in]{images/PlayfairExportImports}
 \caption{The sine illusion in Playfair's graph of trade between the East Indies and England, 1700-1780. The trade balance in 1763 does not appear to be the same size as that in 1745, though the vertical distance is approximately the same.}\label{fig:playfair}
 \end{figure}
 Cleveland and McGill
-\citep{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does readily confirm their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher~\citep{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well - there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in Figure~\ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, Figure~\ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in Cleveland et al~\citep{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. One main difference between the three dimensional image shown in Figure~\ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
+\citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does readily confirm their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher~\citeyear{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well - there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in figure~\ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, figure~\ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in \citeN{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. One main difference between the first three dimensional image shown in figure~\ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
 
-\begin{figure}[h!t]\centering
-\includegraphics[keepaspectratio=TRUE,width=\linewidth, trim=0in 1.5in 0in 1.5in]{figure/fig-sinedemo2}
-\caption{Three dimensional context for the sine illusion.}\label{fig:sineillusion3d}
+\begin{figure}[tp]\centering
+\includegraphics[keepaspectratio=TRUE,width=6in, trim=0in 1.25in 0in .5in]{figure/fig-sinedemo2}
+\caption{Three dimensional context for the sine illusion. The second figure has a vanishing point closer to infinity, and very closely resembles the form of the classic sine illusion.}\label{fig:sineillusion3d}
 \end{figure}
 
-As the vanishing point moves further away from the viewer and the 3d projection decreases in strength, the three-dimensional reconstruction of the image converges on figure~\ref{fig-sineillusion}. Figure~\ref{fig:sineillusion3dmagic} shows a weaker 3-dimensional projection that is much closer to Figure~\ref{fig:sineillusion}, however, the three-dimensional contextual information provided by the shading removes much of the illusion's distortions. This is similar to the Muller-Lyer illusion, as Figure~\ref{fig:mullerlyerreal} is not at all ambiguous because the contextual depth information provided by the rest of the surface of the house is sufficient to remove the illusion that the closer corner is in fact larger due to the perspective.
+As the vanishing point moves further away from the viewer and the 3d projection decreases in strength, the three-dimensional reconstruction of the image converges on figure~\ref{fig:sineillusion}. The second image in figure~\ref{fig:sineillusion3d} shows a weaker 3-dimensional projection that is much closer to figure~\ref{fig:sineillusion}, however, the three-dimensional contextual information provided by the shading removes much of the illusion's distortions. This is similar to the Muller-Lyer illusion, as figure~\ref{fig:mullerlyerreal} is not at all ambiguous because the contextual depth information provided by the rest of the surface of the house is sufficient to remove the illusion that the closer corner is in fact larger due to the perspective.
 
-One difference between the sine illusion and the M\"uller-Lyer illusion that may influence the tendency to see a three-dimensional ``ribbon" instead of the two-dimensional sine curve is that the vertical lines in the sine illusion are ambiguously oriented - there is an entire plane of possible three-dimensional reconstructions for each line, and each possible rotation leads to a line of different length. It is this facet of the image that we believe partially contributes to the ambiguity of the image, though it is not a necessary feature for the illusion to persist, as the illusion also can be found in scatterplots and in ``ribbon plots" such as Figure~\ref{fig:playfair}. 
+One difference between the sine illusion and the M\"uller-Lyer illusion that may influence the tendency to see a three-dimensional ``ribbon" instead of the two-dimensional sine curve is that the vertical lines in the sine illusion are ambiguously oriented - there is an entire plane of possible three-dimensional reconstructions for each line, and each possible rotation leads to a line of different length. It is this facet of the image that we believe partially contributes to the ambiguity of the image, though it is not a necessary feature for the illusion to persist, as the illusion also can be found in scatterplots and in ``ribbon plots" such as figure~\ref{fig:playfair}. 
 
+% 
+% \begin{figure}[t]\centering
+% \includegraphics[keepaspectratio=TRUE,width=.9\textwidth, trim=0in 1.5in 0in 1.5in]{figure/fig-sinedemo3}
+% \caption{Three dimensional context for the sine illusion, with a weaker perspective transformation.}\label{fig:sineillusion3dmagic}
+% \end{figure}
 
-\begin{figure}[h!t]\centering
-\includegraphics[keepaspectratio=TRUE,width=\linewidth, trim=0in 1.5in 0in 1.5in]{figure/fig-sinedemo3}
-\caption{Three dimensional context for the sine illusion, with a weaker perspective transformation.}\label{fig:sineillusion3dmagic}
-\end{figure}
+The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\cite{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical graphics. In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
 
-The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\citep{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical graphics. In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
-
-\section{Experimental Determination of the Size of the Psychological Lie Factor in the Sine Illusion}
+\section{Measuring the Psychological Lie Factor Experimentally}
 \subsection{Study Setup}
-In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to Figure~\ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: "In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
+In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to figure~\ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: "In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
 
 The amount of correction in each sub-plot was chosen such that each stimuli set contained a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. The correction factor we use for extending the length of the line segment at loctaion $x$ is given as
 \[
 (1-w) + w \cdot \left(1 / \cos\left(\tan^{-1}(|f^\prime(x)|)\right)\right)
 \]
-where $w$ is varied between 0 (for no correction) and 1.5 (very strong correction). From the previous pilot study, we suspected values around $w = 0.8$ to be promising, but did not know whether this would generalize to those outside of the statistical graphics community. This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown.
+where $w$ is varied between 0 (for no correction) and 1.5 (very strong correction). From a pilot study, we suspected values around $w = 0.8$ to be promising, but did not know whether this would generalize to those outside of the statistical graphics community. This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown.
 
-\begin{figure}
-\center
-\begin{subfigure}[b]{\linewidth}\centering
-\includegraphics[width=.9\linewidth, trim=.5in 0in .5in 0in ]{figure/fig-stimulicorrectionsize1}
-\caption{One of the graphs presented to participants through Amazon Mechanical Turk.}\label{fig:sinestimuli}
-\end{subfigure}
-\begin{subfigure}[b]{\linewidth}\centering
-\includegraphics[width=.8125\linewidth, trim=.5in .15in .5in 0in ]{images/fig-stimulicorrectionsize2}
-\caption{Line lengths (without the trend) for Figure~\ref{fig:sinestimuli}.}\label{fig:sinestimulinotrend}
-\end{subfigure}
-\caption{Stimuli similar to (a) were shown to participants, while (b) shows the corresponding differences in line lengths.}
+\begin{figure}[tp]
+\centering
+\includegraphics[width=6in, trim=.5in 0in .5in 0in ]{figure/fig-stimulicorrectionsize1}
+\caption{One of the graphs presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths.}\label{fig:sinestimuli}
+\end{figure}
+
+\begin{figure}[tp]
+\centering
+\includegraphics[width=6.5in, trim=.5in .15in .5in 0in ]{images/fig-stimulicorrectionsize2}
+\caption{Line lengths (without the trend) for figure~\ref{fig:sinestimuli}.}\label{fig:sinestimulinotrend}
 \end{figure}
 % latex table generated in R 2.15.1 by xtable 1.7-0 package
 % Sun Mar 31 12:08:30 2013
 \begin{table}[ht]
 \centering
+\tbl{\label{tab:w} Distortion factors used for the sine curve stimulus.}{
 \begin{tabular}{rrrrrrrr}
   \hline
-  & \multicolumn{5}{c}{sub-plot}\\\cline{2-7}\\ [-1.75ex]
+  & \multicolumn{5}{c}{sub-plot}\\ \cline{2-7}\\ [-1.75ex]
 set \vphantom{hp}& 1 & 2 & 3 & 4 & 5 & 6 & difficulty\\ 
   \hline
 1 & 0.00 & 0.20 & 0.40 & 0.80 & 1.25 & 1.40 & test\\ 
@@ -201,40 +208,20 @@ set \vphantom{hp}& 1 & 2 & 3 & 4 & 5 & 6 & difficulty\\
   12 & 0.60 & 0.70 & 0.75 & 0.80 & 0.90 & 1.00 & 5\\ 
    \hline
 \end{tabular}
-\caption{\label{tab:w} Distortion factors used for the sine curve stimulus.}
+}
 \end{table}
 
 Three underlying mean functions were tested using these weight values: $\sin(x)$, $\exp(x)$, and $1/x$. 
 
-% \begin{figure}
-% \begin{subfigure}[b]{.49\linewidth}\centering
-% \includegraphics[width=\linewidth]{figure/fig-inverse}
-% \caption{inverse function.}\label{fig:stimuli.a}
-% \end{subfigure}
-% \begin{subfigure}[b]{.49\linewidth}\centering
-% \includegraphics[width=\linewidth]{figure/fig-exponential}
-% \caption{exponential function.}\label{fig:stimuli.b}
-% \end{subfigure}
-% \caption{\label{fig:stimuli} Vertical line segments along two curves. Lengths of line segments are kept constant but appear to change  due to a strong contextual illusion.}
-% \end{figure}
-
 Each participant was presented with eleven sets of graphs, consisting of one ``easy" test chart, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. Plots were shown to participants in random order. The test chart consists of a set of six sine curves with a very low level diffcilty level, and is used as an introduction to the testing procedure.
 
 Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. 
-% 
-% Additionally, participants were  asked to provide an estimate of their confidence in their answer, rated on a five point likert scale from low to high, where a 5 corresponds to high confidence.
-
-% The 11 sets of graphs were broken down into 6 sets of sine plots as in Figure~\ref{fig:sinestimuli} and 5 sets of plots with either an inverse ($f(x) \propto 1/x$) or exponential ($f(x) \propto \exp(a*x)$) curve. Plots were shown to participants in random order, and were ranked by difficulty so that each participant received one plot of each of 5 levels of difficulty (as measured by the similarity of the 6 plots shown), plus a test sine plot that had the lowest difficulty for use in filtering out spurious responses. After the 11 plots required to receive payment through Amazon, participants could continue participating, and any subsequent plots were randomly selected from the 32 possible stimuli. 
-
 
 \subsection{Demographics}
 Participants for the study were recruited through the Amazon Turk web service. 
 Responses from 128 users at 123 unique IP addresses were collected. 
 
 In order to more accurately identify unique individuals, data were grouped by IP address rather than by user-entered identification code, as it is common for individuals to have multiple accounts and somewhat less likely for two Amazon Mechanical Turk participants to share the same IP address and complete the same study in a reasonably short window. We treated responses from the same IP addresses as additional responses from the same user.
-%There were 123 unique IP addresses and 128 unique user ID values, so at most this decision affected 1/12 of the data. 
-
-% The 11 sets of graphs were broken down into 6 sets of sine plots as in Figure~\ref{fig:sinestimuli} and 5 sets of plots with either an inverse ($f(x) \propto 1/x$) or exponential ($f(x) \propto \exp(a*x)$) curve. Plots were shown to participants in random order, and were ranked by difficulty so that each participant received one plot of each of 5 levels of difficulty (as measured by the similarity of the 6 plots shown), plus a test sine plot that had the lowest difficulty for use in filtering out spurious responses. After the 11 plots required to receive payment through Amazon, participants could continue participating, and any subsequent plots were randomly selected from the 32 possible stimuli. 
 
 \subsection{Analysis}
 \paragraph{Psychological ``Lie Factor"}
@@ -243,61 +230,56 @@ As the strength of the correction varies across the horizontal range of the curv
 We compute this quantity for each plot in each set presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$, corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a plot with $w=0$ and $D_j=1$ also in the plot than if there is at minimum a plot with $w=0.4$ and $D=1.2$. This correction for the set of $D^\ast=\{D_1, ..., D_6\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as 
 $$P=D^\ast/\min_{1\leq j \leq 6} D_j$$
 for each plot and each participant. That is, $P$ is the ratio of the lie factor of the chosen plot to the smallest lie factor available in the set of available plots.
-% 
-% \hh{What is $D^\ast$ and why do we need to divide by the minimum of the other values of $D$? -- I fixed the math and elaborated a bit more. Since not every plot has a w=0 option, the lie factor of "what appears most constant" changes. I'm not sure that it's that big of a deal, to be honest... the outcome should be the same regardless, since both map back to $w$ linearly.}
 
-%
 By considering each participant's answers for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion on an individual level. Estimating distortion factors for each participant facilitates comparison of these estimated values to determine whether the illusion is a product of an individual's perceptual experience or whether there is a possible underlying perceptual heuristic for the sine illusion common across the majority of participants. If the illusion is a learned misperception rather than an underlying perceptual ``bug'', we would expect there to be considerable variability in the estimated individual lie factor $P_i$  for each unique participant $i$, $1\leq i \leq 123$, as it is likely that personal experience varies more widely than perceptual heuristics and their underlying neural architecture. 
 
 Each set of $w$ values as defined in table~\ref{tab:w} corresponds  to a value of $P$ as defined above. 
 We test for only a set of discrete values of $w$, which is reflected directly in the number of different values of $P$ we can observe. This approach allows us to use a finite set of stimuli for testing, so that we can explicitly control the range of $w$ displayed in each set of plots. To mathematically model a continuous quantity (the real domain of possible $P$ values) using discrete data, we employ a Bayesian approach to model an overall psychological lie factor $\theta$ and individual participant lie factors $\theta_i$.
 
 Plots used in the experiment have factors $P$ ranging between 1 and 2.5,  so we can use a truncated normal data model for participant $i$ viewing plot $j$, with $P = p_{ij} \sim N(\theta_i, \sigma)$ and independent flat priors $\pi(\theta)=1/3$ and $\pi(\sigma)=2.5$ for $\sigma\in[.1, .5]$. These ``prior distributions" $\pi(.)$ represent our expectations of the values of $\theta$ and $\sigma$ before the experiment; assigning them constant values indicates that we had little useable knowledge about the joint or marginal distributions of $\theta$ and $\sigma$ before the experiment was conducted. Using Bayesian estimation, we can then obtain posterior distributions for $\theta_i$ and $\theta$, the individual and overall mean lie factors. We are not particularly interested in the actual values of $\sigma$, but it a useful tool to better estimate possible values for $\theta$. 
-% An advantage to using a normal distribution for $P$ and flat priors for $\theta$ and $\sigma$ is that the posterior distribution has a closed form that we can evaluate directly without resorting to Monte Carlo techniques. 
-% Furthermore, use of the normal distribution is not unreasonable given that we are at some level measuring human cognition, and complex quantities (such as IQ) are often normally distributed in the population. 
 
 \subsection{Results}
-The posterior density of $\theta$ for each function is shown in Figure \ref{fig:overalldensity}, along with separate posterior densities for each individual $\theta_i$. $\theta$ is reasonably similar for all three functions, suggesting that while function type may moderate the size of the effect, the illusion occurs regardless of function type. Individual curves have different variability due to the number of trials completed, and are necessarily more spread out as there is less data with which to estimate the individual posterior distributions. 
+The posterior density of $\theta$ for each function is shown in figure \ref{fig:overalldensity}, along with separate posterior densities for each individual $\theta_i$. $\theta$ is reasonably similar for all three functions, suggesting that while function type may moderate the size of the effect, the illusion occurs regardless of function type. Individual curves have different variability due to the number of trials completed, and are necessarily more spread out as there is less data with which to estimate the individual posterior distributions. 
 
-\begin{figure}\centering
-\includegraphics[width=\linewidth]{figure/fig-spaghettiIndivDists}
+\begin{figure}[tp]\centering
+\includegraphics[width=6in]{figure/fig-spaghettiIndivDists}
 \caption{Estimated densities for $\theta_i$, shown in color, with the estimated overall density for $\theta$ shown in black. Individuals have extremely similar posterior distribution of $\theta_i$, and even different functions have similar $\hat\theta$, suggesting a common underlying mental distortion.}\label{fig:overalldensity}
 \end{figure}
 
-On an individual level, Figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. While in many cases, the most probable $\theta_i$ is similar across trials, individuals do seem to have been somewhat more affected by the illusion when the underlying function was sinusoidal, though this may reflect a discrepancy in the number of trials rather than a stronger illusion. Alternately, as the illusion depends on variable slope, it is possible that the monotonic exponential and inverse stimuli induced a weaker three-dimensional context.
+On an individual level, figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. While in many cases, the most probable $\theta_i$ is similar across trials, individuals do seem to have been somewhat more affected by the illusion when the underlying function was sinusoidal, though this may reflect a discrepancy in the number of trials rather than a stronger illusion. Alternately, as the illusion depends on variable slope, it is possible that the monotonic exponential and inverse stimuli induced a weaker three-dimensional context.
 
-\begin{figure}\centering
-\includegraphics[width=\linewidth]{figure/fig-IndivMeanAllFcns}
+\begin{figure}[tp]\centering
+\includegraphics[width=6in]{figure/fig-IndivMeanAllFcns}
 \caption{Posterior distributions for $\theta_i$ for four of the participants who completed at least 6 trials of each of the three function types.}\label{fig:indivdensity}
 \end{figure}
 
-In order to appropriately compare intervals for each participant's $\theta_i$, we simulated 11 new ``data points" from our model (thus enforcing a uniform 11 trials per participant for each function type) to get a single new estimate of $\hat\theta_i$. For each participant, we generated 100 of these $\hat\theta_i$ and used these simulated values to calculate the 95\% credible intervals shown in Figure \ref{fig:indivCIs}. These intervals will allow us to consider the variability in $\theta_i$ due to participant preference rather than the number of trials a participant completed during the study. Removing this additional variability provides us with the opportunity to consider whether the sine illusion stems from an individual's perceptual experiences or from a lower-level perceptual heuristic. 
+In order to appropriately compare intervals for each participant's $\theta_i$, we simulated 11 new ``data points" from our model (thus enforcing a uniform 11 trials per participant for each function type) to get a single new estimate of $\hat\theta_i$. For each participant, we generated 100 of these $\hat\theta_i$ and used these simulated values to calculate the 95\% credible intervals shown in figure \ref{fig:indivCIs}. These intervals will allow us to consider the variability in $\theta_i$ due to participant preference rather than the number of trials a participant completed during the study. Removing this additional variability provides us with the opportunity to consider whether the sine illusion stems from an individual's perceptual experiences or from a lower-level perceptual heuristic. 
 
-\begin{figure}\centering
-\includegraphics[width=\linewidth]{figure/fig-CIindivMean}
+\begin{figure}[tp]\centering
+\includegraphics[width=6.5in]{figure/fig-CIindivMean}
 \caption{95\% posterior predictive intervals for $\theta_i$, calculated for each stimulus type. Vertical lines indicate the median estimate of the overall $\theta$ with a 95\% credible interval.}\label{fig:indivCIs}
 \end{figure}
 
-Posterior predictive intervals for $\theta_i$ as shown in Figure~\ref{fig:indivCIs} suggest that overall, the $\theta_i$ are similar across individuals. Very few of the intervals contain overlap the region (1, 1.05), which corresponds to an ``acceptable" lie factor according to Tufte. This indicates significant distortion for most participants in our experiment, and the marked overlap of the intervals for each participant provides evidence consistent with a common magnitude of distortion. This suggests that there may be some common psychological strategy that is misapplied to the perception of these stimuli. 
+Posterior predictive intervals for $\theta_i$ as shown in figure~\ref{fig:indivCIs} suggest that overall, the $\theta_i$ are similar across individuals. Very few of the intervals contain overlap the region (1, 1.05), which corresponds to an ``acceptable" lie factor according to Tufte. This indicates significant distortion for most participants in our experiment, and the marked overlap of the intervals for each participant provides evidence consistent with a common magnitude of distortion. This suggests that there may be some common psychological strategy that is misapplied to the perception of these stimuli. 
 
 \subsubsection*{Comparison of the Preferred Stimuli}
 Estimates of $\hat\theta = E[\theta]$ for each function are \Sexpr{round(overall.mean.bounds$mean[1], 2)}, \Sexpr{round(overall.mean.bounds$mean[2],2)}, and \Sexpr{round(overall.mean.bounds$mean[3], 2)} respectively for exponential, inverse, and sine functions, suggesting a similar psychological distortion even for very different functions, though it seems as if the inverse function causes somewhat less distortion, possibly because the correction factor is not as proportionately large. Credible intervals can be found in Table \ref{tab:credibleintervalstable}. As all three of the credible intervals exclude 1.05, there is evidence that a psychological distortion is occurring; that is, there is evidence of a significant psychological lie factor. 
 
-\begin{table}\centering\begin{tabular}{ccc}
+\begin{table}\centering
+\tbl{Credible intervals for the overall $\theta$ for exponential, inverse, and sine stimuli.\label{tab:credibleintervalstable}}{\begin{tabular}{ccc}
 Function & 95\% Credible Interval for $\theta$ & Median\\\hline
 Sin & (\Sexpr{overall.mean.bounds[3,2]}, \Sexpr{overall.mean.bounds[3, 5]}) & \Sexpr{overall.mean.bounds[3, 4]}\\
 Exp & (\Sexpr{overall.mean.bounds[1,2]}, \Sexpr{overall.mean.bounds[1, 5]}) & \Sexpr{overall.mean.bounds[1, 4]}\\
 Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \Sexpr{overall.mean.bounds[2, 4]}\\
 \hline
 \end{tabular}
-\caption{Credible intervals for the overall $\theta$ for exponential, inverse, and sine stimuli.}\label{tab:credibleintervalstable}\end{table}
+}
+\end{table}
 
-The optimal weight values corresponding to these $\theta$ are shown in Figure \ref{fig:allCorrectionOptimal}. In all three cases, the optimally corrected plots appear less distorted than the uncorrected plots. 
+The optimal weight values corresponding to these $\theta$ are shown in figure \ref{fig:allCorrectionOptimal}. In all three cases, the optimally corrected plots appear less distorted than the uncorrected plots. 
 
-
-
-\begin{figure}\centering
-\includegraphics[width=.9\linewidth,trim=.25in 0in .25in 0in]{figure/fig-allOptimalWeights}
+\begin{figure}[tp]\centering
+\includegraphics[width=6in,trim=.25in 0in .25in 0in]{figure/fig-allOptimalWeights}
 \caption{Stimuli with uncorrected (w=0), optimally corrected (according to the mean value of $\theta$), and fully corrected (w=1)}\label{fig:allCorrectionOptimal}
 \end{figure}
 
@@ -305,8 +287,8 @@ The optimal weight values corresponding to these $\theta$ are shown in Figure \r
 The sine illusion arises from misapplication of three-dimensional context to a two-dimensional stimulus which results in nearly unavoidable perceptual distortions that impact the inferences made from graphics. We have estimated that the illuson produces a distortion of about 135\%. This distortion occurs entirely between the retinal image and the mental representation of the object; it is not due to the chart, rather, it is an artifact of our perceptual system. 
 
 As Tufte advocated for graphics that showed the data without distortion, our goal is to raise awareness of perceptual distortions that occur within the brain itself due to misapplied heuristics. While applying corrections to the data to remove these distortions is somewhat radical, the persistence of the illusion despite awareness of its presence presents a challenge to those seeking to display data visually. In addition, many graph types can induce this illusion (scatterplots, ribbon plots, parallel sets plots), so avoiding a specific type of graph is not an effective solution. The best solution to this problem is to raise awareness: to demonstrate that optical illusions occur within statistical graphics, and to understand how these illusions arise.  
-\vfill
-\bibliographystyle{plain}
+
+\bibliographystyle{acmlarge}
 \bibliography{references}
 
 <<neckercube, echo=FALSE, fig.width=4, fig.height=1.75, include=FALSE, warning=FALSE, message=FALSE>>=
@@ -393,6 +375,8 @@ qplot(x=x, xend=xend, y = ystart, yend=yend, geom="segment", data=createSine(40,
         axis.title = element_blank(), axis.ticks = element_blank(), 
         axis.text = element_blank()) + coord_equal(ratio=1)
 
+@
+<<sinedemo2, echo=FALSE, fig.width=8, fig.height=4, include=FALSE, warning=FALSE, message=FALSE>>=
 x <- seq(0, 2*pi, length=42)[2:41]
 data <- do.call("rbind", lapply(seq(-.5, .5, 1), function(i) data.frame(x=x, y=2*sin(x), z=i)))
 
@@ -401,41 +385,32 @@ x <- sort(unique(data$x))
 y <- sort(unique(data$y))
 z <- sort(unique(data$z))
 
-p <- persp(x, z, data.persp,  xlab="", ylab="", zlab="", theta=0, phi=45, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, expand=3/pi, d=3) # , ltheta=0, lphi=-15
 
-data$transx <- trans3d(data$x, data$z, data$y, p)$x
-data$transy <- trans3d(data$x, data$z, data$y, p)$y
-# qplot(data=data, x=transx, y=transy, geom="line", group=x)+
-# #   geom_line(aes(x=x, y=ystart), colour="black") + 
-# #   geom_line(aes(x=x, y=yend), colour="black") + 
-#   theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
-#         panel.grid.minor=element_blank(), panel.background=element_blank(),
-#         axis.title = element_blank(), axis.ticks = element_blank(), 
-#         axis.text = element_blank()) + coord_equal(ratio=1)
+linedata <- data.frame(x=c(0, 0, 2*pi, 2*pi), y=c(5, 0, 5, 0), z=seq(-.5, .5, 1))
+xline <- linedata$x
+yline <- linedata$y
+zline <- linedata$z
 
-p <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=0, phi=45, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, d=50, expand=3/(pi)) # , ltheta=0, lphi=-15
+par.settings <- par()
+par(mfrow=c(1, 2), mar=c(0, 0, 0, 0))
 
-data$transx <- trans3d(data$x, data$z, data$y, p)$x
-data$transy <- trans3d(data$x, data$z, data$y, p)$y
-data.2d <- ddply(data, .(x,y), summarise, xstart=min(transx), xend=max(transx), ystart=min(transy), yend=max(transy), len=sqrt(diff(transx)^2+diff(transy)^2))
+p1 <- persp(x, z, data.persp,  xlab="", ylab="", zlab="", theta=0, phi=45, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, expand=3/pi, d=2) # , ltheta=0, lphi=-15
+lines(trans3d(x=xline[1:2], y=yline[1:2], z=zline[1:2], p1), lty=2)
+lines(trans3d(x=xline[3:4], y=yline[3:4], z=zline[3:4], p1), lty=2)
+points(trans3d(x=xline[c(1,3)], y=yline[c(1,3)], z=zline[c(1,3)], p1), pch=2, cex=.75)
+text(trans3d(x=pi, y=max(yline), z=0, p1), label="Finite Vanishing Point")
+
 # 
-# qplot(data=data.2d, x=x, y=xstart, geom="line") + geom_line(aes(y=xend))
-# qplot(data=data.2d, x=y, y=ystart, geom="line") + geom_line(aes(y=yend))
+# linedata <- data.frame(x=c(0, 0, 2*pi, 2*pi), y=c(3.5, 0, 3.5, 0), z=seq(-.5, .5, 1))
+# xline <- linedata$x
+# yline <- linedata$y
+# zline <- linedata$z
 
-data.2d$xstart <- predict(lm(data=data.2d, x~xstart))
-data.2d$xend <- predict(lm(data=data.2d, x~xend))
-data.2d$ystart <- lm(data=data.2d, y~ystart)$coefficients[2]*data.2d$ystart
-data.2d$yend <- lm(data=data.2d, y~yend)$coefficients[2]*data.2d$yend
-
-plot(x=data.2d$x, data.2d$xstart-createSine(40, 1, f=f, fprime=fprime, f2prime)$xstart)
-
-
-qplot(x=xstart, xend=xend, y = ystart, yend=yend, geom="segment", data=data.2d) +
-  theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
-        panel.grid.minor=element_blank(), panel.background=element_blank(),
-        axis.title = element_blank(), axis.ticks = element_blank(), 
-        axis.text = element_blank()) + coord_equal(ratio=1) + 
-  geom_segment(data=createSine(40, 1, f=f, fprime=fprime, f2prime), colour=I("grey"))
+p2 <- persp(x, z, data.persp, xlab="", ylab="", zlab="", theta=0, phi=45, border="black", shade=.35, col="white", xlim=c(-pi/12, 2*pi+pi/12), ylim=c(-1.75, 1.75), scale=FALSE, box=FALSE, d=10, expand=3/(pi)) # , ltheta=0, lphi=-15
+lines(trans3d(x=xline[1:2], y=yline[1:2], z=zline[1:2], p2), lty=2)
+lines(trans3d(x=xline[3:4], y=yline[3:4], z=zline[3:4], p2), lty=2)
+points(trans3d(x=xline[c(1,3)], y=yline[c(1,3)], z=zline[c(1,3)], p2), pch=2, cex=.75)
+text(trans3d(x=pi, y=max(yline)-.25, z=0, p2), label="Infinite Vanishing Point")
 @
 <<stimulicorrectionsize, include=FALSE, echo=FALSE, warning=FALSE, message=FALSE>>=
 weightYTrans <- function(df, w){
