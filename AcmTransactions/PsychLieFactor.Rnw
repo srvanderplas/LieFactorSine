@@ -172,7 +172,7 @@ The amount of correction in each sub-plot was chosen such that each stimuli set 
 \[
 (1-w) + w \cdot \left(1 / \cos\left(\tan^{-1}(|f^\prime(x)|)\right)\right)
 \]
-where $w$ is varied between 0 (for no correction) and 1.5 (very strong correction). From a pilot study, we suspected values around $w = 0.8$ to be promising, but did not know whether this would generalize to those outside of the statistical graphics community. This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown.
+where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correction). From a pilot study, we suspected values around $w = 0.8$ to be promising, but did not know whether this would generalize to those outside of the statistical graphics community. This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown.
 
 \begin{figure}
 \centering
