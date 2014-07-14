@@ -29,7 +29,7 @@ load("./code/BayesAnalysis.Rdata")
 # # overall.mean <- ddply(overall[,-3], .(test_param, mean), summarise, f=sum(f))
 # # overall.mean <- ddply(overall.mean, .(test_param), transform, f=f/sum(f))
 # # 
-# # #' Posterior marginal distribution over individual and std. deviation (does not consider individual in the data at all - equivalent to a simple linear model as opposed to a mixed model)
+# # # Posterior marginal distribution over individual and std. deviation (does not consider individual in the data at all - equivalent to a simple linear model as opposed to a mixed model)
 # # qplot(data=overall.mean, x=mean, y=f, geom="line", colour=test_param, group=test_param) + 
 # #   scale_colour_discrete("Function Type") + 
 # #   xlab("Mean Psychological Lie Factor") + ylab("Density") + theme_bw()  + theme(legend.position="bottom")  + facet_wrap(~test_param, scales="free")
@@ -38,11 +38,11 @@ load("./code/BayesAnalysis.Rdata")
 # # # overall.sd <- ddply(overall[,-2], .(test_param, sd), summarise, f=sum(f))
 # # # overall.sd <- ddply(overall.sd, .(test_param), transform, f=f/sum(f))
 # # 
-# # # #' Posterior marginal distribution over individual and mean
+# # # # Posterior marginal distribution over individual and mean
 # # # qplot(data=overall.sd, x=sd, y=f, geom="line", colour=factor(test_param), group=test_param)
 # # 
-# # #' Posterior joint dist of mean, sd over individuals
-# # #' since stat_density2d won't use weights, ... improvise!
+# # # Posterior joint dist of mean, sd over individuals
+# # # since stat_density2d won't use weights, ... improvise!
 # # overall.joint.sample <- sample(1:nrow(overall), size=50000, replace=TRUE, prob=overall$f)
 # # 
 # # ggplot(data=overall, aes(x=mean, y=sd)) + geom_tile(aes(fill=f))+facet_wrap(~test_param)+scale_fill_continuous(trans="log")
@@ -81,15 +81,15 @@ load("./code/BayesAnalysis.Rdata")
 #   return(value)
 # }
 # 
-# #' Plot 4 individuals who did at least 6 figures of each trial 
+# Plot 4 individuals who did at least 6 figures of each trial 
 # qplot(data=subset(test.mean, ip.id%in%ipsubset), x=mean, y=f, group=test_param, colour=test_param, geom="line") + 
 #   facet_grid(.~ip.id, labeller=par_labeller) + scale_colour_discrete("Function Type") + theme_bw() + 
 #   theme(legend.position="bottom") + xlab("Mean Psychological Lie Factor") + ylab("Density")
-# ggsave("figure/fig-IndivMeanAllFcns.pdf", width=7, height=3.5)      
+# ggsave("figure/fig-IndivMeanAllFcns.pdf", width=6, height=3)      
 # 
 # 
 # 
-# #' Posterior predictive theta estimates, including CI information for the individual MEAN 
+# # Posterior predictive theta estimates, including CI information for the individual MEAN 
 # # (i.e. not for any individual observation)
 # test.post.indiv<- ddply(test.mean, .(ip.id, test_param), 
 #                         function(x){
@@ -123,10 +123,10 @@ load("./code/BayesAnalysis.Rdata")
 #   geom_vline(data=overall.mean.bounds, aes(xintercept=ub), linetype=3) + 
 #   ylab("Participant ID") + xlab("Mean Lie Factor") + theme_bw() + theme(legend.position="none") + 
 #   scale_colour_discrete("Function Type")
-# ggsave("figure/fig-CIindivMean.pdf", width=6, height=5, units="in")
+# ggsave("figure/fig-CIindivMean.pdf", width=6, height=4, units="in")
 # # 
-# # #' Posterior estimates, including CI information for the individual observations 
-# # #' (i.e. not for any individual observation)
+# # # Posterior estimates, including CI information for the individual observations 
+# # # (i.e. not for any individual observation)
 # # # indiv.value.bounds <- ddply(test.mean, .(ip.id, test_param), function(x){
 # # #   lb=x$mean[which.min(abs(cumsum(x$f)-.025))]
 # # #   med=x$mean[which.min(abs(cumsum(x$f)-.5))]
@@ -166,7 +166,7 @@ load("./code/BayesAnalysis.Rdata")
 #   facet_wrap(~functions, scales="free_y") + ylab("Density") + xlab("Lie Factor") + theme_bw() + scale_colour_discrete("Function Type") +
 #   theme(legend.position="none") + xlim(c(1, 2.5)) + 
 #   guides(colour = guide_legend(override.aes = list(alpha = 1)))
-# ggsave("figure/fig-spaghettiIndivDists.pdf", width=5, height=3, units="in")
+# ggsave("figure/fig-spaghettiIndivDists.pdf", width=6, height=3, units="in")
 # 
 # # 
 # # posterior.modes <- ddply(test, .(ip.id, test_param), summarise, theta=mean[which.max(f)])
