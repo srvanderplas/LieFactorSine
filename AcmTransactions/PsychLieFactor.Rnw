@@ -297,7 +297,7 @@ As Tufte advocated for graphics that showed the data without distortion, our goa
 \bibliographystyle{acmlarge}
 \bibliography{references}
 
-<<neckercube, echo=FALSE, fig.width=4, fig.height=1.75, include=FALSE, warning=FALSE, message=FALSE>>=
+<<neckercube, echo=FALSE, fig.width=6, fig.height=2.625, include=FALSE, warning=FALSE, message=FALSE>>=
 data <- rbind(data.frame(x=c(0, 1, 1.5, 1.5, 0.5, 0, 0), y=c(0, 0, 0.25, 1.25, 1.25, 1, 0), group=1, line=1),
               data.frame(x=c(0, .5, 1.5), y=c(0, .25, .25), group=2, line=2), 
               data.frame(x=c(.5, .5), y=c(.25, 1.25), group=3, line=2),
@@ -312,7 +312,7 @@ qplot(data=data, x=x, y=y, group=group, geom="path", linetype=factor(line), colo
   theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
         panel.grid.minor=element_blank(), panel.background=element_blank(),
         axis.title = element_blank(), axis.ticks = element_blank(), 
-        axis.text = element_blank())
+        axis.text = element_blank(), text=element_text(size=10))
 @
 <<mullerlyer, echo=FALSE, fig.width=2, fig.height=2, include=FALSE, warning=FALSE, message=FALSE>>=
 y.a <- .125
@@ -329,7 +329,7 @@ qplot(data=data, x=x, y=y, group=group, geom="path") + facet_grid(.~label) +
   theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
         panel.grid.minor=element_blank(), panel.background=element_blank(),
         axis.title = element_blank(), axis.ticks = element_blank(), 
-        axis.text = element_blank()) + xlim(c(0,1))
+        axis.text = element_blank(), text=element_text(size=10)) + xlim(c(0,1))
 @
 <<sinedemo,   echo=FALSE, fig.width=4, fig.height=4, include=FALSE, warning=FALSE, message=FALSE>>=
 
@@ -450,10 +450,10 @@ data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
 data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 ans <- which.min(abs(frameorder-.99))
-qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
-ggsave("./figure/fig-stimulicorrectionsize1.png", width=6, height=4.15, units="in")
-qplot(data=data, x=xstart, y=ystart-y, xend=xend, yend=yend-y, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy + c(2, -2))
-ggsave("./figure/fig-stimulicorrectionsize2.pdf", width=6, height=2.5, units="in")
+qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
+ggsave("./figure/fig-stimulicorrectionsize1.png", width=6, height=6*(2*diff(lims$dy))/(3*diff(lims$dx))+.15, units="in")
+qplot(data=data, x=xstart, y=ystart-y, xend=xend, yend=yend-y, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy + c(2, -2)) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=8))
+ggsave("./figure/fig-stimulicorrectionsize2.pdf", width=6, height=6*(2*diff(lims$dy + c(2, -2)))/(3*diff(lims$dx))+.15, units="in")
 @
 <<invexpstimuli, echo=FALSE, include=FALSE, warning=FALSE, message=FALSE>>=
 key <- read.csv("./data/pictureKey.csv", stringsAsFactors=FALSE)
