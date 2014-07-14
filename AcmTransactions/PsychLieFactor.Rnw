@@ -119,7 +119,7 @@ The human visual system is largely optimized for perception of three dimensions.
 \end{figure}
 In the case of the Necker cube, the two different figures are equally salient, and thus the brain does not prefer one interpretation over the other and instead continuously switches between interpretations. In many other instances experience with the real world  informs the choice between multiple possible three-dimensional objects which form the same two-dimensional picture. This indicates that processing occurs ``top down" in that our previous experience influences our current perceptions. Without this top-down influence, the brain would not be able to map the picture back to a three-dimensional object. One of the most well studied examples of the influence of top-down processing is the M\"uller-Lyer illusion, shown in figure~\ref{fig:mullerlyer}.
 
-\begin{figure}[tp]\centering
+\begin{figure}\centering
 \includegraphics[keepaspectratio=TRUE]{figure/fig-mullerlyer}
 \caption{The M\"uller-Lyer illusion. The central segment of figure A is perceived as shorter than the central segment  of figure B, even though the two are actually the same length.}
 \label{fig:mullerlyer}
@@ -127,14 +127,14 @@ In the case of the Necker cube, the two different figures are equally salient, a
 
 One explanation for the M\"uller-Lyer illusion is that the brain interprets the ambiguous lines as a common three-dimensional object: corners of a room: figure~\ref{fig:mullerlyer}A occurs when viewing the outside corner of a rectangular prism, figure~\ref{fig:mullerlyer}B occurs when viewing the prism from the inside.  In regions which do not commonly have rectangular buildings, the illusion is significantly less pervasive~\cite{mullerlyerafrica}. Figure~\ref{fig:mullerlyerreal} provides one possible context that would lead to the M\"uller-Lyer effect. This real-world experience carries with it an inferred perspective - when the arrows point inward, the object is typically closer than when the arrows point outward, which causes the brain to interpret the outward-pointing figure as larger, even though the retinal size is identical for the two objects. This inferred ``depth cue"~\cite{gregory} is reasonably consistent across individuals. A similar effect can also be found in the Necker Cube - whichever face appears to be furthest away also seems larger, even though any two parallel faces are equally sized in the image. The advantages of this approach in the real world are considerable~\cite{gregory}, as pictures of real objects are seldom ambiguous and this strategy allow for high performance with limited neural bandwidth. Figure~\ref{fig:mullerlyerreal} shows not only the real-world context, but that the perspective cues which contribute to the illusion allow for an accurate neural representation of the object in context. 
 
-\begin{figure}[tp]\centering
+\begin{figure}\centering
 \includegraphics[width=6in,keepaspectratio=TRUE]{images/mullerlyerhouse}
 \caption{Real-world context that gives rise to the M\"uller-Lyer illusion}\label{fig:mullerlyerreal}
 \end{figure}
 
 \section{Three Dimensional Context of the Sine Illusion}
 While the classic M\"uller-Lyer illusion is seldom a factor in statistical graphics, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion) is one example of this phenomenon which occurs frequently in statistical graphics. Like the M\"uller-Lyer illusion, it is pervasive and very difficult to ``un-see" or mentally correct. Figure~\ref{fig:sineillusion} shows the sine illusion in its original form, and figure~\ref{fig:playfair} shows the same illusion in one of the charts from Playfair's Statistical Atlas~\cite{playfair}. This illusion, which is also known as the line-width illusion, has also been documented in parallel sets plots \cite{parallelsets}. 
-\begin{figure}[tp]\centering
+\begin{figure}\centering
 \includegraphics[keepaspectratio=TRUE,width=5in,trim=0in .5in 0in .5in]{figure/fig-sinedemo}
 \caption{The classic sine illusion. Each vertical line has the same length, though the lines at the peak and trough of the curve appear longer.}\label{fig:sineillusion}
 \end{figure}
@@ -146,7 +146,7 @@ While the classic M\"uller-Lyer illusion is seldom a factor in statistical graph
 Cleveland and McGill
 \citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does readily confirm their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher~\citeyear{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well - there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in figure~\ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, figure~\ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in \citeN{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. One main difference between the first three dimensional image shown in figure~\ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
 
-\begin{figure}[tp]\centering
+\begin{figure}\centering
 \includegraphics[keepaspectratio=TRUE,width=6in, trim=0in 1.25in 0in .5in]{figure/fig-sinedemo2}
 \caption{Three dimensional context for the sine illusion. The second figure has a vanishing point closer to infinity, and very closely resembles the form of the classic sine illusion.}\label{fig:sineillusion3d}
 \end{figure}
@@ -173,15 +173,15 @@ The amount of correction in each sub-plot was chosen such that each stimuli set 
 \]
 where $w$ is varied between 0 (for no correction) and 1.5 (very strong correction). From a pilot study, we suspected values around $w = 0.8$ to be promising, but did not know whether this would generalize to those outside of the statistical graphics community. This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown.
 
-\begin{figure}[tp]
+\begin{figure}
 \centering
 \includegraphics[width=6in, trim=.5in 0in .5in 0in ]{figure/fig-stimulicorrectionsize1}
 \caption{One of the graphs presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths.}\label{fig:sinestimuli}
 \end{figure}
 
-\begin{figure}[tp]
+\begin{figure}
 \centering
-\includegraphics[width=6.5in, trim=.5in .15in .5in 0in ]{images/fig-stimulicorrectionsize2}
+\includegraphics[width=6in, trim=.5in .15in .5in 0in ]{images/fig-stimulicorrectionsize2}
 \caption{Line lengths (without the trend) for figure~\ref{fig:sinestimuli}.}\label{fig:sinestimulinotrend}
 \end{figure}
 % latex table generated in R 2.15.1 by xtable 1.7-0 package
@@ -241,22 +241,22 @@ Plots used in the experiment have factors $P$ ranging between 1 and 2.5,  so we 
 \subsection{Results}
 The posterior density of $\theta$ for each function is shown in figure \ref{fig:overalldensity}, along with separate posterior densities for each individual $\theta_i$. $\theta$ is reasonably similar for all three functions, suggesting that while function type may moderate the size of the effect, the illusion occurs regardless of function type. Individual curves have different variability due to the number of trials completed, and are necessarily more spread out as there is less data with which to estimate the individual posterior distributions. 
 
-\begin{figure}[tp]\centering
+\begin{figure}\centering
 \includegraphics[width=6in]{figure/fig-spaghettiIndivDists}
 \caption{Estimated densities for $\theta_i$, shown in color, with the estimated overall density for $\theta$ shown in black. Individuals have extremely similar posterior distribution of $\theta_i$, and even different functions have similar $\hat\theta$, suggesting a common underlying mental distortion.}\label{fig:overalldensity}
 \end{figure}
 
 On an individual level, figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. While in many cases, the most probable $\theta_i$ is similar across trials, individuals do seem to have been somewhat more affected by the illusion when the underlying function was sinusoidal, though this may reflect a discrepancy in the number of trials rather than a stronger illusion. Alternately, as the illusion depends on variable slope, it is possible that the monotonic exponential and inverse stimuli induced a weaker three-dimensional context.
 
-\begin{figure}[tp]\centering
+\begin{figure}\centering
 \includegraphics[width=6in]{figure/fig-IndivMeanAllFcns}
 \caption{Posterior distributions for $\theta_i$ for four of the participants who completed at least 6 trials of each of the three function types.}\label{fig:indivdensity}
 \end{figure}
 
 In order to appropriately compare intervals for each participant's $\theta_i$, we simulated 11 new ``data points" from our model (thus enforcing a uniform 11 trials per participant for each function type) to get a single new estimate of $\hat\theta_i$. For each participant, we generated 100 of these $\hat\theta_i$ and used these simulated values to calculate the 95\% credible intervals shown in figure \ref{fig:indivCIs}. These intervals will allow us to consider the variability in $\theta_i$ due to participant preference rather than the number of trials a participant completed during the study. Removing this additional variability provides us with the opportunity to consider whether the sine illusion stems from an individual's perceptual experiences or from a lower-level perceptual heuristic. 
 
-\begin{figure}[tp]\centering
-\includegraphics[width=6.5in]{figure/fig-CIindivMean}
+\begin{figure}\centering
+\includegraphics[width=6in]{figure/fig-CIindivMean}
 \caption{95\% posterior predictive intervals for $\theta_i$, calculated for each stimulus type. Vertical lines indicate the median estimate of the overall $\theta$ with a 95\% credible interval.}\label{fig:indivCIs}
 \end{figure}
 
@@ -278,9 +278,9 @@ Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \S
 
 The optimal weight values corresponding to these $\theta$ are shown in figure \ref{fig:allCorrectionOptimal}. In all three cases, the optimally corrected plots appear less distorted than the uncorrected plots. 
 
-\begin{figure}[tp]\centering
+\begin{figure}\centering
 \includegraphics[width=6in,trim=.25in 0in .25in 0in]{figure/fig-allOptimalWeights}
-\caption{Stimuli with uncorrected (w=0), optimally corrected (according to the mean value of $\theta$), and fully corrected (w=1)}\label{fig:allCorrectionOptimal}
+\caption{Uncorrected, optimally corrected (according to the mean value of $\theta$), and fully corrected stimuli for all three underlying functions used in the experiment.}\label{fig:allCorrectionOptimal}
 \end{figure}
 
 \section{Conclusions}
@@ -478,7 +478,9 @@ data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
 data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 data$type <- "Sine"
-data$label <- paste("w = ", round(data$w, 2), sep="")
+data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
+data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
+data$label <- paste("P = ", round(data$P, 2), data$paren, sep="")
 p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
 ggsave("figure/fig-sineOptimalWeights.pdf", p1, width=6, height=2.25)
 
@@ -494,7 +496,9 @@ data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
 data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 data$type <- "Inverse"
-data$label <- paste("w = ", round(data$w, 2), sep="")
+data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
+data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
+data$label <- paste("P = ", round(data$P, 2), data$paren, sep="")
 p2 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
 ggsave("figure/fig-invOptimalWeights.pdf", p2, width=6, height=2.25)
 
@@ -513,7 +517,9 @@ data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
 data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 data$type <- "Exponential"
-data$label <- paste("w = ", round(data$w, 2), sep="")
+data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
+data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
+data$label <- paste("P = ", round(data$P, 2), data$paren, sep="")
 p3 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
 ggsave("figure/fig-expOptimalWeights.pdf", p3, width=6, height=2.25)
 
