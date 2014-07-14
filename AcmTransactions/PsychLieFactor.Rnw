@@ -189,24 +189,27 @@ where $w$ is varied between 0 (for no correction) and 1.5 (very strong correctio
 % Sun Mar 31 12:08:30 2013
 \begin{table}[ht]
 \centering
-\tbl{\label{tab:w} Weight factors used to create the sine curve stimuli.}{
-\begin{tabular}{rrrrrrrr}
+\tbl{\label{tab:w} Ordered weight factors and corresponding line factors for the sine curve stimuli sets.}{
+\begin{tabular}{llrrrrrrlrrrrrr}
   \hline
-  & \multicolumn{5}{c}{sub-plot}\\ \cline{2-7}\\ [-1.75ex]
-set \vphantom{hp}& 1 & 2 & 3 & 4 & 5 & 6 & difficulty\\ 
-  \hline
-1 & 0.00 & 0.20 & 0.40 & 0.80 & 1.25 & 1.40 & test\\ 
-  2 & 0.00 & 0.15 & 0.35 & 0.80 & 1.20 & 1.40 & test\\ 
-  3 & 0.00 & 0.20 & 0.40 & 0.60 & 0.80 & 1.00 & 1 \\ 
-  4 & 0.10 & 0.30 & 0.50 & 0.70 & 0.90 & 1.10 & 1 \\  
-  5 & 0.00 & 0.50 & 0.70 & 0.80 & 0.90 & 1.00 & 2 \\ 
-  6 & 0.00 & 0.45 & 0.65 & 0.75 & 0.85 & 1.00 & 2 \\ 
-  7 & 0.40 & 0.70 & 0.80 & 0.90 & 1.00 & 1.30 & 3 \\  
-  8 & 0.30 & 0.65 & 0.75 & 0.85 & 0.95 & 1.20 & 3 \\ 
-  9 & 0.50 & 0.60 & 0.70 & 0.80 & 0.90 & 1.00 &  4 \\  
-  10 & 0.55 & 0.65 & 0.75 & 0.85 & 0.95 & 1.00 & 4 \\ 
-  11 & 0.60 & 0.70 & 0.75 & 0.85 & 0.90 & 1.00 & 5\\ 
-  12 & 0.60 & 0.70 & 0.75 & 0.80 & 0.90 & 1.00 & 5\\ 
+%\cline{3-8} \cline{10-15}\\ [-1.75ex]
+set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Lie Factor ($D$)}\\ 
+\hline
+& & \multicolumn{6}{c}{sub-plot} & & \multicolumn{6}{c}{sub-plot}\\ 
+    & & 1 & 2 & 3 & 4 & 5 & 6  & & 1 & 2 & 3 & 4 & 5 & 6  \\ 
+    \cline{3-8} \cline{10-15}\\ [-1.75ex]
+  1 & test & 0.00 & 0.20 & 0.40 & 0.80 & 1.25 & 1.40 &       & 1.00 & 1.18 & 1.35 & 1.71 & 2.11 & 2.24 \\ 
+  2 & test & 0.00 & 0.15 & 0.35 & 0.80 & 1.20 & 1.40 &       & 1.00 & 1.13 & 1.31 & 1.71 & 2.06 & 2.24 \\ 
+  3 & 1 & 0.00 & 0.20 & 0.40 & 0.60 & 0.80 & 1.00 &       & 1.00 & 1.18 & 1.35 & 1.53 & 1.71 & 1.88 \\ 
+  4 & 1 & 0.10 & 0.30 & 0.50 & 0.70 & 0.90 & 1.10 &       & 1.09 & 1.27 & 1.44 & 1.62 & 1.80 & 1.97 \\ 
+  5 & 2 & 0.05 & 0.30 & 0.50 & 0.65 & 0.80 & 1.00 &       & 1.04 & 1.27 & 1.44 & 1.57 & 1.71 & 1.88 \\ 
+  6 & 2 & 0.10 & 0.30 & 0.55 & 0.70 & 0.85 & 1.00 &       & 1.09 & 1.27 & 1.49 & 1.62 & 1.75 & 1.88 \\ 
+  7 & 3 & 0.40 & 0.60 & 0.70 & 0.80 & 0.90 & 1.05 &       & 1.35 & 1.53 & 1.62 & 1.71 & 1.80 & 1.93 \\ 
+  8 & 3 & 0.35 & 0.65 & 0.75 & 0.85 & 0.95 & 1.05 &       & 1.31 & 1.57 & 1.66 & 1.75 & 1.84 & 1.93 \\ 
+  9 & 4 & 0.35 & 0.50 & 0.60 & 0.70 & 0.80 & 0.95 &       & 1.31 & 1.44 & 1.53 & 1.62 & 1.71 & 1.84 \\ 
+  10 & 4 & 0.40 & 0.55 & 0.65 & 0.75 & 0.85 & 1.00 &       & 1.35 & 1.49 & 1.57 & 1.66 & 1.75 & 1.88 \\ 
+  11 & 5 & 0.50 & 0.65 & 0.75 & 0.80 & 0.90 & 1.00 &       & 1.44 & 1.57 & 1.66 & 1.71 & 1.80 & 1.88 \\ 
+  12 & 5 & 0.50 & 0.60 & 0.70 & 0.75 & 0.85 & 1.00 &       & 1.44 & 1.53 & 1.62 & 1.66 & 1.75 & 1.88 \\ 
    \hline
 \end{tabular}
 }
@@ -229,15 +232,17 @@ In order to more accurately identify unique individuals, data were grouped by IP
 As the strength of the correction varies across the horizontal range of the curve, we  quantify the psychological distortion as the ratio of the maximum line length to the minimum line length for each plot $j$: $D_j = l_{max}/l_{min}$, and denote the chosen ratio as $D^\ast$. Without any correction for the sine illusion, this factor is, like  Tufte's lie-factor, equal to one. Values above one indicate that at least in some areas of the curve line segments are extended.
 
 We compute this quantity for each sub-plot in each stimulus presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$, corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a sub-plot with $w=0$ ($D=1$) present than if least distorted sub-plot present has $w=0.4$ ($D=1.2$). Correcting for this bias, the set of $D^\ast=\{D_1, ..., D_6\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as 
-$$P=D^\ast/\min_{1\leq j \leq 6} D_j$$
-for each plot and each participant. That is, $P$ is the ratio of the lie factor of the chosen plot to the smallest lie factor available in the set of available plots. When the set of available plots contains an uncorrected plot, $P = D$; when an uncorrected plot is not presented, $P < D$, since $D_j >= 1$. This transformation is a conservative approach to estimating the lie factor, but allows us to show a variety of scaled transformations and estimate the effect with more granularity around $w=0.8$. 
+\begin{equation}\label{eqn:pconv}
+P=D^\ast/\min_{1\leq j \leq 6} D_j
+\end{equation}
+for each plot and each participant. That is, $P$ is the ratio of the lie factor of the chosen plot to the smallest lie factor available in the set of available plots. When the set of available plots contains an uncorrected plot, $P = D$; when an uncorrected plot is not presented, $P < D$, since each $D_j >= 1$, $j=1, ..., 6$. This transformation is a conservative approach to estimating the lie factor, but allows us to show a variety of scaled transformations and estimate the effect with more granularity around $w=0.8$. 
 
 By considering each participant's answers for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion on an individual level. Estimating distortion factors for each participant facilitates comparison of these estimated values to determine whether the illusion is a product of an individual's perceptual experience or whether there is a possible underlying perceptual heuristic for the sine illusion common across the majority of participants. If the illusion is a learned misperception rather than an underlying perceptual ``bug'', we would expect there to be considerable variability in the estimated individual lie factor $P_i$  for each unique participant $i$, $1\leq i \leq 123$, as it is likely that personal experience varies more widely than perceptual heuristics and their underlying neural architecture. 
 
-Each set of $w$ values as defined in table~\ref{tab:w} corresponds  to a value of $P$ as defined above. 
+Each set of $w$ values as defined in table~\ref{tab:w} corresponds  to a value of $P$ as defined in equation \ref{eqn:pconv}. 
 We test for only a set of discrete values of $w$, which is reflected directly in the number of different values of $P$ we can observe. This approach allows us to use a finite set of stimuli for testing, so that we can explicitly control the range of $w$ displayed in each set of plots. To mathematically model a continuous quantity (the real domain of possible $P$ values) using discrete data, we employ a Bayesian approach to model an overall psychological lie factor $\theta$ and individual participant lie factors $\theta_i$.
 
-Plots used in the experiment have factors $P$ ranging between 1 and 2.5,  so we can use a truncated normal data model for participant $i$ viewing plot $j$, with $P = p_{ij} \sim N(\theta_i, \sigma)$ and independent flat priors $\pi(\theta)=1/3$ and $\pi(\sigma)=2.5$ for $\sigma\in[.1, .5]$. These ``prior distributions" $\pi(.)$ represent our expectations of the values of $\theta$ and $\sigma$ before the experiment; assigning them constant values indicates that we had little useable knowledge about the joint or marginal distributions of $\theta$ and $\sigma$ before the experiment was conducted. Using Bayesian estimation, we can then obtain posterior distributions for $\theta_i$ and $\theta$, the individual and overall mean lie factors. We are not particularly interested in the actual values of $\sigma$, but the additional parameter is a useful tool to better estimate possible values for $\theta$. 
+Plots used in the experiment have factors $P$ ranging between 1 and 2.5,  so we can use a truncated normal data model for participant $i$ viewing plot $j$, with $P = p_{ij} \sim N(\theta_i, \sigma)$ and independent flat priors $\pi(\theta)= 0.4$ and $\pi(\sigma)=2.5$ for $\sigma\in[.1, .5]$. These prior distributions $\pi(.)$ represent our expectations of the values of $\theta$ and $\sigma$ before the experiment; assigning them constant values indicates that we had little useable knowledge about the joint or marginal distributions of $\theta$ and $\sigma$ before the experiment was conducted. Using Bayesian estimation, we can then obtain posterior distributions for $\theta_i$ and $\theta$, the individual and overall mean lie factors. We are not particularly interested in the actual values of $\sigma$, but the additional parameter is a useful tool to better estimate possible values for $\theta$. 
 
 \subsection{Results}
 The posterior density of $\theta$ for each function is shown in figure \ref{fig:overalldensity}, along with separate posterior densities for each individual $\theta_i$. $\theta$ is reasonably similar for all three functions, suggesting that while function type may moderate the size of the effect, the illusion occurs regardless of function type. Individual curves have different variability due to the number of trials completed, and are necessarily more spread out as there is less data with which to estimate the individual posterior distributions. 
@@ -266,8 +271,8 @@ Posterior predictive intervals for $\theta_i$ as shown in figure~\ref{fig:indivC
 \subsubsection*{Comparison of the Preferred Stimuli}
 Estimates of $\hat\theta = E[\theta]$ for each function are \Sexpr{round(overall.mean.bounds$mean[1], 2)}, \Sexpr{round(overall.mean.bounds$mean[2],2)}, and \Sexpr{round(overall.mean.bounds$mean[3], 2)} respectively for exponential, inverse, and sine functions, suggesting a similar psychological distortion even for very different functions, though it seems as if the inverse function causes somewhat less distortion, possibly because the correction factor is not as proportionately large. Credible intervals can be found in Table \ref{tab:credibleintervalstable}. As all three of the credible intervals exclude 1.05, there is evidence that a psychological distortion is occurring; that is, there is evidence of a significant psychological lie factor. In addition, the method of adjusting the estimated lie factor we have used here is conservative; it is likely that because most stimuli contain a sub-plot with $w\geq 1$ our estimate of $\theta$ for the inverse function is low (as the lie factor for fully corrected inverse plots is greater than the corresponding lie factors for the other two functions used in this experiment). 
 
-\begin{table}\centering
-\tbl{Credible intervals for the overall $\theta$ for exponential, inverse, and sine stimuli.\label{tab:credibleintervalstable}}{\begin{tabular}{ccc}
+\begin{table}[tp]\centering
+\tbl{Credible intervals for the overall $\theta$ for exponential, inverse, and sine stimuli.\label{tab:credibleintervalstable}}{\begin{tabular}{ccc}\hline
 Function & 95\% Credible Interval for $\theta$ & Median\\\hline
 Sin & (\Sexpr{overall.mean.bounds[3,2]}, \Sexpr{overall.mean.bounds[3, 5]}) & \Sexpr{overall.mean.bounds[3, 4]}\\
 Exp & (\Sexpr{overall.mean.bounds[1,2]}, \Sexpr{overall.mean.bounds[1, 5]}) & \Sexpr{overall.mean.bounds[1, 4]}\\
@@ -279,9 +284,9 @@ Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \S
 
 The optimal weight values corresponding to these $\theta$ are shown in figure \ref{fig:allCorrectionOptimal}. In all three cases, the optimally corrected plots appear less distorted than the uncorrected plots. 
 
-\begin{figure}\centering
+\begin{figure}[tp]\centering
 \includegraphics[width=6in,trim=.25in 0in .25in 0in]{figure/fig-allOptimalWeights}
-\caption{Uncorrected, optimally corrected (according to the mean value of $\theta$), and fully corrected stimuli for all three underlying functions used in the experiment. The corrected value shown here is equivalent to the distortion factor $D$ defined as $D=\ell_{max}/\ell_{min}$.}\label{fig:allCorrectionOptimal}
+\caption{Uncorrected, optimally corrected (according to the median value of $\theta$), and fully corrected stimuli for all three underlying functions used in the experiment. The corrected value shown here is equivalent to the distortion factor $D$ defined as $D=\ell_{max}/\ell_{min}$.}\label{fig:allCorrectionOptimal}
 \end{figure}
 
 \section{Conclusions}
@@ -448,7 +453,7 @@ ans <- which.min(abs(frameorder-.99))
 qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
 ggsave("./figure/fig-stimulicorrectionsize1.png", width=6, height=4.15, units="in")
 qplot(data=data, x=xstart, y=ystart-y, xend=xend, yend=yend-y, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy + c(2, -2))
-ggsave("./figure/fig-stimulicorrectionsize2.pdf", width=6, height=2.02, units="in")
+ggsave("./figure/fig-stimulicorrectionsize2.pdf", width=6, height=2.5, units="in")
 @
 <<invexpstimuli, echo=FALSE, include=FALSE, warning=FALSE, message=FALSE>>=
 key <- read.csv("./data/pictureKey.csv", stringsAsFactors=FALSE)
@@ -495,7 +500,7 @@ data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*
 data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
 data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
-p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
+p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
 ggsave("figure/fig-sineOptimalWeights.pdf", p1, width=6, height=2.25)
 
 f <- function(x) 5/6*1/x
@@ -526,7 +531,7 @@ data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*
 data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
 data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
-p2 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
+p2 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
 ggsave("figure/fig-invOptimalWeights.pdf", p2, width=6, height=2.25)
 
 qplot(data=subset(data, set==1), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
@@ -560,7 +565,7 @@ data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*
 data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
 data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
-p3 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
+p3 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
 ggsave("figure/fig-expOptimalWeights.pdf", p3, width=6, height=2.25)
 
 qplot(data=subset(data, set==1), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
@@ -572,7 +577,7 @@ ggsave("figure/fig-exponential.png", width=2, height=2, units="in")
 # dev.off()
 
 library(grDevices)
-cairo_pdf("./figure/fig-allOptimalWeights.pdf", width=6, height=6)
+cairo_pdf("./figure/fig-allOptimalWeights.pdf", width=6, height=5.5)
 grid.arrange(p1, p3, p2, nrow=3, ncol=1)
 dev.off()
 @
