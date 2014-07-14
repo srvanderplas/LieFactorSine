@@ -114,13 +114,13 @@ One of the basic principles of visual graphics is that the graphic should accura
 \section{The Curse of Three Dimensions}
 The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a reasonably accurate mental representation of the three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional information. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation might correspond to multiple three-dimensional objects, as in the Necker Cube shown in figure~\ref{fig:Necker}. Additionally, the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. Optical illusions that demonstrate this phenomenon are the so-called ``impossible objects" such as the Penrose triangle. 
 \begin{figure}
-\includegraphics[keepaspectratio=TRUE,width=6.5in]{figure/fig-neckercube}
+\includegraphics[keepaspectratio=TRUE,width=6in, trim=0in .25in 0in 0in]{figure/fig-neckercube}
 \caption{The Necker Cube is a so-called ``ambiguous object" because two different transparent objects could produce the same retinal image (and thus the same perceptual experience). Commonly, the image seems to transition instantaneously from one possible mental representation to the other.\cite{gregory}}\label{fig:Necker}
 \end{figure}
 In the case of the Necker cube, the two different figures are equally salient, and thus the brain does not prefer one interpretation over the other and instead continuously switches between interpretations. In many other instances experience with the real world  informs the choice between multiple possible three-dimensional objects which form the same two-dimensional picture. This indicates that processing occurs ``top down" in that our previous experience influences our current perceptions. Without this top-down influence, the brain would not be able to map the picture back to a three-dimensional object. One of the most well studied examples of the influence of top-down processing is the M\"uller-Lyer illusion, shown in figure~\ref{fig:mullerlyer}.
 
 \begin{figure}\centering
-\includegraphics[keepaspectratio=TRUE]{figure/fig-mullerlyer}
+\includegraphics[keepaspectratio=TRUE, trim=0in .3in 0in .3in]{figure/fig-mullerlyer}
 \caption{The M\"uller-Lyer illusion. The central segment of figure A is perceived as shorter than the central segment  of figure B, even though the two are actually the same length.}
 \label{fig:mullerlyer}
 \end{figure}
@@ -128,7 +128,7 @@ In the case of the Necker cube, the two different figures are equally salient, a
 One explanation for the M\"uller-Lyer illusion is that the brain interprets the ambiguous lines as a common three-dimensional object: corners of a room: figure~\ref{fig:mullerlyer}A occurs when viewing the outside corner of a rectangular prism, figure~\ref{fig:mullerlyer}B occurs when viewing the prism from the inside.  In regions which do not commonly have rectangular buildings, the illusion is significantly less pervasive~\cite{mullerlyerafrica}. Figure~\ref{fig:mullerlyerreal} provides one possible context that would lead to the M\"uller-Lyer effect. This real-world experience carries with it an inferred perspective - when the arrows point inward, the object is typically closer than when the arrows point outward, which causes the brain to interpret the outward-pointing figure as larger, even though the retinal size is identical for the two objects. This inferred ``depth cue"~\cite{gregory} is reasonably consistent across individuals. A similar effect can also be found in the Necker Cube - whichever face appears to be furthest away also seems larger, even though any two parallel faces are equally sized in the image. The advantages of this approach in the real world are considerable~\cite{gregory}, as pictures of real objects are seldom ambiguous and this strategy allow for high performance with limited neural bandwidth. Figure~\ref{fig:mullerlyerreal} shows not only the real-world context, but that the perspective cues which contribute to the illusion allow for an accurate neural representation of the object in context. 
 
 \begin{figure}\centering
-\includegraphics[width=6in,keepaspectratio=TRUE]{images/mullerlyerhouse}
+\includegraphics[width=5in,keepaspectratio=TRUE]{images/mullerlyerhouse}
 \caption{Real-world context that gives rise to the M\"uller-Lyer illusion}\label{fig:mullerlyerreal}
 \end{figure}
 
@@ -297,7 +297,7 @@ As Tufte advocated for graphics that showed the data without distortion, our goa
 \bibliographystyle{acmlarge}
 \bibliography{references}
 
-<<neckercube, echo=FALSE, fig.width=6, fig.height=2.625, include=FALSE, warning=FALSE, message=FALSE>>=
+<<neckercube, echo=FALSE, fig.width=6, fig.height=2.2, include=FALSE, warning=FALSE, message=FALSE>>=
 data <- rbind(data.frame(x=c(0, 1, 1.5, 1.5, 0.5, 0, 0), y=c(0, 0, 0.25, 1.25, 1.25, 1, 0), group=1, line=1),
               data.frame(x=c(0, .5, 1.5), y=c(0, .25, .25), group=2, line=2), 
               data.frame(x=c(.5, .5), y=c(.25, 1.25), group=3, line=2),
