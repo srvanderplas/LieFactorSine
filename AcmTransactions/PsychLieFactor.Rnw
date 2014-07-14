@@ -481,6 +481,7 @@ data$type <- "Sine"
 data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
 data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
 data$label <- paste("P = ", round(data$P, 2), data$paren, sep="")
+data$label <- factor(data$label, levels=unique(data$label))
 p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
 ggsave("figure/fig-sineOptimalWeights.pdf", p1, width=6, height=2.25)
 
@@ -499,6 +500,7 @@ data$type <- "Inverse"
 data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
 data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
 data$label <- paste("P = ", round(data$P, 2), data$paren, sep="")
+data$label <- factor(data$label, levels=unique(data$label))
 p2 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
 ggsave("figure/fig-invOptimalWeights.pdf", p2, width=6, height=2.25)
 
@@ -520,6 +522,7 @@ data$type <- "Exponential"
 data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
 data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
 data$label <- paste("P = ", round(data$P, 2), data$paren, sep="")
+data$label <- factor(data$label, levels=unique(data$label))
 p3 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
 ggsave("figure/fig-expOptimalWeights.pdf", p3, width=6, height=2.25)
 
