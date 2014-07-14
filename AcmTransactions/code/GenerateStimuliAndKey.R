@@ -191,6 +191,34 @@ write.csv(data.file, "./stimuli/datafile.csv", row.names=FALSE)
 write.csv(weight.key, "./data/pictureKey.csv", row.names=FALSE)
 write.csv(weight.key, "/home/susan/Dropbox/GraphicsGroup/TurkLieFactorSine/pictureKey.csv", row.names=FALSE)
 
+
+# Make tables for publication
+key <- read.csv("./data/pictureKey.csv", stringsAsFactors=FALSE)
+key$pic_name <- tolower(key$pic_name)
+key <- ddply(key, .(pic_name),transform, d= lmax/min(lmax))
+.simpleCap <- function(x) {
+  s <- strsplit(x, " ")[[1]]
+  paste(toupper(substring(s, 1, 1)), substring(s, 2),
+        sep = "", collapse = " ")
+}
+
+
+key$d <- key$lmax/.5
+key <- ddply(key, .(pic_name), transform, minlie=min(d))
+key$liefactor <- key$d/key$minlie
+key$test_param <- factor(sapply(sapply(key$pic_name, substr, start=7, stop=9), .simpleCap))
+
+key$pic <- as.numeric(gsub("\\.", "", substr(key$pic_name, 10, 11)))
+
+tab.w <- dcast(data=subset(key, test_param=="Sin"), pic ~ set, value.var = "w")
+tab.d <- dcast(data=subset(key, test_param=="Sin"), pic ~ set, value.var = "d")
+
+tab <- cbind(as.character(tab.w[,1]), difficulty=c("test", "test", as.character(rep(1:5, each=2))), tab.w[,2:7], x = "     ", tab.d[,2:7])
+
+library(xtable)
+print(xtable(tab), include.rownames=FALSE)
+
+
 # examples
 w <- c(0, .9, 1.4)
 frameorder <- c(.9, 0, 1.4)
