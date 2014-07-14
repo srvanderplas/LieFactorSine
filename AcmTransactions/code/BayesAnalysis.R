@@ -82,10 +82,12 @@ load("./code/BayesAnalysis.Rdata")
 # }
 # 
 # Plot 4 individuals who did at least 6 figures of each trial 
-qplot(data=subset(test.mean, ip.id%in%ipsubset), x=mean, y=f, group=test_param, colour=test_param, geom="line") + 
-  facet_grid(.~ip.id, labeller=par_labeller) + scale_colour_discrete("Function Type") + theme_bw() + 
-  theme(legend.position="bottom", text=element_text(size=10)) + ylab("Density") + scale_x_continuous(breaks=c(1, 1.5, 2), limits=c(1, 2), name="Mean Psychological Lie Factor")
-ggsave("figure/fig-IndivMeanAllFcns.pdf", width=6, height=3)      
+# test.mean$test_param <- factor(test.mean$test_param, levels=c("Sin", "Exp", "Inv"))
+# test.mean$functions <- factor(c("Sine", "Exponential", "Inverse")[as.numeric(test.mean$test_param)], levels=c("Sine", "Exponential", "Inverse"))
+# qplot(data=subset(test.mean, ip.id%in%ipsubset), x=mean, y=f, group=functions, colour=functions, geom="line") + 
+#   facet_grid(.~ip.id, labeller=par_labeller) + scale_colour_discrete("Function Type") + theme_bw() + 
+#   theme(legend.position="bottom", text=element_text(size=10)) + ylab("Density") + scale_x_continuous(breaks=c(1, 1.5, 2), limits=c(1, 2), name="Mean Psychological Lie Factor")
+# ggsave("figure/fig-IndivMeanAllFcns.pdf", width=6, height=3)      
 # 
 # 
 # 
@@ -116,14 +118,16 @@ ggsave("figure/fig-IndivMeanAllFcns.pdf", width=6, height=3)
 # test.post.indiv$functions <- c("Inverse", "Sine", "Exponential")[as.numeric(test.post.indiv$test_param)]
 # test.post.indiv$functions <- factor(test.post.indiv$functions, levels=c("Sine", "Exponential", "Inverse"))
 # overall.mean.bounds$functions <- c("Exponential", "Inverse", "Sine")[as.numeric(factor(overall.mean.bounds$test_param))]
-qplot(data=test.post.indiv,  x=lb, xend=ub, y=ip.id, yend=ip.id, geom="segment", colour=test_param) + 
-  facet_wrap(~functions) + geom_point(aes(x=median), colour="black") + 
-  geom_vline(data=overall.mean.bounds, aes(xintercept=lb), linetype=3) + 
-  geom_vline(data=overall.mean.bounds, aes(xintercept=median)) + 
-  geom_vline(data=overall.mean.bounds, aes(xintercept=ub), linetype=3) + 
-  ylab("Participant ID") + xlab("Mean Lie Factor") + theme_bw() + theme(legend.position="none", text=element_text(size=10)) + 
-  scale_colour_discrete("Function Type")
-ggsave("figure/fig-CIindivMean.pdf", width=6, height=4, units="in")
+# overall.mean.bounds$functions <- factor(overall.mean.bounds$functions, levels=c("Sine", "Exponential", "Inverse"))
+# 
+# qplot(data=test.post.indiv,  x=lb, xend=ub, y=ip.id, yend=ip.id, geom="segment", colour=functions) + 
+#   facet_wrap(~functions) + geom_point(aes(x=median), colour="black") + 
+#   geom_vline(data=overall.mean.bounds, aes(xintercept=lb), linetype=3) + 
+#   geom_vline(data=overall.mean.bounds, aes(xintercept=median)) + 
+#   geom_vline(data=overall.mean.bounds, aes(xintercept=ub), linetype=3) + 
+#   ylab("Participant ID") + xlab("Mean Lie Factor") + theme_bw() + theme(legend.position="none", text=element_text(size=10)) + 
+#   scale_colour_discrete("Function Type")
+# ggsave("figure/fig-CIindivMean.pdf", width=6, height=4, units="in")
 # # 
 # # # Posterior estimates, including CI information for the individual observations 
 # # # (i.e. not for any individual observation)
@@ -160,13 +164,13 @@ ggsave("figure/fig-CIindivMean.pdf", width=6, height=4, units="in")
 # test.mean.marginal$functions <- factor(test.mean.marginal$functions, levels=c("Sine", "Exponential", "Inverse"))
 # overall.mean$functions <- c("Exponential", "Inverse", "Sine")[as.numeric(as.factor(overall.mean$test_param))]
 # 
-ggplot() + 
-  geom_line(data=test.mean.marginal, aes(x=mean, y=f, group=ip.id, colour=test_param), alpha=I(.175)) + 
-  geom_line(data=overall.mean, aes(x=mean, y=f, group=functions), colour="black") + 
-  facet_wrap(~functions, scales="free_y") + ylab("Density") + xlab("Lie Factor") + theme_bw() + scale_colour_discrete("Function Type") +
-  theme(legend.position="none", text=element_text(size=10)) + xlim(c(1, 2.5)) + 
-  guides(colour = guide_legend(override.aes = list(alpha = 1)))
-ggsave("figure/fig-spaghettiIndivDists.pdf", width=6, height=3, units="in")
+# ggplot() + 
+#   geom_line(data=test.mean.marginal, aes(x=mean, y=f, group=ip.id, colour=functions), alpha=I(.175)) + 
+#   geom_line(data=overall.mean, aes(x=mean, y=f, group=functions), colour="black") + 
+#   facet_wrap(~functions, scales="free_y") + ylab("Density") + xlab("Lie Factor") + theme_bw() + scale_colour_discrete("Function Type") +
+#   theme(legend.position="none", text=element_text(size=10)) + xlim(c(1, 2.5)) + 
+#   guides(colour = guide_legend(override.aes = list(alpha = 1)))
+# ggsave("figure/fig-spaghettiIndivDists.pdf", width=6, height=3, units="in")
 
 # # 
 # # posterior.modes <- ddply(test, .(ip.id, test_param), summarise, theta=mean[which.max(f)])
