@@ -572,7 +572,7 @@ ggsave("figure/fig-exponential.png", width=2, height=2, units="in")
 
 library(grDevices)
 cairo_pdf("./figure/fig-allOptimalWeights.pdf", width=6, height=6)
-grid.arrange(p1, p2, p3, nrow=3, ncol=1)
+grid.arrange(p1, p3, p2, nrow=3, ncol=1)
 dev.off()
 @
 \end{document}
