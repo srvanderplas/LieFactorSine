@@ -176,14 +176,14 @@ where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correctio
 
 \begin{figure}
 \centering
-\includegraphics[width=6in, trim=.5in 0in .5in 0in ]{figure/fig-stimulicorrectionsize1}
+\includegraphics[width=6in]{figure/fig-stimulicorrectionsize1}
 \caption{One of the graphs presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths.}\label{fig:sinestimuli}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[width=6in, trim=.5in .15in .5in 0in ]{images/fig-stimulicorrectionsize2}
-\caption{Line lengths (without the trend) for figure~\ref{fig:sinestimuli}.}\label{fig:sinestimulinotrend}
+\includegraphics[width=6in, trim=0in .15in 0in .15in]{images/fig-stimulicorrectionsize2}
+\caption{Line lengths (without the trend) for figure~\ref{fig:sinestimuli}, demonstrating the effective lie factor for each sub-plot.}\label{fig:sinestimulinotrend}
 \end{figure}
 % latex table generated in R 2.15.1 by xtable 1.7-0 package
 % Sun Mar 31 12:08:30 2013
