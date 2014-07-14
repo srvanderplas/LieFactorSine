@@ -188,7 +188,7 @@ where $w$ is varied between 0 (for no correction) and 1.5 (very strong correctio
 % Sun Mar 31 12:08:30 2013
 \begin{table}[ht]
 \centering
-\tbl{\label{tab:w} Distortion factors used for the sine curve stimulus.}{
+\tbl{\label{tab:w} Weight factors used to create the sine curve stimuli.}{
 \begin{tabular}{rrrrrrrr}
   \hline
   & \multicolumn{5}{c}{sub-plot}\\ \cline{2-7}\\ [-1.75ex]
@@ -227,9 +227,9 @@ In order to more accurately identify unique individuals, data were grouped by IP
 \paragraph{Psychological ``Lie Factor"}
 As the strength of the correction varies across the horizontal range of the curve, we  quantify the psychological distortion as the ratio of the maximum line length to the minimum line length for each plot $j$: $D_j = l_{max}/l_{min}$, and denote the chosen ratio as $D^\ast$. Without any correction, this factor is, as Tufte's lie-factor, equal to one. Values above one indicate that at least in some areas of the curve line segments are extended.
 
-We compute this quantity for each plot in each set presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$, corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a plot with $w=0$ and $D_j=1$ also in the plot than if there is at minimum a plot with $w=0.4$ and $D=1.2$. This correction for the set of $D^\ast=\{D_1, ..., D_6\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as 
+We compute this quantity for each plot in each set presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$, corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a sub-plot with $w=0$ ($D=1$) present than if least distorted sub-plot present has $w=0.4$ ($D=1.2$). This correction for the set of $D^\ast=\{D_1, ..., D_6\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as 
 $$P=D^\ast/\min_{1\leq j \leq 6} D_j$$
-for each plot and each participant. That is, $P$ is the ratio of the lie factor of the chosen plot to the smallest lie factor available in the set of available plots.
+for each plot and each participant. That is, $P$ is the ratio of the lie factor of the chosen plot to the smallest lie factor available in the set of available plots. When the set of available plots contains an uncorrected plot, $P = D$; when an uncorrected plot is not presented, $P < D$, since $D_j >= 1$. This transformation is a conservative approach to estimating the lie factor, but allows us to show a variety of scaled transformations and estimate the effect with more granularity around $w=0.8$. 
 
 By considering each participant's answers for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion on an individual level. Estimating distortion factors for each participant facilitates comparison of these estimated values to determine whether the illusion is a product of an individual's perceptual experience or whether there is a possible underlying perceptual heuristic for the sine illusion common across the majority of participants. If the illusion is a learned misperception rather than an underlying perceptual ``bug'', we would expect there to be considerable variability in the estimated individual lie factor $P_i$  for each unique participant $i$, $1\leq i \leq 123$, as it is likely that personal experience varies more widely than perceptual heuristics and their underlying neural architecture. 
 
@@ -280,7 +280,7 @@ The optimal weight values corresponding to these $\theta$ are shown in figure \r
 
 \begin{figure}\centering
 \includegraphics[width=6in,trim=.25in 0in .25in 0in]{figure/fig-allOptimalWeights}
-\caption{Uncorrected, optimally corrected (according to the mean value of $\theta$), and fully corrected stimuli for all three underlying functions used in the experiment.}\label{fig:allCorrectionOptimal}
+\caption{Uncorrected, optimally corrected (according to the mean value of $\theta$), and fully corrected stimuli for all three underlying functions used in the experiment. The corrected value shown here is equivalent to the distortion factor $D$ defined as $D=\ell_{max}/\ell_{min}$.}\label{fig:allCorrectionOptimal}
 \end{figure}
 
 \section{Conclusions}
@@ -470,17 +470,29 @@ f <- function(x) 2*sin(x)
 fprime <- function(x) 2*cos(x)
 f2prime <- function(x) -2*sin(x)
 orig <- createSine(50, 1, f, fprime, f2prime, 0, 2*pi)
+
 lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
-w <-  sort(c(0, midweights$w[3], 1))
+
+keys2 <- ldply(seq(0, 1, .01), function(i){
+  tmp <- weightYTrans(orig, i)
+  return(data.frame(w=i, theta=max(tmp$elltrans)/min(tmp$elltrans)))
+})
+
+w <-  sort(c(0, keys2$w[which.min(abs(keys2$theta-overall.mean.bounds$median[overall.mean.bounds$functions=="Sine"]))], 1))
 frameorder <- w
 
-data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
+data <- rbind.fill(ldply(w, function(i) {
+    tmp <- weightYTrans(orig, i)
+    tmp$theta <- subset(keys2, keys2$w%in%tmp$w)$theta
+    return(tmp)
+  }
+  ))
 data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 data$type <- "Sine"
 data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
 data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
-data$label <- paste("P = ", round(data$P, 2), data$paren, sep="")
+data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
 p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
 ggsave("figure/fig-sineOptimalWeights.pdf", p1, width=6, height=2.25)
@@ -489,17 +501,29 @@ f <- function(x) 5/6*1/x
 fprime <- function(x) -5/6*x^(-2)
 f2prime <- function(x) 2*5/6*x^(-3)
 orig <- createSine(50, 1, f, fprime, f2prime, 1/2, 3.5)
+keys2 <- ldply(seq(0, 1, .01), function(i){
+  tmp <- weightYTrans(orig, i)
+  return(data.frame(w=i, theta=max(tmp$elltrans)/min(tmp$elltrans)))
+})
+
+
+
 lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
-w <-  c(0, midweights$w[2], 1)
+w <-  sort(c(0, keys2$w[which.min(abs(keys2$theta-overall.mean.bounds$median[overall.mean.bounds$functions=="Inverse"]))], 1))
 frameorder <- w
 
-data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
+data <- rbind.fill(ldply(w, function(i) {
+    tmp <- weightYTrans(orig, i)
+    tmp$theta <- subset(keys2, keys2$w%in%tmp$w)$theta
+    return(tmp)
+  }
+  ))
 data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 data$type <- "Inverse"
 data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
 data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
-data$label <- paste("P = ", round(data$P, 2), data$paren, sep="")
+data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
 p2 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
 ggsave("figure/fig-invOptimalWeights.pdf", p2, width=6, height=2.25)
@@ -511,17 +535,29 @@ f <- function(x) exp(x/2)
 fprime <- function(x) 1/2*exp(x/2)
 f2prime <- function(x) 1/4*exp(x/2)
 orig <- createSine(50, 1, f, fprime, f2prime, -pi, pi)
+keys2 <- ldply(seq(0, 1, .01), function(i){
+  tmp <- weightYTrans(orig, i)
+  return(data.frame(w=i, theta=max(tmp$elltrans)/min(tmp$elltrans)))
+})
+
+
+
 lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
-w <-  c(0, midweights$w[1], 1)
+w <-  sort(c(0, keys2$w[which.min(abs(keys2$theta-overall.mean.bounds$median[overall.mean.bounds$functions=="Exponential"]))], 1))
 frameorder <- w
 
-data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
+data <- rbind.fill(ldply(w, function(i) {
+    tmp <- weightYTrans(orig, i)
+    tmp$theta <- subset(keys2, keys2$w%in%tmp$w)$theta
+    return(tmp)
+  }
+  ))
 data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 data$type <- "Exponential"
 data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
 data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
-data$label <- paste("P = ", round(data$P, 2), data$paren, sep="")
+data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
 p3 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.025, .025, .025, .025), "cm"))
 ggsave("figure/fig-expOptimalWeights.pdf", p3, width=6, height=2.25)
