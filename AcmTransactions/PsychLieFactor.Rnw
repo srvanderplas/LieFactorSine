@@ -291,6 +291,8 @@ for each plot and each participant.
 \hh{XXX Generally - I don't quite see why we need to divide by the minimum. You  have a problem with the choice of plot, if the minimal or maximal $D$ was picked. But due to the discrete nature of the choice, we have a similar problem with any choice of plot: we only know the answer up to the interval of $D_i$s shown. 
 At this point I'm not quite buying into the transformation to $P$. }
 
+\hh{XXX Could you make a picture of raw responses in interval coding? - i.e. if we have a choice of $D$ as 1.14 and the next two answers are 1.0 and 1.4, you shade the area between 1 and 1.4 with more weight towards 1.14 ... - these would be densities that are specific to a stimuli set. }
+
 That is, $P$ is the ratio of the lie factor of the chosen plot to the smallest lie factor available in the set of available plots. When the set of available plots contains an uncorrected plot, $P = D$; when an uncorrected plot is not presented, $P < D$, since each $D_j >= 1$, $j=1, ..., 6$. This transformation is a conservative approach to estimating the lie factor, but allows us to show a variety of scaled transformations and estimate the effect with more granularity around $w=0.8$. 
 
 
