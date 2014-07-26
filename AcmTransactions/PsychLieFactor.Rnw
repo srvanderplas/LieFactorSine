@@ -147,7 +147,8 @@ Figure~\ref{fig:mullerlyerreal} shows not only the real-world context, but that 
 \end{figure}
 
 \section{Three Dimensional Context of the Sine Illusion}
-While the classic M\"uller-Lyer illusion is seldom a factor in statistical graphics, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion) is one example of this phenomenon which occurs frequently in statistical graphics. Like the M\"uller-Lyer illusion, it is pervasive and very difficult to ``un-see" or mentally correct. Figure~\ref{fig:sineillusion} shows the sine illusion in its original form, and figure~\ref{fig:playfair} shows the same illusion in one of the charts from Playfair's Statistical Atlas~\cite{playfair}. This illusion, which is also known as the line-width illusion, has also been documented in parallel sets plots \cite{parallelsets}. 
+While the classic M\"uller-Lyer illusion is seldom a factor in statistical graphics, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion \hh{XXX cite Day and stecher, and ours}) is one example of this phenomenon which occurs frequently in statistical graphics. Like the M\"uller-Lyer illusion, it is pervasive and very difficult to ``un-see" or mentally correct. \hh{XXX what is the sine illusion in words?} Figure~\ref{fig:sineillusion} shows the sine illusion in its original form, and figure~\ref{fig:playfair} shows the same illusion in one of the charts from Playfair's Statistical Atlas~\cite{playfair}. This illusion, which is also known as the line-width illusion, has also been documented in parallel sets plots \cite{parallelsets}. 
+\hh{XXX factors that play into the sine illusion: large changes in the slope of a trend; extent of slope is measured with respect to the local coordinate system in which the chart is displayed, i.e.~it is influenced by the aspect ratio.}
 
 \begin{figure}\centering
 \includegraphics[keepaspectratio=TRUE,trim=0in .5in 0in .5in]{figure/fig-sinedemo}
@@ -156,17 +157,17 @@ While the classic M\"uller-Lyer illusion is seldom a factor in statistical graph
 
 \begin{figure}[t]\centering
 \includegraphics[keepaspectratio=TRUE,width=5in]{images/PlayfairExportImports}
-\caption{The sine illusion in Playfair's graph of trade between the East Indies and England, 1700-1780. The trade balance in 1763 does not appear to be the same size as that in 1745, though the vertical distance is approximately the same.}\label{fig:playfair}
+\caption{Playfair's graph of trade between the East Indies and England, 1700-1780. The trade balance is influenced by the sine illusion: the difference between imports and exports in 1763 does not appear to be the same size as that in 1745, though the vertical distance is approximately the same.}\label{fig:playfair}
 \end{figure}
 Cleveland and McGill
-\citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does readily confirm their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher~\citeyear{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well - there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in figure~\ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, figure~\ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in \citeN{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. One main difference between the first three dimensional image shown in figure~\ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
+\citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does readily confirm their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher~\citeyear{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well -- there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in figure~\ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, figure~\ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in \citeN{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. One main difference between the first three dimensional image shown in figure~\ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
 
 \begin{figure}\centering
 \includegraphics[keepaspectratio=TRUE,width=6in, trim=0in 1.25in 0in .5in]{figure/fig-sinedemo2}
 \caption{Three dimensional context for the sine illusion. The second figure has a vanishing point closer to infinity, and very closely resembles the form of the classic sine illusion.}\label{fig:sineillusion3d}
 \end{figure}
 
-As the vanishing point moves further away from the viewer and the 3d projection decreases in strength, the three-dimensional reconstruction of the image converges on figure~\ref{fig:sineillusion}. The second image in figure~\ref{fig:sineillusion3d} shows a weaker 3-dimensional projection that is much closer to figure~\ref{fig:sineillusion}, however, the three-dimensional contextual information provided by the shading removes much of the illusion's distortions. This is similar to the Muller-Lyer illusion, as figure~\ref{fig:mullerlyerreal} is not at all ambiguous because the contextual depth information provided by the rest of the surface of the house is sufficient to remove the illusion that the closer corner is in fact larger due to the perspective.
+As the vanishing point moves further away from the viewer and the 3d projection decreases in strength, the three-dimensional reconstruction of the image converges to figure~\ref{fig:sineillusion}. The second image in figure~\ref{fig:sineillusion3d} shows a weaker 3-dimensional projection that is much closer to figure~\ref{fig:sineillusion}, however, the three-dimensional contextual information provided by the shading removes much of the illusion's distortions. This is similar to the M\"uller-Lyer illusion, as figure~\ref{fig:mullerlyerreal} is not at all ambiguous because the contextual depth information provided by the rest of the surface of the house is sufficient to remove the illusion that the closer corner is in fact larger due to the perspective.
 
 One difference between the sine illusion and the M\"uller-Lyer illusion that may influence the tendency to see a three-dimensional ``ribbon" instead of the two-dimensional sine curve is that the vertical lines in the sine illusion are ambiguously oriented - there is an entire plane of possible three-dimensional reconstructions for each line, and each possible rotation leads to a line of different length. It is this facet of the image that we believe partially contributes to the ambiguity of the image, though it is not a necessary feature for the illusion to persist, as the illusion also can be found in scatterplots and in ``ribbon plots" such as figure~\ref{fig:playfair}. 
 
@@ -181,30 +182,32 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 
 \section{Measuring the Psychological Lie Factor Experimentally}
 \subsection{Study Setup}
-In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to figure~\ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: "In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
+In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to figure~\ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
 
-The amount of correction in each sub-plot was chosen such that each stimuli set contained a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. The correction factor we use for extending the length of the line segment at loctaion $x$ is given as
+The amount of correction in each sub-plot was chosen such that each stimuli set contained a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. The correction factor we use for extending the length of the line segment at location $x$ is given as
 \[
 (1-w) + w \cdot \left(1 / \cos\left(\tan^{-1}(|f^\prime(x)|)\right)\right)
 \]
-where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correction). From a pilot study, we suspected values around $w = 0.8$ to be promising, but did not know whether this would generalize to those outside of the statistical graphics community. This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown.
+where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correction) - \hh{XXX ah, slow down! that's two aspects in one sentence. $w$ is a weighting factor - which gives 0 and 1 special meaning. the choice of 1.5 is already a design choice for the experiment - that needs a separate sentence}. From a pilot study, we suspected values around $w = 0.8$ to be promising \hh{XXX promising for what?}, but did not know whether this would generalize to those outside of the statistical graphics community. \hh{XXX sorry, I'm not following - how did this lead to twelve sets? Do you mean that we picked twelve sets of stimuli? - describe the process for picking a set. } This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. \hh{XXX rephrase caption text and repeat in the writeup.}
+ The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown. \hh{XXX extra sentence for the difficulty. why do we need it?}
 
 \begin{figure}
 \centering
 \includegraphics[width=6in]{figure/fig-stimulicorrectionsize1}
-\caption{One of the graphs presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths.}\label{fig:sinestimuli}
+\caption{One of the graphs presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths. \hh{XXX which of the weights in table~\ref{tab:w} correspond to this chart?} 
+\hh{Note, that weighting is done in a random order - e.g.~plot \#1 corresponds to a weight of 0, plot \#2 to ???, and plot \#3 to ???}}\label{fig:sinestimuli}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=6in, trim=0in .15in 0in .15in]{images/fig-stimulicorrectionsize2}
-\caption{Line lengths (without the trend) for figure~\ref{fig:sinestimuli}, demonstrating the effective lie factor for each sub-plot.}\label{fig:sinestimulinotrend}
+\caption{Line lengths (without the trend) for figure~\ref{fig:sinestimuli}, demonstrating the effective lie factor for each sub-plot. \hh{XXX I'm not sure that the order in these plots is the same as in the stimulus chart. also, be a bit more precise - what exactly can be seen in this chart? - it's the detrended version of fig~\ref{fig:sinestimuli} - how does that show the `effective' lie factor? - `effective lie factor isn't defined, so make sure that you describe precisely what you mean by that.}}\label{fig:sinestimulinotrend}
 \end{figure}
 % latex table generated in R 2.15.1 by xtable 1.7-0 package
 % Sun Mar 31 12:08:30 2013
 \begin{table}[ht]
 \centering
-\tbl{\label{tab:w} Ordered weight factors and corresponding line factors for the sine curve stimuli sets.}{
+\tbl{\label{tab:w} Ordered weight factors and corresponding line factors for the sine curve stimuli sets. \hh{XXX what was the underlying concept behind the choice of weights? $D$ needs to be defined before this table is referred to - at least give a reference to $D$s definition. Is $D$ really the same for all three stimuli?}}{
 \begin{tabular}{llrrrrrrlrrrrrr}
   \hline
 %\cline{3-8} \cline{10-15}\\ [-1.75ex]
@@ -232,25 +235,69 @@ set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolum
 
 Three underlying mean functions were tested using these weight values: $\sin(x)$, $\exp(x)$, and $1/x$. 
 
-Each participant was presented with eleven sets of graphs, consisting of one ``easy" test chart, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. Plots were shown to participants in random order. The test chart consists of a set of six sine curves with a very low level diffcilty level, and is used as an introduction to the testing procedure.
+\hh{XXX show these functions and discuss why they are good choices. }
 
-Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. 
+
+Each participant was presented with eleven sets of graphs, consisting of one ``easy" test chart, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. 
+Plots were shown to participants in random order. The test chart consisted of a set of six sine curves with a very low level difficulty level, and is used as an introduction to the testing procedure. \hh{XXX this contradicts the random order - describe the test setting in a bit more detail, that'll clear up the confusion.}
 
 \subsection{Demographics}
 Participants for the study were recruited through the Amazon Turk web service. 
-Responses from 128 users at 123 unique IP addresses were collected. 
+Responses from 128 users at 123 unique IP addresses were collected. \hh{XXX payout procedure? how many responses total?} 
 
+
+Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. 
+
+\hh{XXX overview of number of responses for each stimulus?}
+
+\hh{XXX how many of the test charts did people fail? Did you have to clean up data in any other way?}
+
+\hh{XXX how many people started experiment, but did not complete it?}
+
+\hh{XXX why is it necessary for the analysis to know about individuals?}
 In order to more accurately identify unique individuals, data were grouped by IP address rather than by user-entered identification code, as it is common for individuals to have multiple accounts and somewhat less likely for two Amazon Mechanical Turk participants to share the same IP address and complete the same study in a reasonably short window. We treated responses from the same IP addresses as additional responses from the same user.
+
+\hh{XXX What other demographics did you collect? age? gender? - the section header `demographics'  seems out of place, if you only talk about the problem of identifying individuals. }
+
+\hh{XXX What data did you collect - exactly? Maybe a screenshot of the website would be good somewhere and a discussion of what participants had to do - on a click level basis.}
+
+
+
 
 \subsection{Analysis}
 \subsubsection*{Psychological ``Lie Factor"}
-As the strength of the correction varies across the horizontal range of the curve, we  quantify the psychological distortion as the ratio of the maximum line length to the minimum line length for each plot $j$: $D_j = l_{max}/l_{min}$, and denote the chosen ratio as $D^\ast$. Without any correction for the sine illusion, this factor is, like  Tufte's lie-factor, equal to one. Values above one indicate that at least in some areas of the curve line segments are extended.
+As the strength of the correction varies across the horizontal range of the curve, we  quantify the psychological distortion as the ratio of the maximum line length to the minimum line length for each plot $j$: $D_j = l_\text{max}/l_\text{min}$, and denote the chosen ratio as $D^\ast$. 
 
-We compute this quantity for each sub-plot in each stimulus presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$, corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a sub-plot with $w=0$ ($D=1$) present than if least distorted sub-plot present has $w=0.4$ ($D=1.2$). Correcting for this bias, the set of $D^\ast=\{D_1, ..., D_6\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as 
+\hh{XXX is $l_\text{min}$ always equal to 1 in our experiment?}
+
+\hh{XXX I think $D^\ast$ needs a bit more formality. 
+Let's call it $D^\ast_{ij}$ for participant's $i$ choice on the $j$th set. You have 36? different sets, so $1 \le j \le 36$ and $1 \le i \le 128$. For each participant you have at least 11 responses, more for some.  It might be beneficial to even have a third subscript $k$ and introduce this as $D^\ast_{ijk}$ for $k \in \{1,2,3\}$, $1 \le j \le 12$ and $1 \le i \le 128$.}
+
+Without any correction for the sine illusion, this factor is, like  Tufte's lie-factor, equal to one. Values above one indicate that at least in some areas of the curve line segments are extended.
+
+\hh{XXX why only extension?  - That was just our choice. We could also have worked the correction by averaging across lines to keep the average at 1.}
+
+
+We compute this quantity for each sub-plot in each stimulus presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$,  corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a sub-plot with $w=0$ ($D=1$) present than if least distorted sub-plot present has $w=0.4$ ($D=1.2$). Correcting for this bias, the set of $D^\ast=\{D_1, ..., D_6\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as 
 \begin{equation}\label{eqn:pconv}
 P=D^\ast/\min_{1\leq j \leq 6} D_j
 \end{equation}
-for each plot and each participant. That is, $P$ is the ratio of the lie factor of the chosen plot to the smallest lie factor available in the set of available plots. When the set of available plots contains an uncorrected plot, $P = D$; when an uncorrected plot is not presented, $P < D$, since each $D_j >= 1$, $j=1, ..., 6$. This transformation is a conservative approach to estimating the lie factor, but allows us to show a variety of scaled transformations and estimate the effect with more granularity around $w=0.8$. 
+for each plot and each participant.
+
+\hh{XXX previously, $D^\ast$ was defined differently. }
+
+\hh{XXX the way that $P$ is defined, is as a set of ratios, because $D^\ast$ is a set. I'm not sure that that's what you want, and it's not what you describe afterwards. }
+
+\hh{XXX Generally - I don't quite see why we need to divide by the minimum. You  have a problem with the choice of plot, if the minimal or maximal $D$ was picked. But due to the discrete nature of the choice, we have a similar problem with any choice of plot: we only know the answer up to the interval of $D_i$s shown. 
+At this point I'm not quite buying into the transformation to $P$. }
+
+\hh{XXX Could you make a picture of raw responses in interval coding? - i.e. if we have a choice of $D$ as 1.14 and the next two answers are 1.0 and 1.4, you shade the area between 1 and 1.4 with more weight towards 1.14 ... - these would be densities that are specific to a stimuli set. }
+
+That is, $P$ is the ratio of the lie factor of the chosen plot to the smallest lie factor available in the set of available plots. When the set of available plots contains an uncorrected plot, $P = D$; when an uncorrected plot is not presented, $P < D$, since each $D_j >= 1$, $j=1, ..., 6$. This transformation is a conservative approach to estimating the lie factor, but allows us to show a variety of scaled transformations and estimate the effect with more granularity around $w=0.8$. 
+
+
+
+
 
 By considering each participant's answers for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion on an individual level. Estimating distortion factors for each participant facilitates comparison of these estimated values to determine whether the illusion is a product of an individual's perceptual experience or whether there is a possible underlying perceptual heuristic for the sine illusion common across the majority of participants. If the illusion is a learned misperception rather than an underlying perceptual ``bug'', we would expect there to be considerable variability in the estimated individual lie factor $P_i$  for each unique participant $i$, $1\leq i \leq 123$, as it is likely that personal experience varies more widely than perceptual heuristics and their underlying neural architecture. 
 
@@ -297,6 +344,7 @@ Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \S
 }
 \end{table}
 
+\hh{`optimal' is a tricky property - optimality needs a formal proof for back up. Don't go there. It's an estimated weight, or participant based weight.}
 The optimal weight values corresponding to these $\theta$ are shown in figure \ref{fig:allCorrectionOptimal}. In all three cases, the optimally corrected plots appear less distorted than the uncorrected plots. 
 
 \begin{figure}[tp]\centering
