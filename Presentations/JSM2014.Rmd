@@ -4,6 +4,7 @@ author: "Susan VanderPlas"
 date: "07/24/2014"
 output: 
   revealjs_presentation:
+    pandoc_args: [ "--slide-level", "2" ]
     theme: sky
     center: false
     transition: fade
@@ -27,40 +28,42 @@ source("./code/BayesAnalysis.R") # generate pics for analysis without all the dd
 setwd("../Presentations")
 ```
 
-# Outline
+## Outline
 <div align="left">
-## Biology
+### Biology
 <small>Why evolution doesn't prefer statisticians</small>
 </div>
 <br></br>
 <div  align="left">
-## The Sine Illusion 
+### The Sine Illusion 
 <small>Three Dimensions? Or Two?</small>
 </div>
 <br></br>
 <div  align="left">
-## Statistical Graphics
+### Statistical Graphics
 <small>Quantifying the brain-paper divide experimentally</small>
 </div>
 <br></br>
 <div align="left">
-## Conclusions
+### Conclusions
 <small>Knowing is half the battle</small>
 </div>
 
----
 
-<section>    
-<h1>Biology</h1>
+
+# Biology {.title}
+
+
 
 ## Perception is three-dimensional
 
 <img src="./images/mullerlyerhouse.png" width='60%' height='auto'>
 
----
+
 
 ## Perception is three-dimensional
 
+### Graphics are two-dimensional
 ```{r mullerlyer, echo=FALSE, fig.width=2, fig.height=2, out.width='40%', warning=FALSE, message=FALSE}
 y.a <- .125
 x.a <- .375
@@ -79,15 +82,14 @@ qplot(data=data, x=x, y=y, group=group, geom="path") + facet_grid(.~label) +
         axis.text = element_blank(), text=element_text(size=10)) + xlim(c(0,1))
 ```
 
-### Graphics are two-dimensional
 
----
+
 
 ## Perception is three-dimensional
 
 <img src="./images/mullerlyerhouse1.png" width='60%' height='auto'>
 
----
+
 
 ## Ambiguous Figures
 <br></br>
@@ -109,20 +111,23 @@ qplot(data=data, x=x, y=y, group=group, geom="path", linetype=factor(line), colo
         axis.text = element_blank(), text=element_text(size=10))
 ```
 
----
+
+
 
 ## Artistic Trickery
 
 <img src="./images/ImpossibleElephant.png" width='50%' height='auto'>
-<img src="./images/PenroseTriangle.png" width='37%' height='auto'>
+<img src="./images/PenroseTriangle.png" width='38%' height='auto'>
 
 
-</section>
 
-<section>
-<br></br>
-<br></br>
-<h1> The Sine Illusion </h1>
+
+# The Sine Illusion  {.title}
+
+
+---
+
+## The Sine Illusion
 
 ```{r sineillusion,fig.width=4, fig.height=3, out.width='70%'}
 
@@ -176,9 +181,9 @@ qplot(x=x, xend=xend, y = ystart, yend=yend, geom="segment", data=createSine(40,
 
 ```
 
----
 
-# Three Dimensional Context
+
+## Three Dimensional Context
 
 ```{r sineillusion3d,echo=FALSE,fig.width=8, fig.height=4, out.width='100%'}
 x <- seq(0, 2*pi, length=42)[2:41]
@@ -217,7 +222,7 @@ points(trans3d(x=xline[c(1,3)], y=yline[c(1,3)], z=zline[c(1,3)], p2), pch=2, ce
 text(trans3d(x=pi, y=max(yline)-.25, z=0, p2), label="Near-infinite Vanishing Point")
 ```
 
----
+
 
 ## Example: US Gas Prices
 <br></br>
@@ -266,7 +271,9 @@ ggplot(data=gasprices)  +
   ylab("Price per gallon ($)") + theme_bw()+ xlab("Time")  + geom_point(aes(x=1995, y=0), size=0.1) + theme(plot.margin=unit(c(0.1,0.5,0,0.3), "cm"))
 ```
 
----
+<div align="left"><small>[Source: EIA Weekly Retail Gasoline and Diesel Prices](http://www.eia.gov/dnav/pet/pet_pri_gnd_dcus_nus_w.htm)</small></div>
+
+
 
 ## Example: US Gas Prices
 <br></br>
@@ -275,11 +282,11 @@ ggplot( data=subset(monthly, year(month)>=1995) ) + geom_point(aes(month, sd)) +
   theme(plot.margin=unit(c(0.1,.35,0,0), "cm")) + geom_smooth(aes(month, sd), method="loess", colour="grey") + ylim(c(0,0.17))
 ```
 
----
+
 
 ## Understanding the Illusion
 
-```{r orthogonalwidth, out.width='60%', fig.height=4.5, fig.width=6}
+```{r orthogonalwidth, out.width='55%', fig.height=4.5, fig.width=6}
 
 f <- function(x) 2*sin(x)
 fprime <- function(x) 2*cos(x)
@@ -319,27 +326,96 @@ ggplot(data) +
 
 We can correct the illusion by increasing the blue line's length until the red line is equal to the actual distance
 
-</section>
 
 
-<section>
-<br></br>
-<br></br>
-<h1>How much is your brain lying to you?</h1>
+# How much is your brain lying to you? {.title}
+
 
 ---
 
-## Tufte's Lie Factor
+### Tufte's Lie Factor
+
 <br></br>
-$$ \text{Lie Factor} = \frac{\text{size of effect shown in graphic}}{\text{size of effect shown in data}} $$
+$$ \text{Lie Factor} = \frac{\text{Effect Size}_{graphic}}{\text{Effect Size}_{data}} $$
+
+<br></br><br></br>
+
+### Psychological Lie Factor
+
+<br></br>
+$$ \text{Lie Factor (Brain)} = \frac{\text{Effect Size}_{perception}}{\text{Effect Size}_{graphic}} $$
+
+
+## Experiment Goals
+- Is the sine illusion a significant factor in reading simple plots?    
+<small> Do participants always choose the uncorrected plot with uniform line length?</small>    
+<br></br>
+- How large is the effect of the sine illusion? Does it depend on the underlying function?        
+<br></br>
+- Would two individuals have similar psychological lie factors?
+
+
+## Experimental Design
+- Show participants sets of 6 plots with the sine illusion corrected to different degrees (including some overcorrection)    
+    - 3 underlying functions: sin(x), exp(x), and 1/x.     
+<br></br>
+- Participants choose the plot of the 6 shown which has lines that are the most uniform in length    
+<br></br>
+- Participants had to complete at least 10 trials to be included in the study
+
+## Experimental Design
+<img src="figure/YTransInv10.png" width="80%">
+
+
+## Experimental Design {.build}
+- Compute the "Psychological Lie factor", $D^\ast$, for the chosen plot     
+<div align='center'><small>Uncorrected plot has constant line length of 1, so $D$ is equivalent to the maximum line length in a sub plot</small></div>    
+<br></br>
+- Normalize the chosen lie factor so that the lowest possible selection corresponds to 1. $$P = \frac{D^\ast}{D_{min}} \;\;\; 1\leq P \leq D^\ast$$    
+<div align='center'><small> Some test plots do not contain an uncorrected sub-plot, so we will work with $P$ instead of $D^\ast$ to maintain the scale of Tufte's lie factor </small></div>
+
+
+## Experimental Design
+- Compute the "Psychological Lie factor", $D^\ast$, for the chosen plot     
+<br></br>
+- Normalize the chosen lie factor so that the lowest possible selection corresponds to 1.     
+<br></br>    
+<div align=center>`r length(unique(turkdata$ip.id))` participants completed `r nrow(turkdata)` trials      
+(`r table(turkdata$test_param)[1]` exponential, `r table(turkdata$test_param)[2]` inverse, and `r table(turkdata$test_param)[3]` sine)</div>
+
+## Model Details 
+<br></br>
+Hierarchical Bayesian model for $\theta$, the overall lie factor     
+<br></br>
+- Uniform priors on $1\leq \mu\leq 4$, $.1\leq\sigma\leq 2$    
+<br></br>
+- $f(\theta | P, \mu, \sigma)\sim \text{Truncated Normal}(\mu, \sigma)$, $\theta>1$
+
+## Results
+### 4 individuals who completed the most trials
+<img src="figure/fig-IndivMeanAllFcns.png", width='80%'>
 
 
 
-## Psychological Lie Factor
-$$ \text{Lie Factor (Brain) = \frac{\text{size of perceived effect}}{\text{size of effect shown in graphic}}} $$
-
-## Experiment Setup
-
+## Results
+### Overall Results
+<img src="figure/fig-spaghettiIndivDists.png", width='80%'>
 
 
-</section>
+
+## Results
+### Individual and Overall Credible Intervals
+<img src="figure/fig-CIindivMean.png", width='80%'>
+
+
+
+# Conclusions {.title}
+
+
+
+## Conclusions
+- The sine illusion has a significant effect on our perception of simple plots    
+<br></br>
+- The effect does depend on the function    
+<br></br>
+- The effect seems to be fairly consistent across individuals, but there is some variance
