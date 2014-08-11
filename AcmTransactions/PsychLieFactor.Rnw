@@ -135,7 +135,8 @@ Without this top-down influence, the brain would not be able to map the picture 
 \label{fig:mullerlyer}
 \end{figure}
 
-\hh{XXX define what the illusion is before you explain how it happens.}
+In the M\"uller-Lyer illusion, two vertical line segments are shown with arrows extending from both ends; one segment forms an acute angle with the arrows, the other segment forms obtuse angles with the arrows. The line segment adorned with arrows that form an acute angle appears to be shorter than the linen segment which forms an obtuse angle with the arrow segments. 
+% \hh{XXX define what the illusion is before you explain how it happens.}
 One explanation for the M\"uller-Lyer illusion \hh{XXX reference} is that the brain interprets the ambiguous lines as a common three-dimensional object: corners of a room: figure~\ref{fig:mullerlyer}A occurs when viewing the outside corner of a rectangular prism, figure~\ref{fig:mullerlyer}B occurs when viewing the prism from the inside.  In regions which do not commonly have rectangular buildings, the illusion is significantly less pervasive~\cite{mullerlyerafrica}. Figure~\ref{fig:mullerlyerreal} provides one possible context that would lead to the M\"uller-Lyer effect. This real-world experience carries with it an inferred perspective - when the arrows point inward, the object is typically closer than when the arrows point outward, which causes the brain to interpret the outward-pointing figure as larger, even though the retinal size is identical for the two objects. This inferred ``depth cue"~\cite{gregory} is reasonably consistent across individuals. A similar effect can also be found in the Necker Cube - whichever face appears to be furthest away also seems larger, even though any two parallel faces are equally sized in the image. This approach has proved to be very advantageous for real world scenarios~\cite{gregory}, as pictures of real objects are seldom ambiguous. This strategy also allows for high performance with limited neural bandwidth.
 
 Figure~\ref{fig:mullerlyerreal} shows not only the real-world context, but that the perspective cues which contribute to the illusion allow for an accurate neural representation of the object in context. \hh{XXX the previous sentence is grammatically correct, but it's a hard read - chop it in two?}
@@ -377,7 +378,8 @@ qplot(data=data, x=x, y=y, group=group, geom="path", linetype=factor(line), colo
   theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
         panel.grid.minor=element_blank(), panel.background=element_blank(),
         axis.title = element_blank(), axis.ticks = element_blank(), 
-        axis.text = element_blank(), text=element_text(size=10))
+        axis.text = element_blank(), text=element_text(size=10), 
+        plot.background=element_rect(fill="transparent", colour=NA))
 @
 <<mullerlyer, echo=FALSE, fig.width=2, fig.height=2, include=FALSE, warning=FALSE, message=FALSE>>=
 y.a <- .125
@@ -394,7 +396,8 @@ qplot(data=data, x=x, y=y, group=group, geom="path") + facet_grid(.~label) +
   theme(panel.grid.major=element_blank(), panel.background = element_rect(fill = "white", colour = "white"),
         panel.grid.minor=element_blank(), panel.background=element_blank(),
         axis.title = element_blank(), axis.ticks = element_blank(), 
-        axis.text = element_blank(), text=element_text(size=10)) + xlim(c(0,1))
+        axis.text = element_blank(), text=element_text(size=10), 
+        plot.background=element_rect(fill="transparent", colour=NA)) + xlim(c(0,1))
 @
 <<sinedemo,   echo=FALSE, fig.width=4, fig.height=4, include=FALSE, warning=FALSE, message=FALSE>>=
 
