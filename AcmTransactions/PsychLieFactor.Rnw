@@ -108,18 +108,17 @@ Author's address: S. VanderPlas, Snedecor Hall, Iowa State University, Ames, IA 
 \maketitle
 
 \section{Introduction}
-\hh{we should be talking of `chart' rather than `graph' - in the engineering world a graph is always considered as having nodes and edges. I'm not sure what the psychologists make of it, but we shouldn't give them a chance to misinterpret things.}
+% \hh{we should be talking of `chart' rather than `graph' - in the engineering world a graph is always considered as having nodes and edges. I'm not sure what the psychologists make of it, but we shouldn't give them a chance to misinterpret things.}
 
 \hh{motivate power of graphics first?}
 
-One of the basic principles of statistical graphics is that a graphic should accurately reflect the data.
+One of the basic principles of statistical graphics is that a chart should accurately reflect the data.
 \hh{XXX what are statistical graphics, and how are they different from `visualizations'/sketches?}
 
-Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data~\cite{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the transition from data to graphics, it does not give us any insight about the transition from graph to the brain. 
-\hh{XXX is transition a psych word? - I would use the word `mapping'.}
-Ideally, graphics  not only represent the data accurately, but  also allow readers to draw accurate conclusions from the graph. While in many cases these two goals can be achieved simultaneously, there are instances in which human perception produces a psychological distortion that  interferes with the interpretation of graphics, even if the graphics are accurate portrayals of the numerical data. 
-In this paper, we examine situations in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a graphic.
-%that are true to the data. 
+Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data~\cite{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the mapping from data to graphics, it does not give us any insight about the mapping from the chart to the brain. 
+% \hh{XXX is transition a psych word? - I would use the word `mapping'.}
+Ideally, charts not only represent the data accurately, but  also allow readers to draw accurate conclusions from the graph. While in many cases these two goals can be achieved simultaneously, there are instances in which human perception produces a psychological distortion that  interferes with the interpretation of charts, even if the charts are accurate portrayals of the numerical data. 
+In this paper, we examine situations in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a chart.
 
 \section{The Curse of Three Dimensions}
 The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a reasonably \hh{what is `reasonable'? - how about `a functional mental representation'?} accurate mental representation of the three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional information. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation might correspond to multiple three-dimensional objects, as in the well-known Necker Cube (\citealt{gregory}; shown in figure~\ref{fig:Necker}). Additionally, the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. Optical illusions that demonstrate this phenomenon are the so-called ``impossible objects" such as the Penrose triangle \hh{XXX reference}. 
@@ -147,7 +146,7 @@ Figure~\ref{fig:mullerlyerreal} shows not only the real-world context, but that 
 \end{figure}
 
 \section{Three Dimensional Context of the Sine Illusion}
-While the classic M\"uller-Lyer illusion is seldom a factor in statistical graphics, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion \hh{XXX cite Day and stecher, and ours}) is one example of this phenomenon which occurs frequently in statistical graphics. Like the M\"uller-Lyer illusion, it is pervasive and very difficult to ``un-see" or mentally correct. \hh{XXX what is the sine illusion in words?} Figure~\ref{fig:sineillusion} shows the sine illusion in its original form, and figure~\ref{fig:playfair} shows the same illusion in one of the charts from Playfair's Statistical Atlas~\cite{playfair}. This illusion, which is also known as the line-width illusion, has also been documented in parallel sets plots \cite{parallelsets}. 
+While the classic M\"uller-Lyer illusion is seldom a factor in statistical charts, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion \hh{XXX cite Day and stecher, and ours}) is one example of this phenomenon which occurs frequently in statistical graphics. Like the M\"uller-Lyer illusion, it is pervasive and very difficult to ``un-see" or mentally correct. \hh{XXX what is the sine illusion in words?} Figure~\ref{fig:sineillusion} shows the sine illusion in its original form, and figure~\ref{fig:playfair} shows the same illusion in one of the charts from Playfair's Statistical Atlas~\cite{playfair}. This illusion, which is also known as the line-width illusion, has also been documented in parallel sets plots \cite{parallelsets}. 
 \hh{XXX factors that play into the sine illusion: large changes in the slope of a trend; extent of slope is measured with respect to the local coordinate system in which the chart is displayed, i.e.~it is influenced by the aspect ratio.}
 
 \begin{figure}\centering
@@ -157,7 +156,7 @@ While the classic M\"uller-Lyer illusion is seldom a factor in statistical graph
 
 \begin{figure}[t]\centering
 \includegraphics[keepaspectratio=TRUE,width=5in]{images/PlayfairExportImports}
-\caption{Playfair's graph of trade between the East Indies and England, 1700-1780. The trade balance is influenced by the sine illusion: the difference between imports and exports in 1763 does not appear to be the same size as that in 1745, though the vertical distance is approximately the same.}\label{fig:playfair}
+\caption{Playfair's chart of trade between the East Indies and England, 1700-1780. The trade balance is influenced by the sine illusion: the difference between imports and exports in 1763 does not appear to be the same size as that in 1745, though the vertical distance is approximately the same.}\label{fig:playfair}
 \end{figure}
 Cleveland and McGill
 \citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does readily confirm their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher~\citeyear{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well -- there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in figure~\ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, figure~\ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in \citeN{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. One main difference between the first three dimensional image shown in figure~\ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
@@ -177,7 +176,7 @@ One difference between the sine illusion and the M\"uller-Lyer illusion that may
 % \caption{Three dimensional context for the sine illusion, with a weaker perspective transformation.}\label{fig:sineillusion3dmagic}
 % \end{figure}
 
-The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\cite{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical graphics. In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
+The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\cite{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical charts. In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
 \hh{XXX define the psychological lie factor somewhere.}
 
 \section{Measuring the Psychological Lie Factor Experimentally}
@@ -194,7 +193,7 @@ where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correctio
 \begin{figure}
 \centering
 \includegraphics[width=6in]{figure/fig-stimulicorrectionsize1}
-\caption{One of the graphs presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths. \hh{XXX which of the weights in table~\ref{tab:w} correspond to this chart?} 
+\caption{One of the charts presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths. \hh{XXX which of the weights in table~\ref{tab:w} correspond to this chart?} 
 \hh{Note, that weighting is done in a random order - e.g.~plot \#1 corresponds to a weight of 0, plot \#2 to ???, and plot \#3 to ???}}\label{fig:sinestimuli}
 \end{figure}
 
@@ -238,8 +237,8 @@ Three underlying mean functions were tested using these weight values: $\sin(x)$
 \hh{XXX show these functions and discuss why they are good choices. }
 
 
-Each participant was presented with eleven sets of graphs, consisting of one ``easy" test chart, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. 
-Plots were shown to participants in random order. The test chart consisted of a set of six sine curves with a very low level difficulty level, and is used as an introduction to the testing procedure. \hh{XXX this contradicts the random order - describe the test setting in a bit more detail, that'll clear up the confusion.}
+Each participant was presented with eleven sets of graphs (each ``set" consisting of 6 separate plots), consisting of one ``easy" test set, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. After the easy introductory chart, which was presented first, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the 6 plots presented as having lines which were the most even. 
+%\hh{XXX this contradicts the random order - describe the test setting in a bit more detail, that'll clear up the confusion.}
 
 \subsection{Demographics}
 Participants for the study were recruited through the Amazon Turk web service. 
@@ -356,9 +355,9 @@ The optimal weight values corresponding to these $\theta$ are shown in figure \r
 \end{figure}
 
 \section{Conclusions}
-The sine illusion arises from misapplication of three-dimensional context to a two-dimensional stimulus which results in nearly unavoidable perceptual distortions that impact the inferences made from graphics. We have estimated that the illuson produces a distortion of about 135\%. This distortion occurs entirely between the retinal image and the mental representation of the object; it is not due to the chart, rather, it is an artifact of our perceptual system. 
+The sine illusion arises from misapplication of three-dimensional context to a two-dimensional stimulus which results in nearly unavoidable perceptual distortions. These distortions impact the inferences made from charts which are similar to three-dimensional figures, even when we are not consciously aware that this context exists. We have estimated that the illuson produces a distortion of about 135\%. This distortion occurs entirely between the retinal image and the mental representation of the object; it is not due to the chart, rather, it is an artifact of our perceptual system. 
 
-As Tufte advocated for graphics that showed the data without distortion, our goal is to raise awareness of perceptual distortions that occur within the brain itself due to misapplied heuristics. While applying corrections to the data to remove these distortions is somewhat radical, the persistence of the illusion despite awareness of its presence presents a challenge to those seeking to display data visually. In addition, many graph types can induce this illusion (scatterplots, ribbon plots, parallel sets plots), so avoiding a specific type of graph is not an effective solution. The best solution to this problem is to raise awareness: to demonstrate that optical illusions occur within statistical graphics, and to understand how these illusions arise.  
+As Tufte advocated for charts that showed the data without distortion, our goal is to raise awareness of perceptual distortions that occur within the brain itself due to misapplied heuristics. While applying corrections to the data to remove these distortions is somewhat radical, the persistence of the illusion despite awareness of its presence presents a challenge to those seeking to display data visually. In addition, many graph types can induce this illusion (scatterplots, ribbon plots, parallel sets plots), so avoiding a specific type of graph is not an effective solution. The best solution to this problem is to raise awareness: to demonstrate that optical illusions occur within statistical graphics, and to understand how these illusions arise.  
 
 \bibliographystyle{acmlarge}
 \bibliography{references}
