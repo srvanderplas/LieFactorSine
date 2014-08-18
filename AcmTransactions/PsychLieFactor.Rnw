@@ -162,7 +162,7 @@ While the classic M\"uller-Lyer illusion is seldom a factor in statistical chart
 \caption{Playfair's chart of trade between the East Indies and England, 1700-1780. The trade balance is influenced by the sine illusion: the difference between imports and exports in 1763 does not appear to be the same size as that in 1745, though the vertical distance is approximately the same.}\label{fig:playfair}
 \end{figure}
 Cleveland and McGill
-\citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does readily confirm their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher~\citeyear{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well -- there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in figure~\ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, figure~\ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in \citeN{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. One main difference between the first three dimensional image shown in figure~\ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
+\citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does readily confirm their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher~\citeyear{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well -- there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in figure~\ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, figure~\ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in \citeN{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. The main difference between the first three dimensional image shown in figure~\ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
 
 \begin{figure}\centering
 \includegraphics[keepaspectratio=TRUE,width=6in, trim=0in 1.25in 0in .5in]{figure/fig-sinedemo2}
@@ -179,19 +179,19 @@ One difference between the sine illusion and the M\"uller-Lyer illusion that may
 % \caption{Three dimensional context for the sine illusion, with a weaker perspective transformation.}\label{fig:sineillusion3dmagic}
 % \end{figure}
 
-The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\cite{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical charts. In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
-\hh{XXX define the psychological lie factor somewhere.}
+The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\cite{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical charts. In order to assess the distortions due to the illusion, we need to quantify this distortion. For comparison, we will work from Tufte's lie factor \cite[pg 57]{tufte}, which compares the size of an effect in the data with the size shown in a graphic, and is defined as 
+\begin{equation}\label{tufteliefactor}
+\text{Lie Factor} = \frac{\text{size of effect shown in chart}}{\text{size of effect shown in data}}.
+\end{equation}
+\noindent We will similarly define the psychological lie factor for this illusion as shown in equation \ref{psychliefactor}. 
+\begin{equation}\label{psychliefactor}
+\text{Psychological Lie Factor} = \frac{\text{size of effect perceived}}{\text{size of the effect shown in the chart}}
+\end{equation}
+In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
 
 \section{Measuring the Psychological Lie Factor Experimentally}
 \subsection{Study Setup}
 In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to figure~\ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
-
-The amount of correction in each sub-plot was chosen such that each stimuli set contained a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. The correction factor we use for extending the length of the line segment at location $x$ is given as
-\[
-(1-w) + w \cdot \left(1 / \cos\left(\tan^{-1}(|f^\prime(x)|)\right)\right)
-\]
-where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correction) - \hh{XXX ah, slow down! that's two aspects in one sentence. $w$ is a weighting factor - which gives 0 and 1 special meaning. the choice of 1.5 is already a design choice for the experiment - that needs a separate sentence}. From a pilot study, we suspected values around $w = 0.8$ to be promising \hh{XXX promising for what?}, but did not know whether this would generalize to those outside of the statistical graphics community. \hh{XXX sorry, I'm not following - how did this lead to twelve sets? Do you mean that we picked twelve sets of stimuli? - describe the process for picking a set. } This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. \hh{XXX rephrase caption text and repeat in the writeup.}
- The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown. \hh{XXX extra sentence for the difficulty. why do we need it?}
 
 \begin{figure}
 \centering
@@ -199,6 +199,17 @@ where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correctio
 \caption{One of the charts presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths. \hh{XXX which of the weights in table~\ref{tab:w} correspond to this chart?} 
 \hh{Note, that weighting is done in a random order - e.g.~plot \#1 corresponds to a weight of 0, plot \#2 to ???, and plot \#3 to ???}}\label{fig:sinestimuli}
 \end{figure}
+
+
+The amount of correction in each sub-plot was chosen such that each stimuli set contained a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. The correction factor we use for extending the length of the line segment at location $x$ is given as
+\[
+(1-w) + w \cdot \left(1 / \cos\left(\tan^{-1}(|f^\prime(x)|)\right)\right)
+\]
+
+where $w$ represents a weight factor to allow variation of the strength of the correction. A value of $w=0$ indicates that there is no correction, and a value of $w=1$ indicates that the graph is fully corrected. Extending this approach, we can over-correct the graph, to test whether the geometric derivation of the correction is sufficient to remove the illusion. In this experiment, values of $w$ were chosen from between 0 and 1.5. 
+% where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correction) - \hh{XXX ah, slow down! that's two aspects in one sentence. $w$ is a weighting factor - which gives 0 and 1 special meaning. the choice of 1.5 is already a design choice for the experiment - that needs a separate sentence}. 
+From a pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the statistical graphics community. \hh{XXX sorry, I'm not following - how did this lead to twelve sets? Do you mean that we picked twelve sets of stimuli? - describe the process for picking a set. } This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. \hh{XXX rephrase caption text and repeat in the writeup.}
+ The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown. \hh{XXX extra sentence for the difficulty. why do we need it?}
 
 \begin{figure}
 \centering
