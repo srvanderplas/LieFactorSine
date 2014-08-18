@@ -179,12 +179,12 @@ One difference between the sine illusion and the M\"uller-Lyer illusion that may
 % \caption{Three dimensional context for the sine illusion, with a weaker perspective transformation.}\label{fig:sineillusion3dmagic}
 % \end{figure}
 
-The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\cite{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical charts. In order to assess the distortions due to the illusion, we need to quantify this distortion. For comparison, we will work from Tufte's lie factor \cite[pg 57]{tufte}, which compares the size of an effect in the data with the size shown in a graphic, and is defined as 
-\begin{equation}\label{tufteliefactor}
-\text{Lie Factor} = \frac{\text{size of effect shown in chart}}{\text{size of effect shown in data}}.
+The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\cite{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical charts. In order to assess the distortions due to the illusion, we need to quantify this distortion. For comparison, we will work from Tufte's lie factor \cite[pg 57]{tufte}, which compares the size of an effect in the data with the size shown in a graphic, and is defined in equation \ref{eqn:tufteliefactor}.
+\begin{equation}\label{eqn:tufteliefactor}
+\text{Lie Factor} = \frac{\text{size of effect shown in chart}}{\text{size of effect shown in data}}
 \end{equation}
-\noindent We will similarly define the psychological lie factor for this illusion as shown in equation \ref{psychliefactor}. 
-\begin{equation}\label{psychliefactor}
+\noindent We will similarly define the psychological lie factor for this illusion as shown in equation \ref{eqn:psychliefactor}. 
+\begin{equation}\label{eqn:psychliefactor}
 \text{Psychological Lie Factor} = \frac{\text{size of effect perceived}}{\text{size of the effect shown in the chart}}
 \end{equation}
 In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
@@ -193,38 +193,50 @@ In order to estimate the psychological lie factor that occurs due to this illusi
 \subsection{Study Setup}
 In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to figure~\ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
 
-\begin{figure}
+\begin{figure}[tb]
 \centering
 \includegraphics[width=6in]{figure/fig-stimulicorrectionsize1}
-\caption{One of the charts presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths. \hh{XXX which of the weights in table~\ref{tab:w} correspond to this chart?} 
-\hh{Note, that weighting is done in a random order - e.g.~plot \#1 corresponds to a weight of 0, plot \#2 to ???, and plot \#3 to ???}}\label{fig:sinestimuli}
+\caption{One of the charts presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths. This chart corresponds to set \#4 in table~\ref{tab:w}. The plots are shown in random order, however; plot~\#1 corresponds to $w=0.9$, plot~\#2 to $w=0.7$, plot~\#3 to $w=0.3$, plot~\#4 to $w=0.1$, plot~\#5 to $w=0.5$, and plot~\#6 to $w=1.1$.}\label{fig:sinestimuli}
 \end{figure}
-
-
-The amount of correction in each sub-plot was chosen such that each stimuli set contained a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. The correction factor we use for extending the length of the line segment at location $x$ is given as
-\[
-(1-w) + w \cdot \left(1 / \cos\left(\tan^{-1}(|f^\prime(x)|)\right)\right)
-\]
-
-where $w$ represents a weight factor to allow variation of the strength of the correction. A value of $w=0$ indicates that there is no correction, and a value of $w=1$ indicates that the graph is fully corrected. Extending this approach, we can over-correct the graph, to test whether the geometric derivation of the correction is sufficient to remove the illusion. In this experiment, values of $w$ were chosen from between 0 and 1.5. 
-% where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correction) - \hh{XXX ah, slow down! that's two aspects in one sentence. $w$ is a weighting factor - which gives 0 and 1 special meaning. the choice of 1.5 is already a design choice for the experiment - that needs a separate sentence}. 
-From a pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the statistical graphics community. \hh{XXX sorry, I'm not following - how did this lead to twelve sets? Do you mean that we picked twelve sets of stimuli? - describe the process for picking a set. } This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. \hh{XXX rephrase caption text and repeat in the writeup.}
- The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown. \hh{XXX extra sentence for the difficulty. why do we need it?}
 
 \begin{figure}
 \centering
-\includegraphics[width=6in, trim=0in .15in 0in .15in]{images/fig-stimulicorrectionsize2}
-\caption{Line lengths (without the trend) for figure~\ref{fig:sinestimuli}, demonstrating the effective lie factor for each sub-plot. \hh{XXX I'm not sure that the order in these plots is the same as in the stimulus chart. also, be a bit more precise - what exactly can be seen in this chart? - it's the detrended version of fig~\ref{fig:sinestimuli} - how does that show the `effective' lie factor? - `effective lie factor isn't defined, so make sure that you describe precisely what you mean by that.}}\label{fig:sinestimulinotrend}
+\includegraphics[width=6in, trim=.65in 0in .65in 0in]{figure/fig-stimulicorrectionsize2}
+\caption{De-trended line lengths for figure~\ref{fig:sinestimuli}, demonstrating the distortion present due to the correction factor in each sub-plot. Comparing the distortion in the chosen sub-plot to the undistorted data produces an estimate of the psychological lie factor. }\label{fig:sinestimulinotrend}
 \end{figure}
-% latex table generated in R 2.15.1 by xtable 1.7-0 package
-% Sun Mar 31 12:08:30 2013
+
+The amount of correction in each sub-plot was chosen such that each stimuli set contained a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. The correction factor we use for extending the length of the line segment at location $x$ is given as
+
+\begin{equation}\label{eqn:correction}
+(1-w) + w \cdot \left(1 / \cos\left(\tan^{-1}(|f^\prime(x)|)\right)\right)
+\end{equation}
+
+where $w$ represents a weight factor to allow variation of the strength of the correction. A value of $w=0$ indicates that there is no correction, and a value of $w=1$ indicates that the graph is fully corrected. Extending this approach, we can over-correct the graph, to test whether the geometric derivation of the correction is sufficient to remove the illusion. In this experiment, values of $w$ were chosen from between 0 and 1.4. 
+
+In order to quantify the psychological lie factor $D$ for each sub plot $i=1, ..., 6$, we took the ratio of the maximum line length to the minimum line length shown in the plot. As participants were to choose the plot with lines that had the most even length, a large value of $D$ indicates significant distortion. 
+
+\begin{equation}\label{eqn:psychliefactorD}
+D_i = \frac{\text{maximum line length in sub-plot } i}{\text{minimum line length in sub-plot } i}
+\end{equation}
+
+The definition of $D$ in equation \ref{eqn:psychliefactorD} does deviate somewhat from our extension of Tufte's definition of the lie factor described in equation \ref{eqn:psychliefactor}, but this is by necessity, as an uncorrected plot would show a difference of 0, which would wreak havoc on any experimental measure of the lie factor, as that 0 would be in the denominator. Our modification preserves the interpretation of Tufte's lie factor, while adapting the computation for use in this experimental setting. 
+
+% where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correction) - \hh{XXX ah, slow down! that's two aspects in one sentence. $w$ is a weighting factor - which gives 0 and 1 special meaning. the choice of 1.5 is already a design choice for the experiment - that needs a separate sentence}. 
+From a pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the statistical graphics community. In order to pinpoint the weight value necessary to correct the illusion more precisely, we chose twelve sets of 6 weight values each that were used to produce test plots similar to that shown in figure \ref{fig:sinestimuli}. These sets of weight values were chosen to allow greater precision estimates closer to $w=0.8$, while still covering the range of $w$ between 0 and 1.4. The sets of $w$ used are shown in table~\ref{tab:w}, along with corresponding lie factors $D_i$ for stimuli with underlying function $sin(x)$ (other functions used will have different $D_i$ due to the nature of the correction factor). Plots with weight values spread over the full range of $w$ tested were considered ``test" plots that could be used for verification purposes, while plots with weight values concentrated near $w=0.8$ were considered to have higher difficulty (because the sub-plots were very similar). This allowed us to estimate $w$, and thus $D$, with higher precision while still exploring the entire parameter space. 
+% \hh{XXX sorry, I'm not following - how did this lead to twelve sets? Do you mean that we picked twelve sets of stimuli? - describe the process for picking a set. } 
+% This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. \hh{XXX rephrase caption text and repeat in the writeup.}
+%  The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown. \hh{XXX extra sentence for the difficulty. why do we need it?}
+
+
 \begin{table}[ht]
 \centering
-\tbl{\label{tab:w} Ordered weight factors and corresponding line factors for the sine curve stimuli sets. \hh{XXX what was the underlying concept behind the choice of weights? $D$ needs to be defined before this table is referred to - at least give a reference to $D$s definition. Is $D$ really the same for all three stimuli?}}{
+\tbl{\label{tab:w} Ordered weight factors and corresponding lie factors for the sine curve stimuli sets, as computed using equation \ref{eqn:psychliefactorD}. 
+% \hh{XXX what was the underlying concept behind the choice of weights? $D$ needs to be defined before this table is referred to - at least give a reference to $D$s definition. Is $D$ really the same for all three stimuli?}
+}{
 \begin{tabular}{llrrrrrrlrrrrrr}
   \hline
 %\cline{3-8} \cline{10-15}\\ [-1.75ex]
-set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Lie Factor ($D$)}\\ 
+set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Lie Factor ($D$) for $sin(x)$ plots}\\ 
 \hline
 & & \multicolumn{6}{c}{sub-plot} & & \multicolumn{6}{c}{sub-plot}\\ 
     & & 1 & 2 & 3 & 4 & 5 & 6  & & 1 & 2 & 3 & 4 & 5 & 6  \\ 
@@ -246,9 +258,15 @@ set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolum
 }
 \end{table}
 
-Three underlying mean functions were tested using these weight values: $\sin(x)$, $\exp(x)$, and $1/x$. 
+Three underlying mean function families were tested using these weight values: $\sin(x)$, $\exp(x)$, and $1/x$. These functions, shown in figure \ref{fig:uncorrectedExamples}, were chosen because they are nonlinear functions which commonly occur in statistical graphics and are easily correctable using equation \ref{eqn:correction}. The specific mean functions used in the experiment were $y=\sin(2x)$, $y=\exp(x/2)$, and $y=5(6x)^{-1}$; the modifications allowed us to control the aspect ratio of the plot coordinate systems so that the uncorrected plots had aspect ratios between $0.75$ and $0.85$. As no x or y units were provided on the graph, these functional modifications served as experimental controls but did not change the information provided to the participants. 
 
-\hh{XXX show these functions and discuss why they are good choices. }
+\begin{figure}
+\centering
+\includegraphics[width=6in]{figure/fig-exampleUncorrected}
+\caption{Mean functions used during the experiment: $\sin(x)$, $\exp(x)$, and $1/x$. These functions are nonlinear, easily differentiable (for the correction factor), and are similar to trends commonly found in statistical graphics.\label{fig:uncorrectedExamples}}
+\end{figure}
+% 
+% \hh{XXX show these functions and discuss why they are good choices. }
 
 
 Each participant was presented with eleven sets of graphs (each ``set" consisting of 6 separate plots), consisting of one ``easy" test set, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. After the easy introductory chart, which was presented first, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the 6 plots presented as having lines which were the most even. 
@@ -525,6 +543,8 @@ f2prime <- function(x) -2*sin(x)
 orig <- createSine(50, 1, f, fprime, f2prime, 0, 2*pi)
 lims <- getYlim(c(0, 1.4), orig, f, fprime, f2prime)
 w <-  c(.1,  .3,  .5,  .7,  .9,  1.1)
+
+set.seed(52034)
 frameorder <- sample(w, 6)
   
 data <- rbind.fill(ldply(w, function(i) weightYTrans(orig, i)))
@@ -533,9 +553,44 @@ data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 ans <- which.min(abs(frameorder-.99))
 qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
 ggsave("./figure/fig-stimulicorrectionsize1.png", width=6, height=6*(2*diff(lims$dy))/(3*diff(lims$dx))+.15, units="in")
+
 qplot(data=data, x=xstart, y=ystart-y, xend=xend, yend=yend-y, geom="segment") + facet_wrap(~display) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy + c(2, -2)) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=8))
-ggsave("./figure/fig-stimulicorrectionsize2.pdf", width=6, height=6*(2*diff(lims$dy + c(2, -2)))/(3*diff(lims$dx))+.15, units="in")
+ggsave("./figure/fig-stimulicorrectionsize2.png", width=6, height=6*(2*diff(lims$dy + c(2, -2)))/(3*diff(lims$dx))+.15, units="in")
 @
+
+<<stimuliuncorrected,include=FALSE,echo=FALSE,warning=FALSE,message=FALSE>>=
+f <- function(x) 2*sin(x)
+fprime <- function(x) 2*cos(x)
+f2prime <- function(x) -2*sin(x)
+d1 <- createSine(50, 1, f, fprime, f2prime, 0, 2*pi)
+d1$type <- "sin(x)"
+f <- function(x) 5/6*1/x
+fprime <- function(x) -5/6*x^(-2)
+f2prime <- function(x) 2*5/6*x^(-3)
+d3 <- createSine(50, 1, f, fprime, f2prime, 1/2, 3.5)
+d3$type <- "1/x"
+f <- function(x) exp(x/2)
+fprime <- function(x) 1/2*exp(x/2)
+f2prime <- function(x) 1/4*exp(x/2)
+d2 <- createSine(50, 1, f, fprime, f2prime, -pi, pi)
+d2$type <- "exp(x)"
+
+p1 <- qplot(x=xstart, y=ystart, xend=xend, yend=yend, geom="segment", data=d1) + theme_stimuli() + facet_wrap(~type) + coord_equal() + theme(plot.background=element_rect(fill="transparent", colour=NA))
+
+p2 <- qplot(x=xstart, y=ystart, xend=xend, yend=yend, geom="segment", data=d2) + theme_stimuli() + facet_wrap(~type) + coord_equal() + theme(plot.background=element_rect(fill="transparent", colour=NA))
+
+p3 <- qplot(x=xstart, y=ystart, xend=xend, yend=yend, geom="segment", data=d3) + theme_stimuli() + facet_wrap(~type) + coord_equal() + theme(plot.background=element_rect(fill="transparent", colour=NA))
+
+library(grDevices)
+cairo_pdf("./figure/fig-exampleUncorrected.pdf", width=6, height=2)
+grid.arrange(p1, p3, p2, nrow=1, ncol=3, clip=T)
+dev.off()
+
+cairo_pdf("./figure/fig-exampleUncorrected.png", width=6, height=2)
+grid.arrange(p1, p3, p2, nrow=1, ncol=3, clip=T)
+dev.off()
+@
+
 <<invexpstimuli, echo=FALSE, include=FALSE, warning=FALSE, message=FALSE>>=
 key <- read.csv("./data/pictureKey.csv", stringsAsFactors=FALSE)
 key$pic_name <- tolower(key$pic_name)
