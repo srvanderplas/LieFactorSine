@@ -272,25 +272,35 @@ Three underlying mean function families were tested using these weight values: $
 Each participant was presented with eleven sets of graphs (each ``set" consisting of 6 separate plots), consisting of one ``easy" test set, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. After the easy introductory chart, which was presented first, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the 6 plots presented as having lines which were the most even. 
 %\hh{XXX this contradicts the random order - describe the test setting in a bit more detail, that'll clear up the confusion.}
 
-\subsection{Demographics}
-Participants for the study were recruited through the Amazon Turk web service. 
-Responses from 128 users at 123 unique IP addresses were collected. \hh{XXX payout procedure? how many responses total?} 
+\subsection{Data Collection}
+
+% \hh{XXX overview of number of responses for each stimulus?}
+
+Participants for the study were recruited through the Amazon Mechanical Turk web service, which connects workers with tasks that are not easily automated for a small fee. In exchange for completing at least 11 trials, participants were paid \$1. Given the anonymity of web-based data collection, we informed participants that a unique IP address was required to participate in the experiment; responses from duplicate IP addresses with different Turk IDs were grouped and only the first response was paid. This procedure was used to lower the probability of a single user completing the task multiple times, in order to ensure that we could accurately estimate variation among individuals. 
+
+% \hh{XXX why is it necessary for the analysis to know about individuals?}
+
+\Sexpr{nrow(turkdata.full)} responses from \Sexpr{length(unique(turkdata.full$id))} users at \Sexpr{length(unique(turkdata.full$ip.id))} unique IP addresses were collected. We removed data from participants who did not complete at least 10 trials (allowing for one trial to be skipped or otherwise not completed), and of the collected responses, \Sexpr{sum(turkdata.full$len<=10)} trials from \Sexpr{length(unique(turkdata.full[turkdata.full$len<=10,]$id))} participants were removed. 
 
 
-Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. 
+% \hh{XXX how many people started experiment, but did not complete it?}
 
-\hh{XXX overview of number of responses for each stimulus?}
+In addition to the requirement that participants complete at least 10 trials, the participant also was required to complete at least 4 trials of a specific underlying function for those trials to be included. This condition ensured that for any specific function, there were enough trials to estimate an initial effect; an additional \Sexpr{nrow(turkdata.full) - sum(turkdata.full$len<=10) - nrow(turkdata)} trials were excluded based on this condition. 
 
-\hh{XXX how many of the test charts did people fail? Did you have to clean up data in any other way?}
+% \hh{XXX how many of the test charts did people fail? Did you have to clean up data in any other way?}
 
-\hh{XXX how many people started experiment, but did not complete it?}
+There were \Sexpr{length(unique(turkdata$ip.id))} users who completed at least 10 trials each (providing enough data that we could accurately fit individual-level parameters), and those users completed \Sexpr{nrow(turkdata)} trials which were used for this analysis. Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. We did not exclude data based on user responses to avoid biasing our conclusions; the possibility of significant variability between individuals in the preference for a specific $w$ value was too large to filter out even those who chose plots corresponding to $w=1.4$. 
 
-\hh{XXX why is it necessary for the analysis to know about individuals?}
-In order to more accurately identify unique individuals, data were grouped by IP address rather than by user-entered identification code, as it is common for individuals to have multiple accounts and somewhat less likely for two Amazon Mechanical Turk participants to share the same IP address and complete the same study in a reasonably short window. We treated responses from the same IP addresses as additional responses from the same user.
 
-\hh{XXX What other demographics did you collect? age? gender? - the section header `demographics'  seems out of place, if you only talk about the problem of identifying individuals. }
+Due to the experimental design, all participants completed trials with underlying function $y=\sin(x)$, for a total of \Sexpr{sum(turkdata$test_param=="Sin")} trials. As each participant who completed only the required 11 trials saw charts with either $y=1/x$ or $y=\exp(x)$ as the underlying function, each of these functions had fewer trials; \Sexpr{sum(turkdata$test_param=="Inv")} and \Sexpr{sum(turkdata$test_param=="Exp")}, respectively. 
 
-\hh{XXX What data did you collect - exactly? Maybe a screenshot of the website would be good somewhere and a discussion of what participants had to do - on a click level basis.}
+% 
+% 
+% \hh{XXX What other demographics did you collect? age? gender? - the section header `demographics'  seems out of place, if you only talk about the problem of identifying individuals. }
+% No other demographic information; section header has been changed. 
+% 
+% \hh{XXX What data did you collect - exactly? Maybe a screenshot of the website would be good somewhere and a discussion of what participants had to do - on a click level basis.}
+% We collected the plot identification, the trial number (for each user) and the user's response; otherwise, there was no demographic data. I also don't have access to the website; Mahbub ran this experiment. 
 
 
 
