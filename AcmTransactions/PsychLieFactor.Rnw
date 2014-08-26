@@ -213,16 +213,16 @@ The amount of correction in each sub-plot was chosen such that each stimuli set 
 
 where $w$ represents a weight factor to allow variation of the strength of the correction. A value of $w=0$ indicates that there is no correction, and a value of $w=1$ indicates that the graph is fully corrected. Extending this approach, we can over-correct the graph, to test whether the geometric derivation of the correction is sufficient to remove the illusion. In this experiment, values of $w$ were chosen from between 0 and 1.4. 
 
-In order to quantify the psychological lie factor $D$ for each sub plot $i=1, ..., 6$, we took the ratio of the maximum line length to the minimum line length shown in the plot. As participants were to choose the plot with lines that had the most even length, a large value of $D$ indicates significant distortion. 
+In order to quantify the psychological lie factor $D$ for each sub plot $k=1, ..., 6$, we took the ratio of the maximum line length to the minimum line length shown in the plot. As participants were to choose the plot with lines that had the most even length, a large value of $D$ indicates significant distortion. 
 
 \begin{equation}\label{eqn:psychliefactorD}
-D_i = \frac{\text{maximum line length in sub-plot } i}{\text{minimum line length in sub-plot } i}
+D_k = \frac{\text{maximum line length in sub-plot } k}{\text{minimum line length in sub-plot } k}
 \end{equation}
 
 The definition of $D$ in equation \ref{eqn:psychliefactorD} does deviate somewhat from our extension of Tufte's definition of the lie factor described in equation \ref{eqn:psychliefactor}, but this is by necessity, as an uncorrected plot would show a difference of 0, which would wreak havoc on any experimental measure of the lie factor, as that 0 would be in the denominator. Our modification preserves the interpretation of Tufte's lie factor, while adapting the computation for use in this experimental setting. 
 
 % where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correction) - \hh{XXX ah, slow down! that's two aspects in one sentence. $w$ is a weighting factor - which gives 0 and 1 special meaning. the choice of 1.5 is already a design choice for the experiment - that needs a separate sentence}. 
-From a pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the statistical graphics community. In order to pinpoint the weight value necessary to correct the illusion more precisely, we chose twelve sets of 6 weight values each that were used to produce test plots similar to that shown in figure \ref{fig:sinestimuli}. These sets of weight values were chosen to allow greater precision estimates closer to $w=0.8$, while still covering the range of $w$ between 0 and 1.4. The sets of $w$ used are shown in table~\ref{tab:w}, along with corresponding lie factors $D_i$ for stimuli with underlying function $sin(x)$ (other functions used will have different $D_i$ due to the nature of the correction factor). Plots with weight values spread over the full range of $w$ tested were considered ``test" plots that could be used for verification purposes, while plots with weight values concentrated near $w=0.8$ were considered to have higher difficulty (because the sub-plots were very similar). This allowed us to estimate $w$, and thus $D$, with higher precision while still exploring the entire parameter space. 
+From a pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the statistical graphics community. In order to pinpoint the weight value necessary to correct the illusion more precisely, we chose twelve sets of 6 weight values each that were used to produce test plots similar to that shown in figure \ref{fig:sinestimuli}. These sets of weight values were chosen to allow greater precision estimates closer to $w=0.8$, while still covering the range of $w$ between 0 and 1.4. The sets of $w$ used are shown in table~\ref{tab:w}, along with corresponding lie factors $D_k$ for stimuli with underlying function $sin(x)$ (other functions used will have different $D_k$ due to the nature of the correction factor). Plots with weight values spread over the full range of $w$ tested were considered ``test" plots that could be used for verification purposes, while plots with weight values concentrated near $w=0.8$ were considered to have higher difficulty (because the sub-plots were very similar). This allowed us to estimate $w$, and thus $D$, with higher precision while still exploring the entire parameter space. 
 % \hh{XXX sorry, I'm not following - how did this lead to twelve sets? Do you mean that we picked twelve sets of stimuli? - describe the process for picking a set. } 
 % This led to twelve stimuli sets with correction factors as shown in table~\ref{tab:w}. \hh{XXX rephrase caption text and repeat in the writeup.}
 %  The difficulty level of each of the twelve stimuli sets was determined by the similarity of the six plots shown. \hh{XXX extra sentence for the difficulty. why do we need it?}
@@ -307,29 +307,33 @@ Due to the experimental design, all participants completed trials with underlyin
 
 \subsection{Analysis}
 \subsubsection*{Psychological ``Lie Factor"}
-As the strength of the correction varies across the horizontal range of the curve, we  quantify the psychological distortion as the ratio of the maximum line length to the minimum line length for each plot $j$: $D_j = l_\text{max}/l_\text{min}$, and denote the chosen ratio as $D^\ast$. 
+As the strength of the correction varies across the horizontal range of the curve, we quantify the psychological distortion as the ratio of the maximum line length to the minimum line length for each sub-plot $k$: $D_k = l_\text{max}/l_\text{min}$. For a given set of 6 sub-plots, $j$, $D_{jk}$ would denote the sub-plot distortion factor. Let $D_{ijk}$ denote the distortion factor corresponding to participant $i$'s choice of sub-plot $k$ in stimulus set $j$ during a single trial. In this experiment, there are 32 stimuli sets (2 test sets + 10 sets for each of 3 underlying functions), so $1 \leq j \leq 32$. 
 
-\hh{XXX is $l_\text{min}$ always equal to 1 in our experiment?}
 
-\hh{XXX I think $D^\ast$ needs a bit more formality. 
-Let's call it $D^\ast_{ij}$ for participant's $i$ choice on the $j$th set. You have 36? different sets, so $1 \le j \le 36$ and $1 \le i \le 128$. For each participant you have at least 11 responses, more for some.  It might be beneficial to even have a third subscript $k$ and introduce this as $D^\ast_{ijk}$ for $k \in \{1,2,3\}$, $1 \le j \le 12$ and $1 \le i \le 128$.}
+% \hh{XXX is $l_\text{min}$ always equal to 1 in our experiment?}
 
+% \hh{XXX I think $D^\ast$ needs a bit more formality. 
+% Let's call it $D^\ast_{ij}$ for participant's $i$ choice on the $j$th set. You have 36? different sets, so $1 \le j \le 36$ and $1 \le i \le 128$. For each participant you have at least 11 responses, more for some.  It might be beneficial to even have a third subscript $k$ and introduce this as $D^\ast_{ijk}$ for $k \in \{1,2,3\}$, $1 \le j \le 12$ and $1 \le i \le 128$.}
+
+
+% \hh{XXX why only extension?  - That was just our choice. We could also have worked the correction by averaging across lines to keep the average at 1.}
+
+The correction for the sine illusion by default extends the line segments, so that if the initial line segments were all of length 1, the correction will produce corresponding line segments of length greater than or equal to 1. In addition, due to the underlying functions we have chosen, the minimum line length (assuming a starting line length of 1) after correction is approximately 1; this allows us to simplify $D_k$ as $$D_k = \text{maximum line length in plot } k$$. 
 Without any correction for the sine illusion, this factor is, like  Tufte's lie-factor, equal to one. Values above one indicate that at least in some areas of the curve line segments are extended.
 
-\hh{XXX why only extension?  - That was just our choice. We could also have worked the correction by averaging across lines to keep the average at 1.}
 
 
-We compute this quantity for each sub-plot in each stimulus presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$,  corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a sub-plot with $w=0$ ($D=1$) present than if least distorted sub-plot present has $w=0.4$ ($D=1.2$). Correcting for this bias, the set of $D^\ast=\{D_1, ..., D_6\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as 
+We compute this quantity for each sub-plot in each stimulus presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$,  corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a sub-plot with $w=0$ ($D=1$) present than if least distorted sub-plot present has $w=0.4$ ($D=1.2$ for plots of $y=\sin(x)$). Correcting for this bias, the set of $\{D_{\cdot \cdot k}\}=\{D_{\cdot \cdot 1}, ..., D_{\cdot \cdot 6}\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as 
 \begin{equation}\label{eqn:pconv}
-P=D^\ast/\min_{1\leq j \leq 6} D_j
+P_{ij}=D_{ijk}/\min_{1\leq k \leq 6} D_{ijk}
 \end{equation}
 for each plot and each participant.
+% 
+% \hh{XXX previously, $D^\ast$ was defined differently. }
+% 
+% \hh{XXX the way that $P$ is defined, is as a set of ratios, because $D^\ast$ is a set. I'm not sure that that's what you want, and it's not what you describe afterwards. }
 
-\hh{XXX previously, $D^\ast$ was defined differently. }
-
-\hh{XXX the way that $P$ is defined, is as a set of ratios, because $D^\ast$ is a set. I'm not sure that that's what you want, and it's not what you describe afterwards. }
-
-\hh{XXX Generally - I don't quite see why we need to divide by the minimum. You  have a problem with the choice of plot, if the minimal or maximal $D$ was picked. But due to the discrete nature of the choice, we have a similar problem with any choice of plot: we only know the answer up to the interval of $D_i$s shown. 
+\hh{XXX Generally - I don't quite see why we need to divide by the minimum. You  have a problem with the choice of plot, if the minimal or maximal $D$ was picked. But due to the discrete nature of the choice, we have a similar problem with any choice of plot: we only know the answer up to the interval of $D_k$s shown. 
 At this point I'm not quite buying into the transformation to $P$. }
 
 \hh{XXX Could you make a picture of raw responses in interval coding? - i.e. if we have a choice of $D$ as 1.14 and the next two answers are 1.0 and 1.4, you shade the area between 1 and 1.4 with more weight towards 1.14 ... - these would be densities that are specific to a stimuli set. }
