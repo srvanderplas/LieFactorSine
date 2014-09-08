@@ -143,8 +143,8 @@ One explanation for the M\"uller-Lyer illusion \cite{gregory} is that the brain 
 % Figure~\ref{fig:mullerlyerreal} shows not only the real-world context, but that the perspective cues which contribute to the illusion allow for an accurate neural representation of the object in context. \hh{XXX the previous sentence is grammatically correct, but it's a hard read - chop it in two?}
 
 \begin{figure}\centering
-\includegraphics[width=5in,keepaspectratio=TRUE]{images/mullerlyerhouse}
-\caption{Real-world context that gives rise to the M\"uller-Lyer illusion}\label{fig:mullerlyerreal}
+\includegraphics[width=5in,keepaspectratio=TRUE]{images/mullerlyerhouse1}
+\caption{Real-world context that gives rise to the M\"uller-Lyer illusion. The highlighted areas correspond to the parts of the Muller Lyer illusion, and while the two arrows are obviously the same size in the real world, the black arrow takes up much more visual space than the white arrow.}\label{fig:mullerlyerreal}
 \end{figure}
 
 \section{Three Dimensional Context of the Sine Illusion}
