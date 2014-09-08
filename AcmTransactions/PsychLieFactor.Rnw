@@ -376,7 +376,7 @@ In order to appropriately compare intervals for each participant's $\theta_i$ (e
 \caption{95\% posterior predictive intervals for $\theta_i$, calculated for each stimulus type. Vertical lines indicate the median estimate of the overall $\theta$ with a 95\% credible interval.}\label{fig:indivCIs}
 \end{figure}
 
-Posterior predictive intervals for $\theta_i$ as shown in figure~\ref{fig:indivCIs} suggest that overall, the $\theta_i$ are similar across individuals. Very few \hh{XXX how many exactly?} of the intervals overlap the region (1, 1.05), which corresponds to an ``acceptable" lie factor according to Tufte. This indicates significant distortion for most participants in our experiment, and the marked overlap of the intervals for each participant provides evidence consistent with a common magnitude of distortion. This suggests that there may be some common psychological strategy that is misapplied to the perception of these stimuli. 
+Posterior predictive intervals for $\theta_i$ as shown in figure~\ref{fig:indivCIs} suggest that overall, the $\theta_i$ are similar across individuals. Very few (5 each for $y=\sin(x)$ and $y=\exp(x)$, 16 for $y=1/x$) of the intervals overlap the region (1, 1.05), which corresponds to an ``acceptable" lie factor according to Tufte. This indicates significant distortion for most participants in our experiment, and the marked overlap of the intervals for each participant provides evidence consistent with a common magnitude of distortion. This suggests that there may be some common psychological strategy that is misapplied to the perception of these stimuli. 
 
 
 \subsubsection*{Comparison of the Preferred Stimuli}
@@ -393,11 +393,11 @@ Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \S
 }
 \end{table}
 
-\hh{`optimal' is a tricky property - optimality needs a formal proof for back up. Don't go there. It's an estimated weight, or participant based weight.}
-The optimal weight values corresponding to these $\theta$ are shown in figure \ref{fig:allCorrectionOptimal}. In all three cases, the optimally corrected plots appear less distorted than the uncorrected plots. 
+% \hh{`optimal' is a tricky property - optimality needs a formal proof for back up. Don't go there. It's an estimated weight, or participant based weight.}
+The estimated weight values corresponding to these $\theta$ are shown in figure \ref{fig:allCorrectionOptimal}. In all three cases, the experimentally-corrected plots appear less distorted than the uncorrected plots. 
 
 \begin{figure}[tp]\centering
-\includegraphics[width=6in,trim=.25in 0in .25in 0in]{figure/fig-allOptimalWeights}
+\includegraphics[width=6in,trim=.25in 0in .25in 0in]{figure/fig-allOptimalWeights} 
 \caption{Uncorrected, optimally corrected (according to the median value of $\theta$), and fully corrected stimuli for all three underlying functions used in the experiment. The corrected value shown here is equivalent to the distortion factor $D$ defined as $D=\ell_{max}/\ell_{min}$.}\label{fig:allCorrectionOptimal}
 \end{figure}
 
@@ -648,7 +648,7 @@ data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 data$type <- "Sine"
 data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
-data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
+data$paren <- c(" (Uncorrected)", " (Experimental)", " (Fully Corrected)")[data$set]
 data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
 p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
@@ -679,7 +679,7 @@ data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 data$type <- "Inverse"
 data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
-data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
+data$paren <- c(" (Uncorrected)", " (Experimental)", " (Fully Corrected)")[data$set]
 data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
 p2 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
@@ -713,7 +713,7 @@ data$set <- sapply(data$w, function(i) which(w %in% i))
 data$display <- sapply(data$w, function(i) which(frameorder %in% i))
 data$type <- "Exponential"
 data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*ell))
-data$paren <- c(" (Uncorrected)", " (Optimal)", " (Fully Corrected)")[data$set]
+data$paren <- c(" (Uncorrected)", " (Experimental)", " (Fully Corrected)")[data$set]
 data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
 p3 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
@@ -729,6 +729,10 @@ ggsave("figure/fig-exponential.png", width=2, height=2, units="in")
 
 library(grDevices)
 cairo_pdf("./figure/fig-allOptimalWeights.pdf", width=6, height=5.5)
+grid.arrange(p1, p3, p2, nrow=3, ncol=1)
+dev.off()
+
+cairo_pdf("./figure/fig-allOptimalWeights.png", width=6, height=5.5)
 grid.arrange(p1, p3, p2, nrow=3, ncol=1)
 dev.off()
 @
