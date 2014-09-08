@@ -398,7 +398,7 @@ The estimated weight values corresponding to these $\theta$ are shown in figure 
 
 \begin{figure}[tp]\centering
 \includegraphics[width=6in,trim=.25in 0in .25in 0in]{figure/fig-allOptimalWeights} 
-\caption{Uncorrected, optimally corrected (according to the median value of $\theta$), and fully corrected stimuli for all three underlying functions used in the experiment. The corrected value shown here is equivalent to the distortion factor $D$ defined as $D=\ell_{max}/\ell_{min}$.}\label{fig:allCorrectionOptimal}
+\caption{Uncorrected, experimentally corrected (according to the median value of $\theta$), and fully corrected stimuli for all three underlying functions used in the experiment. The corrected value shown here is equivalent to the distortion factor $D$ defined as $D=\ell_{max}/\ell_{min}$.}\label{fig:allCorrectionOptimal}
 \end{figure}
 
 \section{Conclusions}
