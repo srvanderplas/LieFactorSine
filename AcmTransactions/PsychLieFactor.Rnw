@@ -107,6 +107,7 @@ Author's address: S. VanderPlas, Snedecor Hall, Iowa State University, Ames, IA 
 \end{bottomstuff}
 \maketitle
 
+
 \section{Introduction}
 % \hh{we should be talking of `chart' rather than `graph' - in the engineering world a graph is always considered as having nodes and edges. I'm not sure what the psychologists make of it, but we shouldn't give them a chance to misinterpret things.}
 
@@ -119,10 +120,14 @@ One of the basic principles of statistical graphics is that a chart should accur
 Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data~\cite{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the mapping from data to graphics, it does not give us any insight about the mapping from the chart to the brain. 
 % \hh{XXX is transition a psych word? - I would use the word `mapping'.}
 Ideally, charts not only represent the data accurately, but  also allow readers to draw accurate conclusions from the graph. While in many cases these two goals can be achieved simultaneously, there are instances in which human perception produces a psychological distortion that  interferes with the interpretation of charts, even if the charts are accurate portrayals of the numerical data. 
+\comment{let's not undermine the whole idea of graphics in the intro ... in most situations our visual system is pretty good in interpreting graphics ... maybe cite Cleveland ordering of visual tasks, that got replicated by Kosara et al.}
+
+\comment{... but in drawing charts we need to be aware of contextual misperceptions that lead us to wrong conclusions ...}
 In this paper, we examine situations in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a chart.
 
 \comment{Are there any other attempts to ensure that a chart is representing the data? This section needs a bit more lit review.}
 
+\comment{I think the next two sections are actually subsections - the curse of three dimensions and the three dimensional context are part of the background - so let's put it in the intro section}
 \section{The Curse of Three Dimensions}
 The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a functional mental representation of the three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional information. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation might correspond to multiple three-dimensional objects, as in the well-known Necker Cube (\citealt{gregory}; shown in figure~\ref{fig:Necker}). Additionally, the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. Optical illusions that demonstrate this phenomenon are the so-called ``impossible objects" such as the Penrose triangle \cite{gregory}. 
 \begin{figure}
@@ -184,11 +189,16 @@ One difference between the sine illusion and the M\"uller-Lyer illusion that may
 % \end{figure}
 
 The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\cite{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical charts. In order to assess the distortions due to the illusion, we need to quantify this distortion. For comparison, we will work from Tufte's lie factor \cite[pg 57]{tufte}, which compares the size of an effect in the data with the size shown in a graphic, and is defined in equation \ref{eqn:tufteliefactor}.
+\comment{Don't use frac -- make the ratio fall into one line by using / (this holds for all ratios in the document)}
+
 \begin{equation}\label{eqn:tufteliefactor}
 \text{Lie Factor} = \frac{\text{size of effect shown in chart}}{\text{size of effect shown in data}}
 \end{equation}
+
+\comment{Here you are changing the track of the paper completely. THis is where your stuff starts. So let's move the definition of the psych lie factor to the start of the next section; instead set up the rest of the paper here: study, results, maybe interview description }
+
+
 \noindent We will similarly define the psychological lie factor for this illusion as shown in equation \ref{eqn:psychliefactor}. 
-\comment{Don't use frac -- make the ratio fall into one line by using / (this holds for all ratios in the document)}
 \begin{equation}\label{eqn:psychliefactor}
 \text{Psychological Lie Factor} = \frac{\text{size of effect perceived}}{\text{size of the effect shown in the chart}}
 \end{equation}
@@ -196,7 +206,10 @@ In order to estimate the psychological lie factor that occurs due to this illusi
 
 \section{Measuring the Psychological Lie Factor Experimentally}
 \subsection{Study Setup}
-In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to figure~\ref{fig:sinestimuli}. These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
+In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to figure~\ref{fig:sinestimuli}.
+
+\comment{ `similar to figure~\ref{fig:sinestimuli}' is not enough information. Describe each one of the functions, and show tons of pictures.}
+These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
 
 \begin{figure}[tb]
 \centering
