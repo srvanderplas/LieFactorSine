@@ -106,7 +106,8 @@ source("./code/BayesAnalysis.R") # generate pics for analysis without all the dd
 Author's address: S. VanderPlas, Snedecor Hall, Iowa State University, Ames, IA 50010; email: skoons@iastate.edu
 \end{bottomstuff}
 \maketitle
-
+\tableofcontents
+\newpage
 
 \section{Introduction}
 % \hh{we should be talking of `chart' rather than `graph' - in the engineering world a graph is always considered as having nodes and edges. I'm not sure what the psychologists make of it, but we shouldn't give them a chance to misinterpret things.}
@@ -128,7 +129,8 @@ In this paper, we examine situations in which low-level human perceptual process
 \comment{Are there any other attempts to ensure that a chart is representing the data? This section needs a bit more lit review.}
 
 \comment{I think the next two sections are actually subsections - the curse of three dimensions and the three dimensional context are part of the background - so let's put it in the intro section}
-\section{The Curse of Three Dimensions}
+
+%\section{The Curse of Three Dimensions}
 The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a functional mental representation of the three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional information. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation might correspond to multiple three-dimensional objects, as in the well-known Necker Cube (\citealt{gregory}; shown in figure~\ref{fig:Necker}). Additionally, the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. Optical illusions that demonstrate this phenomenon are the so-called ``impossible objects" such as the Penrose triangle \cite{gregory}. 
 \begin{figure}
 \includegraphics[keepaspectratio=TRUE,width=6in, trim=0in .25in 0in 0in]{figure/fig-neckercube}
@@ -180,6 +182,11 @@ Cleveland and McGill
 
 As the vanishing point moves further away from the viewer and the 3d projection decreases in strength, the three-dimensional reconstruction of the image converges to figure~\ref{fig:sineillusion}. The second image in figure~\ref{fig:sineillusion3d} shows a weaker 3-dimensional projection that is much closer to figure~\ref{fig:sineillusion}, however, the three-dimensional contextual information provided by the shading removes much of the illusion's distortions. This is similar to the M\"uller-Lyer illusion, as figure~\ref{fig:mullerlyerreal} is not at all ambiguous because the contextual depth information provided by the rest of the surface of the house is sufficient to remove the illusion that the closer corner is in fact larger due to the perspective.
 
+
+\comment{how about the interview here? }
+\newtext{Further evidence that places the sine illusion firmly into the area of a 3d contextual illusion is given by the non-response of individuals with depth-deficient vision:}
+
+
 One difference between the sine illusion and the M\"uller-Lyer illusion that may influence the tendency to see a three-dimensional ``ribbon" instead of the two-dimensional sine curve is that the vertical lines in the sine illusion are ambiguously oriented - there is an entire plane of possible three-dimensional reconstructions for each line, and each possible rotation leads to a line of different length. It is this facet of the image that we believe partially contributes to the ambiguity of the image, though it is not a necessary feature for the illusion to persist, as the illusion also can be found in scatterplots and in ``ribbon plots" such as figure~\ref{fig:playfair}. 
 
 % 
@@ -188,6 +195,9 @@ One difference between the sine illusion and the M\"uller-Lyer illusion that may
 % \caption{Three dimensional context for the sine illusion, with a weaker perspective transformation.}\label{fig:sineillusion3dmagic}
 % \end{figure}
 
+\section{Measuring the Psychological Lie Factor Experimentally}
+\subsection{The Psychological Lie Factor}
+
 The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\cite{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical charts. In order to assess the distortions due to the illusion, we need to quantify this distortion. For comparison, we will work from Tufte's lie factor \cite[pg 57]{tufte}, which compares the size of an effect in the data with the size shown in a graphic, and is defined in equation \ref{eqn:tufteliefactor}.
 \comment{Don't use frac -- make the ratio fall into one line by using / (this holds for all ratios in the document)}
 
@@ -195,7 +205,6 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 \text{Lie Factor} = \frac{\text{size of effect shown in chart}}{\text{size of effect shown in data}}
 \end{equation}
 
-\comment{Here you are changing the track of the paper completely. THis is where your stuff starts. So let's move the definition of the psych lie factor to the start of the next section; instead set up the rest of the paper here: study, results, maybe interview description }
 
 
 \noindent We will similarly define the psychological lie factor for this illusion as shown in equation \ref{eqn:psychliefactor}. 
@@ -204,7 +213,6 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 \end{equation}
 In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
 
-\section{Measuring the Psychological Lie Factor Experimentally}
 \subsection{Study Setup}
 In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to figure~\ref{fig:sinestimuli}.
 
