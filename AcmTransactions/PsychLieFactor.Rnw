@@ -164,7 +164,9 @@ While the classic M\"uller-Lyer illusion is seldom a factor in statistical chart
 
 \comment{Give each of the two figures in the next sentence its own paragraph. First introduce the sine illusion. Then give an example outside the realm of vertical lines. Otherwise you're wasting good material.}
 
-Figure~\ref{fig:sineillusion} shows the sine illusion in its original form \cite{day:1991}, as straight vertical lines of the same length with a nonlinear mean function. In this illusion, the vertical lines in the center of the figure appear much shorter than the vertical lines at the peak and trough of the sine curve. The illusion still persists when the image is rotated by 90$^\deg$, and is incredibly difficult to mentally overcome (even when viewers are aware of the illusion's presence). 
+\newtext{
+Figure~\ref{fig:sineillusion} shows the sine illusion in its original form \cite{day:1991}, as straight vertical lines of the same length with a nonlinear mean function. In this illusion, the vertical lines in the center of the figure appear much shorter than the vertical lines at the peak and trough of the sine curve. The illusion still persists when the image is rotated by $90^{\deg}$, and is incredibly difficult to mentally overcome (even when viewers are aware of the illusion's presence). 
+}
 
 \begin{figure}\centering
 \includegraphics[keepaspectratio=TRUE,trim=0in .5in 0in .5in]{figure/fig-sinedemo}
