@@ -178,8 +178,48 @@ The sine illusion is also present in well-known graphics, such as the ``Balance 
 \includegraphics[keepaspectratio=TRUE,width=5in]{images/PlayfairExportImports}
 \caption{Playfair's chart of trade between the East Indies and England, 1700-1780. The trade balance is influenced by the sine illusion: the difference between imports and exports in 1763 does not appear to be the same size as that in 1745, though the vertical distance is approximately the same.}\label{fig:playfair}
 \end{figure}
-Cleveland and McGill
-\citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does readily confirm their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. Day \& Stecher~\citeyear{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well -- there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in figure~\ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, figure~\ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in \citeN{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. The main difference between the first three dimensional image shown in figure~\ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
+
+In both figures, the illusion appears when the vertical length displayed in the chart does not match the perceived information. Like the M\"uller-Lyer illusion, the illusion is pervasive and very difficult to ``un-see" or mentally correct. The sine illusion, which is also known as the line-width illusion, has also been documented in parallel sets plots \cite{parallelsets} and occurs when there is a nonlinear function with a large change in absolute slope; this change in slope can mask or exaggerate changes in variance. The illusion is also affected by the aspect ratio of the image and the aspect ratio of the chart's coordinate system. An interactive demonstration of the illusion is available at \url{http://bit.ly/1ldgujL}; manipulating the length of the lines and the amplitude of the underlying sine function also changes the chart's aspect ratio and the perceived strength of the illusion. 
+
+<<cleveland, echo=FALSE, fig.width=6, fig.height=6, include=FALSE>>=
+f <- function(x) -x^2
+sdf <- function(x) (4-0.5*x)/5
+  
+x <- seq(-2,2.5, by=0.1)
+
+id <- 1:30
+dframe <- expand.grid(x=x, id=id)
+dframe$y <- with(dframe, rnorm(n=nrow(dframe), mean=f(x), sd=sdf(x)/2))
+qplot(x,y, data=dframe, geom="jitter") + theme_bw()
+dframe$Trend <- f(dframe$x)
+dframe$Residuals <- dframe$y - dframe$Trend
+
+x <- seq(-2,2.5, by=0.01)
+p1 <- qplot(x=x, y=f(x), ylab="Trend", geom="line") + theme_bw()
+p2 <- qplot(x=x, y=Residuals, data=dframe, geom="jitter") + theme_bw()
+p <- grid.arrange(p1, p2, nrow=2)
+p
+@
+\begin{figure} \hfill
+\begin{minipage}[b]{.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figure/fig-cleveland1}\\
+  (a) \small Data
+\end{minipage} \hfill\hfill
+\begin{minipage}[b]{.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figure/fig-cleveland2}\\
+  (b) \small Trend and Residuals
+\end{minipage} \hfill
+\caption{Describe the conditional variability of the points along the $x$ axis in (a). Is your description consistent with the residual plot in (b)?}
+\label{fig:cleveland-figure}
+\end{figure}
+
+The illusion is not dependent on specifically identifying the vertical distance along a line. Figure \ref{fig:cleveland-figure}(a) shows a scatterplot of data with a trend. A loess smooth is used to estimate the trendline. A visual assessment of variability along this trendline might result in a description such as `homogeneous variance or slightly increasing variance for  negative $x$, followed by a dramatic decrease in vertical variability for positive $x$'. Once the residuals are separated from the trendline as shown on the right hand side of the figure, it becomes apparent that this first assessment of conditional variability was not correct, and the steady decrease along the horizontal axis becomes visible.
+
+Cleveland and McGill \citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does support their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. This comparison holds with scatterplots (such as figure \ref{fig:cleveland-figure}) because when the points are dense, we examine variability by looking at the upper and lower contours of the data.
+
+Day \& Stecher~\citeyear{day:1991} suggest that the sine illusion is similar in principle to the M\"uller-Lyer illusion, attributing it to the perceptual compromise between the vertical extent and the overall dimensions of the figure. The sine illusion is similar to the  M\"uller-Lyer illusion in another way, as well -- there are three-dimensional analogues of the two-dimensional image that may influence the perceptual context. One of these contexts is shown in figure~\ref{fig:sineillusion3d}, generated from the same function shown in the two-dimensional analogue, figure~\ref{fig:sineillusion}, but with the length projected onto a third dimension. While the images do not match exactly, the similarities are striking. Additionally, the tendency to judge vertical distance using the extant width noted in \citeN{cleveland:1985} corresponds to the measurement of depth in the three-dimensional image. The main difference between the first three dimensional image shown in figure~\ref{fig:sineillusion3d} and the original image is that the lines connecting the top and bottom sections of the curve are slightly angled in the three-dimensional version; this is due to the perspective projection used to create the image and the corresponding angles of rotation chosen such that the entire surface is visible. 
 
 \begin{figure}\centering
 \includegraphics[keepaspectratio=TRUE,width=6in, trim=0in 1.25in 0in .5in]{figure/fig-sinedemo2}
