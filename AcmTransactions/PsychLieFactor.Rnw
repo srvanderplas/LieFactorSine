@@ -160,7 +160,7 @@ One explanation for the M\"uller-Lyer illusion \cite{gregory} is that the brain 
 \end{figure}
 
 \subsection{Three Dimensional Context of the Sine Illusion}
-While the classic M\"uller-Lyer illusion is seldom a factor in statistical charts, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion, \citealt{sineillusionjcgs,day:1991}) is one example of this phenomenon which occurs frequently in statistical graphics. 
+While the classic M\"uller-Lyer illusion is seldom a factor in statistical charts, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion: \citealt{sineillusionjcgs,day:1991}) is one example of this phenomenon which occurs frequently in statistical graphics. 
 
 \comment{Give each of the two figures in the next sentence its own paragraph. First introduce the sine illusion. Then give an example outside the realm of vertical lines. Otherwise you're wasting good material.}
 
