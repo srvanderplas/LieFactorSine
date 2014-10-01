@@ -110,16 +110,13 @@ Author's address: S. VanderPlas, Snedecor Hall, Iowa State University, Ames, IA 
 \newpage
 
 \section{Introduction}
-% \hh{we should be talking of `chart' rather than `graph' - in the engineering world a graph is always considered as having nodes and edges. I'm not sure what the psychologists make of it, but we shouldn't give them a chance to misinterpret things.}
-
-\hh{motivate power of graphics first?}
+\comment{motivate power of graphics first?}
 
 One of the basic principles of statistical graphics is that a chart should accurately reflect the data.
-\hh{XXX what are statistical graphics, and how are they different from `visualizations'/sketches?}
+\comment{XXX what are statistical graphics, and how are they different from `visualizations'/sketches?}
 
 \comment{The lie factor needs more details for a proper introduction, like the one you do a bit later. Take out some detail and just mention the lie factor as one measure to assess whether a picture is true to the data it's supposed to show.}
 Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data~\cite{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the mapping from data to graphics, it does not give us any insight about the mapping from the chart to the brain. 
-% \hh{XXX is transition a psych word? - I would use the word `mapping'.}
 
 \newtext{
 Ideally, charts not only represent the data accurately, but  also allow readers to draw accurate conclusions from the graph. While the human visual system is quite good at accurately interpreting statistical charts \cite{cleveland:1984}, we need to be aware of contextual misperceptions that lead us to the wrong conclusion. 
@@ -133,7 +130,7 @@ In this paper, we examine situations in which low-level human perceptual process
 \newtext{There are relatively few examples of the effect of optical illusions and other misperceptions on statistical graphics, but \citet{amer2005bias} and \citet{poulton1985geometric} have documented the effect of the poggendorff illusion on line graphs in different contexts. }
 \comment{I haven't found much, but there's at least this bit. }
 
-\comment{I think the next two sections are actually subsections - the curse of three dimensions and the three dimensional context are part of the background - so let's put it in the intro section}
+%\comment{I think the next two sections are actually subsections - the curse of three dimensions and the three dimensional context are part of the background - so let's put it in the intro section}
 
 \subsection{The Curse of Three Dimensions}
 The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a functional mental representation of the three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional information. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation might correspond to multiple three-dimensional objects, as in the well-known Necker Cube (\citealt{gregory}; shown in figure~\ref{fig:Necker}). Additionally, the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. Optical illusions that demonstrate this phenomenon are the so-called ``impossible objects" such as the Penrose triangle \cite{gregory}. 
@@ -311,20 +308,11 @@ Each participant was presented with eleven sets of graphs (each ``set" consistin
 
 \subsection{Data Collection}
 
-% \hh{XXX overview of number of responses for each stimulus?}
-
 Participants for the study were recruited through the Amazon Mechanical Turk web service, which connects workers with tasks that are not easily automated for a small fee. In exchange for completing at least 11 trials, participants were paid \$1. Given the anonymity of web-based data collection, we informed participants that a unique IP address was required to participate in the experiment; responses from duplicate IP addresses with different Turk IDs were grouped and only the first response was paid. This procedure was used to lower the probability of a single user completing the task multiple times, in order to ensure that we could accurately estimate variation among individuals. 
-
-% \hh{XXX why is it necessary for the analysis to know about individuals?}
 
 \Sexpr{nrow(turkdata.full)} responses from \Sexpr{length(unique(turkdata.full$id))} users at \Sexpr{length(unique(turkdata.full$ip.id))} unique IP addresses were collected. We removed data from participants who did not complete at least 10 trials (allowing for one trial to be skipped or otherwise not completed), and of the collected responses, \Sexpr{sum(turkdata.full$len<=10)} trials from \Sexpr{length(unique(turkdata.full[turkdata.full$len<=10,]$id))} participants were removed. 
 
-
-% \hh{XXX how many people started experiment, but did not complete it?}
-
 In addition to the requirement that participants complete at least 10 trials, the participant also was required to complete at least 4 trials of a specific underlying function for those trials to be included. This condition ensured that for any specific function, there were enough trials to estimate an initial effect; an additional \Sexpr{nrow(turkdata.full) - sum(turkdata.full$len<=10) - nrow(turkdata)} trials were excluded based on this condition. 
-
-% \hh{XXX how many of the test charts did people fail? Did you have to clean up data in any other way?}
 
 There were \Sexpr{length(unique(turkdata$ip.id))} users who completed at least 10 trials each (providing enough data that we could accurately fit individual-level parameters), and those users completed \Sexpr{nrow(turkdata)} trials which were used for this analysis. Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. We did not exclude data based on user responses to avoid biasing our conclusions; the possibility of significant variability between individuals in the preference for a specific $w$ value was too large to filter out even those who chose plots corresponding to $w=1.4$. 
 
