@@ -127,6 +127,8 @@ Ideally, charts not only represent the data accurately, but  also allow readers 
 In this paper, we examine situations in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a chart.
 
 \comment{Are there any other attempts to ensure that a chart is representing the data? This section needs a bit more lit review.}
+\newtext{There are relatively few examples of the effect of optical illusions and other misperceptions on statistical graphics, but \citet{amer2005bias} and \citet{poulton1985geometric} have documented the effect of the poggendorff illusion on line graphs in different contexts. }
+\comment{I haven't found much, but there's at least this bit. }
 
 \comment{I think the next two sections are actually subsections - the curse of three dimensions and the three dimensional context are part of the background - so let's put it in the intro section}
 
