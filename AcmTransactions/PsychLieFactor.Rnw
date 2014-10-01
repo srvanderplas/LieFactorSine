@@ -267,7 +267,7 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
 
 \subsection{Study Setup}
-In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to figure~\ref{fig:sinestimuli}.
+In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots. One of these stimuli sets is shown in figure~\ref{fig:sinestimuli}.
 
 \comment{ `similar to figure~\ref{fig:sinestimuli}' is not enough information. Describe each one of the functions, and show tons of pictures.}
 
