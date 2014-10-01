@@ -389,7 +389,7 @@ As the strength of the correction varies across the horizontal range of the curv
 
 % \hh{XXX why only extension?  - That was just our choice. We could also have worked the correction by averaging across lines to keep the average at 1.}
 
-The correction for the sine illusion by default extends the line segments, so that if the initial line segments were all of length 1, the correction will produce corresponding line segments of length greater than or equal to 1. In addition, due to the underlying functions we have chosen, the minimum line length (assuming a starting line length of 1) after correction is approximately 1; this allows us to simplify $D_k$ as $$D_k = \text{maximum line length in plot } k$$. 
+The correction for the sine illusion by default extends the line segments, so that if the initial line segments were all of length 1, the correction will produce corresponding line segments of length greater than or equal to 1. In addition, due to the underlying functions we have chosen, the minimum line length (assuming a starting line length of 1) after correction is approximately 1; this allows us to simplify $D_k$ as $$D_k = \text{maximum line length in plot } k$$
 Without any correction for the sine illusion, this factor is, like  Tufte's lie-factor, equal to one. Values above one indicate that at least in some areas of the curve line segments are extended.
 
 
