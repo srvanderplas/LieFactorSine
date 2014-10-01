@@ -203,24 +203,26 @@ One difference between the sine illusion and the M\"uller-Lyer illusion that may
 \subsection{The Psychological Lie Factor}
 
 The psychological mechanisms which force three-dimensional context onto two-dimensional stimuli are useful adaptations to a three-dimensional world~\cite{gregory}, but they do have disadvantages when applied to abstract two-dimensional stimuli, such as statistical charts. In order to assess the distortions due to the illusion, we need to quantify this distortion. For comparison, we will work from Tufte's lie factor \cite[pg 57]{tufte}, which compares the size of an effect in the data with the size shown in a graphic, and is defined in equation \ref{eqn:tufteliefactor}.
-\comment{Don't use frac -- make the ratio fall into one line by using / (this holds for all ratios in the document)}
 
 \begin{equation}\label{eqn:tufteliefactor}
-\text{Lie Factor} = \frac{\text{size of effect shown in chart}}{\text{size of effect shown in data}}
+\text{Lie Factor} = (\text{size of effect shown in chart})/(\text{size of effect shown in data})
 \end{equation}
 
 
 
 \noindent We will similarly define the psychological lie factor for this illusion as shown in equation \ref{eqn:psychliefactor}. 
+
 \begin{equation}\label{eqn:psychliefactor}
-\text{Psychological Lie Factor} = \frac{\text{size of effect perceived}}{\text{size of the effect shown in the chart}}
+\text{Psychological Lie Factor} = (\text{size of effect perceived})/(\text{size of the effect shown in the chart})
 \end{equation}
+
 In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
 
 \subsection{Study Setup}
 In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots, similar to figure~\ref{fig:sinestimuli}.
 
 \comment{ `similar to figure~\ref{fig:sinestimuli}' is not enough information. Describe each one of the functions, and show tons of pictures.}
+
 These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
 
 \begin{figure}[tb]
@@ -246,7 +248,7 @@ where $w$ represents a weight factor to allow variation of the strength of the c
 In order to quantify the psychological lie factor $D$ for each sub plot $k=1, ..., 6$, we took the ratio of the maximum line length to the minimum line length shown in the plot. As participants were to choose the plot with lines that had the most even length, a large value of $D$ indicates significant distortion. 
 
 \begin{equation}\label{eqn:psychliefactorD}
-D_k = \frac{\text{maximum line length in sub-plot } k}{\text{minimum line length in sub-plot } k}
+D_k = (\text{maximum line length in sub-plot } k)/(\text{minimum line length in sub-plot } k)
 \end{equation}
 
 The definition of $D$ in equation \ref{eqn:psychliefactorD} does deviate somewhat from our extension of Tufte's definition of the lie factor described in equation \ref{eqn:psychliefactor}, but this is by necessity, as an uncorrected plot would show a difference of 0, which would wreak havoc on any experimental measure of the lie factor, as that 0 would be in the denominator. Our modification preserves the interpretation of Tufte's lie factor, while adapting the computation for use in this experimental setting. 
