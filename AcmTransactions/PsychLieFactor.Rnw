@@ -173,7 +173,9 @@ Figure~\ref{fig:sineillusion} shows the sine illusion in its original form \cite
 \caption{The classic sine illusion. Each vertical line has the same length, though the lines at the peak and trough of the curve appear longer.}\label{fig:sineillusion}
 \end{figure}
 
+\newtext{
 The sine illusion is also present in well-known graphics, such as the ``Balance of Trade'' chart from Playfair's Statistical Atlas~\cite{playfair}, shown in figure~\ref{fig:playfair}. The balance of trade in 1765 seems to be approximately the same as the balance of trade in the years immediately preceding that year; this is in fact extremely misleading (using a straightedge along the chart vertically will demonstrate the issue). This problem has been well-documented \citep{cleveland:1984}, but it is difficult to produce a (single) similar chart which conveys all of the information presented in figure~\ref{fig:playfair}. 
+}
 
 
 \begin{figure}[t]\centering
@@ -217,7 +219,9 @@ p
 \label{fig:cleveland-figure}
 \end{figure}
 
+\newtext{
 The illusion is not dependent on specifically identifying the vertical distance along a line. Figure \ref{fig:cleveland-figure}(a) shows a scatterplot of data with a trend. A loess smooth is used to estimate the trendline. A visual assessment of variability along this trendline might result in a description such as `homogeneous variance or slightly increasing variance for  negative $x$, followed by a dramatic decrease in vertical variability for positive $x$'. Once the residuals are separated from the trendline as shown on the right hand side of the figure, it becomes apparent that this first assessment of conditional variability was not correct, and the steady decrease along the horizontal axis becomes visible.
+}
 
 Cleveland and McGill \citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does support their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. This comparison holds with scatterplots (such as figure \ref{fig:cleveland-figure}) because when the points are dense, we examine variability by looking at the upper and lower contours of the data.
 
