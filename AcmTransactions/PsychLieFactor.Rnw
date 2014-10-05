@@ -289,6 +289,17 @@ These sets of charts were constructed such that line lengths along a curve were 
 \caption{De-trended line lengths for figure~\ref{fig:sinestimuli}, demonstrating the distortion present due to the correction factor in each sub-plot. Comparing the distortion in the chosen sub-plot to the undistorted data produces an estimate of the psychological lie factor. }\label{fig:sinestimulinotrend}
 \end{figure}
 
+\newtext{Figure~\ref{fig:invstimuli} shows another set of these stimuli using a different underlying mean function with the same underlying weight values. }
+
+\newtext{
+The underlying mean function change does change the effective lie factor (due to a different derivative, and thus, a different correction). The illusion, however, is still present; our goal is to determine whether the illusion's effects are consistent with regard to the strength of the preferred lie factor. }
+
+\begin{figure}[tb]
+\centering
+\includegraphics[width=6in]{figure/fig-stimulicorrectionsize3}
+\caption{Another chart presented to participants through Amazon Mechanical Turk. This chart corresponds to set \#4 in table~\ref{tab:w3}. The plots are shown in random order, however; plot~\#1 corresponds to $w=0.9$, plot~\#2 to $w=0.7$, plot~\#3 to $w=0.3$, plot~\#4 to $w=0.1$, plot~\#5 to $w=0.5$, and plot~\#6 to $w=1.1$.}\label{fig:invstimuli}
+\end{figure}
+
 The amount of correction in each sub-plot was chosen such that each stimuli set contained a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. The correction factor we use for extending the length of the line segment at location $x$ is given as
 
 \begin{equation}\label{eqn:correction}
