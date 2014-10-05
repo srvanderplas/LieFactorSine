@@ -350,6 +350,65 @@ set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolum
 }
 \end{table}
 
+
+\begin{table}[ht]
+\centering
+\tbl{\label{tab:w2} Ordered weight factors and corresponding lie factors for the exponential curve stimuli sets, as computed using equation \ref{eqn:psychliefactorD}.
+% \hh{XXX what was the underlying concept behind the choice of weights? $D$ needs to be defined before this table is referred to - at least give a reference to $D$s definition. Is $D$ really the same for all three stimuli?}
+}{
+     \begin{tabular}{llrrrrrrlrrrrrr}
+     \hline
+     %\cline{3-8} \cline{10-15}\\ [-1.75ex]
+     set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Lie Factor ($D$) for $\exp(x)$ plots}\\ 
+     \hline
+     & & \multicolumn{6}{c}{sub-plot} & & \multicolumn{6}{c}{sub-plot}\\ 
+     & & 1 & 2 & 3 & 4 & 5 & 6  & & 1 & 2 & 3 & 4 & 5 & 6  \\ 
+     \cline{3-8} \cline{10-15}\\ [-1.75ex]
+     3 & 1 & 0.00 & 0.20 & 0.40 & 0.60 & 0.80 & 1.00 &  & 1.00 & 1.21 & 1.42 & 1.63 & 1.84 & 2.05 \\ 
+     4 & 1 & 0.10 & 0.30 & 0.50 & 0.70 & 0.90 & 1.10 &  & 1.11 & 1.32 & 1.53 & 1.74 & 1.95 & 2.16 \\ 
+     5 & 2 & 0.05 & 0.30 & 0.50 & 0.65 & 0.80 & 1.00 &  & 1.05 & 1.32 & 1.53 & 1.69 & 1.84 & 2.05 \\ 
+     6 & 2 & 0.10 & 0.30 & 0.55 & 0.70 & 0.85 & 1.00 &  & 1.11 & 1.32 & 1.58 & 1.74 & 1.90 & 2.05 \\ 
+     7 & 3 & 0.40 & 0.60 & 0.70 & 0.80 & 0.90 & 1.05 &  & 1.42 & 1.63 & 1.74 & 1.84 & 1.95 & 2.10 \\ 
+     8 & 3 & 0.35 & 0.65 & 0.75 & 0.85 & 0.95 & 1.05 &  & 1.37 & 1.69 & 1.79 & 1.90 & 2.00 & 2.10 \\ 
+     9 & 4 & 0.35 & 0.50 & 0.60 & 0.70 & 0.80 & 0.95 &  & 1.37 & 1.53 & 1.63 & 1.74 & 1.84 & 2.00 \\ 
+     10 & 4 & 0.40 & 0.55 & 0.65 & 0.75 & 0.85 & 1.00 &  & 1.42 & 1.58 & 1.69 & 1.79 & 1.90 & 2.05 \\ 
+     11 & 5 & 0.50 & 0.65 & 0.75 & 0.80 & 0.90 & 1.00 &  & 1.53 & 1.69 & 1.79 & 1.84 & 1.95 & 2.05 \\ 
+     12 & 5 & 0.50 & 0.60 & 0.70 & 0.75 & 0.85 & 1.00 &  & 1.53 & 1.63 & 1.74 & 1.79 & 1.90 & 2.05 \\ 
+     \hline
+  \end{tabular}
+}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\tbl{\label{tab:w3} Ordered weight factors and corresponding lie factors for the inverse curve stimuli sets, as computed using equation \ref{eqn:psychliefactorD}. 
+}{
+     \begin{tabular}{llrrrrrrlrrrrrr}
+     \hline
+     %\cline{3-8} \cline{10-15}\\ [-1.75ex]
+     set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Lie Factor ($D$) for $1/x$ plots}\\ 
+     \hline
+     & & \multicolumn{6}{c}{sub-plot} & & \multicolumn{6}{c}{sub-plot}\\ 
+     & & 1 & 2 & 3 & 4 & 5 & 6  & & 1 & 2 & 3 & 4 & 5 & 6  \\ 
+     \cline{3-8} \cline{10-15}\\ [-1.75ex]
+     3 & 1 & 0.00 & 0.20 & 0.40 & 0.60 & 0.80 & 1.00 &  & 1.00 & 1.14 & 1.28 & 1.43 & 1.57 & 1.71 \\ 
+     4 & 1 & 0.10 & 0.30 & 0.50 & 0.70 & 0.90 & 1.10 &  & 1.07 & 1.21 & 1.36 & 1.50 & 1.64 & 1.78 \\ 
+     5 & 2 & 0.05 & 0.30 & 0.50 & 0.65 & 0.80 & 1.00 &  & 1.04 & 1.21 & 1.36 & 1.46 & 1.57 & 1.71 \\ 
+     6 & 2 & 0.10 & 0.30 & 0.55 & 0.70 & 0.85 & 1.00 &  & 1.07 & 1.21 & 1.39 & 1.50 & 1.60 & 1.71 \\ 
+     7 & 3 & 0.40 & 0.60 & 0.70 & 0.80 & 0.90 & 1.05 &  & 1.28 & 1.43 & 1.50 & 1.57 & 1.64 & 1.75 \\ 
+     8 & 3 & 0.35 & 0.65 & 0.75 & 0.85 & 0.95 & 1.05 &  & 1.25 & 1.46 & 1.53 & 1.60 & 1.67 & 1.75 \\ 
+     9 & 4 & 0.35 & 0.50 & 0.60 & 0.70 & 0.80 & 0.95 &  & 1.25 & 1.36 & 1.43 & 1.50 & 1.57 & 1.67 \\ 
+     10 & 4 & 0.40 & 0.55 & 0.65 & 0.75 & 0.85 & 1.00 &  & 1.28 & 1.39 & 1.46 & 1.53 & 1.60 & 1.71 \\ 
+     11 & 5 & 0.50 & 0.65 & 0.75 & 0.80 & 0.90 & 1.00 &  & 1.36 & 1.46 & 1.53 & 1.57 & 1.64 & 1.71 \\ 
+     12 & 5 & 0.50 & 0.60 & 0.70 & 0.75 & 0.85 & 1.00 &  & 1.36 & 1.43 & 1.50 & 1.53 & 1.60 & 1.71 \\ 
+     \hline
+     \end{tabular}
+}
+\end{table}
+
+\comment{I know that all of these tables probably belong in the appendix, but I'm not entirely sure that's best. Thoughts?}
+
 Three underlying mean function families were tested using these weight values: $\sin(x)$, $\exp(x)$, and $1/x$. These functions, shown in figure \ref{fig:uncorrectedExamples}, were chosen because they are nonlinear functions which commonly occur in statistical graphics and are easily correctable using equation \ref{eqn:correction}. The specific mean functions used in the experiment were $y=\sin(2x)$, $y=\exp(x/2)$, and $y=5(6x)^{-1}$; the modifications allowed us to control the aspect ratio of the plot coordinate systems so that the uncorrected plots had aspect ratios between $0.75$ and $0.85$. As no x or y units were provided on the graph, these functional modifications served as experimental controls but did not change the information provided to the participants. 
 
 \begin{figure}
@@ -360,8 +419,7 @@ Three underlying mean function families were tested using these weight values: $
 % 
 % \hh{XXX show these functions and discuss why they are good choices. }
 
-
-Each participant was presented with eleven sets of graphs (each ``set" consisting of 6 separate plots), consisting of one ``easy" test set, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. After the easy introductory chart, which was presented first, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the 6 plots presented as having lines which were the most even. 
+Each participant was presented with eleven sets of graphs (each ``set" consisting of 6 separate plots), consisting of one ``easy" test set, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. After the easy introductory chart, which was presented first, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the 6 plots presented as having lines which were the most ``even''. 
 %\hh{XXX this contradicts the random order - describe the test setting in a bit more detail, that'll clear up the confusion.}
 
 \subsection{Data Collection}
