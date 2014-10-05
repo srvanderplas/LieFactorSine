@@ -275,7 +275,7 @@ In order to determine the amount of the psychological distortion, participants w
 
 \comment{ `similar to figure~\ref{fig:sinestimuli}' is not enough information. Describe each one of the functions, and show tons of pictures.}
 
-These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots above. Participants were asked  to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
+These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots in figure~\ref{fig:sinestimuli}. Participants were asked  to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
 
 \begin{figure}[tb]
 \centering
