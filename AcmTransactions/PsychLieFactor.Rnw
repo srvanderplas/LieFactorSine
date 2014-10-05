@@ -328,7 +328,7 @@ From a pilot study, we expected values around $w = 0.8$ to be sufficient to brea
 \begin{tabular}{llrrrrrrlrrrrrr}
   \hline
 %\cline{3-8} \cline{10-15}\\ [-1.75ex]
-set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Lie Factor ($D$) for $sin(x)$ plots}\\ 
+set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Lie Factor ($D$) for $\sin(x)$ plots}\\ 
 \hline
 & & \multicolumn{6}{c}{sub-plot} & & \multicolumn{6}{c}{sub-plot}\\ 
     & & 1 & 2 & 3 & 4 & 5 & 6  & & 1 & 2 & 3 & 4 & 5 & 6  \\ 
