@@ -164,20 +164,19 @@ A similar effect can also be found in the Necker Cube - whichever face appears t
 \subsection{Three Dimensional Context of the Sine Illusion}
 While the classic M\"uller-Lyer illusion is seldom a factor in statistical charts, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion: \citealt{sineillusionjcgs,day:1991}) is one example of this phenomenon which occurs frequently in statistical graphics. 
 
-\comment{Give each of the two figures in the next sentence its own paragraph. First introduce the sine illusion. Then give an example outside the realm of vertical lines. Otherwise you're wasting good material.}
+%\comment{Give each of the two figures in the next sentence its own paragraph. First introduce the sine illusion. Then give an example outside the realm of vertical lines. Otherwise you're wasting good material.}
 
-\newtext{
-Figure~\ref{fig:sineillusion} shows the sine illusion in its original form \cite{day:1991}, as straight vertical lines of the same length with a nonlinear mean function. In this illusion, the vertical lines in the center of the figure appear much shorter than the vertical lines at the peak and trough of the sine curve. The illusion still persists when the image is rotated by $90^{\deg}$, and is incredibly difficult to mentally overcome (even when viewers are aware of the illusion's presence). 
-}
+Figure~\ref{fig:sineillusion} shows the sine illusion in its original form \cite{day:1991}, as straight vertical lines of the same length with a nonlinear mean function. In this illusion, the vertical lines in the center of the figure appear much shorter than the vertical lines at the peak and trough of the sine curve. The illusion still persists when the image is rotated by $90^{\circ}$, and is incredibly difficult to mentally overcome (even when viewers are aware of the illusion's presence). 
+
 
 \begin{figure}\centering
 \includegraphics[keepaspectratio=TRUE,trim=0in .5in 0in .5in]{figure/fig-sinedemo}
 \caption{The classic sine illusion. Each vertical line has the same length, though the lines at the peak and trough of the curve appear longer.}\label{fig:sineillusion}
 \end{figure}
 
-\newtext{
-The sine illusion is also present in well-known graphics, such as the ``Balance of Trade'' chart from Playfair's Statistical Atlas~\cite{playfair}, shown in figure~\ref{fig:playfair}. The balance of trade in 1765 seems to be approximately the same as the balance of trade in the years immediately preceding that year; this is in fact extremely misleading (using a straightedge along the chart vertically will demonstrate the issue). This problem has been well-documented \citep{cleveland:1984}, but it is difficult to produce a (single) similar chart which conveys all of the information presented in figure~\ref{fig:playfair}. 
-}
+
+The sine illusion is also present in well-known graphics, such as the ``Balance of Trade'' chart from Playfair's Statistical Atlas~\cite{playfair}, shown in figure~\ref{fig:playfair}. The balance of trade in 1765 seems to be approximately the same as the balance of trade in the years immediately preceding that year; this is in fact extremely misleading (using a straightedge along the chart vertically will demonstrate the issue). This problem has been well-documented \citep{cleveland:1984, robbins:2005}, but it is difficult to produce a (single) similar chart which conveys all of the information presented in figure~\ref{fig:playfair}. 
+
 
 
 \begin{figure}[t]\centering
