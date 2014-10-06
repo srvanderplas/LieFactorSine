@@ -62,6 +62,7 @@ w.all <- matrix(c(  0, .2,  .4,  .8,  1.25, 1.4,       0,  .15, .35, .8, 1.2,  1
 w.long <- melt(w.all)
 names(w.long) <- c("Stimuli", "Plot", "w")
 
+
 w.long$d <- sapply(w.long$w, function(i) {
                                 temp <- weightYTrans(df=createSine(40, 1, f, fprime, f2prime, 0, 2*pi), w=i)$elltrans
                                 abs(diff(range(temp)))/min(temp)
@@ -73,6 +74,8 @@ w.long$d2 <- sapply(w.long$w, function(i) {
                                   max(temp)/min(temp)
                                 }
 )
+sine.long <- w.long
+sine.long$type="Sine"
 
 w.wide.w <- dcast(w.long, Stimuli ~ Plot, value.var="w")
 w.wide.w$difficulty <- c("test", "test", "1", "1", "2", "2", "3", "3", "4", "4", "5", "5")
@@ -100,6 +103,7 @@ w.all <- matrix(c(  0, .2,  .4,  .8,  1.25, 1.4,       0,  .15, .35, .8, 1.2,  1
 w.long <- melt(w.all)
 names(w.long) <- c("Stimuli", "Plot", "w")
 
+
 w.long$d <- sapply(w.long$w, function(i) {
   temp <- weightYTrans(df=createSine(40, 1, f, fprime, f2prime, -pi, pi), w=i)$elltrans
   abs(diff(range(temp)))/min(temp)
@@ -111,6 +115,9 @@ w.long$d2 <- sapply(w.long$w, function(i) {
   max(temp)/min(temp)
 }
 )
+
+exp.long <- w.long
+exp.long$type="Exponential"
 w.long <- ddply(w.long, .(Stimuli), transform, minlie=min(d2))
 w.long$liefactor <- w.long$d2/w.long$minlie
 
@@ -141,6 +148,7 @@ w.all <- matrix(c(  0, .2,  .4,  .8,  1.25, 1.4,       0,  .15, .35, .8, 1.2,  1
 w.long <- melt(w.all)
 names(w.long) <- c("Stimuli", "Plot", "w")
 
+
 w.long$d <- sapply(w.long$w, function(i) {
   temp <- weightYTrans(df=createSine(40, 1, f, fprime, f2prime, 1/2, 3.5), w=i)$elltrans
   abs(diff(range(temp)))/min(temp)
@@ -152,6 +160,9 @@ w.long$d2 <- sapply(w.long$w, function(i) {
   max(temp)/min(temp)
 }
 )
+inv.long <- w.long
+inv.long$type <- "Inverse"
+
 w.long <- ddply(w.long, .(Stimuli), transform, minlie=min(d2))
 w.long$liefactor <- w.long$d2/w.long$minlie
 
@@ -164,3 +175,10 @@ w.wide.d <- dcast(w.long, Stimuli ~ Plot, value.var="d2")
 
 inv.table <- cbind(w.wide.w, round(w.wide.d[,-1], 2))
 print(xtable(inv.table), include.rownames=FALSE)
+
+library(ggplot2)
+w.long <- rbind(sine.long, inv.long, exp.long)
+
+qplot(data=w.long, x=w, y=d, color=type) + facet_wrap(~Stimuli)
+
+qplot(data=w.long, y=Stimuli, x=d) + facet_wrap(~type)

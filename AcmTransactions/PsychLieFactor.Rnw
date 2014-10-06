@@ -118,21 +118,7 @@ One of the basic principles of statistical graphics is that a chart should accur
 \comment{The lie factor needs more details for a proper introduction, like the one you do a bit later. Take out some detail and just mention the lie factor as one measure to assess whether a picture is true to the data it's supposed to show.}
 Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data~\cite{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the mapping from data to graphics, it does not give us any insight about the mapping from the chart to the brain. 
 
-Ideally, charts not only represent the data accurately, but  also allow readers to draw accurate conclusions from the graph. Generally, the human visual system is quite good at accurately interpreting statistical charts \cite{cleveland:1984, kosara:2010}, but we need to be aware of contextual misperceptions that lead us to the wrong conclusion. 
-
-There are relatively few examples of the effect of optical illusions and other misperceptions on statistical graphics, but 
-\citet{amer2005bias} and \citet{poulton1985geometric} have documented the effect of the Poggendorff illusion on line graphs in different contexts. %}
-
-%While in many cases these two goals can be achieved simultaneously, there are instances in which human perception produces a psychological distortion that  interferes with the interpretation of charts, even if the charts are accurate portrayals of the numerical data. 
-%\comment{let's not undermine the whole idea of graphics in the intro ... in most situations our visual system is pretty good in interpreting graphics ... maybe cite Cleveland ordering of visual tasks, that got replicated by Kosara et al. -- \textbf{need to know more here, I can't find a similar paper on Google Scholar.} It is \citet{kosara:2010}}
-
-In this paper, we examine a situation in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a chart due to one of the identified conceptual misperceptions. 
-
-%\comment{Are there any other attempts to ensure that a chart is representing the data? This section needs a bit more lit review.}
-
-%\comment{I haven't found much, but there's at least this bit. }
-
-%\comment{I think the next two sections are actually subsections - the curse of three dimensions and the three dimensional context are part of the background - so let's put it in the intro section}
+Ideally, charts not only represent the data accurately, but  also allow readers to draw accurate conclusions from the graph. Generally, the human visual system is quite good at accurately interpreting statistical charts \cite{cleveland:1984, kosara:2010}, but we need to be aware of contextual misperceptions that lead us to the wrong conclusion. While there are relatively few examples of the effect of optical illusions and other misperceptions on statistical graphics, \citet{amer2005bias} and \citet{poulton1985geometric} have documented the effect of the Poggendorff illusion on line graphs in different contexts. In this paper, we examine a situation in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a chart due to a specific conceptual misperception: the sine illusion. 
 
 \subsection{The Curse of Three Dimensions}
 The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a functional mental representation of the three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional information. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation might correspond to multiple three-dimensional objects, as in the well-known Necker Cube (\citealt{gregory}; shown in figure~\ref{fig:Necker}). Additionally, the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. Optical illusions that demonstrate this phenomenon are the so-called ``impossible objects" such as the Penrose triangle \cite{gregory}. 
@@ -261,24 +247,47 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 \text{Lie Factor} = (\text{size of effect shown in chart})/(\text{size of effect shown in data})
 \end{equation}
 
-
-
 \noindent We will similarly define the psychological lie factor for this illusion as shown in equation \ref{eqn:psychliefactor}. 
 
 \begin{equation}\label{eqn:psychliefactor}
 \text{Psychological Lie Factor} = (\text{size of effect perceived})/(\text{size of the effect shown in the chart})
 \end{equation}
 
+\newtext{A correction factor which focuses on correcting the psychological distortion caused by the sine illusion is detailed in \citet{sineillusionjcgs}. This correction factor (the $y$ correction in the aforementioned paper) is applied to the line segments and extends these segments vertically at location $x$ according to equation \eqref{eqn:correction}, where $w$ represents a weight factor to allow variation of the strength of the correction. }
+
+\begin{equation}\label{eqn:correction}
+(1-w) + w \cdot \left(1 / \cos\left(\tan^{-1}(|f^\prime(x)|)\right)\right)
+\end{equation}
+
+A value of $w=0$ indicates that there is no correction, and a value of $w=1$ indicates that the graph is fully corrected.
+\newtext{Extending this approach, we can over-correct or under-correct the graph, to test whether the geometric derivation of the correction is sufficient to remove the illusion. The lie factor can then be determined by varying $w$, so that the lie factor of the plot selected so that the lines appear to be ``even" indicates the level of psychological distortion (since lines which are in fact not even but appear to be even would indicate that some distortion occurred within the brain). An example of the correction's effect and various weight factors can be seen in figures~\ref{fig:sinestimuli} and \ref{fig:sinestimulinotrend}. }
+
+\comment{Might need to add a picture demonstrating the correction and original figure side-by-side...?}
+
 In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
 
-\subsection{Study Setup}
-In order to determine the amount of the psychological distortion, participants were presented with different stimuli consisting of six subplots. One of these stimuli sets is shown in figure~\ref{fig:sinestimuli}.
+\subsection{Study Design}
+\newtext{
+The study was designed as a factorial exploration of the factors that contribute to the psychological distortion. We varied the underlying mean function of the stimuli, as well as the strength of the correction described in equation \ref{eqn:correction}.}
 
-\comment{ `similar to figure~\ref{fig:sinestimuli}' is not enough information. Describe each one of the functions, and show tons of pictures.}
 
-These sets of charts were constructed such that line lengths along a curve were varied to different degrees to counteract the illusion. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots in figure~\ref{fig:sinestimuli}. Participants were asked  to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
+\begin{figure}
+\centering
+\includegraphics[width=6in]{figure/fig-exampleUncorrected}
+\caption{Mean functions used during the experiment: $\sin(x)$, $\exp(x)$, and $1/x$. These functions are nonlinear, easily differentiable (for the correction factor), and are similar to trends commonly found in statistical graphics.\label{fig:uncorrectedExamples}}
+\end{figure}
 
-\begin{figure}[tb]
+
+\newtext{
+Three underlying mean functions were used: $y=2\sin(x)$, $y=\exp(x/2)$, and $y=5/(6x)$; varying these functions allowed us to consider whether the psychological lie factor was influenced by the underlying function. The mean functions, shown in figure \ref{fig:uncorrectedExamples}, were chosen from nonlinear functions that occur with relative frequency in statistics which are easily differentiable (due to the correction in equation \ref{eqn:correction}), and then refined so that the aspect ratio would be similar for each set of plots (between $0.75$ and $0.85$). As no x or y units were provided on the graph, these functional modifications served as experimental controls but did not change the information provided to the participants. 
+}
+
+\newtext{
+In addition to varying the underlying mean function, we also varied the strength of the correction factor (as described by the parameter $w$ in equation \ref{eqn:correction}). Experimental stimuli consisting of sets of 6 sub-plots were constructed such that each sub-plot was generated using a different $w$ value between 0 and 1.4. Two of the stimuli used in the experiment are shown in figures~\ref{fig:sinestimuli} and \ref{fig:invstimuli}. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots in figure~\ref{fig:sinestimuli}, and the (ordered) $w$ values and corresponding lie factors are shown in table \ref{tab:w} (row 4).}
+
+For each of the stimuli, participants were asked to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
+
+\begin{figure}
 \centering
 \includegraphics[width=6in]{figure/fig-stimulicorrectionsize1}
 \caption{One of the charts presented to participants through Amazon Mechanical Turk. Figure \ref{fig:sinestimulinotrend} shows the actual differences in line lengths. This chart corresponds to set \#4 in table~\ref{tab:w}. The plots are shown in random order, however; plot~\#1 corresponds to $w=0.9$, plot~\#2 to $w=0.7$, plot~\#3 to $w=0.3$, plot~\#4 to $w=0.1$, plot~\#5 to $w=0.5$, and plot~\#6 to $w=1.1$.}\label{fig:sinestimuli}
@@ -290,25 +299,15 @@ These sets of charts were constructed such that line lengths along a curve were 
 \caption{De-trended line lengths for figure~\ref{fig:sinestimuli}, demonstrating the distortion present due to the correction factor in each sub-plot. Comparing the distortion in the chosen sub-plot to the undistorted data produces an estimate of the psychological lie factor. }\label{fig:sinestimulinotrend}
 \end{figure}
 
-\newtext{Figure~\ref{fig:invstimuli} shows another set of these stimuli using a different underlying mean function with the same underlying weight values. }
-
-\newtext{
-The underlying mean function change does change the effective lie factor (due to a different derivative, and thus, a different correction). The illusion, however, is still present; our goal is to determine whether the illusion's effects are consistent with regard to the strength of the preferred lie factor. }
-
 \begin{figure}[tb]
 \centering
 \includegraphics[width=6in]{figure/fig-stimulicorrectionsize3}
-\caption{Another chart presented to participants through Amazon Mechanical Turk. This chart corresponds to set \#4 in table~\ref{tab:w3}. The plots are shown in random order, however; plot~\#1 corresponds to $w=0.9$, plot~\#2 to $w=0.7$, plot~\#3 to $w=0.3$, plot~\#4 to $w=0.1$, plot~\#5 to $w=0.5$, and plot~\#6 to $w=1.1$.}\label{fig:invstimuli}
+\caption{Another chart presented to participants through Amazon Mechanical Turk. This chart corresponds to set \#4 in table~\ref{tab:w3}. The plots are shown in random order, however; plot~\#1 corresponds to $w=0.7$, plot~\#2 to $w=0.1$, plot~\#3 to $w=0.5$, plot~\#4 to $w=1.1$, plot~\#5 to $w=0.3$, and plot~\#6 to $w=0.9$.}\label{fig:invstimuli}
 \end{figure}
 
-The amount of correction in each sub-plot was chosen such that each stimuli set contained a selection of curves corrected to various degrees using correction factors determined previously in an internal pilot study. The correction factor we use for extending the length of the line segment at location $x$ is given as
+\newtext{Figure~\ref{fig:invstimuli} shows another set of these stimuli using a different underlying mean function with the same underlying weight values. As the slope of the mean function has changed, the illusion does appear to be slightly less misleading. Table \ref{tab:w3} (plot 4) shows the weight values (ordered from least to greatest) and corresponding lie factors for this plot; they are lower than the lie factors corresponding to the sine illusion plots shown in figure~\ref{fig:sinestimuli} even though the weight values are the same. The illusion is still present even though the mean function has changed; our goal is to determine whether the psychological distortion is similar despite the difference in the underlying function. }
 
-\begin{equation}\label{eqn:correction}
-(1-w) + w \cdot \left(1 / \cos\left(\tan^{-1}(|f^\prime(x)|)\right)\right)
-\end{equation}
-
-where $w$ represents a weight factor to allow variation of the strength of the correction. A value of $w=0$ indicates that there is no correction, and a value of $w=1$ indicates that the graph is fully corrected. Extending this approach, we can over-correct the graph, to test whether the geometric derivation of the correction is sufficient to remove the illusion. In this experiment, values of $w$ were chosen from between 0 and 1.4. 
-
+\subsection{Calculating the Psychological Lie Factor}
 In order to quantify the psychological lie factor $D$ for each sub plot $k=1, ..., 6$, we took the ratio of the maximum line length to the minimum line length shown in the plot. As participants were to choose the plot with lines that had the most even length, a large value of $D$ indicates significant distortion. 
 
 \begin{equation}\label{eqn:psychliefactorD}
@@ -317,8 +316,7 @@ D_k = (\text{maximum line length in sub-plot } k)/(\text{minimum line length in 
 
 The definition of $D$ in equation \ref{eqn:psychliefactorD} does deviate somewhat from our extension of Tufte's definition of the lie factor described in equation \ref{eqn:psychliefactor}, but this is by necessity, as an uncorrected plot would show a difference of 0, which would wreak havoc on any experimental measure of the lie factor, as that 0 would be in the denominator. Our modification preserves the interpretation of Tufte's lie factor, while adapting the computation for use in this experimental setting. 
 
-% where $w$ is varied between 0 (for no correction) and 1.5 (strong over-correction) - \hh{XXX ah, slow down! that's two aspects in one sentence. $w$ is a weighting factor - which gives 0 and 1 special meaning. the choice of 1.5 is already a design choice for the experiment - that needs a separate sentence}. 
-From a pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the statistical graphics community. In order to pinpoint the weight value necessary to correct the illusion more precisely, we chose twelve sets of 6 weight values each that were used to produce test plots similar to that shown in figure \ref{fig:sinestimuli}. These sets of weight values were chosen to allow greater precision estimates closer to $w=0.8$, while still covering the range of $w$ between 0 and 1.4. The sets of $w$ used are shown in table~\ref{tab:w}, along with corresponding lie factors $D_k$ for stimuli with underlying function $sin(x)$ (other functions used will have different $D_k$ due to the nature of the correction factor). Plots with weight values spread over the full range of $w$ tested were considered ``test" plots that could be used for verification purposes, while plots with weight values concentrated near $w=0.8$ were considered to have higher difficulty (because the sub-plots were very similar). This allowed us to estimate $w$, and thus $D$, with higher precision while still exploring the entire parameter space. 
+From an internal pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the statistical graphics community. In order to pinpoint the weight value necessary to correct the illusion more precisely, we chose twelve sets of 6 weight values each that were used to produce test plots similar to that shown in figure \ref{fig:sinestimuli}. These sets of weight values were chosen to allow greater precision estimates closer to $w=0.8$, while still covering the range of $w$ between 0 and 1.4. The sets of $w$ used are shown in table~\ref{tab:w}, along with corresponding lie factors $D_k$ for stimuli with underlying function $sin(x)$ (other functions used will have different $D_k$ due to the nature of the correction factor). Plots with weight values spread over the full range of $w$ tested were considered ``test" plots that could be used for verification purposes, while plots with weight values concentrated near $w=0.8$ were considered to have higher difficulty (because the sub-plots were very similar). This allowed us to estimate $w$, and thus $D$, with higher precision while still exploring the entire parameter space. 
 
 
 \begin{table}[ht]
@@ -410,13 +408,6 @@ set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolum
 
 \comment{I know that all of these tables probably belong in the appendix, but I'm not entirely sure that's best. Thoughts?}
 
-Three underlying mean function families were tested using these weight values: $\sin(x)$, $\exp(x)$, and $1/x$. These functions, shown in figure \ref{fig:uncorrectedExamples}, were chosen because they are nonlinear functions which commonly occur in statistical graphics and are easily correctable using equation \ref{eqn:correction}. The specific mean functions used in the experiment were $y=\sin(2x)$, $y=\exp(x/2)$, and $y=5(6x)^{-1}$; the modifications allowed us to control the aspect ratio of the plot coordinate systems so that the uncorrected plots had aspect ratios between $0.75$ and $0.85$. As no x or y units were provided on the graph, these functional modifications served as experimental controls but did not change the information provided to the participants. 
-
-\begin{figure}
-\centering
-\includegraphics[width=6in]{figure/fig-exampleUncorrected}
-\caption{Mean functions used during the experiment: $\sin(x)$, $\exp(x)$, and $1/x$. These functions are nonlinear, easily differentiable (for the correction factor), and are similar to trends commonly found in statistical graphics.\label{fig:uncorrectedExamples}}
-\end{figure}
 % 
 % \hh{XXX show these functions and discuss why they are good choices. }
 
