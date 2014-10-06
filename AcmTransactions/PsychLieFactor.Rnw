@@ -118,17 +118,19 @@ One of the basic principles of statistical graphics is that a chart should accur
 \comment{The lie factor needs more details for a proper introduction, like the one you do a bit later. Take out some detail and just mention the lie factor as one measure to assess whether a picture is true to the data it's supposed to show.}
 Tufte's ``Lie Factor", for instance, is calculated based on the ratio of the effect size shown in the graphic to the effect size in the data~\cite{tufte}. If there is a systematic difference, the lie factor will be notably different from 1 (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the mapping from data to graphics, it does not give us any insight about the mapping from the chart to the brain. 
 
-\newtext{
-Ideally, charts not only represent the data accurately, but  also allow readers to draw accurate conclusions from the graph. While the human visual system is quite good at accurately interpreting statistical charts \cite{cleveland:1984}, we need to be aware of contextual misperceptions that lead us to the wrong conclusion. 
-}
+Ideally, charts not only represent the data accurately, but  also allow readers to draw accurate conclusions from the graph. Generally, the human visual system is quite good at accurately interpreting statistical charts \cite{cleveland:1984, kosara:2010}, but we need to be aware of contextual misperceptions that lead us to the wrong conclusion. 
+
+There are relatively few examples of the effect of optical illusions and other misperceptions on statistical graphics, but 
+\citet{amer2005bias} and \citet{poulton1985geometric} have documented the effect of the Poggendorff illusion on line graphs in different contexts. %}
+
 %While in many cases these two goals can be achieved simultaneously, there are instances in which human perception produces a psychological distortion that  interferes with the interpretation of charts, even if the charts are accurate portrayals of the numerical data. 
-\comment{let's not undermine the whole idea of graphics in the intro ... in most situations our visual system is pretty good in interpreting graphics ... maybe cite Cleveland ordering of visual tasks, that got replicated by Kosara et al. -- \textbf{need to know more here, I can't find a similar paper on Google Scholar.}}
+%\comment{let's not undermine the whole idea of graphics in the intro ... in most situations our visual system is pretty good in interpreting graphics ... maybe cite Cleveland ordering of visual tasks, that got replicated by Kosara et al. -- \textbf{need to know more here, I can't find a similar paper on Google Scholar.} It is \citet{kosara:2010}}
 
-In this paper, we examine situations in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a chart due to one of the identified conceptual misperceptions. 
+In this paper, we examine a situation in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a chart due to one of the identified conceptual misperceptions. 
 
-\comment{Are there any other attempts to ensure that a chart is representing the data? This section needs a bit more lit review.}
-\newtext{There are relatively few examples of the effect of optical illusions and other misperceptions on statistical graphics, but \citet{amer2005bias} and \citet{poulton1985geometric} have documented the effect of the poggendorff illusion on line graphs in different contexts. }
-\comment{I haven't found much, but there's at least this bit. }
+%\comment{Are there any other attempts to ensure that a chart is representing the data? This section needs a bit more lit review.}
+
+%\comment{I haven't found much, but there's at least this bit. }
 
 %\comment{I think the next two sections are actually subsections - the curse of three dimensions and the three dimensional context are part of the background - so let's put it in the intro section}
 
