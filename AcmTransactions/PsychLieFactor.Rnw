@@ -303,7 +303,7 @@ For each of the stimuli, participants were asked to answer the question: ``In wh
 \begin{figure}[tb]
 \centering
 \includegraphics[width=6in]{figure/fig-stimulicorrectionsize3}
-\caption{Another chart presented to participants through Amazon Mechanical Turk. This chart corresponds to set \#4 in table~\ref{tab:w3}. The plots are shown in random order, however; plot~\#1 corresponds to $w=0.7$, plot~\#2 to $w=0.1$, plot~\#3 to $w=0.5$, plot~\#4 to $w=1.1$, plot~\#5 to $w=0.3$, and plot~\#6 to $w=0.9$.}\label{fig:invstimuli}
+\caption{Another chart presented to participants through Amazon Mechanical Turk. This chart corresponds to set \#4 in table~\ref{tab:w3}. The plots are shown in random order, however; plot~\#1 corresponds to $w=0.9$, plot~\#2 to $w=0.7$, plot~\#3 to $w=0.3$, plot~\#4 to $w=0.1$, plot~\#5 to $w=0.5$, and plot~\#6 to $w=1.1$.}\label{fig:invstimuli}
 \end{figure}
 
 \newtext{Figure~\ref{fig:invstimuli} shows another set of these stimuli using a different underlying mean function with the same underlying weight values. As the slope of the mean function has changed, the illusion does appear to be slightly less misleading. Table \ref{tab:w3} (plot 4) shows the weight values (ordered from least to greatest) and corresponding lie factors for this plot; they are lower than the lie factors corresponding to the sine illusion plots shown in figure~\ref{fig:sinestimuli} even though the weight values are the same. The illusion is still present even though the mean function has changed; our goal is to determine whether the psychological distortion is similar despite the difference in the underlying function. }
