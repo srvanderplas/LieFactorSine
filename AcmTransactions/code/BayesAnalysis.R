@@ -84,12 +84,12 @@ library(reshape2)
 # # test.mean$test_param <- factor(test.mean$test_param, levels=c("Sin", "Exp", "Inv"))
 # # test.mean$functions <- factor(c("Sine", "Exponential", "Inverse")[as.numeric(test.mean$test_param)], levels=c("Sine", "Exponential", "Inverse"))
 # 
-# # # Plot 4 individuals who did at least 6 figures of each trial 
-# # qplot(data=subset(test.mean, ip.id%in%ipsubset), x=mean, y=f, group=functions, colour=functions, geom="line") + 
-# #   facet_grid(.~ip.id, labeller=par_labeller) + scale_colour_discrete("Function Type") + theme_bw() + 
-# #   theme(legend.position="bottom", text=element_text(size=10)) + ylab("Density") + scale_x_continuous(breaks=c(1, 1.5, 2), limits=c(1, 2), name="Mean Psychological Lie Factor")
-# # ggsave("figure/fig-IndivMeanAllFcns.pdf", width=6, height=3)      
-# # 
+# # Plot 4 individuals who did at least 6 figures of each trial 
+# qplot(data=subset(test.mean, ip.id%in%ipsubset), x=mean, y=f, group=functions, colour=functions, geom="line") + 
+#   facet_grid(.~ip.id, labeller=par_labeller) + scale_colour_discrete("Function Type") + theme_bw() + 
+#   theme(text=element_text(size=10)) + ylab("Density") + scale_x_continuous(breaks=c(1, 1.5, 2), limits=c(1, 2), name="Mean Psychological Lie Factor")
+# ggsave("figure/fig-IndivMeanAllFcns.pdf", width=7, height=2.5) 
+# ggsave("figure/fig-IndivMeanAllFcns.png", width=7, height=2.5)     
 # 
 # 
 # # Posterior predictive theta estimates, including CI information for the individual MEAN 

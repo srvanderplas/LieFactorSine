@@ -1,7 +1,7 @@
 \documentclass[prodmode,acmtap]{acmlarge}
-
-% Debugging
-\errorcontextlines 10000
+% 
+% % Debugging
+% \errorcontextlines 10000
 
 % Metadata Information
 \acmVolume{1}
@@ -10,6 +10,30 @@
 \articleSeq{1}
 \acmYear{2014}
 \acmMonth{1}
+
+% Page heads
+\markboth{S. VanderPlas, H. Hofmann, and D. Cook}{The curse of three dimensions}
+% Title portion
+\title{The curse of three dimensions: Why your brain is lying to you}
+\author{SUSAN VANDERPLAS, HEIKE HOFMANN and DIANNE COOK\affil{Iowa State University}}
+
+\begin{abstract}
+One of the basic principles of information graphics is that the data should be accurately reflected in the chart.
+Tufte's lie factor was created with the idea that graphs that do not represent the underlying data accurately should be avoided. In this paper, we examine a second level of graph distortion that occurs during the perceptual process.
+ The human visual system is largely optimized for perception of three dimensions. Generally, the brain processes potential  ambiguities in the rendering as the most-common three-dimensional object. 
+This can lead to visual distortions, such as occur with the Necker figure or in the M\"uller-Lyer illusion.
+We discuss the underlying psychological mechanisms for the distortions, examine the effect these distortions have on  judgments, and consider the implications for graph design. Using the sine illusion as a case study, we quantify the effects of the distortion that create a ``perceptual lie factor" for the sine illusion.
+\end{abstract}
+
+\category{H.5.2}{Information Interfaces and Presentation}{User Interfaces}[Screen Design \and User-centered design]
+\category{G.3}{Mathematics of Computing}{Probability and Statistics}[Statistical computing]
+\category{J.2}{Computer Applications}{Physical Sciences and Engineering}[Mathematics and statistics]
+
+
+\terms{Design, Human factors, Reliability}
+\keywords{Information graphics, optical illusion, perceptual theory, visualization}
+
+\acmformat{VanderPlas, S., Hofmann, H., and Cook, D. 2014. The Curse of Three Dimensions: Why Your Brain is Lying to You.}
 
 % Package to generate and customize Algorithm as per ACM style
 \usepackage[ruled]{algorithm2e}
@@ -57,33 +81,6 @@
 \renewcommand{\algorithmcfname}{ALGORITHM}
 
 
-% Page heads
-\markboth{S. VanderPlas, H. Hofmann, and D. Cook}{The curse of three dimensions}
-
-% Title portion
-\title{The curse of three dimensions: Why your brain is lying to you}
-\author{SUSAN VANDERPLAS, HEIKE HOFMANN and DI COOK\affil{Iowa State University}
-}
-
-\begin{abstract}
-One of the basic principles of information graphics is that the data should be accurately reflected in the chart.
-Tufte's lie factor
-% ~\cite{tufte}
-was created with the idea that graphs that do not represent the underlying data accurately should be avoided. In this paper, we examine a second level of graph distortion that occurs during the perceptual process.
- The human visual system is largely optimized for perception of three dimensions. Generally, the brain processes potential  ambiguities in the rendering as the most-common three-dimensional object. This can lead to visual distortions, such as occur with the Necker figure or in the M\"uller-Lyer illusion.
-We discuss the underlying psychological mechanisms for the distortions, examine the effect these distortions have on  judgments, and consider the implications for graph design. Using the sine illusion as a case study, we quantify the effects of the distortion that create a ``perceptual lie factor" for the sine illusion.
-\end{abstract}
-
-% \category{}{}[]
-% \category{}{}{}[]
-% \category{}{}{}[]
-% 
-
-\terms{Design, Human factors, Experimentation}
-\keywords{Information graphics, optical illusion, perceptual theory, visualization}
-
-\acmformat{VanderPlas, S., Hofmann, H., and Cook, D. 2014. The Curse of Three Dimensions: Why Your Brain is Lying to You.}
-
 
 \newcommand{\hh}[1]{{\color{orange} #1}}
 
@@ -108,27 +105,24 @@ source("./code/BayesAnalysis.R") # generate pics for analysis without all the dd
 Author's address: S. VanderPlas, Snedecor Hall, Iowa State University, Ames, IA 50010; email: skoons@iastate.edu
 \end{bottomstuff}
 \maketitle
-\tableofcontents
-\newpage
+% \tableofcontents
+% \newpage
 
 % \comment{ACM is not a statistical crowd, so they are not going to care about statistical graphics. We need to exchange any mentioning of statistical graphics by information graphics. }
 \section{Introduction}
-% \comment{motivate power of graphics first?}
-\newtext{Graphics are one of the most powerful tools researchers have to communicate results to wide audiences. They are easier to understand than tables or verbal descriptions\cite{larkin1987diagram}, easier to remember than words alone \cite{mayer1994whom}, and provide information that can be perceived and used with minimal additional cognitive load \cite{zhang1994representations}. Informative graphics differ from visualizations, sketches, and diagrams in that they present visual summaries of data, using summary functions to map the data graphically, preserving the relationship between two variables using spatial information. That is, unlike visualizations, sketches, and diagrams, spatial relationships presented in information graphics are functions of the data, representing numerical quantities (within the limits of image resolution) accurately. Conveying numerical relationships using spatial information makes use of the brain's visual processing ability, freeing working memory to interpret and make connections between graphics and written interpretations. }
+Graphics are one of the most powerful tools researchers have to communicate results to wide audiences. They are easier to understand than tables or verbal descriptions\cite{larkin1987diagram}, easier to remember than words alone \cite{mayer1994whom}, and provide information that can be perceived and used with minimal additional cognitive load \cite{zhang1994representations}. Informative graphics differ from visualizations, sketches, and diagrams in that they present visual summaries of data, using summary functions to map the data graphically, preserving the relationship between two variables using spatial information. That is, unlike visualizations, sketches, and diagrams, spatial relationships presented in information graphics are functions of the data, representing numerical quantities (within the limits of image resolution) accurately. Conveying numerical relationships using spatial information makes use of the brain's visual processing ability, freeing working memory to interpret and make connections between graphics and written interpretations. 
 
-% \comment{XXX what are information graphics, and how are they different from `visualizations'/sketches?}
-\newtext{As information graphics utilize spatial relationships to convey numerical information, it is particularly important that these relationships accurately portray the data \cite{tufte}. In many cases, attempts to make a chart visually interesting compromise this goal: using three dimensions when only one dimension is required, or adding unnecessary perspective views to a chart can distort the numerical information the plot was designed to convey. In his book, Tufte argues that some graphics (many of which might be better classified as visualizations) do not accurately reflect the data because they sacrifice numerical accuracy for visual appeal. In order to quantify this loss of numerical accuracy, Tufte created the \textbf{lie factor}, which compares the effect size shown in the image to the effect size shown in the data, so that a lie factor much greater than 1 indicates a picture that over-emphasizes an effect, and a lie factor much smaller than one indicates a picture which minimizes an effect (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the accuracy of the transition from data to graphics, we must also be concerned about the transition from graphics to the brain, as we are relying on the brain's visual processing ability to efficiently encode numerical relationships.}
+As information graphics utilize spatial relationships to convey numerical information, it is particularly important that these relationships accurately portray the data \cite{tufte}. In many cases, attempts to make a chart visually interesting compromise this goal: using three dimensions when only one dimension is required, or adding unnecessary perspective views to a chart can distort the numerical information the plot was designed to convey. In his book, Tufte argues that some graphics (many of which might be better classified as visualizations) do not accurately reflect the data because they sacrifice numerical accuracy for visual appeal. In order to quantify this loss of numerical accuracy, Tufte created the \textbf{lie factor}, which compares the effect size shown in the image to the effect size shown in the data, so that a lie factor much greater than 1 indicates a picture that over-emphasizes an effect, and a lie factor much smaller than one indicates a picture which minimizes an effect (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the accuracy of the transition from data to graphics, we must also be concerned about the transition from graphics to the brain, as we are relying on the brain's visual processing ability to efficiently encode numerical relationships.
 
 % \comment{The lie factor needs more details for a proper introduction, like the one you do a bit later. Take out some detail and just mention the lie factor as one measure to assess whether a picture is true to the data it's supposed to show.}
 Ideally, charts not only represent the data accurately, but  also allow readers to draw accurate conclusions. Generally, the human visual system is quite good at accurately interpreting charts \cite{cleveland:1984, kosara:2010}, but we need to be aware of contextual misperceptions that lead us to the wrong conclusion. While there are relatively few examples of the effect of optical illusions and other misperceptions on information graphics, \citet{amer2005bias} and \citet{poulton1985geometric} have documented the effect of the Poggendorff illusion on line graphs in different contexts. 
-\newtext{Tufte's lie factor does not give us any insight about the accuracy of the transition between chart and brain, but a similar factor could be created to measure the accuracy of this transition.}
+Tufte's lie factor does not give us any insight about the accuracy of the transition between chart and brain, but a similar factor could be created to measure the accuracy of this transition.
 In this paper, we examine a situation in which low-level human perceptual processes interfere with making accurate judgements from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a chart due to a specific conceptual misperception: the sine illusion. 
 
 \subsection{The Curse of Three Dimensions}
-% \comment{I don't understand how impossible objects are objects that have infinitely many two-dimensional representations -- isn't the idea of an impossible object that there is no 3d representation?}
 The human visual system is largely optimized for perception of three dimensions. Biologically, binocular vision ensures that we have the necessary information to construct a functional mental representation of the three-dimensional world, but even in the absence of binocular information the brain uses numerous heuristics to parse otherwise ambiguous two-dimensional retinal images into meaningful three-dimensional information. Predictably, however, these heuristics are not without drawbacks; the same two-dimensional neural representation might correspond to multiple three-dimensional objects, as in the well-known Necker Cube (\citealt{gregory}; shown in figure~\ref{fig:Necker}). Additionally, the same three-dimensional object often has infinitely many two-dimensional representations, for instance, when viewed from different angles. 
-\newtext{Many optical illusions occur due to the transition from a two to three dimensions (or from three dimensions to two dimensions)\cite{gregory}. The necker cube has a single two-dimensional representation corresponding to two three-dimensional objects which are both equally salient. As a result, the brain does not prefer one interpretation over the other and instead continuously switches between interpretations.}
-\newtext{Impossible objects, such as the Penrose triangle \cite{penrose1958impossible}, are two-dimensional images of objects that appear to be impossible in three dimensions (sometimes, these objects can be represented in three dimensions, but only appear to be impossible from a certain angle). Impossible objects produce a conflict between the brain's three-dimensional representation of a two-dimensional figure and the brain's experience with the physical world. This conflict between the constraints of physical reality and a depicted image can be quite compelling and is an important component in the work of artists like M.C. Escher \cite{Escher}.}
+Many optical illusions occur due to the transition from a two to three dimensions (or from three dimensions to two dimensions)\cite{gregory}. The necker cube has a single two-dimensional representation corresponding to two three-dimensional objects which are both equally salient. As a result, the brain does not prefer one interpretation over the other and instead continuously switches between interpretations.
+Impossible objects, such as the Penrose triangle \cite{penrose1958impossible}, are two-dimensional images of objects that appear to be impossible in three dimensions (sometimes, these objects can be represented in three dimensions, but only appear to be impossible from a certain angle). Impossible objects produce a conflict between the brain's three-dimensional representation of a two-dimensional figure and the brain's experience with the physical world. This conflict between the constraints of physical reality and a depicted image can be quite compelling and is an important component in the work of artists like M.C. Escher \cite{Escher}.
 
 \begin{figure}
 \includegraphics[keepaspectratio=TRUE,width=6in, trim=0in .25in 0in 0in]{figure/fig-neckercube}
@@ -213,9 +207,7 @@ p
 \label{fig:cleveland-figure}
 \end{figure}
 
-\newtext{
 The illusion is not dependent on specifically identifying the vertical distance along a line. Figure \ref{fig:cleveland-figure}(a) shows a scatterplot of data with a trend. A loess smooth is used to estimate the trendline. A visual assessment of variability along this trendline might result in a description such as `homogeneous variance or slightly increasing variance for  negative $x$, followed by a dramatic decrease in vertical variability for positive $x$'. Once the residuals are separated from the trendline as shown on the right hand side of the figure, it becomes apparent that this first assessment of conditional variability was not correct, and the steady decrease along the horizontal axis becomes visible.
-}
 
 Cleveland and McGill \citeyear{cleveland:1984} determined that comparison of the vertical distance between two curves is often inaccurate, as ``the brain wants to judge minimum distance between the curves in different regions, and not vertical distance". While they do not explain a reason for this tendency, introspection does support their explanation: we judge the distance between two curves based on the shortest distance between them, which geometrically is the distance along the line perpendicular to the tangent line of the curve. This comparison holds with scatterplots (such as figure \ref{fig:cleveland-figure}) because when the points are dense, we examine variability by looking at the upper and lower contours of the data.
 
@@ -262,22 +254,20 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 \text{Psychological Lie Factor} = (\text{size of effect perceived})/(\text{size of the effect shown in the chart})
 \end{equation}
 
-\newtext{A correction factor which focuses on correcting the psychological distortion caused by the sine illusion is detailed in \citet{sineillusionjcgs}. This correction factor (the $y$ correction in the aforementioned paper) is applied to the line segments and extends these segments vertically at location $x$ according to equation \eqref{eqn:correction}, where $w$ represents a weight factor to allow variation of the strength of the correction. }
+A correction factor which focuses on correcting the psychological distortion caused by the sine illusion is detailed in \citet{sineillusionjcgs}. This correction factor (the $y$ correction in the aforementioned paper) is applied to the line segments and extends these segments vertically at location $x$ according to equation \eqref{eqn:correction}, where $w$ represents a weight factor to allow variation of the strength of the correction. 
 
 \begin{equation}\label{eqn:correction}
 (1-w) + w \cdot \left(1 / \cos\left(\tan^{-1}(|f^\prime(x)|)\right)\right)
 \end{equation}
 
-A value of $w=0$ indicates that there is no correction, and a value of $w=1$ indicates that the graph is fully corrected.
-\newtext{Extending this approach, we can over-correct or under-correct the graph, to test whether the geometric derivation of the correction is sufficient to remove the illusion. The lie factor can then be determined by varying $w$, so that the lie factor of the plot selected so that the lines appear to be ``even" indicates the level of psychological distortion (since lines which are in fact not even but appear to be even would indicate that some distortion occurred within the brain). An example of the correction's effect and various weight factors can be seen in figures~\ref{fig:sinestimuli} and \ref{fig:sinestimulinotrend}. }
+A value of $w=0$ indicates that there is no correction, and a value of $w=1$ indicates that the graph is fully corrected. Extending this approach, we can over-correct or under-correct the graph, to test whether the geometric derivation of the correction is sufficient to remove the illusion. The lie factor can then be determined by varying $w$, so that the lie factor of the plot selected so that the lines appear to be ``even" indicates the level of psychological distortion (since lines which are in fact not even but appear to be even would indicate that some distortion occurred within the brain). An example of the correction's effect and various weight factors can be seen in figures~\ref{fig:sinestimuli} and \ref{fig:sinestimulinotrend}.
 
-\comment{Might need to add a picture demonstrating the correction and original figure side-by-side...?}
+% \comment{Might need to add a picture demonstrating the correction and original figure side-by-side...?}
 
 In order to estimate the psychological lie factor that occurs due to this illusion, we assessed the strength of the illusion experimentally. 
 
 \subsection{Study Design}
-\newtext{
-The study was designed as a factorial exploration of the factors that contribute to the psychological distortion. We varied the underlying mean function of the stimuli, as well as the strength of the correction described in equation \ref{eqn:correction}.}
+The study was designed as a factorial exploration of the factors that contribute to the psychological distortion. We varied the underlying mean function of the stimuli, as well as the strength of the correction described in equation \ref{eqn:correction}.
 
 
 \begin{figure}
@@ -286,13 +276,9 @@ The study was designed as a factorial exploration of the factors that contribute
 \caption{Mean functions used during the experiment: $\sin(x)$, $\exp(x)$, and $1/x$. These functions are nonlinear, easily differentiable (for the correction factor), and are similar to trends commonly found in information graphics.\label{fig:uncorrectedExamples}}
 \end{figure}
 
-
-\newtext{
 Three underlying mean functions were used: $y=2\sin(x)$, $y=\exp(x/2)$, and $y=5/(6x)$; varying these functions allowed us to consider whether the psychological lie factor was influenced by the underlying function. The mean functions, shown in figure \ref{fig:uncorrectedExamples}, were chosen from nonlinear functions that occur with relative frequency in statistics which are easily differentiable (due to the correction in equation \ref{eqn:correction}), and then refined so that the aspect ratio would be similar for each set of plots (between $0.75$ and $0.85$). As no x or y units were provided on the graph, these functional modifications served as experimental controls but did not change the information provided to the participants. 
-}
 
-\newtext{
-In addition to varying the underlying mean function, we also varied the strength of the correction factor (as described by the parameter $w$ in equation \ref{eqn:correction}). Experimental stimuli consisting of sets of 6 sub-plots were constructed such that each sub-plot was generated using a different $w$ value between 0 and 1.4. Two of the stimuli used in the experiment are shown in figures~\ref{fig:sinestimuli} and \ref{fig:invstimuli}. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots in figure~\ref{fig:sinestimuli}, and the (ordered) $w$ values and corresponding lie factors are shown in table \ref{tab:w} (row 4).}
+In addition to varying the underlying mean function, we also varied the strength of the correction factor (as described by the parameter $w$ in equation \ref{eqn:correction}). Experimental stimuli consisting of sets of 6 sub-plots were constructed such that each sub-plot was generated using a different $w$ value between 0 and 1.4. Two of the stimuli used in the experiment are shown in figures~\ref{fig:sinestimuli} and \ref{fig:invstimuli}. Figure~\ref{fig:sinestimulinotrend} shows the amount of line correction used in each of the sub-plots in figure~\ref{fig:sinestimuli}, and the (ordered) $w$ values and corresponding lie factors are shown in table \ref{tab:w} (row 4).
 
 For each of the stimuli, participants were asked to answer the question: ``In which graph is the size of the curve most consistent?". The phrasing `size of the curve' was chosen deliberately so as not to bias participants to explicitly measure line lengths. 
 
@@ -314,7 +300,7 @@ For each of the stimuli, participants were asked to answer the question: ``In wh
 \caption{Another chart presented to participants through Amazon Mechanical Turk. This chart corresponds to set \#4 in table~\ref{tab:w3}. The plots are shown in random order, however; plot~\#1 corresponds to $w=0.9$, plot~\#2 to $w=0.7$, plot~\#3 to $w=0.3$, plot~\#4 to $w=0.1$, plot~\#5 to $w=0.5$, and plot~\#6 to $w=1.1$.}\label{fig:invstimuli}
 \end{figure}
 
-\newtext{Figure~\ref{fig:invstimuli} shows another set of these stimuli using a different underlying mean function with the same underlying weight values. As the slope of the mean function has changed, the illusion does appear to be slightly less misleading. Table \ref{tab:w3} (plot 4) shows the weight values (ordered from least to greatest) and corresponding lie factors for this plot; they are lower than the lie factors corresponding to the sine illusion plots shown in figure~\ref{fig:sinestimuli} even though the weight values are the same. The illusion is still present even though the mean function has changed; our goal is to determine whether the psychological distortion is similar despite the difference in the underlying function. }
+Figure~\ref{fig:invstimuli} shows another set of these stimuli using a different underlying mean function with the same underlying weight values. As the slope of the mean function has changed, the illusion does appear to be slightly less misleading. Table \ref{tab:w3} (plot 4) shows the weight values (ordered from least to greatest) and corresponding lie factors for this plot; they are lower than the lie factors corresponding to the sine illusion plots shown in figure~\ref{fig:sinestimuli} even though the weight values are the same. The illusion is still present even though the mean function has changed; our goal is to determine whether the psychological distortion is similar despite the difference in the underlying function. 
 
 \subsection{Calculating the Psychological Lie Factor}
 In order to quantify the psychological lie factor $D$ for each sub plot $k=1, ..., 6$, we took the ratio of the maximum line length to the minimum line length shown in the plot. As participants were to choose the plot with lines that had the most even length, a large value of $D$ indicates significant distortion. 
@@ -415,13 +401,7 @@ set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolum
 }
 \end{table}
 
-\comment{I know that all of these tables probably belong in the appendix, but I'm not entirely sure that's best. Thoughts?}
-
-% 
-% \hh{XXX show these functions and discuss why they are good choices. }
-
 Each participant was presented with eleven sets of graphs (each ``set" consisting of 6 separate plots), consisting of one ``easy" test set, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. After the easy introductory chart, which was presented first, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the 6 plots presented as having lines which were the most ``even''. 
-%\hh{XXX this contradicts the random order - describe the test setting in a bit more detail, that'll clear up the confusion.}
 
 \subsection{Data Collection}
 
@@ -471,28 +451,14 @@ P_{ij}=D_{ijk}/\min_{1\leq k \leq 6} D_{ijk}
 \end{equation}
 for each plot and each participant. This normalization does conservatively bias the results, effectively shrinking the effect size we observe, but without the normalization we would be biased in favor of finding a significant result. Furthermore, while we could normalize relative to $\max_{1\leq k \leq 6}D_{ijk}$, most stimuli sets contain $D > 1.85$ (for $y=\sin(x)$), where more than half of the stimuli sets do not contain $D\approx 1$. This is due to the range of $w$ values chosen for the stimuli sets, as we had pilot data suggesting that $w=0.8$ was a commonly preferred weight value. 
 
-% 
-% \hh{XXX previously, $D^\ast$ was defined differently. }
-% 
-% \hh{XXX the way that $P$ is defined, is as a set of ratios, because $D^\ast$ is a set. I'm not sure that that's what you want, and it's not what you describe afterwards. }
-
-% \hh{XXX Generally - I don't quite see why we need to divide by the minimum. You  have a problem with the choice of plot, if the minimal or maximal $D$ was picked. But due to the discrete nature of the choice, we have a similar problem with any choice of plot: we only know the answer up to the interval of $D_k$s shown. 
-% At this point I'm not quite buying into the transformation to $P$. }
-
-% \hh{XXX Could you make a picture of raw responses in interval coding? - i.e. if we have a choice of $D$ as 1.14 and the next two answers are 1.0 and 1.4, you shade the area between 1 and 1.4 with more weight towards 1.14 ... - these would be densities that are specific to a stimuli set. }
-
 That is, $P$ is the ratio of the lie factor of the chosen plot to the smallest lie factor available in the set of available plots. When the set of available plots contains an uncorrected plot, $P = D$; when an uncorrected plot is not presented, $P < D$, since each $D_j >= 1$, $j=1, ..., 6$. This transformation is a conservative approach to estimating the lie factor, but allows us to show a variety of scaled transformations and estimate the effect with more granularity around $w=0.8$. 
-
-
-
-
 
 By considering each participant's answers for the plot with the most consistent line length, we can obtain an estimate of the psychological distortion from the sine illusion on an individual level. Estimating distortion factors for each participant facilitates comparison of these estimated values to determine whether the illusion is a product of an individual's perceptual experience or whether there is a possible underlying perceptual heuristic for the sine illusion common across the majority of participants. If the illusion is a learned misperception rather than an underlying perceptual ``bug'', we would expect there to be considerable variability in the estimated individual lie factor $P_i$  for each unique participant $i$, $1\leq i \leq 123$, as it is likely that personal experience varies more widely than perceptual heuristics and their underlying neural architecture. 
 
 Each set of $w$ values as defined in table~\ref{tab:w} corresponds  to a value of $P$ as defined in equation \ref{eqn:pconv}. 
 We test for a set of discrete values of $w$, which is reflected directly in the number of different values of $P$ we can observe. This approach allows us to use a finite set of stimuli for testing, so that we can explicitly control the range of $w$ displayed in each set of plots. To mathematically model a continuous quantity (the real domain of possible $P$ values) using discrete data, we employ a Bayesian approach to model an overall psychological lie factor $\theta$ and individual participant lie factors $\theta_i$.
 
-\newtext{Plots used in the experiment have factors $P$ ranging between 1 and 2.5; we can use a truncated normal data model for participant $i$ viewing plot $j$, with $P = p_{ij} \sim N(\theta_i, \sigma)$. We use independent flat prior distributions $\pi(\theta)= 0.4$ and $\pi(\sigma)=2.5$ for $\sigma\in[.1, .5]$. These prior distributions $\pi(.)$ represent our expectations of the values of $\theta$ and $\sigma$ before the experiment; assigning them constant values indicates that we had little useable knowledge about the joint or marginal distributions of $\theta$ and $\sigma$ before the experiment was conducted. Using Bayesian estimation, we can then obtain posterior distributions for $\theta_i$ and $\theta$, the individual and overall mean lie factors. We are not particularly interested in the actual values of $\sigma$, but the additional parameter allows us to better estimate possible values for $\theta$. }
+Plots used in the experiment have factors $P$ ranging between 1 and 2.5; we can use a truncated normal data model for participant $i$ viewing plot $j$, with $P = p_{ij} \sim N(\theta_i, \sigma)$. We use independent flat prior distributions $\pi(\theta)= 0.4$ and $\pi(\sigma)=2.5$ for $\sigma\in[.1, .5]$. These prior distributions $\pi(.)$ represent our expectations of the values of $\theta$ and $\sigma$ before the experiment; assigning them constant values indicates that we had little useable knowledge about the joint or marginal distributions of $\theta$ and $\sigma$ before the experiment was conducted. Using Bayesian estimation, we can then obtain posterior distributions for $\theta_i$ and $\theta$, the individual and overall mean lie factors. We are not particularly interested in the actual values of $\sigma$, but the additional parameter allows us to better estimate possible values for $\theta$. 
 
 \subsection{Results}
 The posterior density of $\theta$ for each function is shown in figure \ref{fig:overalldensity}, along with separate posterior densities for each individual $\theta_i$. $\theta$ is reasonably similar for all three functions, suggesting that while function type may moderate the size of the effect, the illusion occurs regardless of function type. Individual curves have different variability due to the number of trials completed, and are necessarily more spread out as there is less data with which to estimate the individual posterior distributions. 
@@ -503,14 +469,12 @@ The posterior density of $\theta$ for each function is shown in figure \ref{fig:
 \end{figure}
 
 On an individual level, figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. While in many cases, the most probable $\theta_i$ is similar across trials, individuals do seem to have been somewhat more affected by the illusion when the underlying function was sinusoidal, though this may reflect a discrepancy in the number of trials rather than a stronger illusion. Alternately, as the illusion depends on variable slope, it is possible that the monotonic exponential and inverse stimuli induced a weaker three-dimensional context. The posterior densities for these individuals appear extreme because they completed more trials (and thus estimates are much more precise); the individuals in question are not necessarily more prone to the illusion than other participants. 
-% \hh{XXX  the individuals you picked are among the most extreme ones.}
 
 \begin{figure}\centering
-\includegraphics[width=6in, trim=0in .2in 0in .1in]{figure/fig-IndivMeanAllFcns}
+\includegraphics[width=6.5in, keepaspectratio=T, trim=0in .2in 0in .1in]{figure/fig-IndivMeanAllFcns}
 \caption{Posterior distributions for $\theta_i$ for four of the participants who completed at least 6 trials of each of the three function types.}\label{fig:indivdensity}
 \end{figure}
 
-% \hh{XXX what do you mean by `appropriately compare intervals'? Oh, ok, those are 95\% credible intervals - say that first. Are 100 enough or is that choice triggered by computational restrictions? }
 In order to appropriately compare intervals for each participant's $\theta_i$ (even though participants may have completed different numbers of trials), we simulated 11 new ``data points" from our model (thus enforcing a uniform 11 trials per participant for each function type) to get a single new estimate of $\hat\theta_i$. For each participant, we generated 1000 of these $\hat\theta_i$ and used these simulated values to calculate the 95\% credible intervals shown in figure \ref{fig:indivCIs}. These intervals will allow us to consider the variability in $\theta_i$ due to participant preference rather than the number of trials a participant completed during the study. Removing this additional variability provides us with the opportunity to consider whether the sine illusion stems from an individual's perceptual experiences or from a lower-level perceptual heuristic. 
 
 \begin{figure}\centering
@@ -539,7 +503,7 @@ Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \S
 The estimated weight values corresponding to these $\theta$ are shown in figure \ref{fig:allCorrectionOptimal}. In all three cases, the experimentally-corrected plots appear less distorted than the uncorrected plots. 
 
 \begin{figure}[tp]\centering
-\includegraphics[width=6in,trim=.25in 0in .25in 0in]{figure/fig-allOptimalWeights} 
+\includegraphics[width=5.5in,trim=.125in 0in .125in 0in]{figure/fig-allOptimalWeights} 
 \caption{Uncorrected, experimentally corrected (according to the median value of $\theta$), and fully corrected stimuli for all three underlying functions used in the experiment. The corrected value shown here is equivalent to the distortion factor $D$ defined as $D=\ell_{max}/\ell_{min}$.}\label{fig:allCorrectionOptimal}
 \end{figure}
 This experiment has demonstrated that the sine illusion results in mis-perception of graphically presented data. In particular, participants tend to see uneven line length when lines are even while missing uneven line length due to the illusion's effect. 
@@ -814,7 +778,7 @@ data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*
 data$paren <- c(" (Uncorrected)", " (Experimental)", " (Fully Corrected)")[data$set]
 data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
-p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
+p1 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, -.0125, .0125), "cm"), text=element_text(size=10))
 ggsave("figure/fig-sineOptimalWeights.pdf", p1, width=6, height=2.25)
 
 f <- function(x) 5/6*1/x
@@ -845,7 +809,7 @@ data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*
 data$paren <- c(" (Uncorrected)", " (Experimental)", " (Fully Corrected)")[data$set]
 data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
-p2 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
+p2 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(-.0125, .0125, -.0125, .0125), "cm"), text=element_text(size=10))
 ggsave("figure/fig-invOptimalWeights.pdf", p2, width=6, height=2.25)
 
 qplot(data=subset(data, set==1), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
@@ -879,7 +843,7 @@ data <- ddply(data, .(set), transform, P=max(ellx*w+(1-w)*ell)/min(ellx*w+(1-w)*
 data$paren <- c(" (Uncorrected)", " (Experimental)", " (Fully Corrected)")[data$set]
 data$label <- paste("D = ", round(data$theta, 2), data$paren, sep="")
 data$label <- factor(data$label, levels=unique(data$label))
-p3 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
+p3 <- qplot(data=data, x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + facet_grid(type~label) + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy) + theme(plot.margin=unit(c(-.0125, .0125, .0125, .0125), "cm"), text=element_text(size=10))
 ggsave("figure/fig-expOptimalWeights.pdf", p3, width=6, height=2.25)
 
 qplot(data=subset(data, set==1), x=xstart, y=ystart, xend=xend, yend=yend, geom="segment") + coord_equal(ratio=1) + theme_stimuli() + xlim(lims$dx) + ylim(lims$dy)
