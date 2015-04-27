@@ -332,18 +332,18 @@ D_k = (\text{maximum line length in sub-plot } k)/(\text{minimum line length in 
 \newtext{Note that $D_k$ and the weight used for the correction factor $w$ depend on each other (see equation (\ref{eqn:correction})). 
 }
 
-Based on an internal pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the information graphics community. In order to pinpoint the weight value necessary to correct the illusion more precisely, we chose twelve sets of 6 weight values each that were used to produce test plots similar to that shown in figure \ref{fig:sinestimuli}. These sets of weight values were chosen to allow greater precision estimates closer to $w=0.8$, while still covering the range of $w$ between 0 and 1.4. The sets of $w$ used are shown in table~\ref{tab:w}, along with corresponding lie factors $D_k$ for stimuli with underlying function $sin(x)$ (other functions used will have different $D_k$ due to the nature of the correction factor). Plots with weight values spread over the full range of $w$ tested were considered ``test" plots that could be used for verification purposes, while plots with weight values concentrated near $w=0.8$ were considered to have higher difficulty (because the sub-plots were very similar). This allowed us to estimate $w$, and thus $D$, with higher precision while still exploring the entire parameter space. 
+Based on an internal pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the information graphics community. In order to pinpoint the weight value necessary to correct the illusion more precisely, we chose twelve sets of six weight values each that were used to produce test plots similar to that shown in figure \ref{fig:sinestimuli}. These sets of weight values were chosen to allow greater precision estimates closer to $w=0.8$, while still covering the range of $w$ between 0 and 1.4. The sets of $w$ used are shown in table~\ref{tab:w}, along with corresponding distortion factors $D_k$ for stimuli with underlying function $sin(x)$ (other functions used will have different $D_k$ due to the nature of the correction factor). Plots with weight values spread over the full range of $w$ tested were considered easy ``test" plots that could be used for verification purposes, while plots with weight values concentrated near $w=0.8$ were considered to have higher difficulty (because the sub-plots were very similar). This allowed us to estimate $w$, and thus $D$, with higher precision while still exploring the entire parameter space. 
 
 
 \begin{table}[ht]
 \centering
-\tbl{\label{tab:w} Ordered weight factors and corresponding lie factors for the sine curve stimuli sets, as computed using equation \ref{eqn:psychliefactorD}. 
+\tbl{\label{tab:w} Ordered weight factors and corresponding distortion factors for the sine curve stimuli sets, as computed using equation \ref{eqn:psychliefactorD}. 
 % \hh{XXX what was the underlying concept behind the choice of weights? $D$ needs to be defined before this table is referred to - at least give a reference to $D$s definition. Is $D$ really the same for all three stimuli?}
 }{
 \begin{tabular}{llrrrrrrlrrrrrr}
   \hline
 %\cline{3-8} \cline{10-15}\\ [-1.75ex]
-set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Lie Factor ($D$) for $\sin(x)$ plots}\\ 
+set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Distortion ($D$) for $\sin(x)$ plots}\\ 
 \hline
 & & \multicolumn{6}{c}{sub-plot} & & \multicolumn{6}{c}{sub-plot}\\ 
     & & 1 & 2 & 3 & 4 & 5 & 6  & & 1 & 2 & 3 & 4 & 5 & 6  \\ 
@@ -368,13 +368,13 @@ set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolum
 
 \begin{table}[ht]
 \centering
-\tbl{\label{tab:w2} Ordered weight factors and corresponding lie factors for the exponential curve stimuli sets, as computed using equation \ref{eqn:psychliefactorD}.
+\tbl{\label{tab:w2} Ordered weight factors and corresponding distortion for the exponential curve stimuli sets, as computed using equation \ref{eqn:psychliefactorD}.
 % \hh{XXX what was the underlying concept behind the choice of weights? $D$ needs to be defined before this table is referred to - at least give a reference to $D$s definition. Is $D$ really the same for all three stimuli?}
 }{
      \begin{tabular}{llrrrrrrlrrrrrr}
      \hline
      %\cline{3-8} \cline{10-15}\\ [-1.75ex]
-     set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Lie Factor ($D$) for $\exp(x)$ plots}\\ 
+     set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Distortion ($D$) for $\exp(x)$ plots}\\ 
      \hline
      & & \multicolumn{6}{c}{sub-plot} & & \multicolumn{6}{c}{sub-plot}\\ 
      & & 1 & 2 & 3 & 4 & 5 & 6  & & 1 & 2 & 3 & 4 & 5 & 6  \\ 
@@ -397,12 +397,12 @@ set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolum
 
 \begin{table}[ht]
 \centering
-\tbl{\label{tab:w3} Ordered weight factors and corresponding lie factors for the inverse curve stimuli sets, as computed using equation \ref{eqn:psychliefactorD}. 
+\tbl{\label{tab:w3} Ordered weight factors and corresponding distortion for the inverse curve stimuli sets, as computed using equation \ref{eqn:psychliefactorD}. 
 }{
      \begin{tabular}{llrrrrrrlrrrrrr}
      \hline
      %\cline{3-8} \cline{10-15}\\ [-1.75ex]
-     set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Lie Factor ($D$) for $1/x$ plots}\\ 
+     set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolumn{6}{c}{Distortion ($D$) for $1/x$ plots}\\ 
      \hline
      & & \multicolumn{6}{c}{sub-plot} & & \multicolumn{6}{c}{sub-plot}\\ 
      & & 1 & 2 & 3 & 4 & 5 & 6  & & 1 & 2 & 3 & 4 & 5 & 6  \\ 
@@ -422,17 +422,29 @@ set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolum
 }
 \end{table}
 
-Each participant was presented with eleven sets of graphs (each ``set" consisting of 6 separate plots), consisting of one ``easy" test set, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. After the easy introductory chart, which was presented first, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the 6 plots presented as having lines which were the most ``even''. 
+Each participant was presented with eleven sets of graphs (each ``set" made up of six separate plots), consisting of one ``easy" test set, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. 
+\newdo{How do you determine difficulty level? You have talked about easier and harder plots, but you have not come up with the level yet. Just define it.}
+
+After first presenting an easy introductory chart, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the six plots presented as having lines which were the most ``even''. 
+
+\newdo{Is it ``even" or ``consistent"? What question did you use, exactly? We need to stick to that.}
 
 \subsection{Data Collection}
 
-Participants for the study were recruited through the Amazon Mechanical Turk web service, which connects workers with tasks that are not easily automated for a small fee. In exchange for completing at least 11 trials, participants were paid \$1. Given the anonymity of web-based data collection, we informed participants that a unique IP address was required to participate in the experiment; responses from duplicate IP addresses with different Turk IDs were grouped and only the first response was paid. This procedure was used to lower the probability of a single user completing the task multiple times, in order to ensure that we could accurately estimate variation among individuals. 
+Participants for the study were recruited through the Amazon Mechanical Turk web service, which connects workers with tasks that are not easily automated. In exchange for completing at least 11 trials, participants were paid \$1. Given the anonymity of web-based data collection, we informed participants that a unique IP address was required to participate in the experiment; responses from duplicate IP addresses with different Turk IDs were grouped and only the first set of responses was paid. This procedure was used to deter participants from completing the task multiple times, in order to preserve independence between responses from % ensure that we could accurately estimate variation among
+participants. 
 
-\Sexpr{nrow(turkdata.full)} responses from \Sexpr{length(unique(turkdata.full$id))} users at \Sexpr{length(unique(turkdata.full$ip.id))} unique IP addresses were collected. We removed data from participants who did not complete at least 10 trials (allowing for one trial to be skipped or otherwise not completed), and of the collected responses, \Sexpr{sum(turkdata.full$len<=10)} trials from \Sexpr{length(unique(turkdata.full[turkdata.full$len<=10,]$id))} participants were removed. 
+\Sexpr{nrow(turkdata.full)} responses from \Sexpr{length(unique(turkdata.full$id))} users at \Sexpr{length(unique(turkdata.full$ip.id))} unique IP addresses were collected. We removed data from participants who did not complete at least 10 trials (i.e. we allowed for one trial to be skipped or otherwise not completed), and of the collected responses, \Sexpr{sum(turkdata.full$len<=10)} trials from \Sexpr{length(unique(turkdata.full[turkdata.full$len<=10,]$id))} participants were removed. 
 
-In addition to the requirement that participants complete at least 10 trials, the participant also was required to complete at least 4 trials of a specific underlying function for those trials to be included. This condition ensured that for any specific function, there were enough trials to estimate an initial effect; an additional \Sexpr{nrow(turkdata.full) - sum(turkdata.full$len<=10) - nrow(turkdata)} trials were excluded based on this condition. 
+In addition to the requirement that participants complete at least 10 trials, the participant also was required to complete at least 4 trials of a specific underlying function for those trials to be included. 
+\newdo{uh. do you need to spell this out here? It's essentially just a reflection that complete randomization is a bad idea, and that this way no participant who only contributed 11 times as asked for, could evaluate all three functions. Could we put this as a footnote in the estimation? Right now this seems very much like a post-hoc  choice for convenience.}
 
-There were \Sexpr{length(unique(turkdata$ip.id))} users who completed at least 10 trials each (providing enough data that we could accurately fit individual-level parameters), and those users completed \Sexpr{nrow(turkdata)} trials which were used for this analysis. Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. We did not exclude data based on user responses to avoid biasing our conclusions; the possibility of significant variability between individuals in the preference for a specific $w$ value was too large to filter out even those who chose plots corresponding to $w=1.4$. 
+\newdo{could you make sure to change `user' to `participant'?}
+
+This condition ensured that for any specific function, there were enough trials to estimate an initial effect; an additional \Sexpr{nrow(turkdata.full) - sum(turkdata.full$len<=10) - nrow(turkdata)} trials were excluded based on this condition. 
+
+There were \Sexpr{length(unique(turkdata$ip.id))} users who completed at least 10 trials each (providing enough data that we could accurately fit individual-level parameters), and those users completed \Sexpr{nrow(turkdata)} trials which were used for this analysis. Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. We did not exclude data based on user responses to avoid biasing our conclusions; \newdo{but we really should have done this - because this way participants who submitted a large number of responses have a larger effect on the estimation results. We have to do this, but I don't think we should go into this discussion.}
+the possibility of significant variability between individuals in the preference for a specific $w$ value was too large to filter out even those who chose plots corresponding to $w=1.4$. 
 
 
 Due to the experimental design, all participants completed trials with underlying function $y=\sin(x)$, for a total of \Sexpr{sum(turkdata$test_param=="Sin")} trials. As each participant who completed only the required 11 trials saw charts with either $y=1/x$ or $y=\exp(x)$ as the underlying function, each of these functions had fewer trials; \Sexpr{sum(turkdata$test_param=="Inv")} and \Sexpr{sum(turkdata$test_param=="Exp")}, respectively. 
@@ -446,7 +458,9 @@ Due to the experimental design, all participants completed trials with underlyin
 % We collected the plot identification, the trial number (for each user) and the user's response; otherwise, there was no demographic data. I also don't have access to the website; Mahbub ran this experiment. 
 
 
+\newdo{I'm just checking on the demographics - we usually collect them in a separate table.
 
+Let's trim down this section to the bare essentials: collecting data through amazon turk. Using filters to ensure good data quality, resulting in XXX responses from YYY participants. No discussions about excluding any responses. }
 
 \subsection{Analysis}
 \subsubsection*{Psychological ``Lie Factor"}
