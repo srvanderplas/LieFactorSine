@@ -311,7 +311,7 @@ Figure~\ref{fig:invstimuli} shows another set of these stimuli using a different
 \newdo{I think that I have finally figured out what my problem with $D_k$ is -- the psychological lie factor is defined as the ratio of the size of the perceived effect  and the size of the shown effect. That means that we cannot measure the psychological lie factor without input from somebody who perceives effects. Therefore we should not call $D_k$ the psychological lie factor of plot $k$. These values are all candidates until somebody picks one of the sub-plots. I think, it's just a naming convention. 
 }
 
-\newtext{In an attempt to estimate the psychological lie factor for each of the three functions, we first define $D_k$ for each sub plot $k=1, ..., 6$, as the ratio of the maximum line length to the minimum line length shown in the plot.
+\newtext{In an attempt to estimate the psychological lie factor for each of the three functions, we first define the {\it distortion} $D_k$ for each sub plot $k=1, ..., 6$, as the ratio of the maximum line length to the minimum line length shown in the plot.
 This results in a positive measure $D$, for which $D = 1$ indicates no distortion, while  a value of $D$ far from one indicates a significant distortion.
 }
 
@@ -325,9 +325,14 @@ D_k = (\text{maximum line length in sub-plot } k)/(\text{minimum line length in 
 
 \newdo{ I think we should first explain that we estimate the psychological lie factor from the values of the chosen $D_k$.}
 
+\newtext{In the experiment, we ask onlookers to identify the subplot from the chart with the most consistent lines along the function $f(x)$. This, in turn, identifies the corresponding $D_k$ value as the one which leads to the least amount of perceived distortion, which allows us to estimate the psychological lie factor underlying function $f(x)$. }
 
+\newdo{what are the results from the experiment for figures 9 and 11? Could we talk through those results to explain our procedure?}
 
-From an internal pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the information graphics community. In order to pinpoint the weight value necessary to correct the illusion more precisely, we chose twelve sets of 6 weight values each that were used to produce test plots similar to that shown in figure \ref{fig:sinestimuli}. These sets of weight values were chosen to allow greater precision estimates closer to $w=0.8$, while still covering the range of $w$ between 0 and 1.4. The sets of $w$ used are shown in table~\ref{tab:w}, along with corresponding lie factors $D_k$ for stimuli with underlying function $sin(x)$ (other functions used will have different $D_k$ due to the nature of the correction factor). Plots with weight values spread over the full range of $w$ tested were considered ``test" plots that could be used for verification purposes, while plots with weight values concentrated near $w=0.8$ were considered to have higher difficulty (because the sub-plots were very similar). This allowed us to estimate $w$, and thus $D$, with higher precision while still exploring the entire parameter space. 
+\newtext{Note that $D_k$ and the weight used for the correction factor $w$ depend on each other (see equation (\ref{eqn:correction})). 
+}
+
+Based on an internal pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the information graphics community. In order to pinpoint the weight value necessary to correct the illusion more precisely, we chose twelve sets of 6 weight values each that were used to produce test plots similar to that shown in figure \ref{fig:sinestimuli}. These sets of weight values were chosen to allow greater precision estimates closer to $w=0.8$, while still covering the range of $w$ between 0 and 1.4. The sets of $w$ used are shown in table~\ref{tab:w}, along with corresponding lie factors $D_k$ for stimuli with underlying function $sin(x)$ (other functions used will have different $D_k$ due to the nature of the correction factor). Plots with weight values spread over the full range of $w$ tested were considered ``test" plots that could be used for verification purposes, while plots with weight values concentrated near $w=0.8$ were considered to have higher difficulty (because the sub-plots were very similar). This allowed us to estimate $w$, and thus $D$, with higher precision while still exploring the entire parameter space. 
 
 
 \begin{table}[ht]
