@@ -464,6 +464,7 @@ Let's trim down this section to the bare essentials: collecting data through ama
 
 \subsection{Analysis}
 \subsubsection*{Psychological ``Lie Factor"}
+\newdo{Could we please call $D_k$ and $D_{ijk}$ just `distortion' at the moment? It turns into the psychological lie factor once participants pick it, but we shouldn't be calling it psychological factor beforehand.}
 As the strength of the correction varies across the horizontal range of the curve, we quantify the psychological distortion as the ratio of the maximum line length to the minimum line length for each sub-plot $k$: $D_k = l_\text{max}/l_\text{min}$. For a given set of 6 sub-plots, $j$, $D_{jk}$ would denote the sub-plot distortion factor. Let $D_{ijk}$ denote the distortion factor corresponding to participant $i$'s choice of sub-plot $k$ in stimulus set $j$ during a single trial. In this experiment, there are 32 stimuli sets (2 test sets + 10 sets for each of 3 underlying functions), so $1 \leq j \leq 32$. 
 
 
