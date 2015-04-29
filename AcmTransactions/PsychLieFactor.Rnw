@@ -439,7 +439,7 @@ participants.
 In addition to the requirement that participants complete at least 10 trials, the participant also was required to complete at least 4 trials of a specific underlying function for those trials to be included. 
 \newdo{uh. do you need to spell this out here? It's essentially just a reflection that complete randomization is a bad idea, and that this way no participant who only contributed 11 times as asked for, could evaluate all three functions. Could we put this as a footnote in the estimation? Right now this seems very much like a post-hoc  choice for convenience.}
 
-\newdo{could you make sure to change `user' to `participant'?}
+% \newdo{could you make sure to change `user' to `participant'?}
 
 This condition ensured that for any specific function, there were enough trials to estimate an initial effect; an additional \Sexpr{nrow(turkdata.full) - sum(turkdata.full$len<=10) - nrow(turkdata)} trials were excluded based on this condition. 
 
