@@ -109,12 +109,12 @@ Author's address: S. VanderPlas, Snedecor Hall, Iowa State University, Ames, IA 
 % \newpage
 
 % \comment{ACM is not a statistical crowd, so they are not going to care about statistical graphics. We need to exchange any mentioning of statistical graphics by information graphics. }
+
 \section{Introduction}
 Graphics are one of the most powerful tools researchers have to communicate results to wide audiences. They are easier to understand than tables or verbal descriptions\cite{larkin1987diagram}, easier to remember than words alone \cite{mayer1994whom}, and provide information that can be perceived and used with minimal additional cognitive load \cite{zhang1994representations}. Informative graphics differ from visualizations, sketches, and diagrams in that they present visual summaries of data, using summary functions to map the data graphically, preserving the relationship between two variables using spatial information. That is, unlike visualizations, sketches, and diagrams, spatial relationships presented in information graphics are functions of the data, representing numerical quantities (within the limits of image resolution) accurately. Conveying numerical relationships using spatial information makes use of the brain's visual processing ability, freeing working memory to interpret and make connections between graphics and written interpretations. 
 
 As information graphics utilize spatial relationships to convey numerical information, it is particularly important that these relationships accurately portray the data \cite{tufte}. In many cases, attempts to make a chart visually interesting compromise this goal: using three dimensions when only one dimension is required, or adding unnecessary perspective views to a chart can distort the numerical information the plot was designed to convey. In his book, Tufte argues that some graphics (many of which might be better classified as visualizations) do not accurately reflect the data because they sacrifice numerical accuracy for visual appeal. In order to quantify this loss of numerical accuracy, Tufte created the \textbf{lie factor}, which compares the effect size shown in the image to the effect size shown in the data, so that a lie factor much greater than 1 indicates a picture that over-emphasizes an effect, and a lie factor much smaller than one indicates a picture which minimizes an effect (values between .95 and 1.05 are typically acceptable). While Tufte's lie factor is an effective measurement of the accuracy of the transition from data to graphics, we must also be concerned about the transition from graphics to the brain, as we are relying on the brain's visual processing ability to efficiently encode numerical relationships.
 
-% \comment{The lie factor needs more details for a proper introduction, like the one you do a bit later. Take out some detail and just mention the lie factor as one measure to assess whether a picture is true to the data it's supposed to show.}
 Ideally, charts not only represent the data accurately, but  also allow readers to draw accurate conclusions. Generally, the human visual system is quite good at accurately interpreting charts \cite{cleveland:1984, kosara:2010}, but we need to be aware of contextual misperceptions that lead us to the wrong conclusion. While there are relatively few examples of the effect of optical illusions and other misperceptions on information graphics, \citet{amer2005bias} and \citet{poulton1985geometric} have documented the effect of the Poggendorff illusion on line graphs in different contexts. 
 Tufte's lie factor does not give us any insight about the accuracy of the transition between chart and brain, but a similar factor could be created to measure the accuracy of this transition.
 In this paper, we examine a situation in which low-level human perceptual processes interfere with making accurate judgments from displays and suggest an experimental methodology for estimating the psychological ``lie factor" of a chart due to a specific conceptual misperception: the sine illusion. 
@@ -151,8 +151,6 @@ A similar effect can also be found in the Necker Cube - whichever face appears t
 \subsection{Three Dimensional Context of the Sine Illusion}
 While the classic M\"uller-Lyer illusion is seldom a factor in information charts, there are other illusions caused by the interpretation of a two-dimensional stimulus in the context of three-dimensional objects, leading to a distortion in the mental representation of the original stimulus. The sine illusion (also known as the line width illusion: \citealt{sineillusionjcgs,day:1991}) is one example of this phenomenon which occurs frequently in information graphics. 
 
-%\comment{Give each of the two figures in the next sentence its own paragraph. First introduce the sine illusion. Then give an example outside the realm of vertical lines. Otherwise you're wasting good material.}
-
 Figure~\ref{fig:sineillusion} shows the sine illusion in its original form \cite{day:1991} as straight vertical lines of the same length with a sinusoidal mean function. In this illusion, the vertical lines in the center of the figure appear much shorter than the vertical lines at the peak and trough of the sine curve. The illusion still persists when the image is rotated by $90^{\circ}$. Even when viewers are aware of the illusion's presence, it is close to impossible to  overcome mentally. 
 
 
@@ -162,8 +160,7 @@ Figure~\ref{fig:sineillusion} shows the sine illusion in its original form \cite
 \end{figure}
 
 
-The problem that the sine illusion presents in information graphics is well documented \cite{cleveland:1984, robbins:2005}. One such example is the ``Balance of Trade'' from Playfair's Statistical Atlas~\cite{playfair}, as shown in figure~\ref{fig:playfair}. The balance of trade in 1765 seems to be approximately the same as the balance of trade in the years immediately preceding that year; this is in fact extremely misleading (using a straightedge along the chart vertically will demonstrate the issue).% This problem has been well-documented . %, but it is difficult to produce a (single) similar chart which conveys all of the information presented in figure~\ref{fig:playfair}. 
-
+The problem that the sine illusion presents in information graphics is well documented \cite{cleveland:1984, robbins:2005}. One such example is the ``Balance of Trade'' from Playfair's Statistical Atlas~\cite{playfair}, as shown in figure~\ref{fig:playfair}. The balance of trade in 1765 seems to be approximately the same as the balance of trade in the years immediately preceding that year; this is in fact extremely misleading (using a straightedge along the chart vertically will demonstrate the issue).
 
 
 \begin{figure}[t]\centering
@@ -326,14 +323,11 @@ D_k = (\text{maximum line length in sub-plot } k)/(\text{minimum line length in 
 
 %The definition of $D$ in equation \ref{eqn:psychliefactorD} does deviate somewhat from our extension of Tufte's definition of the lie factor described in equation \ref{eqn:psychliefactor}, but this is by necessity, as an uncorrected plot would show a difference of 0, which would wreak havoc on any experimental measure of the lie factor, as that 0 would be in the denominator. Our modification preserves the interpretation of Tufte's lie factor, while adapting the computation for use in this experimental setting. %% we are already distinguishing between Tufte's lie factor and the psychological lie factor, so there's no need for this last paragraph anymore. 
 
-\newdo{ I think we should first explain that we estimate the psychological lie factor from the values of the chosen $D_k$.}
-
-\newtext{In the experiment, we ask onlookers to identify the subplot from the chart with the most consistent lines along the function $f(x)$. This, in turn, identifies the corresponding $D_k$ value as the one which leads to the least amount of perceived distortion, which allows us to estimate the psychological lie factor underlying function $f(x)$. }
+In the experiment, we ask onlookers to identify the subplot from the chart with the most consistent lines along the function $f(x)$. This, in turn, identifies the corresponding $D_k$ value as the one which leads to the least amount of perceived distortion, which allows us to estimate the psychological lie factor underlying function $f(x)$. 
+Note that $D_k$ and the weight used for the correction factor $w$ depend on each other (see equation \eqref{eqn:correction}). 
 
 \newdo{what are the results from the experiment for figures 9 and 11? Could we talk through those results to explain our procedure?}
-
-\newtext{Note that $D_k$ and the weight used for the correction factor $w$ depend on each other (see equation (\ref{eqn:correction})). 
-}
+\newtext{One of the stimuli shown to participants is provided in figure \ref{fig:sinestimuli}. A participant might select plot 2 as appearing the most even; we compute the distortion factor $D_2 = 1.80/1.00 = 1.80$, that is, this participant identified a figure with lines varying in length from 1 to 1.8 as appearing to be the most consistent (weight values and the corresponding distortion factors are shown in Tables \ref{tab:w}, \ref{tab:w2}, and \ref{tab:w3} for sine, exponential, and inverse stimuli respectively. }
 
 Based on an internal pilot study, we expected values around $w = 0.8$ to be sufficient to break the illusion, but did not know whether this would generalize to those outside of the information graphics community. In order to pinpoint the weight value necessary to correct the illusion more precisely, we chose twelve sets of six weight values each that were used to produce test plots similar to that shown in figure \ref{fig:sinestimuli}. These sets of weight values were chosen to allow greater precision estimates closer to $w=0.8$, while still covering the range of $w$ between 0 and 1.4. The sets of $w$ used are shown in table~\ref{tab:w}, along with corresponding distortion factors $D_k$ for stimuli with underlying function $sin(x)$ (other functions used will have different $D_k$ due to the nature of the correction factor). Plots with weight values spread over the full range of $w$ tested were considered easy ``test" plots that could be used for verification purposes, while plots with weight values concentrated near $w=0.8$ were considered to have higher difficulty (because the sub-plots were very similar). This allowed us to estimate $w$, and thus $D$, with higher precision while still exploring the entire parameter space. 
 
@@ -426,28 +420,34 @@ set \vphantom{hp}& difficulty & \multicolumn{6}{c}{Weight ($w$)} & & \multicolum
 \end{table}
 
 Each participant was presented with eleven sets of graphs (each ``set" made up of six separate plots), consisting of one ``easy" test set, five stimuli sets of difficulty level 1 through 5 with the sine curve as the underlying function, and another five graph sets (also of difficulty levels 1 to 5) with either the exponential or the inverse curve as the underlying function. 
-\newdo{How do you determine difficulty level? You have talked about easier and harder plots, but you have not come up with the level yet. Just define it.}
+\newtext{
+Difficulty level is determined by the range of weight values shown in the stimuli: easy sets contain plots which span a wide range of weight values, while harder sets span a more narrow range of weight values.
+}
 
-After first presenting an easy introductory chart, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the six plots presented as having lines which were the most ``even''. 
+\done{How do you determine difficulty level? You have talked about easier and harder plots, but you have not come up with the level yet. Just define it.}
 
-\newdo{Is it ``even" or ``consistent"? What question did you use, exactly? We need to stick to that.}
+After first presenting an easy introductory chart, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the six plots presented as having lines which were the most ``consistent''. 
+
+\newdo{Is it ``even" or ``consistent"? What question did you use, exactly? We need to stick to that.\\
+From my emails with Mahbub:\\
+In what picture is the size of the curve most consistent?}
 
 \subsection{Data Collection}
 
-Participants for the study were recruited through the Amazon Mechanical Turk web service, which connects workers with tasks that are not easily automated. In exchange for completing at least 11 trials, participants were paid \$1. Given the anonymity of web-based data collection, we informed participants that a unique IP address was required to participate in the experiment; responses from duplicate IP addresses with different Turk IDs were grouped and only the first set of responses was paid. This procedure was used to deter participants from completing the task multiple times, in order to preserve independence between responses from % ensure that we could accurately estimate variation among
-participants. 
+Participants for the study were recruited through the Amazon Mechanical Turk web service, which connects workers with tasks that are not easily automated. In exchange for completing at least 11 trials, participants were paid \$1. Given the anonymity of web-based data collection, we informed participants that a unique IP address was required to participate in the experiment; responses from duplicate IP addresses with different Turk IDs were grouped and only the first set of responses was paid. This procedure was used to deter participants from completing the task multiple times, in order to preserve independence between responses from participants. 
 
 \Sexpr{nrow(turkdata.full)} responses from \Sexpr{length(unique(turkdata.full$id))} participants at \Sexpr{length(unique(turkdata.full$ip.id))} unique IP addresses were collected. We removed data from participants who did not complete at least 10 trials (i.e. we allowed for one trial to be skipped or otherwise not completed), and of the collected responses, \Sexpr{sum(turkdata.full$len<=10)} trials from \Sexpr{length(unique(turkdata.full[turkdata.full$len<=10,]$id))} participants were removed. 
 
-In addition to the requirement that participants complete at least 10 trials, the participant also was required to complete at least 4 trials of a specific underlying function for those trials to be included. 
-\newdo{uh. do you need to spell this out here? It's essentially just a reflection that complete randomization is a bad idea, and that this way no participant who only contributed 11 times as asked for, could evaluate all three functions. Could we put this as a footnote in the estimation? Right now this seems very much like a post-hoc  choice for convenience.}
+% In addition to the requirement that participants complete at least 10 trials, the participant also was required to complete at least 4 trials of a specific underlying function for those trials to be included. 
+% \newdo{uh. do you need to spell this out here? It's essentially just a reflection that complete randomization is a bad idea, and that this way no participant who only contributed 11 times as asked for, could evaluate all three functions. Could we put this as a footnote in the estimation? Right now this seems very much like a post-hoc  choice for convenience.}
 
 % \newdo{could you make sure to change `user' to `participant'?}
 
-This condition ensured that for any specific function, there were enough trials to estimate an initial effect; an additional \Sexpr{nrow(turkdata.full) - sum(turkdata.full$len<=10) - nrow(turkdata)} trials were excluded based on this condition. 
+% This condition ensured that for any specific function, there were enough trials to estimate an initial effect; an additional \Sexpr{nrow(turkdata.full) - sum(turkdata.full$len<=10) - nrow(turkdata)} trials were excluded based on this condition. 
 
-There were \Sexpr{length(unique(turkdata$ip.id))} participants who completed at least 10 trials each (providing enough data that we could accurately fit individual-level parameters), and those participants completed \Sexpr{nrow(turkdata)} trials which were used for this analysis. Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. We did not exclude data based on participant responses to avoid biasing our conclusions; \newdo{but we really should have done this - because this way participants who submitted a large number of responses have a larger effect on the estimation results. We have to do this, but I don't think we should go into this discussion.}
-the possibility of significant variability between individuals in the preference for a specific $w$ value was too large to filter out even those who chose plots corresponding to $w=1.4$. 
+There were \Sexpr{length(unique(turkdata$ip.id))} participants who completed at least 10 trials each (providing enough data that we could accurately fit individual-level parameters), and those participants completed \Sexpr{nrow(turkdata)} trials which were used for this analysis. 
+% Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. We did not exclude data based on participant responses to avoid biasing our conclusions; \newdo{but we really should have done this - because this way participants who submitted a large number of responses have a larger effect on the estimation results. We have to do this, but I don't think we should go into this discussion.}
+% the possibility of significant variability between individuals in the preference for a specific $w$ value was too large to filter out even those who chose plots corresponding to $w=1.4$. 
 
 
 Due to the experimental design, all participants completed trials with underlying function $y=\sin(x)$, for a total of \Sexpr{sum(turkdata$test_param=="Sin")} trials. As each participant who completed only the required 11 trials saw charts with either $y=1/x$ or $y=\exp(x)$ as the underlying function, each of these functions had fewer trials; \Sexpr{sum(turkdata$test_param=="Inv")} and \Sexpr{sum(turkdata$test_param=="Exp")}, respectively. 
@@ -468,30 +468,13 @@ Let's trim down this section to the bare essentials: collecting data through ama
 \subsection{Analysis}
 \subsubsection*{Psychological ``Lie Factor"}
 
-\newdo{Could we please call $D_k$ and $D_{ijk}$ just `distortion' at the moment? It turns into the psychological lie factor once participants pick it, but we shouldn't be calling it psychological factor beforehand.}
 
-\newtext{We quantify the amount of distortion across the horizontal range of the curve as the }
-%As the strength of the correction varies across the horizontal range of the curve, we quantify the psychological distortion as the 
-ratio of the maximum line length to the minimum line length for each sub-plot $k$: $D_k = l_\text{max}/l_\text{min}$ (see definition (\ref{eqn:psychliefactorD})). 
-
-%For a given set of 6 sub-plots, $j$, $D_{jk}$ would denote the sub-plot distortion factor. 
+We quantify the amount of distortion across the horizontal range of the curve as the ratio of the maximum line length to the minimum line length for each sub-plot $k$: $D_k = l_\text{max}/l_\text{min}$ (see definition (\ref{eqn:psychliefactorD})). 
+ 
 Let $D_{ijk}$ denote the distortion factor corresponding to participant $i$'s choice of sub-plot $k$ in stimulus set $j$ during a single trial. In this experiment, there are 32 stimuli sets (2 test sets and 10 sets for each of 3 underlying functions), so $1 \leq j \leq 32$. 
 
-
-% \hh{XXX is $l_\text{min}$ always equal to 1 in our experiment?}
-
-% \hh{XXX I think $D^\ast$ needs a bit more formality. 
-% Let's call it $D^\ast_{ij}$ for participant's $i$ choice on the $j$th set. You have 36? different sets, so $1 \le j \le 36$ and $1 \le i \le 128$. For each participant you have at least 11 responses, more for some.  It might be beneficial to even have a third subscript $k$ and introduce this as $D^\ast_{ijk}$ for $k \in \{1,2,3\}$, $1 \le j \le 12$ and $1 \le i \le 128$.}
-
-
-% \hh{XXX why only extension?  - That was just our choice. We could also have worked the correction by averaging across lines to keep the average at 1.}
-
-The correction for the sine illusion we use here extends the line segments, so that for initial line segments of length 1, the correction  produces  line segments of length greater than or equal to 1. For all of the functions in the study, 
-%In addition, due to the underlying functions we have chosen, 
-the minimum line length (assuming a starting line length of 1) after correction is approximately 1; this allows us to simplify $D_k$ as $$D_k = \text{maximum line length in plot } k$$
+The correction for the sine illusion we use here extends the line segments, so that for initial line segments of length 1, the correction  produces  line segments of length greater than or equal to 1. For all of the functions in the study, the minimum line length (assuming a starting line length of 1) after correction is approximately 1; this allows us to simplify $D_k$ as $$D_k = \text{maximum line length in plot } k$$
 Without any correction for the sine illusion, this factor is, like  Tufte's lie-factor, equal to one. Values above one indicate that at least in some areas of the curve line segments are extended.
-
-
 
 We compute this quantity for each sub-plot in each stimulus presented to the participant. The participant's choice therefore provides us with an estimate of what value of $D$ constitutes the most consistent line length (out of the set shown). As each set of 6 plots is not guaranteed to contain a plot with $w=0$,  corresponding to constant length, choosing a plot with $D=1.4$ indicates more distortion if there is a sub-plot with $w=0$ ($D=1$) present than if least distorted sub-plot present has $w=0.4$ ($D=1.2$ for plots of $y=\sin(x)$). Correcting for this bias, the set of $\{D_{\cdot \cdot k}\}=\{D_{\cdot \cdot 1}, ..., D_{\cdot \cdot 6}\}$ that is available to choose from produces an estimate of the overall  psychological `lie factor' as the ratio of the distortion of the chosen plot and the smallest distortion presented in set $j$:
 \begin{equation}\label{eqn:pconv}
@@ -501,8 +484,7 @@ for each plot $k$ and each participant $i$. This normalization does conservative
 Furthermore, while we could normalize relative to the maximal distortion, most stimuli sets contain large distortions values ($D > 1.85$; for $y=\sin(x)$), while more than half of the stimuli sets do not contain $D\approx 1$. 
 This favoring of larger distortion values is due to choices of $w$  around  $w=0.8$, which was suggested in the pilot data to be the commonly preferred weight value. 
 
-%That is, $P$ is the ratio of the lie factor of the chosen plot to the smallest lie factor available in the set of available plots. 
-Whenever the set of available plots contains an uncorrected plot, the psycholgical lie factor $P$ is equal to $D$; otherwise, i.e.\ no uncorrected plot is  presented, the psycholgical lie factor $P$ is less than the distortion $D$. %, since each $D_j >= 1$, $j=1, ..., 6$. 
+Whenever the set of available plots contains an uncorrected plot, the psycholgical lie factor $P$ is equal to $D$; otherwise, i.e.\ no uncorrected plot is  presented, the psycholgical lie factor $P$ is less than the distortion $D$.
 This transformation is a conservative approach to estimating the lie factor, but allows us to show a variety of scaled transformations and estimate the effect with more granularity around $w=0.8$. 
 
 By considering each participant's answers for the plot with the most consistent line length, we  obtain an estimate of the psychological distortion from the sine illusion on an individual level. Estimating distortion factors for each participant facilitates comparison of these estimated values to determine whether the illusion is a product of an individual's perceptual experience or whether there possibly is an  underlying perceptual heuristic for the sine illusion common across the majority of participants. If the illusion is a learned misperception rather than an underlying perceptual ``bug'', we would expect there to be considerable variability in the estimated individual lie factor $P_i$  for each unique participant $i$, $1\leq i \leq 123$, as it is likely that personal experience varies more widely than perceptual heuristics and their underlying neural architecture. 
@@ -523,39 +505,56 @@ The posterior density of $\theta$ for each function is shown in figure \ref{fig:
 \caption{Estimated densities for $\theta_i$, shown in color, with the estimated overall density for $\theta$ shown in black. Individuals have extremely similar posterior distribution of $\theta_i$, and even different functions have similar $\hat\theta$, suggesting a common underlying mental distortion.}\label{fig:overalldensity}
 \end{figure}
 
-\newdo{I am not sure what figure \ref{fig:indivdensity} contributes ... the estimated functions seem to me to be too different to instill  confidence in the population based theory ... }
+% \newdo{I am not sure what figure \ref{fig:indivdensity} contributes ... the estimated functions seem to me to be too different to instill  confidence in the population based theory ... }
+% 
+% 
+% On an individual level, figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. While in many cases, the most probable $\theta_i$ is similar across trials, individuals do seem to have been somewhat more affected by the illusion when the underlying function was sinusoidal, though this may reflect a discrepancy in the number of trials rather than a stronger illusion. Alternately, as the illusion depends on variable slope, it is possible that the monotonic exponential and inverse stimuli induced a weaker three-dimensional context. The posterior densities for these individuals appear extreme because they completed more trials (and thus estimates are much more precise); the individuals in question are not necessarily more prone to the illusion than other participants. 
+% 
+% \begin{figure}\centering
+% \includegraphics[width=6.5in, keepaspectratio=T, trim=0in .2in 0in .1in]{figure/fig-IndivMeanAllFcns}
+% \caption{Posterior distributions for $\theta_i$ for four of the participants who completed at least 6 trials of each of the three function types.}\label{fig:indivdensity}
+% \end{figure}
+% 
+% \newdo{I think it's safe to say that ACM Transaction readers are ot going to appreciate the finer details of how the credible intervals are constructed. Comment it out and focus on interpreting the results ...}
+% 
+% In order to appropriately compare intervals for each participant's $\theta_i$ (even though participants may have completed different numbers of trials), we simulated 11 new ``data points" from our model (thus enforcing a uniform 11 trials per participant for each function type) to get a single new estimate of $\hat\theta_i$. For each participant, we generated 1000 of these $\hat\theta_i$ and used these simulated values to calculate the 95\% credible intervals shown in figure \ref{fig:indivCIs}. These intervals will allow us to consider the variability in $\theta_i$ due to participant preference rather than the number of trials a participant completed during the study. Removing this additional variability provides us with the opportunity to consider whether the sine illusion stems from an individual's perceptual experiences or from a lower-level perceptual heuristic. 
 
-
-On an individual level, figure~\ref{fig:indivdensity} shows the posterior density for $\theta_i$ for four of the participants who completed at least 6 trials in each category. While in many cases, the most probable $\theta_i$ is similar across trials, individuals do seem to have been somewhat more affected by the illusion when the underlying function was sinusoidal, though this may reflect a discrepancy in the number of trials rather than a stronger illusion. Alternately, as the illusion depends on variable slope, it is possible that the monotonic exponential and inverse stimuli induced a weaker three-dimensional context. The posterior densities for these individuals appear extreme because they completed more trials (and thus estimates are much more precise); the individuals in question are not necessarily more prone to the illusion than other participants. 
-
-\begin{figure}\centering
-\includegraphics[width=6.5in, keepaspectratio=T, trim=0in .2in 0in .1in]{figure/fig-IndivMeanAllFcns}
-\caption{Posterior distributions for $\theta_i$ for four of the participants who completed at least 6 trials of each of the three function types.}\label{fig:indivdensity}
-\end{figure}
-
-\newdo{I think it's safe to say that ACM Transaction readers are ot going to appreciate the finer details of how the credible intervals are constructed. Comment it out and focus on interpreting the results ...}
-
-In order to appropriately compare intervals for each participant's $\theta_i$ (even though participants may have completed different numbers of trials), we simulated 11 new ``data points" from our model (thus enforcing a uniform 11 trials per participant for each function type) to get a single new estimate of $\hat\theta_i$. For each participant, we generated 1000 of these $\hat\theta_i$ and used these simulated values to calculate the 95\% credible intervals shown in figure \ref{fig:indivCIs}. These intervals will allow us to consider the variability in $\theta_i$ due to participant preference rather than the number of trials a participant completed during the study. Removing this additional variability provides us with the opportunity to consider whether the sine illusion stems from an individual's perceptual experiences or from a lower-level perceptual heuristic. 
+\newtext{
+Figure \ref{fig:indivCIs} shows 95\% posterior predictive credible intervals for $\theta_i$ estimated for each participant and mean function. 
+}
 
 \begin{figure}\centering
 \includegraphics[width=6in, trim=0in .1in 0in .1in]{figure/fig-CIindivMean}
 \caption{95\% posterior predictive intervals for $\theta_i$, calculated for each stimulus type. Vertical lines indicate the median estimate of the overall $\theta$ with a 95\% credible interval.}\label{fig:indivCIs}
 \end{figure}
 
-Posterior predictive intervals for $\theta_i$ as shown in figure~\ref{fig:indivCIs} suggest that overall, the $\theta_i$ are similar across individuals. Very few (5 each for $y=\sin(x)$ and $y=\exp(x)$, 16 for $y=1/x$) of the intervals overlap the region (1, 1.05), which corresponds to an ``acceptable" lie factor according to Tufte. This indicates significant distortion for most participants in our experiment, and the marked overlap of the intervals for each participant provides evidence consistent with a common magnitude of distortion. This suggests that there may be some common psychological strategy that is misapplied to the perception of these stimuli. 
+These intervals suggest that overall, the $\theta_i$ are similar across individuals. Very few (5 each for $y=\sin(x)$ and $y=\exp(x)$, 16 for $y=1/x$) of the intervals overlap the region (1, 1.05), which corresponds to an ``acceptable" lie factor according to Tufte. This indicates significant distortion for most participants in our experiment, and the marked overlap of the intervals for each participant provides evidence consistent with a common magnitude of distortion. This suggests that there may be some common psychological strategy that is misapplied to the perception of these stimuli. 
 
 
 \subsubsection*{Comparison of the Preferred Stimuli}
 Estimates of $\hat\theta = E[\theta]$ for each function are \Sexpr{round(overall.mean.bounds$mean[1], 2)}, \Sexpr{round(overall.mean.bounds$mean[2],2)}, and \Sexpr{round(overall.mean.bounds$mean[3], 2)} respectively for exponential, inverse, and sine functions, suggesting a similar psychological distortion even for very different functions, though it seems as if the inverse function causes somewhat less distortion, possibly because the correction factor is not as proportionately large. Credible intervals can be found in Table \ref{tab:credibleintervalstable}. As all three of the credible intervals exclude 1.05, there is evidence that a psychological distortion is occurring; that is, there is evidence of a significant psychological lie factor. In addition, the method of adjusting the estimated lie factor we have used here is conservative; it is likely that because most stimuli contain a sub-plot with $w\geq 1$ our estimate of $\theta$ for the inverse function is low (as the lie factor for fully corrected inverse plots is greater than the corresponding lie factors for the other two functions used in this experiment). 
 
-\newdo{Reduce the number of significant digits in the table ... }
-
+% \newdo{Reduce the number of significant digits in the table ... }
 \begin{table}[tp]\centering
 \tbl{Credible intervals for the overall $\theta$ for exponential, inverse, and sine stimuli.\label{tab:credibleintervalstable}}{\begin{tabular}{ccc}\hline
 Function & 95\% Credible Interval for $\theta$ & Median\\\hline
-Sin & (\Sexpr{overall.mean.bounds[3,2]}, \Sexpr{overall.mean.bounds[3, 5]}) & \Sexpr{overall.mean.bounds[3, 4]}\\
-Exp & (\Sexpr{overall.mean.bounds[1,2]}, \Sexpr{overall.mean.bounds[1, 5]}) & \Sexpr{overall.mean.bounds[1, 4]}\\
-Inv & (\Sexpr{overall.mean.bounds[2,2]}, \Sexpr{overall.mean.bounds[2, 5]}) & \Sexpr{overall.mean.bounds[2, 4]}\\
+Sin & (
+\Sexpr{round(overall.mean.bounds[3,2], 2)}, 
+\Sexpr{round(overall.mean.bounds[3,5], 2)}
+) & 
+\Sexpr{round(overall.mean.bounds[3,4], 2)}\\
+Exp & (
+\Sexpr{round(overall.mean.bounds[1,2], 2)}
+, 
+\Sexpr{round(overall.mean.bounds[1,5], 2)}
+) & 
+\Sexpr{round(overall.mean.bounds[1,4], 2)}\\
+Inv & (
+\Sexpr{round(overall.mean.bounds[2,2], 2)}
+, 
+\Sexpr{round(overall.mean.bounds[2,5], 2)}
+) & 
+\Sexpr{round(overall.mean.bounds[2,4], 2)}\\
 \hline
 \end{tabular}
 }
