@@ -252,12 +252,11 @@ The psychological mechanisms which force three-dimensional context onto two-dime
 \end{equation}
 
 A correction factor which focuses on correcting the psychological distortion caused by the sine illusion is detailed in \citet{sineillusionjcgs}. This correction factor $c_\ell$ (the $y$ correction in the aforementioned paper) is applied to the line segments and extends these segments vertically at location $x$ according to equation \eqref{eqn:correction}, where $w$ represents a weight factor to allow variation of the strength of the correction. 
-\newtext{
 For a differentiable function $f(x)$ (obtained by regression or loess smoothing) with derivative $f^\prime(x)$, the correction is: 
-}
+
 
 \begin{equation}\label{eqn:correction}
-c_\ell(w) = (1-w) + w \sqrt{\left(1+f^\prime(x)^2\right)}
+c_\ell(w) = (1-w) + w \sqrt{1+f^\prime(x)^2}
 \end{equation}
 
 % \newdo{This is, I think, the first time that the function $f(x)$ is mentioned - that needs some explanation (plus a suggestion on how to get to this function if it is not known). 
