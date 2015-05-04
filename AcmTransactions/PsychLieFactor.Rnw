@@ -435,7 +435,8 @@ In what picture is the size of the curve most consistent?}
 
 Participants for the study were recruited through the Amazon Mechanical Turk web service, which connects workers with tasks that are not easily automated. In exchange for completing at least 11 trials, participants were paid \$1. Given the anonymity of web-based data collection, we informed participants that a unique IP address was required to participate in the experiment; responses from duplicate IP addresses with different Turk IDs were grouped and only the first set of responses was paid. This procedure was used to deter participants from completing the task multiple times, in order to preserve independence between responses from participants. 
 
-\Sexpr{nrow(turkdata.full)} responses from \Sexpr{length(unique(turkdata.full$id))} participants at \Sexpr{length(unique(turkdata.full$ip.id))} unique IP addresses were collected. We removed data from participants who did not complete at least 10 trials (i.e. we allowed for one trial to be skipped or otherwise not completed), and of the collected responses, \Sexpr{sum(turkdata.full$len<=10)} trials from \Sexpr{length(unique(turkdata.full[turkdata.full$len<=10,]$id))} participants were removed. 
+
+% \Sexpr{nrow(turkdata.full)} responses from \Sexpr{length(unique(turkdata.full$id))} participants at \Sexpr{length(unique(turkdata.full$ip.id))} unique IP addresses were collected. We removed data from participants who did not complete at least 10 trials (i.e. we allowed for one trial to be skipped or otherwise not completed), and of the collected responses, \Sexpr{sum(turkdata.full$len<=10)} trials from \Sexpr{length(unique(turkdata.full[turkdata.full$len<=10,]$id))} participants were removed. 
 
 % In addition to the requirement that participants complete at least 10 trials, the participant also was required to complete at least 4 trials of a specific underlying function for those trials to be included. 
 % \newdo{uh. do you need to spell this out here? It's essentially just a reflection that complete randomization is a bad idea, and that this way no participant who only contributed 11 times as asked for, could evaluate all three functions. Could we put this as a footnote in the estimation? Right now this seems very much like a post-hoc  choice for convenience.}
@@ -444,10 +445,11 @@ Participants for the study were recruited through the Amazon Mechanical Turk web
 
 % This condition ensured that for any specific function, there were enough trials to estimate an initial effect; an additional \Sexpr{nrow(turkdata.full) - sum(turkdata.full$len<=10) - nrow(turkdata)} trials were excluded based on this condition. 
 
-There were \Sexpr{length(unique(turkdata$ip.id))} participants who completed at least 10 trials each (providing enough data that we could accurately fit individual-level parameters), and those participants completed \Sexpr{nrow(turkdata)} trials which were used for this analysis. 
+\newtext{
+After removing data from participants who did not complete at least 10 trials, \Sexpr{length(unique(turkdata$ip.id))} participants completed \Sexpr{nrow(turkdata)} trials. 
+}
 % Though participants were asked to participate in 11 total trials, some participants continued to provide feedback beyond the eleven trials required to receive payment through Amazon. For any subsequent responses we randomly selected one of the 32 possible stimuli. This approach allowed us to collect some data in which a single participant provided responses to all three underlying functions. We did not exclude data based on participant responses to avoid biasing our conclusions; \newdo{but we really should have done this - because this way participants who submitted a large number of responses have a larger effect on the estimation results. We have to do this, but I don't think we should go into this discussion.}
 % the possibility of significant variability between individuals in the preference for a specific $w$ value was too large to filter out even those who chose plots corresponding to $w=1.4$. 
-
 
 Due to the experimental design, all participants completed trials with underlying function $y=\sin(x)$, for a total of \Sexpr{sum(turkdata$test_param=="Sin")} trials. As each participant who completed only the required 11 trials saw charts with either $y=1/x$ or $y=\exp(x)$ as the underlying function, each of these functions had fewer trials; \Sexpr{sum(turkdata$test_param=="Inv")} and \Sexpr{sum(turkdata$test_param=="Exp")}, respectively. 
 
@@ -461,8 +463,9 @@ Due to the experimental design, all participants completed trials with underlyin
 
 
 \newdo{I'm just checking on the demographics - we usually collect them in a separate table.
-
-Let's trim down this section to the bare essentials: collecting data through amazon turk. Using filters to ensure good data quality, resulting in XXX responses from YYY participants. No discussions about excluding any responses. }
+% 
+% Let's trim down this section to the bare essentials: collecting data through amazon turk. Using filters to ensure good data quality, resulting in XXX responses from YYY participants. No discussions about excluding any responses. 
+}
 
 \subsection{Analysis}
 \subsubsection*{Psychological ``Lie Factor"}
