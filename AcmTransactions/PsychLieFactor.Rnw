@@ -501,7 +501,37 @@ Plots used in the experiment have factors $P$ ranging between 1 and 2.5; we use 
 \newdo{the choice of names $\theta$ and $\theta_i$ suggests that $\theta$ is the population mean, while $\theta_i$ is the individual mean, and should therefore be centered around the population mean.  everything but the last statement holds ... which makes figure \ref{fig:overalldensity} look so odd, because the  individual densities are so different. Could we have one plot that shows the distribution of theta for all of the different functions, and then another plot like fig \ref{fig:overalldensity} for the individual densities separately? The individual densities suggest that there are at least two groups of people, and the overall population solution looks like an awkward fit between those two groups that doesn't capture either group adequately ... sorry ... I don't want to slam the statistics, it's just what it looks like to me.
 ... and I just noticed something else - are you sure that the lines show densities? The area under the curves don't seem to add to the same value. The population densities look like they encompass a larger area. Admittedly, the Bayesian approach is interested in $\pi(\theta)$, but I really think that the $\theta$ itself might be more informative - and the $\theta_i$ might then actually scatter around the population mean ... you can tell that I'm still struggling with this.}
 
-The posterior density of $\theta$ for each function is shown in figure \ref{fig:overalldensity}, along with separate posterior densities for each individual $\theta_i$. $\theta$ is reasonably similar for all three functions, suggesting that while function type may moderate the size of the effect, the illusion occurs regardless of function type. Individual curves have different variability due to the number of trials completed, and are necessarily more spread out as there is less data with which to estimate the individual posterior distributions. 
+\newtext{
+Posterior estimates of $\theta$ for each function are shown in figure \ref{fig:meanestimates}. Posterior density estimates for each individual's $\theta_i$ are shown in figure \ref{fig:overalldensity}. 
+}
+% The posterior density of $\theta$ for each function is shown in figure \ref{fig:overalldensity}, along with separate posterior densities for each individual $\theta_i$. 
+$\theta$ is reasonably similar for all three functions, suggesting that while function type may moderate the size of the effect, the illusion occurs regardless of function type. Individual curves have different variability due to the number of trials completed, and are necessarily more diffuse as there is less data with which to estimate the individual posterior distributions. 
+
+\begin{figure}\centering
+<<plotmeans, fig.width=4, fig.height=2, out.width=".5\\linewidth", echo=F>>=
+overall.mean$test_param2 <- factor(overall.mean$test_param, levels=c("Sin", "Exp", "Inv"), labels=c("Sine", "Exponential", "Inverse"))
+ggplot(data=overall.mean.bounds) + 
+  geom_pointrange(aes(x = functions, y=median, ymin=lb, ymax=ub, color=functions)) + 
+  xlab("Function") + ggtitle(expression(paste("Estimates and 95% Credible Intervals for ", theta))) + 
+  ylab("Lie Factor") + 
+  scale_colour_discrete("Function Type", guide="none") + 
+  ylim(c(1, 1.5)) + 
+  coord_flip() + 
+  theme_bw()
+# overall.mean.lines$functions <- factor(overall.mean.lines$test_param, levels=c("Sin", "Exp", "Inv"), labels=c("Sine", "Exponential", "Inverse"), ordered=T)
+#   
+# qplot(data=overall.mean, x=mean, y=f, geom="line", colour=functions, group=functions) +
+#   scale_colour_discrete("Function Type") + 
+#   xlab("Mean Psychological Lie Factor") + 
+#   ylab("Density") + 
+#   theme_bw() + 
+#   theme(legend.position="bottom") + 
+#   # facet_grid(~functions) +
+#   xlim(c(1, 1.5))
+  
+@
+\caption{Estimates and 95\% credible intervals for $\theta$. The inverse stimuli require less correction than the exponential and sine stimuli, in part because the procedure for estimating the psychological lie factor is particularly conservative for the inverse function stimuli.}\label{fig:meanestimates}
+\end{figure}
 
 \begin{figure}\centering
 \includegraphics[width=6in, trim=0in .1in 0in .1in]{figure/fig-spaghettiIndivDists}
