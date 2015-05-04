@@ -492,7 +492,12 @@ This transformation is a conservative approach to estimating the lie factor, but
 By considering each participant's answers for the plot with the most consistent line length, we  obtain an estimate of the psychological distortion from the sine illusion on an individual level. Estimating distortion factors for each participant facilitates comparison of these estimated values to determine whether the illusion is a product of an individual's perceptual experience or whether there possibly is an  underlying perceptual heuristic for the sine illusion common across the majority of participants. If the illusion is a learned misperception rather than an underlying perceptual ``bug'', we would expect there to be considerable variability in the estimated individual lie factor $P_i$  for each unique participant $i$, $1\leq i \leq 123$, as it is likely that personal experience varies more widely than perceptual heuristics and their underlying neural architecture. 
 
 Each set of $w$ values as defined in table~\ref{tab:w} corresponds  to a value of $P$ as defined in equation \ref{eqn:pconv}. 
-We test for a set of discrete values of $w$, which is reflected directly in the number of different values of $P$ we can observe. This approach allows us to use a finite set of stimuli for testing, so that we can explicitly control the range of $w$ displayed in each set of plots. To mathematically model a continuous quantity (the real domain of possible $P$ values) using discrete data, we employ a Bayesian approach to model an overall psychological lie factor $\theta$ and individual participant lie factors $\theta_i$.
+We test for a set of discrete values of $w$, which is reflected directly in the number of different values of $P$ we can observe. This approach allows us to use a finite set of stimuli for testing, so that we can explicitly control the range of $w$ displayed in each set of plots. 
+
+\newtext{
+We model the theoretical psychological lie factor as $\theta$, a continuous, unobservable population parameter, and individual psychological lie factors $\theta_i$ which represent the psychological distortion present due to the sine illusion in an individual. We can observe $P_{ij}$ for each participant $i$ and plot $j$. $P_{ij}$ values are discrete (the set of possible $P_{ij}$ values depends on the plot $j$), but provide information about the continuous $\theta_i$ for each participant (and the overall population value $\theta$). We use a Bayesian model to account for the discrete nature of the observable values and the continuous unobservable parameter values.
+}
+% In order to mathematically model a continuous quantity (the real domain of possible $P$ values) using discrete data, we employ a Bayesian approach to model an overall psychological lie factor $\theta$ and individual participant lie factors $\theta_i$. 
 
 Plots used in the experiment have factors $P$ ranging between 1 and 2.5; we use a truncated normal data model for participant $i$ viewing plot $j$, with $P = p_{ij} \sim N(\theta_i, \sigma)$ and independent flat prior distributions $\pi(\theta)= 0.4$ and $\pi(\sigma)=2.5$ for $\sigma\in[.1, .5]$. These prior distributions $\pi(.)$ represent our expectations of the values of $\theta$ and $\sigma$ before the experiment; assigning them constant values signals that we had little usable knowledge about the joint or marginal distributions of $\theta$ and $\sigma$ before the experiment was conducted. Using Bayesian estimation, we  then obtain posterior distributions for $\theta_i$ and $\theta$, the individual and overall mean lie factors. We are not particularly interested in the actual values of $\sigma$, but the additional parameter allows us to better estimate possible values for $\theta$. 
 
@@ -501,42 +506,42 @@ Plots used in the experiment have factors $P$ ranging between 1 and 2.5; we use 
 \newdo{the choice of names $\theta$ and $\theta_i$ suggests that $\theta$ is the population mean, while $\theta_i$ is the individual mean, and should therefore be centered around the population mean.  everything but the last statement holds ... which makes figure \ref{fig:overalldensity} look so odd, because the  individual densities are so different. Could we have one plot that shows the distribution of theta for all of the different functions, and then another plot like fig \ref{fig:overalldensity} for the individual densities separately? The individual densities suggest that there are at least two groups of people, and the overall population solution looks like an awkward fit between those two groups that doesn't capture either group adequately ... sorry ... I don't want to slam the statistics, it's just what it looks like to me.
 ... and I just noticed something else - are you sure that the lines show densities? The area under the curves don't seem to add to the same value. The population densities look like they encompass a larger area. Admittedly, the Bayesian approach is interested in $\pi(\theta)$, but I really think that the $\theta$ itself might be more informative - and the $\theta_i$ might then actually scatter around the population mean ... you can tell that I'm still struggling with this.}
 
-\newtext{
-Posterior estimates of $\theta$ for each function are shown in figure \ref{fig:meanestimates}. Posterior density estimates for each individual's $\theta_i$ are shown in figure \ref{fig:overalldensity}. 
-}
+% \newtext{
+% Posterior predictive estimates of $\theta$ for each function are shown in figure \ref{fig:meanestimates}. Posterior density estimates for each individual's $\theta_i$ are shown in figure \ref{fig:overalldensity}. 
+% }
 % The posterior density of $\theta$ for each function is shown in figure \ref{fig:overalldensity}, along with separate posterior densities for each individual $\theta_i$. 
-$\theta$ is reasonably similar for all three functions, suggesting that while function type may moderate the size of the effect, the illusion occurs regardless of function type. Individual curves have different variability due to the number of trials completed, and are necessarily more diffuse as there is less data with which to estimate the individual posterior distributions. 
-
-\begin{figure}\centering
-<<plotmeans, fig.width=4, fig.height=2, out.width=".5\\linewidth", echo=F>>=
-overall.mean$test_param2 <- factor(overall.mean$test_param, levels=c("Sin", "Exp", "Inv"), labels=c("Sine", "Exponential", "Inverse"))
-ggplot(data=overall.mean.bounds) + 
-  geom_pointrange(aes(x = functions, y=median, ymin=lb, ymax=ub, color=functions)) + 
-  xlab("Function") + ggtitle(expression(paste("Estimates and 95% Credible Intervals for ", theta))) + 
-  ylab("Lie Factor") + 
-  scale_colour_discrete("Function Type", guide="none") + 
-  ylim(c(1, 1.5)) + 
-  coord_flip() + 
-  theme_bw()
-# overall.mean.lines$functions <- factor(overall.mean.lines$test_param, levels=c("Sin", "Exp", "Inv"), labels=c("Sine", "Exponential", "Inverse"), ordered=T)
-#   
-# qplot(data=overall.mean, x=mean, y=f, geom="line", colour=functions, group=functions) +
-#   scale_colour_discrete("Function Type") + 
-#   xlab("Mean Psychological Lie Factor") + 
-#   ylab("Density") + 
-#   theme_bw() + 
-#   theme(legend.position="bottom") + 
-#   # facet_grid(~functions) +
-#   xlim(c(1, 1.5))
-  
-@
-\caption{Estimates and 95\% credible intervals for $\theta$. The inverse stimuli require less correction than the exponential and sine stimuli, in part because the procedure for estimating the psychological lie factor is particularly conservative for the inverse function stimuli.}\label{fig:meanestimates}
-\end{figure}
-
-\begin{figure}\centering
-\includegraphics[width=6in, trim=0in .1in 0in .1in]{figure/fig-spaghettiIndivDists}
-\caption{Estimated densities for $\theta_i$, shown in color, with the estimated overall density for $\theta$ shown in black. Individuals have extremely similar posterior distribution of $\theta_i$, and even different functions have similar $\hat\theta$, suggesting a common underlying mental distortion.}\label{fig:overalldensity}
-\end{figure}
+% $\theta$ is reasonably similar for all three functions, suggesting that while function type may moderate the size of the effect, the illusion occurs regardless of function type. Individual curves have different variability due to the number of trials completed, and are necessarily more diffuse as there is less data with which to estimate the individual posterior distributions. 
+%' 
+%' \begin{figure}\centering
+%' <<plotmeans, fig.width=4, fig.height=2, out.width=".5\\linewidth", echo=F>>=
+%' overall.mean$test_param2 <- factor(overall.mean$test_param, levels=c("Sin", "Exp", "Inv"), labels=c("Sine", "Exponential", "Inverse"))
+%' ggplot(data=overall.mean.bounds) + 
+%'   geom_pointrange(aes(x = functions, y=median, ymin=lb, ymax=ub, color=functions)) + 
+%'   xlab("Function") + ggtitle(expression(paste("Estimates and 95% Credible Intervals for ", theta))) + 
+%'   ylab("Lie Factor") + 
+%'   scale_colour_discrete("Function Type", guide="none") + 
+%'   ylim(c(1, 1.5)) + 
+%'   coord_flip() + 
+%'   theme_bw()
+%' # overall.mean.lines$functions <- factor(overall.mean.lines$test_param, levels=c("Sin", "Exp", "Inv"), labels=c("Sine", "Exponential", "Inverse"), ordered=T)
+%' #   
+%' # qplot(data=overall.mean, x=mean, y=f, geom="line", colour=functions, group=functions) +
+%' #   scale_colour_discrete("Function Type") + 
+%' #   xlab("Mean Psychological Lie Factor") + 
+%' #   ylab("Density") + 
+%' #   theme_bw() + 
+%' #   theme(legend.position="bottom") + 
+%' #   # facet_grid(~functions) +
+%' #   xlim(c(1, 1.5))
+%'   
+%' @
+%' \caption{Estimates and 95\% credible intervals for $\theta$. The inverse stimuli require less correction than the exponential and sine stimuli, in part because the procedure for estimating the psychological lie factor is particularly conservative for the inverse function stimuli.}\label{fig:meanestimates}
+%' \end{figure}
+%' 
+%' \begin{figure}\centering
+%' \includegraphics[width=6in, trim=0in .1in 0in .1in]{figure/fig-spaghettiIndivDists}
+%' \caption{Estimated densities for $\theta_i$, shown in color, with the estimated overall density for $\theta$ shown in black. Individuals have extremely similar posterior distribution of $\theta_i$, and even different functions have similar $\hat\theta$, suggesting a common underlying mental distortion.}\label{fig:overalldensity}
+%' \end{figure}
 
 % \newdo{I am not sure what figure \ref{fig:indivdensity} contributes ... the estimated functions seem to me to be too different to instill  confidence in the population based theory ... }
 % 
@@ -553,7 +558,7 @@ ggplot(data=overall.mean.bounds) +
 % In order to appropriately compare intervals for each participant's $\theta_i$ (even though participants may have completed different numbers of trials), we simulated 11 new ``data points" from our model (thus enforcing a uniform 11 trials per participant for each function type) to get a single new estimate of $\hat\theta_i$. For each participant, we generated 1000 of these $\hat\theta_i$ and used these simulated values to calculate the 95\% credible intervals shown in figure \ref{fig:indivCIs}. These intervals will allow us to consider the variability in $\theta_i$ due to participant preference rather than the number of trials a participant completed during the study. Removing this additional variability provides us with the opportunity to consider whether the sine illusion stems from an individual's perceptual experiences or from a lower-level perceptual heuristic. 
 
 \newtext{
-Figure \ref{fig:indivCIs} shows 95\% posterior predictive credible intervals for $\theta_i$ estimated for each participant and mean function. 
+Figure \ref{fig:indivCIs} shows 95\% posterior predictive credible intervals for $\theta_i$ estimated for each participant and mean function.
 }
 
 \begin{figure}\centering
