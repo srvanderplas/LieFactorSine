@@ -217,7 +217,7 @@ Day \& Stecher~\citeyear{day:1991} suggest that the sine illusion is similar in 
 
 As the vanishing point moves further away from the viewer and the 3d projection decreases in strength, the three-dimensional reconstruction of the image converges to figure~\ref{fig:sineillusion}. The second image in figure~\ref{fig:sineillusion3d} shows a weaker 3-dimensional projection that is much closer to figure~\ref{fig:sineillusion}, however, the three-dimensional contextual information provided by the shading removes much of the illusion's distortions. This is similar to the M\"uller-Lyer illusion, as figure~\ref{fig:mullerlyerreal} is not at all ambiguous because the contextual depth information provided by the rest of the surface of the house is sufficient to remove the illusion that the closer corner is in fact larger due to the perspective.
 
-\subsection{Case Study: Three Dimensions and the Sine Illusion}
+\section{Case Study: Three Dimensions and the Sine Illusion}
 Further evidence that places the sine illusion firmly into the area of a 3d contextual illusion is given by the non-response to the illusion by individuals with depth-deficient vision. While it is difficult to provide experimental evidence suggesting that the sine illusion is due to depth perception directly, it is possible to examine whether the illusion occurs in people who do not have binocular depth perception. Conditions such as amblyopia (lazy eye) and strabismus (crossed eyes), when not corrected within a critical period during development \cite{DepthCriticalPeriod}, can result in weakened or absent depth perception \cite{StrabismusDepthPerception, BinocularDepthPerception, BinocularAmblyopia}. In many cases, use of partial patching and early surgery can correct these problems before the critical period lapses, but before protocols were well established, this was not always completely successful. 
 
 We examined the effect of the sine illusion on DW, who has minimal depth perception due to strabismic amblyopia. DW was diagnosed as a young child, and prescribed complete patching to strengthen her initially non-dominant eye. As a result of the patching, DW developed near-independent control over both eyes (doctors now recommend partial patching as a result of this problem). She has 20/20 vision, and can wear glasses to correct the strabismus, but generally does not because they are not necessary for her to see well. DW is right-eye dominant in most contexts, but is left-eye dominant for driving, and can switch which eye is in focus at will. 
@@ -305,10 +305,6 @@ For each of the stimuli, participants were asked to answer the question: ``In wh
 Figure~\ref{fig:invstimuli} shows another set of these stimuli using a different underlying mean function with the same underlying weight values. As the slope of the mean function has changed, the illusion does appear to be slightly less misleading. Table \ref{tab:w3} (plot \#4) shows the weight values (ordered from least to greatest) and corresponding lie factors for this plot; they are lower than the lie factors corresponding to the sine illusion plots shown in figure~\ref{fig:sinestimuli} even though the weight values are the same. The illusion is still present even though the mean function has changed. Our goal is to determine whether the psychological distortion is similar despite the difference in the underlying function. 
 
 \subsection{Quantifying the Psychological Lie Factor}
-
-
-%\newdo{I think that I have finally figured out what my problem with $D_k$ is -- the psychological lie factor is defined as the ratio of the size of the perceived effect  and the size of the shown effect. That means that we cannot measure the psychological lie factor without input from somebody who perceives effects. Therefore we should not call $D_k$ the psychological lie factor of plot $k$. These values are all candidates until somebody picks one of the sub-plots. I think, it's just a naming convention. 
-}
 
 In an attempt to estimate the psychological lie factor for each of the three functions, we first define the {\it distortion} $D_k$ for each sub plot $k=1, ..., 6$, as the ratio of the maximum line length to the minimum line length shown in the plot.
 This results in a positive measure $D$, for which $D = 1$ indicates no distortion, while  a value of $D$ far from one indicates a significant distortion.
@@ -427,9 +423,9 @@ Difficulty level is determined by the range of weight values shown in the stimul
 
 After first presenting an easy introductory chart, the order of the plots was randomized across difficulty level as well as function type. The test chart consisted of a set of six sine curves with a very low level difficulty level, and was used as an introduction to the testing procedure. Participants were asked to select a single plot out of the six plots presented as having lines which were the most ``consistent''. 
 
-\newdo{Is it ``even" or ``consistent"? What question did you use, exactly? We need to stick to that.\\
-From my emails with Mahbub:\\
-In what picture is the size of the curve most consistent?}
+% \newdo{Is it ``even" or ``consistent"? What question did you use, exactly? We need to stick to that.\\
+% From my emails with Mahbub:\\
+% In what picture is the size of the curve most consistent?}
 
 \subsection{Data Collection}
 
@@ -461,11 +457,6 @@ Due to the experimental design, all participants completed trials with underlyin
 % \hh{XXX What data did you collect - exactly? Maybe a screenshot of the website would be good somewhere and a discussion of what participants had to do - on a click level basis.}
 % We collected the plot identification, the trial number (for each participant) and the participant's response; otherwise, there was no demographic data. I also don't have access to the website; Mahbub ran this experiment. 
 
-
-\newdo{I'm just checking on the demographics - we usually collect them in a separate table.
-% 
-% Let's trim down this section to the bare essentials: collecting data through amazon turk. Using filters to ensure good data quality, resulting in XXX responses from YYY participants. No discussions about excluding any responses. 
-}
 
 \subsection{Analysis}
 \subsubsection*{Psychological ``Lie Factor"}
